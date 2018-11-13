@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import MapGL from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 class App extends Component {
 
@@ -11,17 +12,17 @@ class App extends Component {
       height: "100vh",
       latitude: -34.609032,
       longitude: -58.373219,
-      zoom: 12,
-      mapStyle: 'mapbox://styles/mapbox/satellite-v9'
-    }
-
+      zoom: 7,
+    },
+    mapStyle: 'mapbox://styles/mapbox/satellite-v9'
   };
 
   render() {
     return (
-      <MapGL
+      <ReactMapGL
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({ viewport })}
+        mapStyle={this.state.mapStyle}
         mapboxApiAccessToken="pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
       />
     );

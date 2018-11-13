@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapGL from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 class App extends Component {
 

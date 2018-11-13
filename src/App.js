@@ -14,7 +14,7 @@ class App extends Component {
       longitude: -58.373219,
       zoom: 7,
     },
-    mapStyle: 'mapbox://styles/mapbox/satellite-v9'
+    mapStyle: 'mapbox://styles/mapbox/satellite-streets-v9'
   };
 
   render() {

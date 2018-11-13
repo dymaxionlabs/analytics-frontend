@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -17,14 +17,34 @@ class App extends Component {
     mapStyle: 'mapbox://styles/mapbox/satellite-streets-v9'
   };
 
+  constructor(props) {
+    super(props)
+    this.handleViewportChange = this.handleViewportChange.bind(this)
+
+  }
+
+  handleViewportChange(viewport) {
+    this.setState({ viewport })
+
+  }
+
   render() {
     return (
       <ReactMapGL
         {...this.state.viewport}
-        onViewportChange={(viewport) => this.setState({ viewport })}
+        onViewportChange={this.handleViewportChange}
         mapStyle={this.state.mapStyle}
         mapboxApiAccessToken="pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
-      />
+
+      >
+        <div style={{ position: 'absolute', right: 0 }}>
+          <NavigationControl
+            onViewportChange={this.handleViewportChange}
+            showCompass={false}
+
+          />
+        </div>
+      </ReactMapGL>
     );
   }
 }

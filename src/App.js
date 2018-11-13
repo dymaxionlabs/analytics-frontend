@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import ReactMapGL, { NavigationControl } from 'react-map-gl';
+import MapGL, { NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Geocoder from 'react-map-gl-geocoder'
 
+const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
 class App extends Component {
 
@@ -24,29 +26,66 @@ class App extends Component {
   }
 
   handleViewportChange(viewport) {
-    this.setState({ viewport })
-
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    })
   }
+
+
+  mapRef = React.createRef()
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize)
+    this.resize()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
+  }
+
+  resize = () => {
+    this.handleViewportChange({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
+  }
+
+  handleGeocoderViewportChange = (viewport) => {
+    const geocoderDefaultOverrides = { transitionDuration: 1000 }
+
+    return this.handleViewportChange({
+      ...viewport,
+      ...geocoderDefaultOverrides
+    })
+  }
+
 
   render() {
     return (
-      <ReactMapGL
+      <MapGL
         {...this.state.viewport}
+        ref={this.mapRef}
+        mapboxApiAccessToken={MAPBOX_TOKEN}
         onViewportChange={this.handleViewportChange}
         mapStyle={this.state.mapStyle}
-        mapboxApiAccessToken="pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
-
       >
-        <div style={{ position: 'absolute', right: 0 }}>
+        <div style={{ position: 'absolute', right: 1250 }}>
           <NavigationControl
             onViewportChange={this.handleViewportChange}
             showCompass={false}
 
           />
         </div>
-      </ReactMapGL>
+        <Geocoder
+          mapRef={this.mapRef}
+          onViewportChange={this.handleGeocoderViewportChange}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+        />
+      </MapGL>
     );
   }
 }
+
+
 
 export default App;

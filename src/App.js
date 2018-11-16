@@ -69,7 +69,7 @@ class App extends Component {
         onViewportChange={this.handleViewportChange}
         mapStyle={this.state.mapStyle}
       >
-        <div style={{ position: 'absolute', right: 1250 }}>
+        <div style={{ position: 'absolute', right: 10, top: 10 }}>
           <NavigationControl
             onViewportChange={this.handleViewportChange}
             showCompass={false}

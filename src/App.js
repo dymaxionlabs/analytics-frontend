@@ -80,6 +80,7 @@ class App extends Component {
           mapRef={this.mapRef}
           onViewportChange={this.handleGeocoderViewportChange}
           mapboxApiAccessToken={MAPBOX_TOKEN}
+          position='top-left'
         />
       </MapGL>
     );

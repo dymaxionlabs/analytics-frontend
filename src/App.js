@@ -3,6 +3,7 @@ import './App.css';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Geocoder from 'react-map-gl-geocoder'
+import ControlPanel from './control-panel';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
@@ -15,8 +16,23 @@ class App extends Component {
       latitude: -34.609032,
       longitude: -58.373219,
       zoom: 7,
+      bearing: 0,
+      pitch: 0
     },
+    interactiveLayerIds: [],
     mapStyle: 'mapbox://styles/mapbox/satellite-streets-v9'
+  };
+
+  _onClick = (event) => {
+    const feature = event.features && event.features[0];
+
+    if (feature) {
+      window.alert(`Clicked layer ${feature.layer.id}`);
+    }
+  };
+
+  _getCursor = ({ isHovering, isDragging }) => {
+    return isHovering ? 'pointer' : 'default';
   };
 
   constructor(props) {
@@ -68,6 +84,9 @@ class App extends Component {
         mapboxApiAccessToken={MAPBOX_TOKEN}
         onViewportChange={this.handleViewportChange}
         mapStyle={this.state.mapStyle}
+        clickRadius={2}
+        onClick={this._onClick}
+        getCursor={this._getCursor}
       >
         <div style={{ position: 'absolute', right: 10, top: 10 }}>
           <NavigationControl
@@ -82,7 +101,13 @@ class App extends Component {
           mapboxApiAccessToken={MAPBOX_TOKEN}
           position='top-left'
         />
-      </MapGL>
+        <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px' }}>
+          <ControlPanel
+            containerComponent={this.props.containerComponent}
+            onChange={this.handleGeocoderViewportChange}
+          />
+        </div>
+      </MapGL >
     );
   }
 }

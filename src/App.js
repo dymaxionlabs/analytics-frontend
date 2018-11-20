@@ -17,7 +17,8 @@ class App extends Component {
       longitude: -58.373219,
       zoom: 7,
       bearing: 0,
-      pitch: 0
+      pitch: 0,
+      isActive: false,
     },
     interactiveLayerIds: [],
     mapStyle: 'mapbox://styles/mapbox/satellite-streets-v9'
@@ -38,6 +39,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleViewportChange = this.handleViewportChange.bind(this)
+    this.handIsActive = this.handIsActive(this)
 
   }
 
@@ -45,6 +47,10 @@ class App extends Component {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
+  }
+
+  handIsActive() {
+    this.setState({ isActive: false })
   }
 
 
@@ -75,8 +81,20 @@ class App extends Component {
     })
   }
 
-
   render() {
+
+    let components = null
+
+    if (this.state.isActive === true) {
+      components =
+        <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px', }}>
+          < ControlPanel
+            containerComponent={this.props.containerComponent}
+            onChange={this.handleGeocoderViewportChange}
+          />
+        </div>
+
+    }
     return (
       <MapGL
         {...this.state.viewport}
@@ -92,7 +110,6 @@ class App extends Component {
           <NavigationControl
             onViewportChange={this.handleViewportChange}
             showCompass={false}
-
           />
         </div>
         <Geocoder
@@ -101,17 +118,9 @@ class App extends Component {
           mapboxApiAccessToken={MAPBOX_TOKEN}
           position='top-left'
         />
-        <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px' }}>
-          <ControlPanel
-            containerComponent={this.props.containerComponent}
-            onChange={this.handleGeocoderViewportChange}
-          />
-        </div>
+        {components}
       </MapGL >
     );
   }
 }
-
-
-
 export default App;

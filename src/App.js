@@ -36,21 +36,14 @@ class App extends Component {
     return isHovering ? 'pointer' : 'default';
   };
 
-  constructor(props) {
-    super(props)
-    this.handleViewportChange = this.handleViewportChange.bind(this)
-    this.handIsActive = this.handIsActive(this)
-
-  }
-
-  handleViewportChange(viewport) {
+  handleViewportChange = (viewport) => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
 
-  handIsActive() {
-    this.setState({ isActive: false })
+  handleIsActive = () => {
+    this.setState({ isActive: true })
   }
 
 
@@ -117,6 +110,8 @@ class App extends Component {
           onViewportChange={this.handleGeocoderViewportChange}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           position='top-left'
+          onResult={this.handleIsActive}
+
         />
         {components}
       </MapGL >

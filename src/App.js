@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import './App.css';
-import MapGL, { NavigationControl } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import Geocoder from 'react-map-gl-geocoder'
-import ControlPanel from './control-panel';
+
+import ReactMapboxGl, {
+  ScaleControl,
+  ZoomControl,
+  RotationControl,
+} from "react-mapbox-gl";
+
+//import Geocoder from 'react-map-gl-geocoder'
+//import ControlPanel from './control-panel';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
+
+const Map = ReactMapboxGl({
+  accessToken: MAPBOX_TOKEN
+})
+
+const mapContainerStyle = {
+  width: '100vw',
+  height: '100vh',
+  flex: 1
+};
 
 class App extends Component {
 
   state = {
-    viewport: {
-      width: "100vw",
-      height: "100vh",
-      latitude: -34.609032,
-      longitude: -58.373219,
-      zoom: 7,
-      bearing: 0,
-      pitch: 0,
-      isActive: false,
-    },
-    interactiveLayerIds: [],
-    mapStyle: 'mapbox://styles/mapbox/satellite-streets-v9'
+    center: [-58.373219, -34.609032],
+    zoom: [7],
+    isActive: false,
   };
 
+  /*
   _onClick = (event) => {
     const feature = event.features && event.features[0];
 
@@ -73,9 +80,11 @@ class App extends Component {
       ...geocoderDefaultOverrides
     })
   }
+  */
 
   render() {
 
+    /*
     let components = null
 
     if (this.state.isActive === true) {
@@ -86,36 +95,35 @@ class App extends Component {
             onChange={this.handleGeocoderViewportChange}
           />
         </div>
-
     }
-    return (
-      <MapGL
-        {...this.state.viewport}
-        ref={this.mapRef}
-        mapboxApiAccessToken={MAPBOX_TOKEN}
-        onViewportChange={this.handleViewportChange}
-        mapStyle={this.state.mapStyle}
-        clickRadius={2}
-        onClick={this._onClick}
-        getCursor={this._getCursor}
-      >
-        <div style={{ position: 'absolute', right: 10, top: 10 }}>
-          <NavigationControl
-            onViewportChange={this.handleViewportChange}
-            showCompass={false}
-          />
-        </div>
-        <Geocoder
-          mapRef={this.mapRef}
-          onViewportChange={this.handleGeocoderViewportChange}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-          position='top-left'
-          onResult={this.handleIsActive}
+    */
 
-        />
-        {components}
-      </MapGL >
+    return (
+      <Map
+        style="mapbox://styles/mapbox/satellite-streets-v9" // eslint-disable-line
+        containerStyle={mapContainerStyle}
+        center={this.state.center}
+        zoom={this.state.zoom}
+      >
+        {/* Controls */}
+        <ScaleControl />
+        <ZoomControl />
+        <RotationControl style={{ top: 80 }} />
+      </Map>
     );
+
+    /*
+    <Geocoder
+      mapRef={this.mapRef}
+      onViewportChange={this.handleGeocoderViewportChange}
+      mapboxApiAccessToken={MAPBOX_TOKEN}
+      position='top-left'
+      onResult={this.handleIsActive}
+
+    />
+    {components}
+    */
   }
 }
+
 export default App;

@@ -1,46 +1,47 @@
-import React, {
-  Component
-} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import MapboxGeocoder from 'mapbox-geocoder'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
-class Geocoder extends Component {
-  static contextTypes = {
-    map: PropTypes.object.isRequired,
-  };
-
+class Geocoder extends React.Component {
   static defaultProps = {
     position: 'top-left',
   }
 
   static propTypes = {
+    mapRef: PropTypes.object.isRequired,
+    accessToken: PropTypes.string.isRequired,
     position: PropTypes.string,
   }
 
   componentWillMount() {
     const {
-      position
+      accessToken,
+      mapRef,
+      position,
     } = this.props
 
-    const {
-      map
-    } = this.context
+    const map = mapRef.current.state.map
 
-    this.geocoder = new MapboxGeocoder({})
+    this.geocoder = new MapboxGeocoder({
+      accessToken: accessToken,
+    })
 
     map.addControl(this.geocoder, position)
   }
 
   componentWillUnmount() {
     const {
-      map
-    } = this.context
+      mapRef,
+    } = this.props
+
+    const map = mapRef.current.state.map
 
     if (!map || !map.getStyle()) {
       return
     }
 
-    map.removeControl(this.draw)
+    map.removeControl(this.geocoder)
   }
 
   render() {

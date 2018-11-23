@@ -28,7 +28,9 @@ class App extends Component {
     center: [-58.373219, -34.609032],
     zoom: [7],
     isActive: false,
-  };
+  }
+
+  mapRef = React.createRef()
 
   /*
   _onClick = (event) => {
@@ -100,16 +102,20 @@ class App extends Component {
 
     return (
       <Map
+        ref={this.mapRef}
         style="mapbox://styles/mapbox/satellite-streets-v9" // eslint-disable-line
         containerStyle={mapContainerStyle}
         center={this.state.center}
         zoom={this.state.zoom}
       >
-        {/* Controls */}
         <ScaleControl />
         <ZoomControl />
-        <RotationControl style={{ top: 80 }} />
-        <Geocoder position="top-left" />
+        <RotationControl style={{ top: 70 }} />
+        <Geocoder
+          accessToken={MAPBOX_TOKEN}
+          mapRef={this.mapRef}
+          position="top-left"
+        />
       </Map>
     );
 

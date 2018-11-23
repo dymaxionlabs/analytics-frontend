@@ -8,7 +8,7 @@ import ReactMapboxGl, {
 } from "react-mapbox-gl";
 
 import Geocoder from './Geocoder'
-//import ControlPanel from './control-panel';
+import ControlPanel from './control-panel';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
@@ -37,20 +37,16 @@ class App extends Component {
   }
 
   render() {
-
-    /*
     let components = null
 
     if (this.state.isActive === true) {
       components =
         <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px', }}>
-          < ControlPanel
-            containerComponent={this.props.containerComponent}
-            onChange={this.handleGeocoderViewportChange}
+          <ControlPanel
+            mapRef={this.mapRef}
           />
         </div>
     }
-    */
 
     return (
       <Map
@@ -69,20 +65,9 @@ class App extends Component {
           position="top-left"
           onResult={this._onGeocoderResult}
         />
+        {components}
       </Map>
     );
-
-    /*
-    <Geocoder
-      mapRef={this.mapRef}
-      onViewportChange={this.handleGeocoderViewportChange}
-      mapboxApiAccessToken={MAPBOX_TOKEN}
-      position='top-left'
-      onResult={this.handleIsActive}
-
-    />
-    {components}
-    */
   }
 }
 

@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
+import './App.css'
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
+import React, { Component } from 'react'
 import ReactMapboxGl, {
   ScaleControl,
   ZoomControl,
   RotationControl,
-} from "react-mapbox-gl";
+} from "react-mapbox-gl"
 
+import DrawControl from './DrawControl'
 import Geocoder from './Geocoder'
-import ControlPanel from './control-panel';
+import ControlPanel from './control-panel'
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
@@ -65,6 +67,7 @@ class App extends Component {
           position="top-left"
           onResult={this._onGeocoderResult}
         />
+        <DrawControl mapRef={this.mapRef} position="top-left" />
         {components}
       </Map>
     );

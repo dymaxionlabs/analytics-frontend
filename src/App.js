@@ -7,7 +7,7 @@ import ReactMapboxGl, {
   RotationControl,
 } from "react-mapbox-gl";
 
-//import Geocoder from 'react-map-gl-geocoder'
+import Geocoder from './Geocoder'
 //import ControlPanel from './control-panel';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
@@ -109,6 +109,7 @@ class App extends Component {
         <ScaleControl />
         <ZoomControl />
         <RotationControl style={{ top: 80 }} />
+        <Geocoder position="top-left" />
       </Map>
     );
 
@@ -126,4 +127,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

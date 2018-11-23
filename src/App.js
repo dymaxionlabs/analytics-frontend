@@ -32,57 +32,9 @@ class App extends Component {
 
   mapRef = React.createRef()
 
-  /*
-  _onClick = (event) => {
-    const feature = event.features && event.features[0];
-
-    if (feature) {
-      window.alert(`Clicked layer ${feature.layer.id}`);
-    }
-  };
-
-  _getCursor = ({ isHovering, isDragging }) => {
-    return isHovering ? 'pointer' : 'default';
-  };
-
-  handleViewportChange = (viewport) => {
-    this.setState({
-      viewport: { ...this.state.viewport, ...viewport }
-    })
-  }
-
-  handleIsActive = () => {
+  _onGeocoderResult = () => {
     this.setState({ isActive: true })
   }
-
-
-  mapRef = React.createRef()
-
-  componentDidMount() {
-    window.addEventListener('resize', this.resize)
-    this.resize()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize)
-  }
-
-  resize = () => {
-    this.handleViewportChange({
-      width: window.innerWidth,
-      height: window.innerHeight
-    })
-  }
-
-  handleGeocoderViewportChange = (viewport) => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 }
-
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides
-    })
-  }
-  */
 
   render() {
 
@@ -115,6 +67,7 @@ class App extends Component {
           accessToken={MAPBOX_TOKEN}
           mapRef={this.mapRef}
           position="top-left"
+          onResult={this._onGeocoderResult}
         />
       </Map>
     );

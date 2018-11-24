@@ -60,17 +60,23 @@ export default class StyleControls extends PureComponent {
 
     return (
       <Container>
-        <h>Custom Cursor</h>
-        <p>Customize the cursor based on interactivity.</p>
-        <div className="source-link">
-          <a href="https://github.com/uber/react-map-gl/tree/3.2-release/examples/custom-cursor" target="_new">
-            View Code ↗
-          </a>
+        <div className="columns ">
+          <div className="column " >
+            <p className="Line-control">0.83km </p>
+            <p className="Control"> area size </p>
+            <p className="Line-control">Cars, Ships, Boats</p>
+            <p className="Control Line-control"> selected analyses</p>
+          </div>
+          <div className="columns">
+            <div className="column control">
+              <button> cancelar </button>
+            </div>
+            <div className="column control">
+              <button> confirmar </button>
+            </div>
+          </div>
         </div>
-        <hr />
-        <p>Clickable layers</p>
-        {Object.keys(layerSelector).map(name => this._renderLayerControl(name))}
-      </Container>
+      </Container >
     );
   }
 }

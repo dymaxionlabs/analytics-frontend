@@ -1,7 +1,13 @@
 .Control {
   color: #282c34;
+  font-size: x-small;
 }
 
 .Line-control {
   line-height: 2px;
+}
+
+
+.separator {
+  margin: 20px;
 }

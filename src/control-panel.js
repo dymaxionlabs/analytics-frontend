@@ -1,25 +1,27 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
+import ModalContactForm from "../src/contact-modal"
+import 'semantic-ui-css/semantic.min.css'
 
 class ControlPanel extends React.PureComponent {
 
   render() {
     return (
-      <div className="columns ">
-        <div className="column " >
-          <p className="Line-control">0.83km </p>
-          <p className="Control"> area size </p>
+      <div >
+        <div className="separator">
+          <p className="Line-control">0.83km^2 </p>
+          <p className="Control Line-control"> area size </p>
+        </div>
+        <div className="separator">
           <p className="Line-control">Cars, Ships, Boats</p>
           <p className="Control Line-control"> selected analyses</p>
         </div>
-        <div className="columns">
-          <div className="column control">
-            <button> cancelar </button>
-          </div>
-          <div className="column control">
-            <button> confirmar </button>
-          </div>
+        <div>
+          <Button primary>cancelar</Button>
+          <ModalContactForm />
         </div>
       </div>
+
     );
   }
 }

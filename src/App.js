@@ -67,7 +67,7 @@ class App extends Component {
           position="top-left"
           onResult={this._onGeocoderResult}
         />
-        <DrawControl mapRef={this.mapRef} position="top-left" />
+        <DrawControl controls={{ polygon: true, trash: true }} mapRef={this.mapRef} position="top-left" displayControlsDefault={false} />
         {components}
       </Map>
     );

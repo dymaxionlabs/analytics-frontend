@@ -11,3 +11,9 @@
 .separator {
   margin: 20px;
 }
+
+.controlButton{
+  position: absolute;
+    bottom: 30px;
+    left: 10px;
+}

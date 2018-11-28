@@ -1,6 +1,5 @@
 import './App.css'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-
 import React, { Component } from 'react'
 import ReactMapboxGl, {
   ScaleControl,
@@ -11,6 +10,7 @@ import ReactMapboxGl, {
 import DrawControl from './DrawControl'
 import Geocoder from './Geocoder'
 import ControlPanel from './control-panel'
+import ButtonCircule from './button'
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
@@ -23,6 +23,9 @@ const mapContainerStyle = {
   height: '100vh',
   flex: 1
 };
+
+
+
 
 class App extends Component {
 
@@ -158,6 +161,7 @@ class App extends Component {
         containerStyle={mapContainerStyle}
         center={this.state.center}
         zoom={this.state.zoom}
+
       >
         <ScaleControl />
         <ZoomControl />
@@ -169,6 +173,7 @@ class App extends Component {
           onResult={this._onGeocoderResult}
         />
         <DrawControl styles={stilePoint} controls={{ polygon: true, trash: true }} mapRef={this.mapRef} position="top-left" displayControlsDefault={false} />
+        < ButtonCircule />
         {components}
       </Map>
     );

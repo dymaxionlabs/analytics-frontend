@@ -11,6 +11,8 @@ import DrawControl from './DrawControl'
 import Geocoder from './Geocoder'
 import ControlPanel from './control-panel'
 import ButtonCircule from './button'
+import TransitionablePortalExampleControlled from './button'
+
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw"
 
@@ -174,6 +176,7 @@ class App extends Component {
         />
         <DrawControl styles={stilePoint} controls={{ polygon: true, trash: true }} mapRef={this.mapRef} position="top-left" displayControlsDefault={false} />
         < ButtonCircule />
+        < TransitionablePortalExampleControlled />
         {components}
       </Map>
     );

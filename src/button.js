@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Button, Modal, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown, Segment, TransitionablePortal, Header } from 'semantic-ui-react'
+
+
 
 
 class ListDivided extends React.PureComponent {
-
 
     render() {
         const optionsConstruccion = [
@@ -34,7 +35,7 @@ class ListDivided extends React.PureComponent {
 
         return (
             <div>
-                <Button.Group color=''>
+                <Button.Group >
                     <Button>Desarrollo Urbano</Button>
                     <Dropdown options={optionsConstruccion} floating button className='icon' />
                 </Button.Group>
@@ -56,24 +57,38 @@ class ListDivided extends React.PureComponent {
     }
 }
 
-
 class ButtonCircule extends Component {
     state = { open: false }
-    show = size => () => this.setState({ size, open: true })
-    close = () => this.setState({ open: false })
+
+    handleOpen = () => this.setState({ open: true })
+
+    handleClose = () => this.setState({ open: false })
 
     render() {
-        const { open, size } = this.state
+
         return (
-            <Modal size={size} open={open} onClose={this.close} trigger={<Button className="controlButton" circular icon='osi' size="massive" color="blue" onClick={this.show('mini')} />} closeIcon>
-                <Modal.Content>
-                    <ListDivided />
-                </Modal.Content>
-            </Modal>
-        );
+            <TransitionablePortal
+                closeOnTriggerClick
+                onOpen={this.handleOpen}
+                onClose={this.handleClose}
+                openOnTriggerClick
+                trigger={
+                    <Button
+                        className='controlButton'
+                        circular icon='osi' size="massive" color="blue"
+                    />
+                }
+            >
+                <Segment style={{ left: '02%', position: 'fixed', top: '50%', zIndex: 1000 }}>
+                    <Header>
+                        <ListDivided />
+                    </Header>
+
+                </Segment>
+            </TransitionablePortal>
+        )
     }
 }
-
 
 
 

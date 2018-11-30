@@ -36,15 +36,18 @@ class App extends Component {
     center: [-58.373219, -34.609032],
     zoom: [7],
     isActive: false,
+    stateInicial: null
   }
 
   mapRef = React.createRef()
 
   _onGeocoderResult = () => {
     this.setState({ isActive: true })
+    this.setState({ stateInicial: "initial" })
   }
 
   render() {
+
     let components = null
     let stilePoint = [
       {
@@ -156,6 +159,7 @@ class App extends Component {
           />
         </div>
     }
+
 
     return (
       <Map

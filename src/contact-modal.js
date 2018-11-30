@@ -23,12 +23,12 @@ class ContactForm extends Component {
 class ModalContactForm extends Component {
     render() {
         return (
-            <Modal trigger={<Button>Confirmar</Button>} closeIcon>
-                <Header content='Cotizar Imagenes' />
+            <Modal trigger={<Button className="ui " data-tooltip="Si está de acuerdo con la selección, haga clic en Confirmar">Confirmar</Button>} closeIcon>
+                < Header content='Cotizar Imagenes' />
                 <Modal.Content>
                     <ContactForm />
                 </Modal.Content>
-            </Modal>
+            </Modal >
         )
     }
 }

@@ -34,9 +34,9 @@ class ListDivided extends React.PureComponent {
 
 
         return (
-            <div>
+            <div >
                 <Button.Group >
-                    <Button>Desarrollo Urbano</Button>
+                    <Button className="ui" data-tooltip="Seleccione una o más capas de análisis">Desarrollo Urbano</Button>
                     <Dropdown options={optionsConstruccion} floating button className='icon' />
                 </Button.Group>
                 <div>
@@ -76,11 +76,13 @@ class ButtonCircule extends Component {
                     <Button
                         className='controlButton'
                         circular icon='osi' size="massive" color="blue"
+
                     />
                 }
             >
                 <Segment style={{ left: '02%', position: 'fixed', top: '50%', zIndex: 1000 }}>
-                    <Header>
+
+                    <Header >
                         <ListDivided />
                     </Header>
 

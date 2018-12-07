@@ -4,53 +4,55 @@ import { Button, Dropdown, Segment, TransitionablePortal, Header } from 'semanti
 
 
 
+
+
 class ListDivided extends React.PureComponent {
 
     render() {
         const optionsConstruccion = [
-            { key: 'construc', text: 'Construcción reciente', value: 'construc' },
-            { key: 'techos', text: 'Techos', value: 'techos' },
-            { key: 'piletas', text: 'Piletas', value: 'piletas' },
-            { key: 'mancha', text: 'Mancha Urbano', value: 'mancha' },
-            { key: 'asentamiento', text: 'Asentamiento Informales', value: 'asentamiento' },
-            { key: 'area', text: 'Areas Verdes', value: 'area' },
-            { key: 'calles', text: 'Calles', value: 'calles' },
-            { key: 'imagen', text: 'Imagen Nocturna', value: 'imagen' },
+            { key: 'construc', icon: 'tree', text: 'Construcción reciente', value: 'construc' },
+            { key: 'techos', icon: 'tree', text: 'Techos', value: 'techos' },
+            { key: 'piletas', icon: 'tree', text: 'Piletas', value: 'piletas' },
+            { key: 'mancha', icon: 'tree', text: 'Mancha Urbano', value: 'mancha' },
+            { key: 'asentamiento', icon: 'tree', text: 'Asentamiento Informales', value: 'asentamiento' },
+            { key: 'area', icon: 'tree', text: 'Areas Verdes', value: 'area' },
+            { key: 'calles', icon: 'tree', text: 'Calles', value: 'calles' },
+            { key: 'imagen', icon: 'tree', text: 'Imagen Nocturna', value: 'imagen' },
         ]
 
         const optionsAgricultura = [
-            { key: 'area sembrada', text: 'Área sembrada', value: 'area sembrada' },
-            { key: 'area anegada', text: 'Área anegada', value: 'area anegada' },
-            { key: 'pivotes', text: 'Pivotes', value: 'pivotes' },
-            { key: 'simbolsa', text: 'Silobolsa', value: 'simbolsa' },
-            { key: 'indice ndvi', text: 'Índice NDVI', value: 'indice ndvi' },
-            { key: 'indice evi', text: 'Índice EVI', value: 'indice evi' },
+            { key: 'area sembrada', icon: 'tree', text: 'Área sembrada', value: 'area sembrada' },
+            { key: 'area anegada', icon: 'tree', text: 'Área anegada', value: 'area anegada' },
+            { key: 'pivotes', icon: 'tree', text: 'Pivotes', value: 'pivotes' },
+            { key: 'simbolsa', icon: 'tree', text: 'Silobolsa', value: 'simbolsa' },
+            { key: 'indice ndvi', icon: 'tree', text: 'Índice NDVI', value: 'indice ndvi' },
+            { key: 'indice evi', icon: 'tree', text: 'Índice EVI', value: 'indice evi' },
         ]
         const optionsDatosDemograficos = [
-            { key: 'asentamientos informales', text: 'Asentamientos informales', value: 'asentamientos informales' },
-            { key: 'escuelas', text: 'Escuelas', value: 'escuelas' },
-            { key: 'hospitales', text: 'Hospitales', value: 'hospitales' },
+            { key: 'asentamientos informales', icon: 'tree', text: 'Asentamientos informales', value: 'asentamientos informales' },
+            { key: 'escuelas', icon: 'tree', text: 'Escuelas', value: 'escuelas' },
+            { key: 'hospitales', icon: 'tree', text: 'Hospitales', value: 'hospitales' },
         ]
 
 
         return (
             <div >
                 <Button.Group >
-                    <Button className="ui" data-tooltip="Seleccione una o más capas de análisis">Desarrollo Urbano</Button>
-                    <Dropdown options={optionsConstruccion} floating button className='icon' />
+                    <Button additionPosition="bottom">Desarrollo Urbano</Button>
+                    <Dropdown className="ui" data-tooltip="Seleccione una o más capas de análisis" options={optionsConstruccion} floating button className='icon' />
+
                 </Button.Group>
-                <div>
-                    <Button.Group color=''>
-                        <Button>Agricultura</Button>
-                        <Dropdown options={optionsAgricultura} floating button className='icon' />
-                    </Button.Group>
-                </div>
-                <div>
-                    <Button.Group color=''>
-                        <Button> Datos Demograficos </Button>
-                        <Dropdown options={optionsDatosDemograficos} floating button className='icon' />
-                    </Button.Group>
-                </div>
+                <Button.Group additionPosition="bottom">
+                    <Button >Agricultura </Button>
+                    <Dropdown className="ui" data-tooltip="Seleccione una o más capas de análisis" options={optionsAgricultura} floating button className='icon' />
+                </Button.Group>
+
+
+                <Button.Group additionPosition="bottom">
+                    <Button> Datos Demograficos </Button>
+                    <Dropdown className="ui" data-tooltip="Seleccione una o más capas de análisis" options={optionsDatosDemograficos} floating button className='icon' />
+                </Button.Group>
+
 
             </div>
         );
@@ -84,6 +86,7 @@ class ButtonCircule extends Component {
 
                     <Header >
                         <ListDivided />
+
                     </Header>
 
                 </Segment>
@@ -91,7 +94,6 @@ class ButtonCircule extends Component {
         )
     }
 }
-
 
 
 export default ButtonCircule

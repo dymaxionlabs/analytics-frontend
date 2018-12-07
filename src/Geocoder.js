@@ -6,11 +6,11 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 class Geocoder extends React.Component {
   static defaultProps = {
     position: 'top-left',
-    onClear: () => {},
-    onLoading: () => {},
-    onResults: () => {},
-    onResult: () => {},
-    onError: () => {},
+    onClear: () => { },
+    onLoading: () => { },
+    onResults: () => { },
+    onResult: () => { },
+    onError: () => { },
   }
 
   static propTypes = {

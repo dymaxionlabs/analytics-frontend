@@ -4,6 +4,8 @@ import { Button, Form, Modal, Header } from 'semantic-ui-react'
 
 
 
+
+
 class ContactForm extends Component {
     render() {
         return (
@@ -23,7 +25,7 @@ class ContactForm extends Component {
 class ModalContactForm extends Component {
     render() {
         return (
-            <Modal trigger={<Button className="ui " data-tooltip="Si está de acuerdo con la selección, haga clic en Confirmar">Confirmar</Button>} closeIcon>
+            <Modal trigger={<Button floated='left' hoverable>Confirmar</Button>} closeIcon>
                 < Header content='Cotizar Imagenes' />
                 <Modal.Content>
                     <ContactForm />
@@ -32,6 +34,8 @@ class ModalContactForm extends Component {
         )
     }
 }
+
+
 export default ModalContactForm
 
 

@@ -11,6 +11,8 @@ import DrawControl from './DrawControl'
 import Geocoder from './Geocoder'
 import ControlPanel from './control-panel'
 import ButtonCircule from './button'
+import Guide from '../src/guide'
+
 
 
 
@@ -40,10 +42,13 @@ class App extends Component {
   }
 
   mapRef = React.createRef()
+  geoRef = React.createRef()
+  buttonRef = React.createRef()
+  drawRef = React.createRef()
 
   _onGeocoderResult = () => {
     this.setState({ isActive: true })
-    this.setState({ stateInicial: "initial" })
+
   }
 
   render() {
@@ -97,7 +102,7 @@ class App extends Component {
         "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
         "paint": {
           "circle-radius": 15,
-          "circle-color": "#FFF"
+          "circle-color": "blue"
         }
       },
 
@@ -107,7 +112,7 @@ class App extends Component {
         "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
         "paint": {
           "circle-radius": 3,
-          "circle-color": "#D20C0C",
+          "circle-color": "#FFF",
         }
       },
 
@@ -157,6 +162,7 @@ class App extends Component {
           <ControlPanel
             mapRef={this.mapRef}
           />
+
         </div>
     }
 
@@ -170,21 +176,34 @@ class App extends Component {
         zoom={this.state.zoom}
 
       >
-        <ScaleControl />
-        <ZoomControl />
-        <RotationControl style={{ top: 70 }} />
         <Geocoder
+          ref={this.geoRef}
           accessToken={MAPBOX_TOKEN}
           mapRef={this.mapRef}
           position="top-left"
           onResult={this._onGeocoderResult}
         />
-        <DrawControl styles={stilePoint} controls={{ polygon: true, trash: true }} mapRef={this.mapRef} position="top-left" displayControlsDefault={false} />
-        < ButtonCircule />
+
+        <Guide geoRef={this.geoRef} drawRef={this.drawRef} />
+        <ScaleControl />
+        <ZoomControl />
+        <RotationControl style={{ top: 70 }} />
+
+        <DrawControl
+          styles={stilePoint}
+          controls={{ polygon: true, trash: true }}
+          mapRef={this.mapRef}
+          position="top-left"
+          displayControlsDefault={false}
+          ref={this.drawRef}
+        />
+        < ButtonCircule
+          ref={this.buttonRef} />
         {components}
       </Map>
     );
   }
 }
+
 
 export default App

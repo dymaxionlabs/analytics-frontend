@@ -9,19 +9,18 @@ class ControlPanel extends React.PureComponent {
     return (
       <div >
         <div className="separator">
-          <p className="Line-control">0.83km^2 </p>
-          <p className="Control Line-control"> area size </p>
+          <p className="Line-control"><b>0.83</b> km² </p>
+          <p className="Control Line-control">tamaño de superficie</p>
         </div>
         <div className="separator">
           <p className="Line-control">Cars, Ships, Boats</p>
-          <p className="Control Line-control"> selected analyses</p>
+          <p className="Control Line-control">capas seleccionadas</p>
         </div>
         <div>
-          <Button primary>cancelar</Button>
+          <Button primary>Cancelar</Button>
           <ModalContactForm />
         </div>
       </div>
-
     );
   }
 }

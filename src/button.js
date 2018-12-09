@@ -82,7 +82,7 @@ class ButtonCircule extends Component {
                     />
                 }
             >
-                <Segment style={{ left: '02%', position: 'fixed', top: '50%', zIndex: 1000 }}>
+                <Segment style={{ left: '16px', position: 'fixed', bottom: '100px', zIndex: 1000 }}>
 
                     <Header >
                         <ListDivided />

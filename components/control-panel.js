@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react'
-import ModalContactForm from "../src/contact-modal"
-import 'semantic-ui-css/semantic.min.css'
+import ModalContactForm from "./contact-modal"
 
 class ControlPanel extends React.PureComponent {
 

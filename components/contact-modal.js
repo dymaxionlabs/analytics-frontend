@@ -1,10 +1,5 @@
-
 import React, { Component } from 'react'
 import { Button, Form, Modal, Header } from 'semantic-ui-react'
-
-
-
-
 
 class ContactForm extends Component {
     render() {
@@ -17,11 +12,11 @@ class ContactForm extends Component {
                 </Form.Group>
                 <Form.TextArea placeholder='Mensaje' />
                 <Form.Button>Enviar</Form.Button>
-
             </Form>
         )
     }
 }
+
 class ModalContactForm extends Component {
     render() {
         return (
@@ -35,8 +30,4 @@ class ModalContactForm extends Component {
     }
 }
 
-
 export default ModalContactForm
-
-
-

@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
+import React from 'react'
+import PropTypes from 'prop-types'
+import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw'
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
 class DrawControl extends React.Component {
   static defaultProps = {

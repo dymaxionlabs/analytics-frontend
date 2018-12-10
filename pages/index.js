@@ -4,11 +4,16 @@ import 'semantic-ui-css/semantic.css' // FIXME Move this Layout
 
 import React from 'react'
 import dynamic from 'next/dynamic'
+import { Dimmer, Loader } from 'semantic-ui-react'
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import('../components/TrialMap'), {
   ssr: false,
-  loading: () => <p>Cargando...</p>
+  loading: () => (
+    <Dimmer active>
+      <Loader size='big'>Cargando</Loader>
+    </Dimmer>
+  )
 });
 
 import ControlPanel from '../components/control-panel'

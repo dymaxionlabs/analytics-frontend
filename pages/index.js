@@ -26,17 +26,24 @@ class Index extends React.Component {
     center: [-58.373219, -34.609032],
     zoom: [7],
     isActive: false,
-    stateInicial: null
+    step: {
+      "initial": "Escriba una ciudad o busque en el mapa un lugar",
+      "search_done": "Dibuje un polígono del área que desea analizar",
+      "polygon_drawn": "Seleccione una o más capas de análisis",
+      "layer_selected": "Si está de acuerdo con la selección, haga clic en Confirmar",
+    },
+
   }
 
-  mapRef    = React.createRef()
-  geoRef    = React.createRef()
+  mapRef = React.createRef()
+  geoRef = React.createRef()
   buttonRef = React.createRef()
-  drawRef   = React.createRef()
+  drawRef = React.createRef()
 
   _onGeocoderResult = () => {
     this.setState({ isActive: true })
   }
+
 
   render() {
     let controlPanel = null
@@ -57,9 +64,10 @@ class Index extends React.Component {
         onGeocoderResult={this._onGeocoderResult}
       >
         <Guide
-          geoRef={this.geoRef}
-          drawRef={this.drawRef}
+          step={this.state.step.initial}
+
         />
+
         <ButtonCircule
           ref={this.buttonRef}
         />

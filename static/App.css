@@ -24,3 +24,11 @@
   left: 300px;
   font-size: 50px;
 }
+
+
+.popupRight{
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 18px;
+}

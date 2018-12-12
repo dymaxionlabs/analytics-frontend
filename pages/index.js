@@ -1,25 +1,24 @@
-import '../static/index.css' // FIXME Convert to JSX styles
-import '../static/App.css' // FIXME Convert to JSX styles
-import 'semantic-ui-css/semantic.css' // FIXME Move this Layout
+import "../static/index.css"; // FIXME Convert to JSX styles
+import "../static/App.css"; // FIXME Convert to JSX styles
+import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-import { Dimmer, Loader } from 'semantic-ui-react'
+import React from "react";
+import dynamic from "next/dynamic";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 // Dynamically load TrialMap component as it only works on browser
-const Map = dynamic(() => import('../components/TrialMap'), {
+const Map = dynamic(() => import("../components/TrialMap"), {
   ssr: false,
   loading: () => (
     <Dimmer active>
-      <Loader size='big'>Cargando</Loader>
+      <Loader size="big">Cargando</Loader>
     </Dimmer>
   )
 });
 
-import ControlPanel from '../components/control-panel'
-import ButtonCircule from '../components/button'
-import Guide from '../components/guide'
-
+import ControlPanel from "../components/control-panel";
+import LayerSelector from "../components/LayerSelector";
+import Guide from "../components/guide";
 
 
 
@@ -38,27 +37,34 @@ class Index extends React.Component {
     isActive: false,
     step: "initial",
     guideContext: this.geoRef,
-
   }
-
-
 
   _onGeocoderResult = () => {
     this.setState({ isActive: true, step: "search_done", })
-
   }
+
   componentDidMount() {
     this.setState({ guideContext: this.geoRef, })
   }
 
   render() {
-    let controlPanel = null
+    let controlPanel = null;
     if (this.state.isActive === true) {
-      controlPanel =
-        <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px', }}>
+      controlPanel = (
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 100,
+            background: "#fff",
+            margin: "24px",
+            padding: "12px 24px"
+          }}
+        >
           <ControlPanel mapRef={this.mapRef} />
 
         </div>
+      );
     }
 
     return (
@@ -74,15 +80,11 @@ class Index extends React.Component {
           step={this.state.step}
         // context={this.state.guideContext}
         />
-
-        <ButtonCircule
-          ref={this.buttonRef}
-        />
+        <LayerSelector ref={this.layerSelectorRef} />
         {controlPanel}
       </Map>
-    )
+    );
   }
 }
 
-
-export default Index
+export default Index;

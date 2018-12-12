@@ -14,48 +14,63 @@ class ListDivided extends React.Component {
   render() {
     const optionsConstruccion = [
       {
-        key: "construc",
+        key: "recent-construction",
         icon: "tree",
-        text: "Construcción reciente",
+        text: "Construcción Reciente",
         value: "construc"
       },
-      { key: "techos", icon: "tree", text: "Techos", value: "techos" },
-      { key: "piletas", icon: "tree", text: "Piletas", value: "piletas" },
-      { key: "mancha", icon: "tree", text: "Mancha Urbano", value: "mancha" },
+      { key: "roofs", icon: "tree", text: "Techos", value: "techos" },
+      { key: "pools", icon: "tree", text: "Piletas", value: "piletas" },
       {
-        key: "asentamiento",
+        key: "urban-sprawl",
         icon: "tree",
-        text: "Asentamiento Informales",
+        text: "Mancha Urbana",
+        value: "mancha"
+      },
+      {
+        key: "informal-settlements",
+        icon: "tree",
+        text: "Asentamientos Informales",
         value: "asentamiento"
       },
-      { key: "area", icon: "tree", text: "Areas Verdes", value: "area" },
-      { key: "calles", icon: "tree", text: "Calles", value: "calles" },
-      { key: "imagen", icon: "tree", text: "Imagen Nocturna", value: "imagen" }
+      { key: "green-areas", icon: "tree", text: "Areas Verdes", value: "area" },
+      { key: "streets", icon: "tree", text: "Calles", value: "calles" },
+      {
+        key: "nighttime",
+        icon: "tree",
+        text: "Imagen Nocturna",
+        value: "imagen"
+      }
     ];
 
     const optionsAgricultura = [
       {
-        key: "area sembrada",
+        key: "soil",
         icon: "tree",
-        text: "Área sembrada",
+        text: "Área Sembrada",
         value: "area sembrada"
       },
       {
-        key: "area anegada",
+        key: "floods",
         icon: "tree",
-        text: "Área anegada",
+        text: "Área Anegada",
         value: "area anegada"
       },
-      { key: "pivotes", icon: "tree", text: "Pivotes", value: "pivotes" },
-      { key: "simbolsa", icon: "tree", text: "Silobolsa", value: "simbolsa" },
       {
-        key: "indice ndvi",
+        key: "water-wheels",
+        icon: "tree",
+        text: "Pivotes Circulares",
+        value: "pivotes"
+      },
+      { key: "silobags", icon: "tree", text: "Silobolsas", value: "simbolsa" },
+      {
+        key: "ndvi",
         icon: "tree",
         text: "Índice NDVI",
         value: "indice ndvi"
       },
       {
-        key: "indice evi",
+        key: "evi",
         icon: "tree",
         text: "Índice EVI",
         value: "indice evi"
@@ -64,14 +79,14 @@ class ListDivided extends React.Component {
 
     const optionsDatosDemograficos = [
       {
-        key: "asentamientos informales",
+        key: "informal-settlements",
         icon: "tree",
-        text: "Asentamientos informales",
+        text: "Asentamientos Informales",
         value: "asentamientos informales"
       },
-      { key: "escuelas", icon: "tree", text: "Escuelas", value: "escuelas" },
+      { key: "schools", icon: "tree", text: "Escuelas", value: "escuelas" },
       {
-        key: "hospitales",
+        key: "hospitals",
         icon: "tree",
         text: "Hospitales",
         value: "hospitales"
@@ -106,7 +121,7 @@ class ListDivided extends React.Component {
   }
 }
 
-class ButtonCircule extends React.Component {
+class LayerSelector extends React.Component {
   state = { open: false };
 
   handleOpen = () => this.setState({ open: true });
@@ -143,4 +158,4 @@ class ButtonCircule extends React.Component {
   }
 }
 
-export default ButtonCircule;
+export default LayerSelector;

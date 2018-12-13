@@ -27,10 +27,10 @@ class Index extends React.Component {
     zoom: [7],
     isActive: false,
     step: {
-      "initial": "Escriba una ciudad o busque en el mapa un lugar",
-      "search_done": "Dibuje un polígono del área que desea analizar",
-      "polygon_drawn": "Seleccione una o más capas de análisis",
-      "layer_selected": "Si está de acuerdo con la selección, haga clic en Confirmar",
+      initial: " Escriba una ciudad o busque en el mapa un lugar ",
+      search_done: "Dibuje un polígono del área que desea analizar",
+      polygon_drawn: "Seleccione una o más capas de análisis",
+      layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar",
     },
 
   }
@@ -65,6 +65,11 @@ class Index extends React.Component {
       >
         <Guide
           step={this.state.step.initial}
+          stepSearch={this.state.step.search_done}
+          stepPolygon={this.state.step.polygon_drawn}
+          stepSearch={this.state.step.search_done}
+
+
 
         />
 

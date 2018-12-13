@@ -2,117 +2,122 @@ import React from "react";
 import {
   Button,
   Dropdown,
-  Segment,
   TransitionablePortal,
-  List,
-  Menu,
-  Icon,
-  Header
+  Menu
 } from "semantic-ui-react";
 
-class ListDivided extends React.Component {
+class LayersMenu extends React.Component {
+  optionsConstruccion = [
+    {
+      key: "recent-construction",
+      icon: "tree",
+      text: "Construcción Reciente",
+      value: "recent-construction"
+    },
+    { key: "roofs", icon: "tree", text: "Techos", value: "roofs" },
+    { key: "pools", icon: "tree", text: "Piletas", value: "pools" },
+    {
+      key: "urban-sprawl",
+      icon: "tree",
+      text: "Mancha Urbana",
+      value: "urban-sprawl"
+    },
+    {
+      key: "informal-settlements",
+      icon: "tree",
+      text: "Asentamientos Informales",
+      value: "informal-settlements"
+    },
+    {
+      key: "green-areas",
+      icon: "tree",
+      text: "Areas Verdes",
+      value: "green-areas"
+    },
+    { key: "streets", icon: "tree", text: "Calles", value: "streets" },
+    {
+      key: "nighttime",
+      icon: "tree",
+      text: "Imagen Nocturna",
+      value: "nighttime"
+    }
+  ];
+
+  optionsAgricultura = [
+    {
+      key: "soil",
+      icon: "tree",
+      text: "Área Sembrada",
+      value: "soil"
+    },
+    {
+      key: "floods",
+      icon: "tree",
+      text: "Área Anegada",
+      value: "floods"
+    },
+    {
+      key: "water-wheels",
+      icon: "tree",
+      text: "Pivotes Circulares",
+      value: "water-wheels"
+    },
+    { key: "silobags", icon: "tree", text: "Silobolsas", value: "silobags" },
+    {
+      key: "ndvi",
+      icon: "tree",
+      text: "Índice NDVI",
+      value: "ndvi"
+    },
+    {
+      key: "evi",
+      icon: "tree",
+      text: "Índice EVI",
+      value: "evi"
+    }
+  ];
+
+  optionsDatosDemograficos = [
+    {
+      key: "informal-settlements",
+      icon: "tree",
+      text: "Asentamientos Informales",
+      value: "informal-settlements"
+    },
+    { key: "schools", icon: "tree", text: "Escuelas", value: "schools" },
+    {
+      key: "hospitals",
+      icon: "tree",
+      text: "Hospitales",
+      value: "hospitals"
+    }
+  ];
+
+  _onClickLayer = (event, data) => {
+    this.props.onToggleLayer(data.value);
+  };
+
   render() {
-    const optionsConstruccion = [
-      {
-        key: "recent-construction",
-        icon: "tree",
-        text: "Construcción Reciente",
-        value: "construc"
-      },
-      { key: "roofs", icon: "tree", text: "Techos", value: "techos" },
-      { key: "pools", icon: "tree", text: "Piletas", value: "piletas" },
-      {
-        key: "urban-sprawl",
-        icon: "tree",
-        text: "Mancha Urbana",
-        value: "mancha"
-      },
-      {
-        key: "informal-settlements",
-        icon: "tree",
-        text: "Asentamientos Informales",
-        value: "asentamiento"
-      },
-      { key: "green-areas", icon: "tree", text: "Areas Verdes", value: "area" },
-      { key: "streets", icon: "tree", text: "Calles", value: "calles" },
-      {
-        key: "nighttime",
-        icon: "tree",
-        text: "Imagen Nocturna",
-        value: "imagen"
-      }
-    ];
-
-    const optionsAgricultura = [
-      {
-        key: "soil",
-        icon: "tree",
-        text: "Área Sembrada",
-        value: "area sembrada"
-      },
-      {
-        key: "floods",
-        icon: "tree",
-        text: "Área Anegada",
-        value: "area anegada"
-      },
-      {
-        key: "water-wheels",
-        icon: "tree",
-        text: "Pivotes Circulares",
-        value: "pivotes"
-      },
-      { key: "silobags", icon: "tree", text: "Silobolsas", value: "simbolsa" },
-      {
-        key: "ndvi",
-        icon: "tree",
-        text: "Índice NDVI",
-        value: "indice ndvi"
-      },
-      {
-        key: "evi",
-        icon: "tree",
-        text: "Índice EVI",
-        value: "indice evi"
-      }
-    ];
-
-    const optionsDatosDemograficos = [
-      {
-        key: "informal-settlements",
-        icon: "tree",
-        text: "Asentamientos Informales",
-        value: "asentamientos informales"
-      },
-      { key: "schools", icon: "tree", text: "Escuelas", value: "escuelas" },
-      {
-        key: "hospitals",
-        icon: "tree",
-        text: "Hospitales",
-        value: "hospitales"
-      }
-    ];
-
     return (
       <Menu vertical style={this.props.style}>
         <Dropdown text="Construcción" pointing="left" className="link item">
           <Dropdown.Menu>
-            {optionsConstruccion.map(opts => (
-              <Dropdown.Item {...opts} />
+            {this.optionsConstruccion.map(opts => (
+              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
             ))}
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown text="Agricultura" pointing="left" className="link item">
           <Dropdown.Menu>
-            {optionsAgricultura.map(opts => (
-              <Dropdown.Item {...opts} />
+            {this.optionsAgricultura.map(opts => (
+              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
             ))}
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown text="Demográficos" pointing="left" className="link item">
           <Dropdown.Menu>
-            {optionsDatosDemograficos.map(opts => (
-              <Dropdown.Item {...opts} />
+            {this.optionsDatosDemograficos.map(opts => (
+              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
             ))}
           </Dropdown.Menu>
         </Dropdown>
@@ -129,6 +134,8 @@ class LayerSelector extends React.Component {
   handleClose = () => this.setState({ open: false });
 
   render() {
+    const { onToggleLayer } = this.props;
+
     return (
       <TransitionablePortal
         closeOnTriggerClick
@@ -145,13 +152,14 @@ class LayerSelector extends React.Component {
           />
         }
       >
-        <ListDivided
+        <LayersMenu
           style={{
             left: "16px",
             position: "fixed",
             bottom: "100px",
             zIndex: 1000
           }}
+          onToggleLayer={onToggleLayer}
         />
       </TransitionablePortal>
     );

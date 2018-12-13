@@ -34,6 +34,7 @@ class Index extends React.Component {
   state = {
     center: [-58.373219, -34.609032],
     zoom: [7],
+    selectedLayers: [],
     isActive: false,
     step: "initial",
     guideContext: this.geoRef,
@@ -47,9 +48,25 @@ class Index extends React.Component {
     this.setState({ guideContext: this.geoRef, })
   }
 
+  _onToggleLayer = layer => {
+    const newSelectedLayers = this._addOrRemove(
+      this.state.selectedLayers,
+      layer
+    );
+    console.log(`newSelectedLayers: ${newSelectedLayers}`);
+    this.setState({ selectedlayers: newSelectedLayers });
+  };
+
+  _addOrRemove = (array, item) => {
+    const include = array.includes(item);
+    return include
+      ? array.filter(arrayItem => arrayItem !== item)
+      : [...array, item];
+  };
+
   render() {
     let controlPanel = null;
-    if (this.state.isActive === true) {
+    if (this.state.isActive) {
       controlPanel = (
         <div
           style={{
@@ -61,8 +78,10 @@ class Index extends React.Component {
             padding: "12px 24px"
           }}
         >
-          <ControlPanel mapRef={this.mapRef} />
-
+          <ControlPanel
+            mapRef={this.mapRef}
+            selectedLayers={this.state.selectedLayers}
+          />
         </div>
       );
     }
@@ -80,7 +99,10 @@ class Index extends React.Component {
           step={this.state.step}
         // context={this.state.guideContext}
         />
-        <LayerSelector ref={this.layerSelectorRef} />
+        <LayerSelector
+          ref={this.layerSelectorRef}
+          onToggleLayer={this._onToggleLayer}
+        />
         {controlPanel}
       </Map>
     );

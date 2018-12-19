@@ -21,29 +21,35 @@ import ButtonCircule from '../components/button'
 import Guide from '../components/guide'
 
 
-class Index extends React.Component {
-  state = {
-    center: [-58.373219, -34.609032],
-    zoom: [7],
-    isActive: false,
-    step: {
-      initial: " Escriba una ciudad o busque en el mapa un lugar ",
-      search_done: "Dibuje un polígono del área que desea analizar",
-      polygon_drawn: "Seleccione una o más capas de análisis",
-      layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar",
-    },
 
-  }
+
+class Index extends React.Component {
+
 
   mapRef = React.createRef()
   geoRef = React.createRef()
   buttonRef = React.createRef()
   drawRef = React.createRef()
 
-  _onGeocoderResult = () => {
-    this.setState({ isActive: true })
+
+  state = {
+    center: [-58.373219, -34.609032],
+    zoom: [7],
+    isActive: false,
+    step: "initial",
+    // guideContext: this.geoRef,
+
   }
 
+
+
+  _onGeocoderResult = () => {
+    this.setState({ isActive: true, step: "search_done", })
+
+  }
+  componentDidMount() {
+    // this.setState({ guideContext: this.geoRef, })
+  }
 
   render() {
     let controlPanel = null
@@ -51,6 +57,7 @@ class Index extends React.Component {
       controlPanel =
         <div style={{ position: 'absolute', right: 0, top: 100, background: '#fff', margin: '24px', padding: '12px 24px', }}>
           <ControlPanel mapRef={this.mapRef} />
+
         </div>
     }
 
@@ -64,13 +71,8 @@ class Index extends React.Component {
         onGeocoderResult={this._onGeocoderResult}
       >
         <Guide
-          step={this.state.step.initial}
-          stepSearch={this.state.step.search_done}
-          stepPolygon={this.state.step.polygon_drawn}
-          stepSearch={this.state.step.search_done}
-
-
-
+          step={this.state.step}
+        // context={this.state.guideContext}
         />
 
         <ButtonCircule
@@ -81,5 +83,6 @@ class Index extends React.Component {
     )
   }
 }
+
 
 export default Index

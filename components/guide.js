@@ -22,6 +22,13 @@ const stylePolygon = {
 
 }
 
+const stepText = {
+    initial: " Escriba una ciudad o busque en el mapa un lugar ",
+    search_done: "Dibuje un polígono del área que desea analizar",
+    polygon_drawn: "Seleccione una o más capas de análisis",
+    layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar",
+}
+
 class Guide extends Component {
 
 
@@ -41,53 +48,23 @@ class Guide extends Component {
 
     render() {
         return (
-            <Grid.Row>
-                <Grid.Column>
-                    <div >
-                        <Popup
-                            content={this.props.step}
-                            open={this.state.isOpen}
-                            onClose={this.handleClose}
-                            onOpen={this.handleOpen}
-                            size='mini'
-                            className="controlPopup"
-                            context={this.props.context}
-                            style={styleInitial}
-                        // position='top center'
-
-
-
-                        />
-                    </div>
-                </Grid.Column>
-                <Grid.Column>
-                    <Popup
-                        className="popupLeft"
-                        content={this.props.stepSearch}
-                        open={this.state.isOpen}
-                        onClose={this.handleClose}
-                        onOpen={this.handleOpen}
-                        size='mini'
-                        context={this.props.context}
-                        style={styleSearch}
-
-                    />
-                </Grid.Column>
+            <div >
                 <Popup
-                    className="popupLeftPolygon"
-                    content={this.props.stepPolygon}
+                    content={stepText[this.props.step]}
                     open={this.state.isOpen}
                     onClose={this.handleClose}
                     onOpen={this.handleOpen}
                     size='mini'
+                    className={"initial" + this.props.step}
                     context={this.props.context}
-                    style={stylePolygon}
-                    pointing="left"
-
+                    style={styleInitial}
+                    // position="top right"
+                    position='top center'
 
 
                 />
-            </Grid.Row>
+            </div>
+
         )
     }
 }

@@ -18,7 +18,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "yarn build && next export"
   },
   "devDependencies": {
     "file-loader": "^2.0.0",

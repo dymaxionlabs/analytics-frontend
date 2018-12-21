@@ -1,11 +1,15 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import ModalContactForm from "./contact-modal";
+import { allLayers } from "./LayerSelector";
 
 class ControlPanel extends React.PureComponent {
   _layersSentence() {
-    const layers = this.props.selectedLayers || [];
-    return layers.join(", ");
+    const selectedLayers = this.props.selectedLayers || [];
+    return allLayers
+      .filter(layer => selectedLayers.includes(layer.key))
+      .map(layer => layer.text)
+      .join(", ");
   }
 
   render() {

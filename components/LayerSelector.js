@@ -6,96 +6,129 @@ import {
   Menu
 } from "semantic-ui-react";
 
+export const allLayers = [
+  {
+    key: "recent-construction",
+    icon: "tree",
+    text: "Construcción Reciente",
+    value: "recent-construction",
+    categories: ["construction"]
+  },
+  {
+    key: "roofs",
+    icon: "tree",
+    text: "Techos",
+    value: "roofs",
+    categories: ["construction"]
+  },
+  {
+    key: "pools",
+    icon: "tree",
+    text: "Piletas",
+    value: "pools",
+    categories: ["construction"]
+  },
+  {
+    key: "urban-sprawl",
+    icon: "tree",
+    text: "Mancha Urbana",
+    value: "urban-sprawl",
+    categories: ["construction"]
+  },
+  {
+    key: "informal-settlements",
+    icon: "tree",
+    text: "Asentamientos Informales",
+    value: "informal-settlements",
+    categories: ["construction", "demographic"]
+  },
+  {
+    key: "green-areas",
+    icon: "tree",
+    text: "Areas Verdes",
+    value: "green-areas",
+    categories: ["construction"]
+  },
+  {
+    key: "streets",
+    icon: "tree",
+    text: "Calles",
+    value: "streets",
+    categories: ["construction"]
+  },
+  {
+    key: "nighttime",
+    icon: "tree",
+    text: "Imagen Nocturna",
+    value: "nighttime",
+    categories: ["construction"]
+  },
+  {
+    key: "soil",
+    icon: "tree",
+    text: "Área Sembrada",
+    value: "soil",
+    categories: ["agri"]
+  },
+  {
+    key: "floods",
+    icon: "tree",
+    text: "Área Anegada",
+    value: "floods",
+    categories: ["agri"]
+  },
+  {
+    key: "water-wheels",
+    icon: "tree",
+    text: "Pivotes Circulares",
+    value: "water-wheels",
+    categories: ["agri"]
+  },
+  {
+    key: "silobags",
+    icon: "tree",
+    text: "Silobolsas",
+    value: "silobags",
+    categories: ["agri"]
+  },
+  {
+    key: "ndvi",
+    icon: "tree",
+    text: "Índice NDVI",
+    value: "ndvi",
+    categories: ["agri"]
+  },
+  {
+    key: "evi",
+    icon: "tree",
+    text: "Índice EVI",
+    value: "evi",
+    categories: ["agri"]
+  },
+  {
+    key: "schools",
+    icon: "tree",
+    text: "Escuelas",
+    value: "schools",
+    categories: ["demographic"]
+  },
+  {
+    key: "hospitals",
+    icon: "tree",
+    text: "Hospitales",
+    value: "hospitals",
+    categories: ["demographic"]
+  }
+];
+
 class LayersMenu extends React.Component {
-  optionsConstruccion = [
-    {
-      key: "recent-construction",
-      icon: "tree",
-      text: "Construcción Reciente",
-      value: "recent-construction"
-    },
-    { key: "roofs", icon: "tree", text: "Techos", value: "roofs" },
-    { key: "pools", icon: "tree", text: "Piletas", value: "pools" },
-    {
-      key: "urban-sprawl",
-      icon: "tree",
-      text: "Mancha Urbana",
-      value: "urban-sprawl"
-    },
-    {
-      key: "informal-settlements",
-      icon: "tree",
-      text: "Asentamientos Informales",
-      value: "informal-settlements"
-    },
-    {
-      key: "green-areas",
-      icon: "tree",
-      text: "Areas Verdes",
-      value: "green-areas"
-    },
-    { key: "streets", icon: "tree", text: "Calles", value: "streets" },
-    {
-      key: "nighttime",
-      icon: "tree",
-      text: "Imagen Nocturna",
-      value: "nighttime"
-    }
-  ];
-
-  optionsAgricultura = [
-    {
-      key: "soil",
-      icon: "tree",
-      text: "Área Sembrada",
-      value: "soil"
-    },
-    {
-      key: "floods",
-      icon: "tree",
-      text: "Área Anegada",
-      value: "floods"
-    },
-    {
-      key: "water-wheels",
-      icon: "tree",
-      text: "Pivotes Circulares",
-      value: "water-wheels"
-    },
-    { key: "silobags", icon: "tree", text: "Silobolsas", value: "silobags" },
-    {
-      key: "ndvi",
-      icon: "tree",
-      text: "Índice NDVI",
-      value: "ndvi"
-    },
-    {
-      key: "evi",
-      icon: "tree",
-      text: "Índice EVI",
-      value: "evi"
-    }
-  ];
-
-  optionsDatosDemograficos = [
-    {
-      key: "informal-settlements",
-      icon: "tree",
-      text: "Asentamientos Informales",
-      value: "informal-settlements"
-    },
-    { key: "schools", icon: "tree", text: "Escuelas", value: "schools" },
-    {
-      key: "hospitals",
-      icon: "tree",
-      text: "Hospitales",
-      value: "hospitals"
-    }
-  ];
-
   _onClickLayer = (event, data) => {
     this.props.onToggleLayer(data.value);
   };
+
+  _layersByCategory(categoryId) {
+    return allLayers.filter(layer => layer.categories.includes(categoryId));
+  }
 
   render() {
     const { style, selectedLayers } = this.props;
@@ -104,7 +137,7 @@ class LayersMenu extends React.Component {
       <Menu vertical style={style}>
         <Dropdown text="Construcción" pointing="left" className="link item">
           <Dropdown.Menu>
-            {this.optionsConstruccion.map(opts => (
+            {this._layersByCategory("construction").map(opts => (
               <Dropdown.Item
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
@@ -115,7 +148,7 @@ class LayersMenu extends React.Component {
         </Dropdown>
         <Dropdown text="Agricultura" pointing="left" className="link item">
           <Dropdown.Menu>
-            {this.optionsAgricultura.map(opts => (
+            {this._layersByCategory("agri").map(opts => (
               <Dropdown.Item
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
@@ -126,7 +159,7 @@ class LayersMenu extends React.Component {
         </Dropdown>
         <Dropdown text="Demográficos" pointing="left" className="link item">
           <Dropdown.Menu>
-            {this.optionsDatosDemograficos.map(opts => (
+            {this._layersByCategory("demographic").map(opts => (
               <Dropdown.Item
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
@@ -144,7 +177,6 @@ class LayerSelector extends React.Component {
   state = { open: false };
 
   handleOpen = () => this.setState({ open: true });
-
   handleClose = () => this.setState({ open: false });
 
   render() {

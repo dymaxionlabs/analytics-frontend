@@ -20,16 +20,11 @@ import ControlPanel from "../components/control-panel";
 import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/guide";
 
-
-
 class Index extends React.Component {
-
-
-  mapRef = React.createRef()
-  geoRef = React.createRef()
-  buttonRef = React.createRef()
-  drawRef = React.createRef()
-
+  mapRef = React.createRef();
+  geoRef = React.createRef();
+  buttonRef = React.createRef();
+  drawRef = React.createRef();
 
   state = {
     center: [-58.373219, -34.609032],
@@ -38,23 +33,29 @@ class Index extends React.Component {
     isActive: false,
     step: "initial",
     guideContext: this.geoRef,
-  }
+  };
 
-  _onGeocoderResult = () => {
-    this.setState({ isActive: true, step: "search_done", })
+  constructor(props) {
+    super(props);
+    this._onToggleLayer = this._onToggleLayer.bind(this);
+    this._onGeocoderResult = this._onGeocoderResult.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ guideContext: this.geoRef, })
+    this.setState({ guideContext: this.geoRef })
   }
+
+  _onGeocoderResult = () => {
+    this.setState({ isActive: true, step: "search_done" });
+  };
 
   _onToggleLayer = layer => {
     const newSelectedLayers = this._addOrRemove(
       this.state.selectedLayers,
       layer
     );
-    console.log(`newSelectedLayers: ${newSelectedLayers}`);
-    this.setState({ selectedlayers: newSelectedLayers });
+    console.log(`newSelectedLayers: ${JSON.stringify(newSelectedLayers)}`);
+    this.setState({ selectedLayers: newSelectedLayers });
   };
 
   _addOrRemove = (array, item) => {
@@ -97,11 +98,12 @@ class Index extends React.Component {
       >
         <Guide
           step={this.state.step}
-        // context={this.state.guideContext}
+          // context={this.state.guideContext}
         />
         <LayerSelector
           ref={this.layerSelectorRef}
           onToggleLayer={this._onToggleLayer}
+          selectedLayers={this.state.selectedLayers}
         />
         {controlPanel}
       </Map>

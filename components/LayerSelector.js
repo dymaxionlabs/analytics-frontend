@@ -98,26 +98,40 @@ class LayersMenu extends React.Component {
   };
 
   render() {
+    const { style, selectedLayers } = this.props;
+
     return (
-      <Menu vertical style={this.props.style}>
+      <Menu vertical style={style}>
         <Dropdown text="Construcción" pointing="left" className="link item">
           <Dropdown.Menu>
             {this.optionsConstruccion.map(opts => (
-              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
+              <Dropdown.Item
+                {...opts}
+                active={selectedLayers.includes(opts.key)}
+                onClick={this._onClickLayer}
+              />
             ))}
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown text="Agricultura" pointing="left" className="link item">
           <Dropdown.Menu>
             {this.optionsAgricultura.map(opts => (
-              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
+              <Dropdown.Item
+                {...opts}
+                active={selectedLayers.includes(opts.key)}
+                onClick={this._onClickLayer}
+              />
             ))}
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown text="Demográficos" pointing="left" className="link item">
           <Dropdown.Menu>
             {this.optionsDatosDemograficos.map(opts => (
-              <Dropdown.Item {...opts} onClick={this._onClickLayer} />
+              <Dropdown.Item
+                {...opts}
+                active={selectedLayers.includes(opts.key)}
+                onClick={this._onClickLayer}
+              />
             ))}
           </Dropdown.Menu>
         </Dropdown>
@@ -134,7 +148,7 @@ class LayerSelector extends React.Component {
   handleClose = () => this.setState({ open: false });
 
   render() {
-    const { onToggleLayer } = this.props;
+    const { onToggleLayer, selectedLayers } = this.props;
 
     return (
       <TransitionablePortal
@@ -160,6 +174,7 @@ class LayerSelector extends React.Component {
             zIndex: 1000
           }}
           onToggleLayer={onToggleLayer}
+          selectedLayers={selectedLayers}
         />
       </TransitionablePortal>
     );

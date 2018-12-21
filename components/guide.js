@@ -23,7 +23,7 @@ const stylePolygon = {
 }
 
 const stepText = {
-    initial: " Escriba una ciudad o busque en el mapa un lugar ",
+    initial: "Escriba una ciudad o busque en el mapa un lugar ",
     search_done: "Dibuje un polígono del área que desea analizar",
     polygon_drawn: "Seleccione una o más capas de análisis",
     layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar",
@@ -31,7 +31,7 @@ const stepText = {
 
 class Guide extends Component {
 
-
+    geoRef = React.createRef()
 
     state = { isOpen: true }
 
@@ -48,22 +48,22 @@ class Guide extends Component {
 
     render() {
         return (
-            <div >
+            <div>
                 <Popup
                     content={stepText[this.props.step]}
                     open={this.state.isOpen}
                     onClose={this.handleClose}
                     onOpen={this.handleOpen}
                     size='mini'
-                    className={"initial" + this.props.step}
+                    id='pop'
+                    className={"popup initial"}
                     context={this.props.context}
                     style={styleInitial}
-                    // position="top right"
-                    position='top center'
-
+                    basic
 
                 />
-            </div>
+
+            </div >
 
         )
     }

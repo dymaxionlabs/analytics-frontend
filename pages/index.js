@@ -37,7 +37,7 @@ class Index extends React.Component {
     zoom: [7],
     isActive: false,
     step: "initial",
-    // guideContext: this.geoRef,
+    guideContext: this.geoRef,
 
   }
 
@@ -48,7 +48,7 @@ class Index extends React.Component {
 
   }
   componentDidMount() {
-    // this.setState({ guideContext: this.geoRef, })
+    this.setState({ guideContext: this.geoRef, })
   }
 
   render() {

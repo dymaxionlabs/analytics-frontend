@@ -18,11 +18,11 @@
     left: 10px;
 }
 
-.popup.initial{
+#pop.initial{
   position: absolute;
-  top: 100px;
+  top: 5px;
   left: 300px;
-  font-size: 50px;
+  font-size: 10px;
   padding: 1em;
   margin: 10px;
   

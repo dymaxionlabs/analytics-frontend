@@ -18,41 +18,40 @@
     left: 10px;
 }
 
-#pop.initial{
+.initial{
   position: absolute;
-  top: 5px;
+  top: 10px !important;
   left: 300px;
   font-size: 10px;
   padding: 1em;
-  margin: 10px;
-  
-
- 
 }
 
 
-.popup.search_done{
+.search_done{
   position: absolute;
-  top: 90px;
-  left: 1px;
-  font-size: 50px;
- 
-}
-
-
-.popup.polygon{
-  position: absolute;
-  top: 100px;
-  left: 40px;
-  font-size: 50px;
+  top: 60px !important;
+  left: 50px;
+  font-size: 10px;
+  padding: 1em;
   
 }
 
-.popup.layer{
+
+.polygon_drawn{
   position: absolute;
-  top: 100px;
-  left: 40px;
-  font-size: 50px;
+  top: 550px !important;
+  left: 80px;
+  font-size: 10px;
+  padding: 1em;
+  
+}
+
+.layer_selected{
+  position: absolute;
+  top: 250px !important;
+  right: 400px !important;
+  font-size: 10px;
+  padding: 1em;
   
 }
 

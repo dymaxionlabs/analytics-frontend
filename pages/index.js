@@ -31,7 +31,7 @@ class Index extends React.Component {
     zoom: [7],
     selectedLayers: [],
     isActive: false,
-    step: "initial",
+    step: "layer_selected",
     guideContext: this.geoRef,
   };
 
@@ -46,7 +46,7 @@ class Index extends React.Component {
   }
 
   _onGeocoderResult = () => {
-    this.setState({ isActive: true, step: "search_done" });
+    this.setState({ isActive: true, isOpen: true, step: "search_done" });
   };
 
   _onToggleLayer = layer => {
@@ -98,7 +98,7 @@ class Index extends React.Component {
       >
         <Guide
           step={this.state.step}
-          // context={this.state.guideContext}
+        // context={this.state.guideContext}
         />
         <LayerSelector
           ref={this.layerSelectorRef}

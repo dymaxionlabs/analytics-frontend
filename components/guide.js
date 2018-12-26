@@ -2,28 +2,8 @@ import { Popup, Grid } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 
-const styleInitial = {
-    borderRadius: 0,
-    padding: '1em',
-    margin: "10px",
-}
-
-const styleSearch = {
-    borderRadius: 0,
-    padding: '0em',
-    margin: "70px",
-
-}
-
-const stylePolygon = {
-    borderRadius: 0,
-    padding: '1em',
-    margin: "500px",
-
-}
-
 const stepText = {
-    initial: "Escriba una ciudad o busque en el mapa un lugar ",
+    initial: "Escriba una ciudad o busque en el mapa un lugar",
     search_done: "Dibuje un polígono del área que desea analizar",
     polygon_drawn: "Seleccione una o más capas de análisis",
     layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar",
@@ -55,15 +35,13 @@ class Guide extends Component {
                     onClose={this.handleClose}
                     onOpen={this.handleOpen}
                     size='mini'
-                    id='pop'
-                    className={"popup initial"}
+                    className={this.props.step}
                     context={this.props.context}
-                    style={styleInitial}
                     basic
 
                 />
 
-            </div >
+            </div>
 
         )
     }

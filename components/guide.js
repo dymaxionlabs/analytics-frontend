@@ -15,25 +15,12 @@ class Guide extends Component {
 
     state = { isOpen: true }
 
-
-    handleOpen = () => {
-        this.setState({ isOpen: true })
-
-    }
-
-    handleClose = () => {
-        this.setState({ isOpen: false })
-
-    }
-
     render() {
         return (
             <div>
                 <Popup
                     content={stepText[this.props.step]}
                     open={this.state.isOpen}
-                    onClose={this.handleClose}
-                    onOpen={this.handleOpen}
                     size='mini'
                     className={this.props.step}
                     context={this.props.context}

@@ -111,7 +111,7 @@ const Map = ReactMapboxGl({
 })
 
 export default props => (
-  <Map 
+  <Map
     style='mapbox://styles/mapbox/satellite-streets-v9'  // eslint-disable-line
     containerStyle={mapContainerStyle}
     ref={props.mapRef}
@@ -134,7 +134,7 @@ export default props => (
       mapRef={props.mapRef}
       position='top-left'
       displayControlsDefault={false}
-      ref={props.drawRef}
+      onDrawResul={props.onDrawResul}
     />
     {props.children}
   </Map>

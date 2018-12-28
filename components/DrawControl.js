@@ -5,15 +5,15 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 
 class DrawControl extends React.Component {
   static defaultProps = {
-    onDrawActionable: () => {},
-    onDrawCombine: () => {},
-    onDrawCreate: () => {},
-    onDrawDelete: () => {},
-    onDrawModeChange: () => {},
-    onDrawRender: () => {},
-    onDrawSelectionChange: () => {},
-    onDrawUncombine: () => {},
-    onDrawUpdate: () => {},
+    onDrawActionable: () => { },
+    onDrawCombine: () => { },
+    onDrawCreate: () => { },
+    onDrawDelete: () => { },
+    onDrawModeChange: () => { },
+    onDrawRender: () => { },
+    onDrawSelectionChange: () => { },
+    onDrawUncombine: () => { },
+    onDrawUpdate: () => { },
     position: 'top-left'
   };
 
@@ -49,7 +49,7 @@ class DrawControl extends React.Component {
     styles: PropTypes.arrayOf(PropTypes.object)
   };
 
-  componentWillMount () {
+  componentWillMount() {
     const {
       mapRef,
       ...mapProps
@@ -93,7 +93,7 @@ class DrawControl extends React.Component {
     map.on('draw.update', onDrawUpdate);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const map = this.props.mapRef.current.state.map;
     if (!map || !map.getStyle()) {
       return;
@@ -101,7 +101,7 @@ class DrawControl extends React.Component {
     map.removeControl(this.draw);
   }
 
-  render () {
+  render() {
     return null;
   }
 }

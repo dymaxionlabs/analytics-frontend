@@ -117,6 +117,8 @@ export default props => (
     ref={props.mapRef}
     center={props.center}
     zoom={props.zoom}
+    draw={props.drawRef}
+
   >
     <ScaleControl />
     <ZoomControl />
@@ -134,7 +136,7 @@ export default props => (
       mapRef={props.mapRef}
       position='top-left'
       displayControlsDefault={false}
-      onDrawResul={props.onDrawResul}
+      onDrawCreate={props.onDrawCreate}
     />
     {props.children}
   </Map>

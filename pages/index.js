@@ -49,7 +49,7 @@ class Index extends React.Component {
     this.setState({ isActive: true, step: "search_done" });
   };
 
-  _onDrawResul = () => {
+  _onDrawCreate = () => {
     this.setState({ step: "polygon_drawn" })
   };
 
@@ -99,7 +99,7 @@ class Index extends React.Component {
         geocoderRef={this.geoRef}
         drawRef={this.drawRef}
         onGeocoderResult={this._onGeocoderResult}
-        onDrawResul={this._onDrawResul}
+        onDrawCreate={this._onDrawCreate}
       >
         <Guide
           step={this.state.step}

@@ -51,7 +51,7 @@ class DrawControl extends React.Component {
 
   componentWillMount() {
     const {
-      mapRef,
+      mapRef, drawRef,
       ...mapProps
     } = this.props
 

@@ -27,12 +27,12 @@ class Index extends React.Component {
   drawRef = React.createRef();
 
   state = {
-    center: [-58.373219, -34.609032],
-    zoom: [7],
+    center: [-34.609032, -58.373219],
+    zoom: [11],
     selectedLayers: [],
     isActive: false,
     step: "initial",
-    guideContext: this.geoRef,
+    guideContext: this.geoRef
   };
 
   constructor(props) {
@@ -42,7 +42,7 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ guideContext: this.geoRef })
+    this.setState({ guideContext: this.geoRef });
   }
 
   _onGeocoderResult = () => {
@@ -50,7 +50,7 @@ class Index extends React.Component {
   };
 
   _onDrawCreate = () => {
-    this.setState({ step: "polygon_drawn" })
+    this.setState({ step: "polygon_drawn" });
   };
 
   _onToggleLayer = layer => {
@@ -101,9 +101,7 @@ class Index extends React.Component {
         onGeocoderResult={this._onGeocoderResult}
         onDrawCreate={this._onDrawCreate}
       >
-        <Guide
-          step={this.state.step}
-        />
+        <Guide step={this.state.step} />
         <LayerSelector
           ref={this.layerSelectorRef}
           onToggleLayer={this._onToggleLayer}

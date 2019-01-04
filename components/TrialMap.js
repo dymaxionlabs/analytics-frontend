@@ -1,12 +1,23 @@
+import { Map, TileLayer, ZoomControl } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
+const mapContainerStyle = {
+  width: "100vw",
+  height: "100vh",
+  flex: 1
+};
+
+// FIXME Move this to config/
+const MAPBOX_TOKEN =
+  "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw";
+
+const styleId = "mapbox.streets-satellite";
+const basemapUrl = `https://api.tiles.mapbox.com/v4/${styleId}/{z}/{x}/{y}.png?access_token=${MAPBOX_TOKEN}`;
+
+/*
 import ReactMapboxGl, { ScaleControl, ZoomControl, RotationControl } from 'react-mapbox-gl'
 import Geocoder from './Geocoder'
 import DrawControl from './DrawControl'
-
-const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
-  flex: 1
-}
 
 const drawControlStyles = [
   {
@@ -103,9 +114,6 @@ const drawControlStyles = [
   }
 ]
 
-// FIXME Move this to config/
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw'
-
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 })
@@ -141,3 +149,20 @@ export default props => (
     {props.children}
   </Map>
 )
+*/
+
+export default ({ children, center, zoom }) => (
+  <Map
+    style={mapContainerStyle}
+    center={center}
+    zoom={zoom}
+    zoomControl={false}
+  >
+    <TileLayer
+      attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
+      url={basemapUrl}
+    />
+    <ZoomControl position="topright" />
+    {children}
+  </Map>
+);

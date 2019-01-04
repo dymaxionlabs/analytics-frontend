@@ -1,5 +1,7 @@
-import { Map, TileLayer, ZoomControl } from "react-leaflet";
+import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import GeocoderControl from "./GeocoderControl";
+import DrawControl from "./DrawControl";
+
 import "leaflet/dist/leaflet.css";
 
 const mapContainerStyle = {
@@ -171,6 +173,10 @@ export default ({ children, center, zoom, onGeocoderResult }) => (
       placeholder="Search..."
       errorMessage="Nothing found."
     />
+    <FeatureGroup>
+      <DrawControl position="topleft" />
+    </FeatureGroup>
+
     {children}
   </Map>
 );

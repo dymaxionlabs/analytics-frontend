@@ -1,4 +1,5 @@
 import { Map, TileLayer, ZoomControl } from "react-leaflet";
+import GeocoderControl from "./GeocoderControl";
 import "leaflet/dist/leaflet.css";
 
 const mapContainerStyle = {
@@ -16,7 +17,6 @@ const basemapUrl = `https://api.tiles.mapbox.com/v4/${styleId}/{z}/{x}/{y}.png?a
 
 /*
 import ReactMapboxGl, { ScaleControl, ZoomControl, RotationControl } from 'react-mapbox-gl'
-import Geocoder from './Geocoder'
 import DrawControl from './DrawControl'
 
 const drawControlStyles = [
@@ -151,7 +151,7 @@ export default props => (
 )
 */
 
-export default ({ children, center, zoom }) => (
+export default ({ children, center, zoom, onGeocoderResult }) => (
   <Map
     style={mapContainerStyle}
     center={center}
@@ -163,6 +163,14 @@ export default ({ children, center, zoom }) => (
       url={basemapUrl}
     />
     <ZoomControl position="topright" />
+    <GeocoderControl
+      accessToken={MAPBOX_TOKEN}
+      onResult={onGeocoderResult}
+      collapsed={false}
+      position="topleft"
+      placeholder="Search..."
+      errorMessage="Nothing found."
+    />
     {children}
   </Map>
 );

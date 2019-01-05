@@ -32,13 +32,15 @@ class Index extends React.Component {
     selectedLayers: [],
     isActive: false,
     step: "initial",
-    guideContext: this.geoRef
+    guideContext: this.geoRef,
+    polygonBounds: []
   };
 
   constructor(props) {
     super(props);
     this._onToggleLayer = this._onToggleLayer.bind(this);
     this._onGeocoderResult = this._onGeocoderResult.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +63,22 @@ class Index extends React.Component {
     console.log(`newSelectedLayers: ${JSON.stringify(newSelectedLayers)}`);
     this.setState({ selectedLayers: newSelectedLayers });
   };
+
+  _onClick(event) {
+    console.log("map click");
+
+    const newBounds = event.target.getBounds().pad(-0.1);
+
+    const { polygonBounds } = this.state;
+    this.setState({
+      polygonBounds: [...polygonBounds, newBounds]
+    });
+  }
+
+  _onFeatureGroupClick(event) {
+    console.log("feature group click");
+    console.log(event);
+  }
 
   _addOrRemove = (array, item) => {
     const include = array.includes(item);
@@ -100,6 +118,9 @@ class Index extends React.Component {
         drawRef={this.drawRef}
         onGeocoderResult={this._onGeocoderResult}
         onDrawCreate={this._onDrawCreate}
+        onClick={this._onClick}
+        onFeatureGroupClick={e => this._onFeatureGroupClick(e)}
+        polygonBounds={this.state.polygonBounds}
       >
         <Guide step={this.state.step} />
         <LayerSelector

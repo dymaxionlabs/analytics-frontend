@@ -39,7 +39,7 @@ export default ({
   children,
   center,
   zoom,
-  polygonBounds,
+  autoRectangleBounds,
   onFeatureGroupClick,
   onClick,
   onGeocoderResult
@@ -66,9 +66,7 @@ export default ({
     />
     <FeatureGroup onClick={onFeatureGroupClick}>
       <DrawControl position="topleft" draw={drawOptions} />
-      {polygonBounds.map((bounds, i) => (
-        <Rectangle key={i} bounds={bounds} />
-      ))}
+      {autoRectangleBounds && <Rectangle bounds={autoRectangleBounds} />}
     </FeatureGroup>
 
     {children}

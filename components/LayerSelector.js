@@ -191,6 +191,7 @@ class LayerSelector extends React.Component {
         trigger={
           <Button
             className="controlButton"
+            style={{ zIndex: 1000 }}
             circular
             icon="osi"
             size="massive"

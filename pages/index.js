@@ -11,7 +11,7 @@ const Map = dynamic(() => import("../components/TrialMap"), {
   ssr: false,
   loading: () => (
     <Dimmer active>
-      <Loader size="big">Cargando</Loader>
+      <Loader size="big">Cargando...</Loader>
     </Dimmer>
   )
 });
@@ -33,7 +33,7 @@ class Index extends React.Component {
     isActive: false,
     step: "initial",
     guideContext: this.geoRef,
-    polygonBounds: []
+    autoRectangleBounds: null
   };
 
   constructor(props) {
@@ -67,12 +67,11 @@ class Index extends React.Component {
   _onClick(event) {
     console.log("map click");
 
+    // FIXME It should center map and then build bounds centered there
+    // based on event.latlng
     const newBounds = event.target.getBounds().pad(-0.1);
 
-    const { polygonBounds } = this.state;
-    this.setState({
-      polygonBounds: [...polygonBounds, newBounds]
-    });
+    this.setState({ autoRectangleBounds: newBounds });
   }
 
   _onFeatureGroupClick(event) {
@@ -120,7 +119,7 @@ class Index extends React.Component {
         onDrawCreate={this._onDrawCreate}
         onClick={this._onClick}
         onFeatureGroupClick={e => this._onFeatureGroupClick(e)}
-        polygonBounds={this.state.polygonBounds}
+        autoRectangleBounds={this.state.autoRectangleBounds}
       >
         <Guide step={this.state.step} />
         <LayerSelector

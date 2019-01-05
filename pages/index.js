@@ -21,57 +21,29 @@ import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/guide";
 
 class Index extends React.Component {
-  mapRef = React.createRef();
-  geoRef = React.createRef();
-  buttonRef = React.createRef();
-  drawRef = React.createRef();
-
   state = {
     center: [-34.609032, -58.373219],
     zoom: [11],
     selectedLayers: [],
     isActive: false,
-    step: "initial",
-    guideContext: this.geoRef,
-    autoRectangleBounds: null
+    step: "initial"
   };
 
   constructor(props) {
     super(props);
+
     this._onToggleLayer = this._onToggleLayer.bind(this);
     this._onGeocoderResult = this._onGeocoderResult.bind(this);
-    this._onClick = this._onClick.bind(this);
+    this._onDrawCreate = this._onDrawCreate.bind(this);
+    this._onFeatureGroupClick = this._onFeatureGroupClick.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ guideContext: this.geoRef });
-  }
-
-  _onGeocoderResult = () => {
+  _onGeocoderResult() {
     this.setState({ isActive: true, step: "search_done" });
-  };
+  }
 
-  _onDrawCreate = () => {
+  _onDrawCreate() {
     this.setState({ step: "polygon_drawn" });
-  };
-
-  _onToggleLayer = layer => {
-    const newSelectedLayers = this._addOrRemove(
-      this.state.selectedLayers,
-      layer
-    );
-    console.log(`newSelectedLayers: ${JSON.stringify(newSelectedLayers)}`);
-    this.setState({ selectedLayers: newSelectedLayers });
-  };
-
-  _onClick(event) {
-    console.log("map click");
-
-    // FIXME It should center map and then build bounds centered there
-    // based on event.latlng
-    const newBounds = event.target.getBounds().pad(-0.1);
-
-    this.setState({ autoRectangleBounds: newBounds });
   }
 
   _onFeatureGroupClick(event) {
@@ -79,12 +51,21 @@ class Index extends React.Component {
     console.log(event);
   }
 
-  _addOrRemove = (array, item) => {
+  _onToggleLayer(layer) {
+    const newSelectedLayers = this._addOrRemove(
+      this.state.selectedLayers,
+      layer
+    );
+    console.log(`newSelectedLayers: ${JSON.stringify(newSelectedLayers)}`);
+    this.setState({ selectedLayers: newSelectedLayers });
+  }
+
+  _addOrRemove(array, item) {
     const include = array.includes(item);
     return include
       ? array.filter(arrayItem => arrayItem !== item)
       : [...array, item];
-  };
+  }
 
   render() {
     let controlPanel = null;
@@ -100,10 +81,7 @@ class Index extends React.Component {
             padding: "12px 24px"
           }}
         >
-          <ControlPanel
-            mapRef={this.mapRef}
-            selectedLayers={this.state.selectedLayers}
-          />
+          <ControlPanel selectedLayers={this.state.selectedLayers} />
         </div>
       );
     }
@@ -112,18 +90,12 @@ class Index extends React.Component {
       <Map
         center={this.state.center}
         zoom={this.state.zoom}
-        mapRef={this.mapRef}
-        geocoderRef={this.geoRef}
-        drawRef={this.drawRef}
         onGeocoderResult={this._onGeocoderResult}
         onDrawCreate={this._onDrawCreate}
-        onClick={this._onClick}
-        onFeatureGroupClick={e => this._onFeatureGroupClick(e)}
-        autoRectangleBounds={this.state.autoRectangleBounds}
+        onFeatureGroupClick={this._onFeatureGroupClick}
       >
         <Guide step={this.state.step} />
         <LayerSelector
-          ref={this.layerSelectorRef}
           onToggleLayer={this._onToggleLayer}
           selectedLayers={this.state.selectedLayers}
         />

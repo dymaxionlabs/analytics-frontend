@@ -35,11 +35,16 @@ const drawOptions = {
   circlemarker: false
 };
 
+function boundsKey(bounds) {
+  const ne = bounds.getNorthEast();
+  const sw = bounds.getSouthWest();
+  return `${ne.lng},${ne.lat}-${sw.lng},${sw.lat}`;
+}
+
 export default ({
   children,
   center,
   zoom,
-  autoRectangleBounds,
   onFeatureGroupClick,
   onClick,
   onGeocoderResult
@@ -49,6 +54,7 @@ export default ({
     center={center}
     zoom={zoom}
     zoomControl={false}
+    animate={true}
     onClick={onClick}
   >
     <TileLayer
@@ -66,7 +72,6 @@ export default ({
     />
     <FeatureGroup onClick={onFeatureGroupClick}>
       <DrawControl position="topleft" draw={drawOptions} />
-      {autoRectangleBounds && <Rectangle bounds={autoRectangleBounds} />}
     </FeatureGroup>
 
     {children}

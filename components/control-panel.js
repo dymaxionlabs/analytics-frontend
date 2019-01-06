@@ -3,6 +3,15 @@ import { Button } from "semantic-ui-react";
 import ModalContactForm from "./contact-modal";
 import { allLayers } from "./LayerSelector";
 
+const style = {
+  position: "absolute",
+  right: 80,
+  top: 40,
+  background: "#fff",
+  padding: "12px 24px",
+  zIndex: 1000
+};
+
 class ControlPanel extends React.PureComponent {
   _layersSentence() {
     const selectedLayers = this.props.selectedLayers || [];
@@ -14,7 +23,7 @@ class ControlPanel extends React.PureComponent {
 
   render() {
     return (
-      <div>
+      <div style={style}>
         <div className="separator">
           <p className="Line-control">
             <b>0.83</b> km²{" "}

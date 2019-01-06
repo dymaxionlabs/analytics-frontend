@@ -67,8 +67,8 @@ export default ({
       onResult={onGeocoderResult}
       collapsed={false}
       position="topleft"
-      placeholder="Search..."
-      errorMessage="Nothing found."
+      placeholder="Buscar ciudad..."
+      errorMessage="No se han encontrado resultados."
     />
     <FeatureGroup onClick={onFeatureGroupClick}>
       <DrawControl position="topleft" draw={drawOptions} />

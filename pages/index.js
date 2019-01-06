@@ -25,8 +25,7 @@ class Index extends React.Component {
     center: [-34.609032, -58.373219],
     zoom: [11],
     selectedLayers: [],
-    isActive: false,
-    step: "initial"
+    step: "layer_selected"
   };
 
   constructor(props) {
@@ -39,7 +38,7 @@ class Index extends React.Component {
   }
 
   _onGeocoderResult() {
-    this.setState({ isActive: true, step: "search_done" });
+    this.setState({ step: "search_done" });
   }
 
   _onDrawCreate() {
@@ -68,23 +67,7 @@ class Index extends React.Component {
   }
 
   render() {
-    let controlPanel = null;
-    if (this.state.isActive) {
-      controlPanel = (
-        <div
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 100,
-            background: "#fff",
-            margin: "24px",
-            padding: "12px 24px"
-          }}
-        >
-          <ControlPanel selectedLayers={this.state.selectedLayers} />
-        </div>
-      );
-    }
+    const isLayerSelected = this.state.step === "layer_selected";
 
     return (
       <Map
@@ -99,7 +82,9 @@ class Index extends React.Component {
           onToggleLayer={this._onToggleLayer}
           selectedLayers={this.state.selectedLayers}
         />
-        {controlPanel}
+        {isLayerSelected && (
+          <ControlPanel selectedLayers={this.state.selectedLayers} />
+        )}
       </Map>
     );
   }

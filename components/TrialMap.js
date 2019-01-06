@@ -45,9 +45,11 @@ export default ({
   children,
   center,
   zoom,
+  featureGroupRef,
   onFeatureGroupClick,
   onClick,
-  onGeocoderResult
+  onGeocoderResult,
+  onDrawCreate
 }) => (
   <Map
     style={mapContainerStyle}
@@ -70,8 +72,12 @@ export default ({
       placeholder="Buscar ciudad..."
       errorMessage="No se han encontrado resultados."
     />
-    <FeatureGroup onClick={onFeatureGroupClick}>
-      <DrawControl position="topleft" draw={drawOptions} />
+    <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
+      <DrawControl
+        position="topleft"
+        draw={drawOptions}
+        onCreated={onDrawCreate}
+      />
     </FeatureGroup>
 
     {children}

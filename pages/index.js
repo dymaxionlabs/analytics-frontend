@@ -25,8 +25,10 @@ class Index extends React.Component {
     center: [-34.609032, -58.373219],
     zoom: [11],
     selectedLayers: [],
-    step: "layer_selected"
+    step: "initial"
   };
+
+  featureGroupRef = React.createRef();
 
   constructor(props) {
     super(props);
@@ -34,29 +36,49 @@ class Index extends React.Component {
     this._onToggleLayer = this._onToggleLayer.bind(this);
     this._onGeocoderResult = this._onGeocoderResult.bind(this);
     this._onDrawCreate = this._onDrawCreate.bind(this);
-    this._onFeatureGroupClick = this._onFeatureGroupClick.bind(this);
   }
 
   _onGeocoderResult() {
-    this.setState({ step: "search_done" });
+    if (!this._hasAnyPolygons() && !this._hasAnyLayerSelected()) {
+      this.setState({ step: "search_done" });
+    }
   }
 
   _onDrawCreate() {
-    this.setState({ step: "polygon_drawn" });
+    if (this._hasAnyLayerSelected()) {
+      this.setState({ step: "layer_selected" });
+    } else {
+      this.setState({ step: "polygon_drawn" });
+    }
   }
 
-  _onFeatureGroupClick(event) {
-    console.log("feature group click");
-    console.log(event);
+  _hasAnyPolygons() {
+    const featureGroup = this.featureGroupRef.current.leafletElement;
+    const numberOfPolygons = featureGroup.getLayers().length;
+    return numberOfPolygons > 0;
+  }
+
+  _hasAnyLayerSelected() {
+    return this.state.selectedLayers.length > 0;
   }
 
   _onToggleLayer(layer) {
-    const newSelectedLayers = this._addOrRemove(
-      this.state.selectedLayers,
-      layer
-    );
-    console.log(`newSelectedLayers: ${JSON.stringify(newSelectedLayers)}`);
-    this.setState({ selectedLayers: newSelectedLayers });
+    const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
+    let step;
+    if (selectedLayers.length > 0) {
+      if (this._hasAnyPolygons()) {
+        step = "layer_selected";
+      } else {
+        step = "search_done";
+      }
+    } else {
+      if (this._hasAnyPolygons()) {
+        step = "polygon_drawn";
+      } else {
+        step = "search_done";
+      }
+    }
+    this.setState({ selectedLayers, step });
   }
 
   _addOrRemove(array, item) {
@@ -73,9 +95,9 @@ class Index extends React.Component {
       <Map
         center={this.state.center}
         zoom={this.state.zoom}
+        featureGroupRef={this.featureGroupRef}
         onGeocoderResult={this._onGeocoderResult}
         onDrawCreate={this._onDrawCreate}
-        onFeatureGroupClick={this._onFeatureGroupClick}
       >
         <Guide step={this.state.step} />
         <LayerSelector

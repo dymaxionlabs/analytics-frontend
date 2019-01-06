@@ -7,54 +7,33 @@
   line-height: 2px;
 }
 
-
 .separator {
   margin: 20px;
 }
 
-.controlButton{
+.controlButton {
   position: absolute;
-    bottom: 30px;
-    left: 10px;
+  bottom: 30px;
+  left: 10px;
 }
 
-.initial{
-  position: absolute;
-  top: 10px !important;
+.ui.popup.initial {
+  top: 10px;
   left: 300px;
-  font-size: 10px;
-  padding: 1em;
 }
 
-
-.search_done{
-  position: absolute;
-  top: 60px !important;
+.ui.popup.search_done {
+  top: 60px;
   left: 50px;
-  font-size: 10px;
-  padding: 1em;
-  
 }
 
-
-.polygon_drawn{
-  position: absolute;
-  top: 550px !important;
+.ui.popup.polygon_drawn {
+  top: inherit;
+  bottom: 40px;
   left: 80px;
-  font-size: 10px;
-  padding: 1em;
-  
 }
 
-.layer_selected{
-  position: absolute;
-  top: 250px !important;
-  right: 400px !important;
-  font-size: 10px;
-  padding: 1em;
-  
+.ui.popup.layer_selected {
+  top: 60px;
+  right: 400px;
 }
-
-
-
-

@@ -13,16 +13,13 @@ class Guide extends Component {
 
   render() {
     return (
-      <div>
-        <Popup
-          content={stepText[this.props.step]}
-          open={this.state.isOpen}
-          size="mini"
-          className={this.props.step}
-          context={this.props.context}
-          basic
-        />
-      </div>
+      <Popup
+        content={stepText[this.props.step]}
+        open={this.state.isOpen}
+        size="mini"
+        className={this.props.step}
+        basic
+      />
     );
   }
 }

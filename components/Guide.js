@@ -8,6 +8,10 @@ const stepText = {
   layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar"
 };
 
+const popupStyle = {
+  fontSize: 14
+};
+
 class Guide extends Component {
   state = { isOpen: true };
 
@@ -18,6 +22,7 @@ class Guide extends Component {
         open={this.state.isOpen}
         size="mini"
         className={this.props.step}
+        style={popupStyle}
         basic
       />
     );

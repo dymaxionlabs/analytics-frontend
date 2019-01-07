@@ -3,6 +3,7 @@ import "../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader } from "semantic-ui-react";
 
@@ -19,7 +20,6 @@ const Map = dynamic(() => import("../components/TrialMap"), {
 import ConfirmationPortal from "../components/ConfirmationPortal";
 import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/Guide";
-
 
 class Index extends React.Component {
   state = {
@@ -93,22 +93,31 @@ class Index extends React.Component {
     const isLayerSelected = this.state.step === "layer_selected";
 
     return (
-      <Map
-        center={this.state.center}
-        zoom={this.state.zoom}
-        featureGroupRef={this.featureGroupRef}
-        onGeocoderResult={this._onGeocoderResult}
-        onDrawCreate={this._onDrawCreate}
-      >
-        <Guide step={this.state.step} />
-        <LayerSelector
-          onToggleLayer={this._onToggleLayer}
-          selectedLayers={this.state.selectedLayers}
-        />
-        {isLayerSelected && (
-          <ConfirmationPortal selectedLayers={this.state.selectedLayers} />
-        )}
-      </Map>
+      <div>
+        <Head>
+          <title>Analytics | Dymaxion Labs</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <Map
+          center={this.state.center}
+          zoom={this.state.zoom}
+          featureGroupRef={this.featureGroupRef}
+          onGeocoderResult={this._onGeocoderResult}
+          onDrawCreate={this._onDrawCreate}
+        >
+          <Guide step={this.state.step} />
+          <LayerSelector
+            onToggleLayer={this._onToggleLayer}
+            selectedLayers={this.state.selectedLayers}
+          />
+          {isLayerSelected && (
+            <ConfirmationPortal selectedLayers={this.state.selectedLayers} />
+          )}
+        </Map>
+      </div>
     );
   }
 }

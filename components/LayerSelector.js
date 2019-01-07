@@ -29,39 +29,11 @@ export const allLayers = [
     categories: ["construction"]
   },
   {
-    key: "urban-sprawl",
-    icon: "tree",
-    text: "Mancha Urbana",
-    value: "urban-sprawl",
-    categories: ["construction"]
-  },
-  {
     key: "informal-settlements",
     icon: "tree",
     text: "Asentamientos Informales",
     value: "informal-settlements",
-    categories: ["construction", "demographic"]
-  },
-  {
-    key: "green-areas",
-    icon: "tree",
-    text: "Areas Verdes",
-    value: "green-areas",
-    categories: ["construction"]
-  },
-  {
-    key: "streets",
-    icon: "tree",
-    text: "Calles",
-    value: "streets",
-    categories: ["construction"]
-  },
-  {
-    key: "nighttime",
-    icon: "tree",
-    text: "Imagen Nocturna",
-    value: "nighttime",
-    categories: ["construction"]
+    categories: ["demographic"]
   },
   {
     key: "soil",
@@ -78,31 +50,10 @@ export const allLayers = [
     categories: ["agri"]
   },
   {
-    key: "water-wheels",
-    icon: "tree",
-    text: "Pivotes Circulares",
-    value: "water-wheels",
-    categories: ["agri"]
-  },
-  {
-    key: "silobags",
-    icon: "tree",
-    text: "Silobolsas",
-    value: "silobags",
-    categories: ["agri"]
-  },
-  {
     key: "ndvi",
     icon: "tree",
     text: "Índice NDVI",
     value: "ndvi",
-    categories: ["agri"]
-  },
-  {
-    key: "evi",
-    icon: "tree",
-    text: "Índice EVI",
-    value: "evi",
     categories: ["agri"]
   },
   {

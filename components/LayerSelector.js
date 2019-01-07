@@ -6,24 +6,28 @@ import {
   Menu
 } from "semantic-ui-react";
 
+const dropdownItemStyle = {
+  width: 250
+};
+
 export const allLayers = [
   {
     key: "recent-construction",
-    icon: "tree",
+    image: { src: "/static/icons/recent-construction.svg" },
     text: "Construcción Reciente",
     value: "recent-construction",
     categories: ["construction"]
   },
   {
     key: "roofs",
-    icon: "tree",
+    image: { src: "/static/icons/roofs.svg" },
     text: "Techos",
     value: "roofs",
     categories: ["construction"]
   },
   {
     key: "pools",
-    icon: "tree",
+    image: { src: "/static/icons/pools.svg" },
     text: "Piletas",
     value: "pools",
     categories: ["construction"]
@@ -93,6 +97,7 @@ class LayersMenu extends React.Component {
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
                 onClick={this._onClickLayer}
+                style={dropdownItemStyle}
               />
             ))}
           </Dropdown.Menu>
@@ -104,6 +109,7 @@ class LayersMenu extends React.Component {
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
                 onClick={this._onClickLayer}
+                style={dropdownItemStyle}
               />
             ))}
           </Dropdown.Menu>
@@ -115,6 +121,7 @@ class LayersMenu extends React.Component {
                 {...opts}
                 active={selectedLayers.includes(opts.key)}
                 onClick={this._onClickLayer}
+                style={dropdownItemStyle}
               />
             ))}
           </Dropdown.Menu>

@@ -16,9 +16,10 @@ const Map = dynamic(() => import("../components/TrialMap"), {
   )
 });
 
-import ControlPanel from "../components/control-panel";
+import ConfirmationPortal from "../components/ConfirmationPortal";
 import LayerSelector from "../components/LayerSelector";
-import Guide from "../components/guide";
+import Guide from "../components/Guide";
+
 
 class Index extends React.Component {
   state = {
@@ -105,7 +106,7 @@ class Index extends React.Component {
           selectedLayers={this.state.selectedLayers}
         />
         {isLayerSelected && (
-          <ControlPanel selectedLayers={this.state.selectedLayers} />
+          <ConfirmationPortal selectedLayers={this.state.selectedLayers} />
         )}
       </Map>
     );

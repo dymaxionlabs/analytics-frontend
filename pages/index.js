@@ -65,7 +65,11 @@ class Index extends React.Component {
 
   _onDrawDeleted(event) {
     console.log("deleted");
-    this._updatePolygonsArea();
+    if (!this._updatePolygonsArea() && (!this._hasAnyPolygons() == true)) {
+      this.setState({ step: "search_done" });
+
+    }
+
   }
 
   _hasAnyPolygons() {

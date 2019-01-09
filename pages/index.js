@@ -26,6 +26,7 @@ class Index extends React.Component {
     center: [-34.609032, -58.373219],
     zoom: [11],
     selectedLayers: [],
+    polygonsArea: 0,
     step: "initial"
   };
 
@@ -36,7 +37,9 @@ class Index extends React.Component {
 
     this._onToggleLayer = this._onToggleLayer.bind(this);
     this._onGeocoderResult = this._onGeocoderResult.bind(this);
-    this._onDrawCreate = this._onDrawCreate.bind(this);
+    this._onDrawCreated = this._onDrawCreated.bind(this);
+    this._onDrawEdited = this._onDrawEdited.bind(this);
+    this._onDrawDeleted = this._onDrawDeleted.bind(this);
   }
 
   _onGeocoderResult() {
@@ -45,7 +48,9 @@ class Index extends React.Component {
     }
   }
 
-  _onDrawCreate() {
+  _onDrawCreated() {
+    console.log("drawed");
+    this._updatePolygonsArea();
     if (this._hasAnyLayerSelected()) {
       this.setState({ step: "layer_selected" });
     } else {
@@ -53,10 +58,35 @@ class Index extends React.Component {
     }
   }
 
+  _onDrawEdited(event) {
+    console.log("edited");
+    this._updatePolygonsArea();
+  }
+
+  _onDrawDeleted(event) {
+    console.log("deleted");
+    this._updatePolygonsArea();
+  }
+
   _hasAnyPolygons() {
-    const featureGroup = this.featureGroupRef.current.leafletElement;
+    const featureGroup = this._getFeatureGroup();
     const numberOfPolygons = featureGroup.getLayers().length;
     return numberOfPolygons > 0;
+  }
+
+  _updatePolygonsArea() {
+    const featureGroup = this._getFeatureGroup();
+    const layers = featureGroup.getLayers();
+    const areas = layers.map(layer =>
+      L.GeometryUtil.geodesicArea(layer.getLatLngs()[0])
+    );
+    const area = areas.reduce((acc, v) => acc + v, 0);
+    const polygonsArea = area / 1e6;
+    this.setState({ polygonsArea });
+  }
+
+  _getFeatureGroup() {
+    return this.featureGroupRef.current.leafletElement;
   }
 
   _hasAnyLayerSelected() {
@@ -90,7 +120,8 @@ class Index extends React.Component {
   }
 
   render() {
-    const isLayerSelected = this.state.step === "layer_selected";
+    const { center, zoom, step, selectedLayers } = this.state;
+    const isLayerSelected = step === "layer_selected";
 
     return (
       <div>
@@ -102,19 +133,24 @@ class Index extends React.Component {
           />
         </Head>
         <Map
-          center={this.state.center}
-          zoom={this.state.zoom}
+          center={center}
+          zoom={zoom}
           featureGroupRef={this.featureGroupRef}
           onGeocoderResult={this._onGeocoderResult}
-          onDrawCreate={this._onDrawCreate}
+          onDrawCreated={this._onDrawCreated}
+          onDrawEdited={this._onDrawEdited}
+          onDrawDeleted={this._onDrawDeleted}
         >
-          <Guide step={this.state.step} />
+          <Guide step={step} />
           <LayerSelector
             onToggleLayer={this._onToggleLayer}
-            selectedLayers={this.state.selectedLayers}
+            selectedLayers={selectedLayers}
           />
           {isLayerSelected && (
-            <ConfirmationPortal selectedLayers={this.state.selectedLayers} />
+            <ConfirmationPortal
+              area={this.state.polygonsArea}
+              selectedLayers={selectedLayers}
+            />
           )}
         </Map>
       </div>

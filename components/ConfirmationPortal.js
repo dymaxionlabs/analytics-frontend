@@ -12,7 +12,7 @@ const style = {
   zIndex: 1000
 };
 
-class ConfirmationPortal extends React.PureComponent {
+class ConfirmationPortal extends React.Component {
   _layersSentence() {
     const selectedLayers = this.props.selectedLayers || [];
     return allLayers
@@ -22,11 +22,13 @@ class ConfirmationPortal extends React.PureComponent {
   }
 
   render() {
+    const { area } = this.props;
+
     return (
       <div style={style}>
         <div className="separator">
           <p className="Line-control">
-            <b>0.83</b> km²{" "}
+            <b>{area}</b> km²{" "}
           </p>
           <p className="Control Line-control">tamaño de superficie</p>
         </div>

@@ -29,12 +29,6 @@ const drawOptions = {
   circlemarker: false
 };
 
-function boundsKey(bounds) {
-  const ne = bounds.getNorthEast();
-  const sw = bounds.getSouthWest();
-  return `${ne.lng},${ne.lat}-${sw.lng},${sw.lat}`;
-}
-
 export default ({
   children,
   center,
@@ -43,7 +37,9 @@ export default ({
   onFeatureGroupClick,
   onClick,
   onGeocoderResult,
-  onDrawCreate
+  onDrawCreated,
+  onDrawEdited,
+  onDrawDeleted
 }) => (
   <Map
     style={mapContainerStyle}
@@ -71,7 +67,9 @@ export default ({
       <DrawControl
         position="topleft"
         draw={drawOptions}
-        onCreated={onDrawCreate}
+        onCreated={onDrawCreated}
+        onEdited={onDrawEdited}
+        onDeleted={onDrawDeleted}
       />
     </FeatureGroup>
 

@@ -1,10 +1,4 @@
-import {
-  Map,
-  TileLayer,
-  ZoomControl,
-  FeatureGroup,
-  Rectangle
-} from "react-leaflet";
+import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import GeocoderControl from "./GeocoderControl";
 import DrawControl from "./DrawControl";
 
@@ -56,6 +50,7 @@ export default ({
     center={center}
     zoom={zoom}
     zoomControl={false}
+    maxZoom={20}
     animate={true}
     onClick={onClick}
   >

@@ -1,15 +1,16 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
 
 const style = {
   position: "absolute",
-  right: 80,
-  top: 40,
+  right: 40,
+  top: 80,
   background: "#fff",
   padding: "12px 24px",
-  zIndex: 1000
+  width: "300px",
+  zIndex: 1000,
+
 };
 
 class ConfirmationPortal extends React.Component {
@@ -36,10 +37,7 @@ class ConfirmationPortal extends React.Component {
           <p className="Line-control">{this._layersSentence()}</p>
           <p className="Control Line-control">capas seleccionadas</p>
         </div>
-        <div>
-          <Button primary>Cancelar</Button>
-          <ModalContactForm />
-        </div>
+        <ModalContactForm />
       </div>
     );
   }

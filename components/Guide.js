@@ -1,4 +1,4 @@
-import { Popup, Grid } from "semantic-ui-react";
+import { Popup } from "semantic-ui-react";
 import React, { Component } from "react";
 
 const stepText = {

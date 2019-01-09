@@ -4,7 +4,7 @@
 }
 
 .Line-control {
-  line-height: 2px;
+  line-height: 15px;
 }
 
 .separator {
@@ -33,7 +33,7 @@
   left: 80px;
 }
 
-.ui.popup.layer_selected {
+.ui.popup.layer_selected { 
   top: 40px;
   right: 360px;
 }

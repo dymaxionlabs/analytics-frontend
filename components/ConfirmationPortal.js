@@ -23,13 +23,14 @@ class ConfirmationPortal extends React.Component {
   }
 
   render() {
+
     const { area } = this.props;
 
     return (
       <div style={style}>
         <div className="separator">
           <p className="Line-control">
-            <b>{area}</b> km²{" "}
+            <b>{(Math.round(area))}</b> km²{" "}
           </p>
           <p className="Control Line-control">tamaño de superficie</p>
         </div>

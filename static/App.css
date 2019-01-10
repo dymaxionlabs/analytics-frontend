@@ -36,4 +36,7 @@
 .ui.popup.layer_selected { 
   top: 40px;
   right: 360px;
+  z-index: 1000 !important;
+
+
 }

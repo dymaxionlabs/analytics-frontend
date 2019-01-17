@@ -1,4 +1,7 @@
-# CartoLatam
+# Analytics (aka Terra frontend)
+
+This is our main platform of image provisioning and analytics for users.
+It uses Terra API for fetching user data and raster/vector layers.
 
 ## Development
 
@@ -8,8 +11,9 @@
 
 ## License
 
-Attribution to some icons:
+Attribution for some icons:
 
-- buildings by Three Six Five from the Noun Project
-- recent by rupa c from the Noun Project
-- Swimming Pool by Creative Stall from the Noun Project
+- `buildings` by Three Six Five from the Noun Project
+- `recent` by rupa c from the Noun Project
+- `Swimming Pool` by Creative Stall from the Noun Project
+

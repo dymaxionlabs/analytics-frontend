@@ -16,3 +16,4 @@ Attribution for some icons:
 - `buildings` by Three Six Five from the Noun Project
 - `recent` by rupa c from the Noun Project
 - `Swimming Pool` by Creative Stall from the Noun Project
+

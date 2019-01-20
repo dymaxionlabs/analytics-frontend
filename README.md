@@ -1,7 +1,7 @@
 # Analytics (aka Terra frontend)
 
 This is our main platform of image provisioning and analytics for users.
-It uses Terra API for fetching user data and raster/vector layers.
+It uses the Terra API for fetching user data and raster/vector layers.
 
 ## Development
 

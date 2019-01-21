@@ -1,5 +1,5 @@
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
-import GeocoderControl from "./GeocoderControl";
+import NewGeocoderControl from "./NewGeocoderControl";
 import DrawControl from "./DrawControl";
 
 import "leaflet/dist/leaflet.css";
@@ -55,7 +55,7 @@ export default ({
       url={basemapUrl}
     />
     <ZoomControl position="topright" />
-    <GeocoderControl
+    <NewGeocoderControl
       accessToken={MAPBOX_TOKEN}
       onResult={onGeocoderResult}
       collapsed={false}

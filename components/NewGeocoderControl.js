@@ -71,7 +71,6 @@ class NewGeocoderControl extends Component {
             onSearchChange={this.handleSearchChange}
             results={results}
             value={value}
-            {...this.props}
           />
         </div>
         <style jsx>{`

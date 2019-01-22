@@ -1,5 +1,5 @@
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
-import NewGeocoderControl from "./NewGeocoderControl";
+import GeocoderControl from "./GeocoderControl";
 import DrawControl from "./DrawControl";
 
 import "leaflet/dist/leaflet.css";
@@ -55,13 +55,10 @@ export default ({
       url={basemapUrl}
     />
     <ZoomControl position="topright" />
-    <NewGeocoderControl
+    <GeocoderControl
       accessToken={MAPBOX_TOKEN}
       onResult={onGeocoderResult}
-      collapsed={false}
       position="topleft"
-      placeholder="Buscar ciudad..."
-      errorMessage="No se han encontrado resultados."
     />
     <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
       <DrawControl

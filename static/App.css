@@ -33,10 +33,17 @@
   left: 80px;
 }
 
-.ui.popup.layer_selected { 
+.ui.popup.layer_selected {
   top: 40px;
   right: 360px;
-  z-index: 1000 !important;
+  z-index: 700 !important;
+}
 
-
+.index .leaflet-container a {
+  color: #222;
+}
+.index .leaflet-draw-actions a {
+  background-color: #ccc;
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  line-height: 30px;
 }

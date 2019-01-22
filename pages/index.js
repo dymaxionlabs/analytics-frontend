@@ -65,11 +65,9 @@ class Index extends React.Component {
 
   _onDrawDeleted(event) {
     console.log("deleted");
-    if (!this._updatePolygonsArea() && (!this._hasAnyPolygons() == true)) {
+    if (!this._updatePolygonsArea() && !this._hasAnyPolygons() == true) {
       this.setState({ step: "search_done" });
-
     }
-
   }
 
   _hasAnyPolygons() {
@@ -128,7 +126,7 @@ class Index extends React.Component {
     const isLayerSelected = step === "layer_selected";
 
     return (
-      <div>
+      <div className="index">
         <Head>
           <title>Analytics | Dymaxion Labs</title>
           <meta

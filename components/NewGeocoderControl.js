@@ -1,14 +1,29 @@
-import _ from "lodash";
-import React, { Component } from "react";
-//import { withLeaflet } from "react-leaflet";
+import React from "react";
+import { MapControl, withLeaflet } from "react-leaflet";
 import { Search } from "semantic-ui-react";
 import axios from "axios";
 
-//{"url":"","index":"mapbox.places","staging":false,"onCountry":true,"onType":true,"onProximity":true,"onBBOX":true,"onLimit":true,"onLanguage":true,"countries":[{"name":"Argentina","code":"ar"}],"proximity":"","typeToggle":{"country":false,"region":false,"district":true,"postcode":false,"locality":true,"place":true,"neighborhood":true,"address":false,"poi":false},"types":["district","locality","place","neighborhood"],"bbox":"","limit":"","autocomplete":true,"languages":[{"code":"es","name":"Spanish"}],"languageStrict":false,"onDebug":false,"selectedLayer":"","debugClick":{},"query":"pilar"}
+// This is a custom Leaflet control that only renders
+// an empty div with similar height and width used by the Geocoder.
+L.Control.GeocoderPlaceholder = L.Control.extend({
+  onAdd: function(map) {
+    var div = L.DomUtil.create("div");
+    div.style.width = "200px";
+    div.style.height = "32px";
+    return div;
+  }
+});
 
-const source = [{ title: "a" }, { title: "b" }, { title: "c" }];
+class NewGeocoderControl extends MapControl {
+  createLeafletElement(props) {
+    return new L.Control.GeocoderPlaceholder(props);
+  }
 
-class NewGeocoderControl extends Component {
+  componentDidMount() {
+    const { map } = this.props.leaflet;
+    this.leafletElement.addTo(map);
+  }
+
   componentWillMount() {
     this.resetComponent();
   }
@@ -74,16 +89,16 @@ class NewGeocoderControl extends Component {
           />
         </div>
         <style jsx>{`
-            .control {
-                position: absolute;
-                top: 20px
-                left: 20px;
-                z-index: 1000;
-            }
-      `}</style>
+          .control {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+          }
+        `}</style>
       </div>
     );
   }
 }
 
-export default NewGeocoderControl;
+export default withLeaflet(NewGeocoderControl);

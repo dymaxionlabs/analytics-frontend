@@ -62,6 +62,7 @@ export default ({
     />
     <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
       <DrawControl
+        locale="es"
         position="topleft"
         draw={drawOptions}
         onCreated={onDrawCreated}

@@ -1,6 +1,6 @@
 import React from "react";
 import { MapControl, withLeaflet } from "react-leaflet";
-import { Search } from "semantic-ui-react";
+import { Input, Search } from "semantic-ui-react";
 import axios from "axios";
 
 // This is a custom Leaflet control that only renders
@@ -78,22 +78,33 @@ class NewGeocoderControl extends MapControl {
     const { isLoading, value, results } = this.state;
 
     return (
-      <div>
-        <div className="control">
-          <Search
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={this.handleSearchChange}
-            results={results}
-            value={value}
-          />
-        </div>
-        <style jsx>{`
-          .control {
+      <div className="geocoder">
+        <Search
+          loading={isLoading}
+          onResultSelect={this.handleResultSelect}
+          onSearchChange={this.handleSearchChange}
+          results={results}
+          value={value}
+          input={
+            <Input
+              icon="search"
+              iconPosition="left"
+              placeholder="Buscar localidad..."
+            />
+          }
+          noResultsMessage="No hay resultados."
+          noResultsDescription="Pruebe escribir el nombre de la ciudad o localidad."
+        />
+        <style jsx global>{`
+          .geocoder {
             position: absolute;
             top: 10px;
             left: 10px;
             z-index: 1000;
+          }
+          .geocoder .ui.search .prompt {
+            border-radius: 4px;
+            box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35);
           }
         `}</style>
       </div>

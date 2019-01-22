@@ -31,8 +31,9 @@ class NewGeocoderControl extends MapControl {
   resetComponent = () =>
     this.setState({ isLoading: false, results: [], prevValue: "", value: "" });
 
-  handleResultSelect = (e, { result }) =>
+  handleResultSelect = (e, { result }) => {
     this.setState({ value: result.title });
+  };
 
   handleSearchChange = (e, { value }) => {
     this.setState({ value });
@@ -60,6 +61,20 @@ class NewGeocoderControl extends MapControl {
     }, 300);
   };
 
+  handleMouseDown = (e, data) => {
+    // For some reason, when you click on a result on the results container, the
+    // onResultSelect event is not being triggered.  This handler is a workaround
+    // for those cases.
+    if (e.target.nodeName === "DIV") {
+      let node = e.target;
+      if (node.className !== "title") {
+        node = node.children[0].children[0];
+      }
+      const title = node.textContent;
+      this.setState({ value: title });
+    }
+  };
+
   async geocode() {
     const { accessToken } = this.props;
     const searchText = encodeURIComponent(this.state.value);
@@ -83,6 +98,7 @@ class NewGeocoderControl extends MapControl {
           loading={isLoading}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
+          onMouseDown={this.handleMouseDown}
           results={results}
           value={value}
           input={

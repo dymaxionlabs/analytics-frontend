@@ -2938,6 +2938,11 @@ launch-editor@2.2.1:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
 
+leaflet-draw-locales@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/leaflet-draw-locales/-/leaflet-draw-locales-0.5.0.tgz#b59a611a93aaf7297dfa4f23bdebdcd39a13891c"
+  integrity sha512-zkTxuRWHCuShcm7yiIkBh60s3XMq8v8z5ngChYD23c+o6Z3HlBw1DZGBdtl12ofOHPuVZklTxXHNVJAu07OoYg==
+
 leaflet-draw@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/leaflet-draw/-/leaflet-draw-1.0.4.tgz#45be92f378ed253e7202fdeda1fcc71885198d46"

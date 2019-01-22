@@ -31,10 +31,6 @@ class GeocoderControl extends MapControl {
   resetComponent = () =>
     this.setState({ isLoading: false, results: [], prevValue: "", value: "" });
 
-  handleResultSelect = (e, { result }) => {
-    this.setState({ value: result.title });
-  };
-
   handleSearchChange = (e, { value }) => {
     this.setState({ value });
 
@@ -49,7 +45,8 @@ class GeocoderControl extends MapControl {
 
         this.geocode().then(features => {
           const results = features.map(feat => {
-            return { title: feat.place_name };
+            const center = [feat.center[1], feat.center[0]];
+            return { title: feat.place_name, center: center };
           });
 
           this.setState({
@@ -61,6 +58,22 @@ class GeocoderControl extends MapControl {
     }, 300);
   };
 
+  updateMapCenter() {
+    const { map } = this.props.leaflet;
+    map.flyTo(this.state.center);
+  }
+
+  handleResultSelect = (e, { result }) => {
+    this.setState({ value: result.title, center: result.center });
+    this.triggerOnResult(result);
+  };
+
+  componentDidUpdate() {
+    if (this.state.center) {
+      this.updateMapCenter();
+    }
+  }
+
   handleMouseDown = (e, data) => {
     // For some reason, when you click on a result on the results container, the
     // onResultSelect event is not being triggered.  This handler is a workaround
@@ -70,10 +83,21 @@ class GeocoderControl extends MapControl {
       if (node.className !== "title") {
         node = node.children[0].children[0];
       }
+
       const title = node.textContent;
-      this.setState({ value: title });
+      const result = this.state.results.find(elem => elem.title === title);
+
+      this.setState({ value: title, center: result.center });
+      this.triggerOnResult(result);
     }
   };
+
+  triggerOnResult() {
+    const { onResult } = this.props;
+    if (onResult) {
+      onResult(this.state.value);
+    }
+  }
 
   async geocode() {
     const { accessToken } = this.props;

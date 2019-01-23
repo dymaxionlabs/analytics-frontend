@@ -8,28 +8,29 @@ import {
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
 
-const AreaSection = ({ value }) => (
+const Item = ({ icon, title, description }) => (
   <Header as="h4">
     <Image
-      src="/static/icons/area.png"
-      verticalAlign="middle"
-      style={{ width: 20, height: 20, margin: 10, marginLeft: 0 }}
+      src={`/static/icons/${icon}.png`}
+      style={{ float: "left", width: 20, height: 20 }}
     />
-    {Math.ceil(value)} km² / {Math.ceil(value * 100)} ha
-    <Header.Subheader>tamaño de superficie</Header.Subheader>
+    <div style={{ paddingLeft: 30 }}>
+      {title}
+      <Header.Subheader>{description}</Header.Subheader>
+    </div>
   </Header>
 );
 
-const LayersSection = ({ children }) => (
-  <Header as="h4">
-    <Image
-      src="/static/icons/layers.png"
-      verticalAlign="middle"
-      style={{ width: 20, height: 20, margin: 10, marginLeft: 0 }}
-    />
-    {children}
-    <Header.Subheader>capas seleccionadas</Header.Subheader>
-  </Header>
+const AreaSection = ({ value }) => (
+  <Item
+    icon="area"
+    title={`${Math.ceil(value)} km² / ${Math.ceil(value * 100)} ha`}
+    description="tamaño de superficie"
+  />
+);
+
+const LayersSection = ({ layers }) => (
+  <Item icon="layers" title={layers} description="capas seleccionadas" />
 );
 
 class ConfirmationPortal extends React.Component {
@@ -64,7 +65,7 @@ class ConfirmationPortal extends React.Component {
             }}
           >
             <AreaSection value={area} />
-            {layers && <LayersSection>{layers}</LayersSection>}
+            {layers && <LayersSection layers={layers} />}
             <ModalContactForm />
           </Segment>
         </TransitionablePortal>

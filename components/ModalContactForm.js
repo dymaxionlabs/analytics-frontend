@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Modal, Header, Message } from "semantic-ui-react";
+import { Button, Form, Modal, Header } from "semantic-ui-react";
 
 
 class ContactForm extends Component {
@@ -8,93 +8,60 @@ class ContactForm extends Component {
 
     super(props)
     this.state = {
-      name: '',
-      email: '',
-      city: '',
-      message: '',
-      formError: false,
+      fields: {
+        name: '',
+        email: '',
+        city: '',
+        message: ''
+      },
       nameError: false,
       emailError: false,
       cityError: false,
       messageError: false,
+      formError: false,
     }
+    this.handleOnChange = this.handleOnChange.bind(this)
+    this.handleOnClick = this.handleOnClick.bind(this)
   }
 
+  handleOnChange(event) {
 
-  updateName(event) {
+
     this.setState({
-      name: event.target.value
+      fields: {
+        ...this.state.fields,
+        [event.target.name]: event.target.value
 
-    });
-  }
-
-
-  updateEmail(event) {
-    this.setState({
-      email: event.target.value
-    });
-  }
-
-  updateCity(event) {
-    this.setState({
-      city: event.target.value
-    });
-  }
-
-  updateMessage(event) {
-    this.setState({
-      message: event.target.value
-    });
-  }
-
-
-
-  validate(event) {
-    this.setState({
-      isActive: event.target.checked
-
+      },
+      errorFields: {
+        ...this.state.errorFields,
+        [event.target.name]: event.target.value
+      }
     })
   }
 
+
   handleOnClick() {
-
-    if (this.state.name === '') {
-      this.setState({ nameError: true })
-    } else {
-      this.setState({ nameError: false })
+    let fields = ["name", "email", "city", "message"];
+    for (let field of fields) {
+      let errorFields = field + "Error"
+      this.setState({
+        [errorFields]: (this.state.fields[field] === "")
+      })
     }
-
-    if (this.state.email === '') {
-      this.setState({ emailError: true })
-    } else {
-      this.setState({ emailError: false })
-    }
-
-    if (this.state.city === '') {
-      this.setState({ cityError: true })
-    } else {
-      this.setState({ cityError: false })
-    }
-
-    if (this.state.message === '') {
-      this.setState({ messageError: true })
-    } else {
-      this.setState({ messageError: false })
-    }
-
   }
 
   render() {
     return (
       <Form error={this.state.formError}>
         <Form.Group widths="equal">
-          <Form.Input fluid required={true} label="Nombre" placeholder="Nombre" value={this.state.name} onChange={(this.updateName.bind(this))} error={this.state.nameError} />
-          <Form.Input fluid required={true} label="Email" placeholder="Email" value={this.state.email} onChange={(this.updateEmail.bind(this))} error={this.state.emailError} />
-          <Form.Input fluid required={true} label="Ciudad" placeholder="Ciudad" value={this.state.city} onChange={(this.updateCity.bind(this))} error={this.state.cityError} />
+          <Form.Input fluid required={true} label="Nombre" placeholder="Nombre" name="name" value={this.state.fields.name} onChange={this.handleOnChange} error={this.state.nameError} />
+          <Form.Input fluid required={true} label="Email" placeholder="Email" name="email" value={this.state.fields.email} onChange={this.handleOnChange} error={this.state.emailError} />
+          <Form.Input fluid required={true} label="Ciudad" placeholder="Ciudad" name="city" value={this.state.fields.city} onChange={this.handleOnChange} error={this.state.cityError} />
         </Form.Group>
-        <Form.TextArea required={true} label='Mensaje' placeholder="Mensaje" value={this.state.message} onChange={(this.updateMessage.bind(this))} error={this.state.messageError} />
+        <Form.TextArea required={true} label='Mensaje' placeholder="Mensaje" name="message" value={this.state.fields.message} onChange={this.handleOnChange} error={this.state.messageError} />
         <Form.Button
-          onClick={this.handleOnClick.bind(this)}>Enviar</Form.Button>
+          onClick={this.handleOnClick}>Enviar</Form.Button>
       </Form>
     );
   }

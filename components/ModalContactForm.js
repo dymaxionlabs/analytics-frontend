@@ -18,25 +18,17 @@ class ContactForm extends Component {
       emailError: false,
       cityError: false,
       messageError: false,
-      formError: false,
     }
     this.handleOnChange = this.handleOnChange.bind(this)
     this.handleOnClick = this.handleOnClick.bind(this)
   }
 
   handleOnChange(event) {
-
-
     this.setState({
       fields: {
         ...this.state.fields,
         [event.target.name]: event.target.value
-
       },
-      errorFields: {
-        ...this.state.errorFields,
-        [event.target.name]: event.target.value
-      }
     })
   }
 
@@ -53,7 +45,7 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <Form error={this.state.formError}>
+      <Form>
         <Form.Group widths="equal">
           <Form.Input fluid required={true} label="Nombre" placeholder="Nombre" name="name" value={this.state.fields.name} onChange={this.handleOnChange} error={this.state.nameError} />
           <Form.Input fluid required={true} label="Email" placeholder="Email" name="email" value={this.state.fields.email} onChange={this.handleOnChange} error={this.state.emailError} />

@@ -30,7 +30,7 @@
 .ui.popup.polygon_drawn {
   top: inherit;
   bottom: 40px;
-  left: 80px;
+  left: 90px;
 }
 
 .ui.popup.layer_selected {
@@ -42,6 +42,7 @@
 .index .leaflet-container a {
   color: #222;
 }
+
 .index .leaflet-draw-actions a {
   background-color: #ccc;
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;

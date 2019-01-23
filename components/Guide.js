@@ -14,6 +14,7 @@ class Guide extends Component {
   render() {
     return (
       <Popup
+        style={{ transition: "all 0.25s ease" }}
         content={stepText[this.props.step]}
         open={this.state.isOpen}
         size="small"

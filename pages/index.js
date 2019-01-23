@@ -22,8 +22,8 @@ import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/Guide";
 
 const DEFAULT_VIEWPORT = {
-  center: [-34.609032, -58.373219],
-  zoom: 11
+  center: [-34.43888767776975, -58.93332694025683],
+  zoom: 16
 };
 
 class Index extends React.Component {

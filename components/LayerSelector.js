@@ -1,84 +1,89 @@
 import React from "react";
 import {
   Button,
-  Dropdown,
   TransitionablePortal,
   Segment,
-  Menu
+  List,
+  Image
 } from "semantic-ui-react";
-
-const dropdownItemStyle = {
-  width: 250
-};
 
 export const allLayers = [
   {
     key: "recent-construction",
-    image: { src: "/static/icons/recent-construction.svg" },
+    image: "/static/icons/recent.png",
     text: "Construcción Reciente",
+    description: "Casas y edificios recientemente construidos.",
     value: "recent-construction",
     categories: ["construction"]
   },
   {
     key: "roofs",
-    image: { src: "/static/icons/roofs.svg" },
+    image: "/static/icons/roofs.png",
     text: "Techos",
+    description: "Techos de casas y edificios.",
     value: "roofs",
     categories: ["construction"]
   },
   {
     key: "pools",
-    image: { src: "/static/icons/pools.svg" },
+    image: "/static/icons/pools.png",
     text: "Piletas",
+    description: "Piscinas residenciales y pequeñas piletas",
     value: "pools",
     categories: ["construction"]
   },
   {
     key: "informal-settlements",
-    icon: "tree",
+    image: "/static/icons/slums.png",
     text: "Asentamientos Informales",
+    description: "Barrios precarios y asentamientos informales",
     value: "informal-settlements",
     categories: ["demographic"]
   },
   {
     key: "soil",
-    icon: "tree",
+    image: "/static/icons/soil.png",
     text: "Área Sembrada",
+    description: "Suelo utilizado para siembra y cultivo.",
     value: "soil",
     categories: ["agri"]
   },
   {
     key: "floods",
-    icon: "tree",
-    text: "Área Anegada",
+    image: "/static/icons/flood.png",
+    text: "Área Inundada y Anegada",
+    description: "Suelo que se encuentra inundado y/o presenta anegamiento",
     value: "floods",
     categories: ["agri"]
   },
   {
     key: "ndvi",
-    icon: "tree",
+    image: "/static/icons/vi.png",
     text: "Índice NDVI",
+    description: "Índice que indica áreas con vegetación",
     value: "ndvi",
     categories: ["agri"]
   },
   {
     key: "schools",
-    icon: "tree",
+    image: "/static/icons/schools.png",
     text: "Escuelas",
+    description: "Escuelas y otros asentamientos educativos.",
     value: "schools",
     categories: ["demographic"]
   },
   {
     key: "hospitals",
-    icon: "tree",
+    image: "/static/icons/hospitals.png",
     text: "Hospitales",
+    description: "Hospitales y clínicas.",
     value: "hospitals",
     categories: ["demographic"]
   }
 ];
 
 class LayersMenu extends React.Component {
-  _onClickLayer = (event, data) => {
+  _onClickLayer = (_event, data) => {
     this.props.onToggleLayer(data.value);
   };
 
@@ -87,47 +92,33 @@ class LayersMenu extends React.Component {
   }
 
   render() {
-    const { style, selectedLayers } = this.props;
+    const { selectedLayers } = this.props;
 
     return (
-      <Menu vertical style={style}>
-        <Dropdown text="Construcción" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("construction").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
+      <List divided relaxed style={{ width: 300 }}>
+        {allLayers.map(opts => (
+          <List.Item
+            active={selectedLayers.includes(opts.key)}
+            onClick={this._onClickLayer}
+            key={opts.key}
+          >
+            {opts.image ? (
+              <Image src={opts.image} width={24} height={24} />
+            ) : (
+              <List.Icon
+                name={opts.icon}
+                size="large"
+                verticalAlign="middle"
+                inline="true"
               />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown text="Agricultura" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("agri").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
-              />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown text="Demográficos" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("demographic").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
-              />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu>
+            )}
+            <List.Content>
+              <List.Header as="a">{opts.text}</List.Header>
+              <List.Description as="a">{opts.description}</List.Description>
+            </List.Content>
+          </List.Item>
+        ))}
+      </List>
     );
   }
 }
@@ -160,7 +151,14 @@ class LayerSelector extends React.Component {
           }
         >
           <Segment
-            style={{ position: "fixed", left: 20, bottom: 110, zIndex: 1000 }}
+            style={{
+              position: "fixed",
+              left: 20,
+              bottom: 110,
+              zIndex: 1000,
+              overflow: "auto",
+              maxHeight: 300
+            }}
           >
             <LayersMenu
               onToggleLayer={onToggleLayer}

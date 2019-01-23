@@ -1,5 +1,10 @@
 import React from "react";
-import { Image, Segment, Header } from "semantic-ui-react";
+import {
+  TransitionablePortal,
+  Image,
+  Segment,
+  Header
+} from "semantic-ui-react";
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
 
@@ -38,31 +43,31 @@ class ConfirmationPortal extends React.Component {
   }
 
   render() {
-    const { area } = this.props;
+    const { open, area } = this.props;
     const layers = this._layersSentence();
 
     return (
-      <div className="confirmation-portal">
-        <Segment>
-          <AreaSection value={area} />
-          {layers && <LayersSection>{layers}</LayersSection>}
-        </Segment>
-        <ModalContactForm />
-
-        <style jsx>{`
-          .confirmation-portal {
-            background-color: #fff;
-            padding: 10px;
-            box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12),
-              0px 2px 10px 0px rgba(34, 36, 38, 0.15);
-            border-radius: 4px;
-            position: absolute;
-            right: 80px;
-            top: 50px;
-            width: 300px;
-            z-index: 1000;
-          }
-        `}</style>
+      <div>
+        <TransitionablePortal
+          open={open}
+          closeOnDocumentClick={false}
+          closeOnEscape={false}
+          transition={{ animation: "fade left" }}
+        >
+          <Segment
+            style={{
+              position: "fixed",
+              top: 40,
+              right: 80,
+              zIndex: 1000,
+              width: 300
+            }}
+          >
+            <AreaSection value={area} />
+            {layers && <LayersSection>{layers}</LayersSection>}
+            <ModalContactForm />
+          </Segment>
+        </TransitionablePortal>
       </div>
     );
   }

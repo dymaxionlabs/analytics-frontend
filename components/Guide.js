@@ -1,4 +1,4 @@
-import { Popup, Button } from "semantic-ui-react";
+import { Popup } from "semantic-ui-react";
 import React, { Component } from "react";
 
 const stepText = {
@@ -9,7 +9,7 @@ const stepText = {
 };
 
 const stepPosition = {
-  initial: "right center",
+  initial: "left bottom",
   search_done: "right center",
   polygon_drawn: "right center",
   layer_selected: "left center"
@@ -21,7 +21,7 @@ class Guide extends Component {
   render() {
     return (
       <Popup
-        style={{ transition: "all 0.25s ease" }}
+        style={{ transition: "all 0.25s ease", zIndex: 500 }}
         content={stepText[this.props.step]}
         open={this.state.isOpen}
         size="large"

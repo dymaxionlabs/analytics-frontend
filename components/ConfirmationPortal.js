@@ -1,10 +1,15 @@
 import React from "react";
-import { Segment, Header } from "semantic-ui-react";
+import { Image, Segment, Header } from "semantic-ui-react";
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
 
 const AreaSection = ({ value }) => (
   <Header as="h4">
+    <Image
+      src="/static/icons/area.png"
+      verticalAlign="middle"
+      style={{ width: 20, height: 20, margin: 10, marginLeft: 0 }}
+    />
     {Math.round(value)} km²
     <Header.Subheader>tamaño de superficie</Header.Subheader>
   </Header>
@@ -12,6 +17,11 @@ const AreaSection = ({ value }) => (
 
 const LayersSection = ({ children }) => (
   <Header as="h4">
+    <Image
+      src="/static/icons/layers.png"
+      verticalAlign="middle"
+      style={{ width: 20, height: 20, margin: 10, marginLeft: 0 }}
+    />
     {children}
     <Header.Subheader>capas seleccionadas</Header.Subheader>
   </Header>

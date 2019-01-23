@@ -24,7 +24,7 @@ class Guide extends Component {
         style={{ transition: "all 0.25s ease" }}
         content={stepText[this.props.step]}
         open={this.state.isOpen}
-        size="small"
+        size="large"
         className={this.props.step + " " + stepPosition[this.props.step]}
         position="top right"
       />

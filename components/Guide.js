@@ -1,4 +1,4 @@
-import { Popup } from "semantic-ui-react";
+import { Popup, Button } from "semantic-ui-react";
 import React, { Component } from "react";
 
 const stepText = {
@@ -6,6 +6,13 @@ const stepText = {
   search_done: "Dibuje un polígono del área que desea analizar.",
   polygon_drawn: "Seleccione una o más capas de análisis.",
   layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar."
+};
+
+const stepPosition = {
+  initial: "right center",
+  search_done: "right center",
+  polygon_drawn: "right center",
+  layer_selected: "left center"
 };
 
 class Guide extends Component {
@@ -18,8 +25,8 @@ class Guide extends Component {
         content={stepText[this.props.step]}
         open={this.state.isOpen}
         size="small"
-        className={this.props.step}
-        basic
+        className={this.props.step + " " + stepPosition[this.props.step]}
+        position="top right"
       />
     );
   }

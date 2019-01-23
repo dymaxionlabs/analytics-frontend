@@ -9,7 +9,7 @@ L.Control.GeocoderPlaceholder = L.Control.extend({
   onAdd: function(map) {
     var div = L.DomUtil.create("div");
     div.style.width = "200px";
-    div.style.height = "32px";
+    div.style.height = "40px";
     return div;
   }
 });
@@ -28,8 +28,14 @@ class GeocoderControl extends MapControl {
     this.resetComponent();
   }
 
-  resetComponent = () =>
-    this.setState({ isLoading: false, results: [], prevValue: "", value: "" });
+  resetComponent = () => {
+    this.setState({
+      isLoading: false,
+      results: [],
+      value: "",
+      bounds: null
+    });
+  };
 
   handleSearchChange = (e, { value }) => {
     this.setState({ value });
@@ -45,8 +51,9 @@ class GeocoderControl extends MapControl {
 
         this.geocode().then(features => {
           const results = features.map(feat => {
-            const center = [feat.center[1], feat.center[0]];
-            return { title: feat.place_name, center: center };
+            const [lon1, lat1, lon2, lat2] = feat.bbox;
+            const bounds = [[lat1, lon1], [lat2, lon2]];
+            return { title: feat.place_name, bounds: bounds };
           });
 
           this.setState({
@@ -58,21 +65,10 @@ class GeocoderControl extends MapControl {
     }, 300);
   };
 
-  updateMapCenter() {
-    const { map } = this.props.leaflet;
-    map.flyTo(this.state.center);
-  }
-
   handleResultSelect = (e, { result }) => {
-    this.setState({ value: result.title, center: result.center });
+    this.setState(result);
     this.triggerOnResult(result);
   };
-
-  componentDidUpdate() {
-    if (this.state.center) {
-      this.updateMapCenter();
-    }
-  }
 
   handleMouseDown = (e, data) => {
     // For some reason, when you click on a result on the results container, the
@@ -87,15 +83,15 @@ class GeocoderControl extends MapControl {
       const title = node.textContent;
       const result = this.state.results.find(elem => elem.title === title);
 
-      this.setState({ value: title, center: result.center });
+      this.setState(result);
       this.triggerOnResult(result);
     }
   };
 
-  triggerOnResult() {
+  triggerOnResult(result) {
     const { onResult } = this.props;
     if (onResult) {
-      onResult(this.state.value);
+      onResult(result);
     }
   }
 
@@ -110,7 +106,7 @@ class GeocoderControl extends MapControl {
         country: "AR"
       }
     });
-    return res.data.features;
+    return res.data.features || [];
   }
 
   render() {
@@ -119,6 +115,7 @@ class GeocoderControl extends MapControl {
     return (
       <div className="geocoder">
         <Search
+          size="large"
           loading={isLoading}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
@@ -145,6 +142,9 @@ class GeocoderControl extends MapControl {
           .geocoder .ui.search .prompt {
             border-radius: 4px;
             box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35);
+          }
+          .geocoder .ui.search > .ui.input.icon {
+            width: 20em;
           }
         `}</style>
       </div>

@@ -21,10 +21,14 @@ import ConfirmationPortal from "../components/ConfirmationPortal";
 import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/Guide";
 
+const DEFAULT_VIEWPORT = {
+  center: [-34.609032, -58.373219],
+  zoom: 11
+};
+
 class Index extends React.Component {
   state = {
-    center: [-34.609032, -58.373219],
-    zoom: [11],
+    viewport: DEFAULT_VIEWPORT,
     selectedLayers: [],
     polygonsArea: 0,
     step: "initial"
@@ -36,20 +40,20 @@ class Index extends React.Component {
     super(props);
 
     this._onToggleLayer = this._onToggleLayer.bind(this);
-    this._onGeocoderResult = this._onGeocoderResult.bind(this);
     this._onDrawCreated = this._onDrawCreated.bind(this);
     this._onDrawEdited = this._onDrawEdited.bind(this);
     this._onDrawDeleted = this._onDrawDeleted.bind(this);
   }
 
-  _onGeocoderResult() {
+  componentDidUpdate() {}
+
+  _onGeocoderResult = result => {
     if (!this._hasAnyPolygons() && !this._hasAnyLayerSelected()) {
       this.setState({ step: "search_done" });
     }
-  }
+  };
 
   _onDrawCreated() {
-    console.log("drawed");
     this._updatePolygonsArea();
     if (this._hasAnyLayerSelected()) {
       this.setState({ step: "layer_selected" });
@@ -59,12 +63,10 @@ class Index extends React.Component {
   }
 
   _onDrawEdited(event) {
-    console.log("edited");
     this._updatePolygonsArea();
   }
 
   _onDrawDeleted(event) {
-    console.log("deleted");
     if (!this._updatePolygonsArea() && !this._hasAnyPolygons() == true) {
       this.setState({ step: "search_done" });
     }
@@ -114,6 +116,10 @@ class Index extends React.Component {
     this.setState({ selectedLayers, step });
   }
 
+  _onMapViewportChanged = viewport => {
+    this.setState({ viewport });
+  };
+
   _addOrRemove(array, item) {
     const include = array.includes(item);
     return include
@@ -122,7 +128,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const { center, zoom, step, selectedLayers } = this.state;
+    const { viewport, step, selectedLayers } = this.state;
     const isLayerSelected = step === "layer_selected";
 
     return (
@@ -135,9 +141,9 @@ class Index extends React.Component {
           />
         </Head>
         <Map
-          center={center}
-          zoom={zoom}
+          viewport={viewport}
           featureGroupRef={this.featureGroupRef}
+          onViewportChanged={this._onMapViewportChanged}
           onGeocoderResult={this._onGeocoderResult}
           onDrawCreated={this._onDrawCreated}
           onDrawEdited={this._onDrawEdited}

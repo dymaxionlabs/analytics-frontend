@@ -101,8 +101,15 @@ class LayersMenu extends React.Component {
             active={selectedLayers.includes(opts.key)}
             key={opts.key}
             onClick={e => this._onClickLayer(e, opts.key)}
+            style={{ padding: 7 }}
           >
-            <Image avatar src={opts.image} width={28} height={28} />
+            <Image
+              avatar
+              src={opts.image}
+              width={28}
+              height={28}
+              style={{ margin: "7px 9px 7px 0px" }}
+            />
             <List.Content style={{ width: "85%" }}>
               <List.Header as="a">{opts.text}</List.Header>
               <List.Description as="a">{opts.description}</List.Description>

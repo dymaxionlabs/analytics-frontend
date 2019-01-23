@@ -1,5 +1,6 @@
 import { PropTypes } from "prop-types";
 import Draw from "leaflet-draw"; // eslint-disable-line
+import drawLocales from "leaflet-draw-locales";
 import isEqual from "lodash-es/isEqual";
 
 import "leaflet-draw/dist/leaflet.draw.css";
@@ -136,6 +137,12 @@ function createDrawElement(props) {
 
   if (position) {
     options.position = position;
+  }
+
+  // Localize control
+  if (props.locale) {
+    const locale = drawLocales(props.locale);
+    L.drawLocal = locale;
   }
 
   return new Control.Draw(options);

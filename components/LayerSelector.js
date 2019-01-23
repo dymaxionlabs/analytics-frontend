@@ -1,84 +1,90 @@
 import React from "react";
 import {
   Button,
-  Dropdown,
   TransitionablePortal,
-  Menu
+  Segment,
+  List,
+  Image
 } from "semantic-ui-react";
-
-const dropdownItemStyle = {
-  width: 250
-};
 
 export const allLayers = [
   {
     key: "recent-construction",
-    image: { src: "/static/icons/recent-construction.svg" },
+    image: "/static/icons/recent.png",
     text: "Construcción Reciente",
+    description: "Casas y edificios recientemente construidos.",
     value: "recent-construction",
     categories: ["construction"]
   },
   {
     key: "roofs",
-    image: { src: "/static/icons/roofs.svg" },
+    image: "/static/icons/roofs.png",
     text: "Techos",
+    description: "Techos de casas y edificios.",
     value: "roofs",
     categories: ["construction"]
   },
   {
     key: "pools",
-    image: { src: "/static/icons/pools.svg" },
+    image: "/static/icons/pools.png",
     text: "Piletas",
+    description: "Piscinas residenciales y pequeñas piletas",
     value: "pools",
     categories: ["construction"]
   },
   {
     key: "informal-settlements",
-    icon: "tree",
+    image: "/static/icons/slums.png",
     text: "Asentamientos Informales",
+    description: "Barrios precarios y asentamientos informales",
     value: "informal-settlements",
     categories: ["demographic"]
   },
   {
     key: "soil",
-    icon: "tree",
+    image: "/static/icons/soil.png",
     text: "Área Sembrada",
+    description: "Suelo utilizado para siembra y cultivo.",
     value: "soil",
     categories: ["agri"]
   },
   {
     key: "floods",
-    icon: "tree",
-    text: "Área Anegada",
+    image: "/static/icons/flood.png",
+    text: "Área Inundada y Anegada",
+    description: "Suelo que se encuentra inundado y/o presenta anegamiento",
     value: "floods",
     categories: ["agri"]
   },
   {
     key: "ndvi",
-    icon: "tree",
+    image: "/static/icons/vi.png",
     text: "Índice NDVI",
+    description: "Índice que indica áreas con vegetación",
     value: "ndvi",
     categories: ["agri"]
   },
   {
     key: "schools",
-    icon: "tree",
+    image: "/static/icons/schools.png",
     text: "Escuelas",
+    description: "Escuelas y otros asentamientos educativos.",
     value: "schools",
     categories: ["demographic"]
   },
   {
     key: "hospitals",
-    icon: "tree",
+    image: "/static/icons/hospitals.png",
     text: "Hospitales",
+    description: "Hospitales y clínicas.",
     value: "hospitals",
     categories: ["demographic"]
   }
 ];
 
 class LayersMenu extends React.Component {
-  _onClickLayer = (event, data) => {
-    this.props.onToggleLayer(data.value);
+  _onClickLayer = (_event, layerKey) => {
+    this.props.onToggleLayer(layerKey);
   };
 
   _layersByCategory(categoryId) {
@@ -86,47 +92,24 @@ class LayersMenu extends React.Component {
   }
 
   render() {
-    const { style, selectedLayers } = this.props;
+    const { selectedLayers } = this.props;
 
     return (
-      <Menu vertical style={style}>
-        <Dropdown text="Construcción" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("construction").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
-              />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown text="Agricultura" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("agri").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
-              />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown text="Demográficos" pointing="left" className="link item">
-          <Dropdown.Menu>
-            {this._layersByCategory("demographic").map(opts => (
-              <Dropdown.Item
-                {...opts}
-                active={selectedLayers.includes(opts.key)}
-                onClick={this._onClickLayer}
-                style={dropdownItemStyle}
-              />
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu>
+      <List selection relaxed style={{ width: 300 }}>
+        {allLayers.map(opts => (
+          <List.Item
+            active={selectedLayers.includes(opts.key)}
+            key={opts.key}
+            onClick={e => this._onClickLayer(e, opts.key)}
+          >
+            <Image avatar src={opts.image} width={28} height={28} />
+            <List.Content style={{ width: "85%" }}>
+              <List.Header as="a">{opts.text}</List.Header>
+              <List.Description as="a">{opts.description}</List.Description>
+            </List.Content>
+          </List.Item>
+        ))}
+      </List>
     );
   }
 }
@@ -137,37 +120,56 @@ class LayerSelector extends React.Component {
   handleOpen = () => this.setState({ open: true });
   handleClose = () => this.setState({ open: false });
 
+  handleToggleLayer = (event, layerKey) => {
+    // FIXME Should close automatically if there is 0 or 1 selected layers only
+    this.setState({ open: false });
+
+    const { onToggleLayer } = this.props;
+    if (onToggleLayer) {
+      onToggleLayer(event, layerKey);
+    }
+  };
+
   render() {
-    const { onToggleLayer, selectedLayers } = this.props;
+    const { selectedLayers } = this.props;
+    const { open } = this.state;
 
     return (
-      <TransitionablePortal
-        closeOnTriggerClick
-        onOpen={this.handleOpen}
-        onClose={this.handleClose}
-        openOnTriggerClick
-        trigger={
-          <Button
-            className="controlButton"
-            style={{ zIndex: 1000 }}
-            circular
-            icon="osi"
-            size="massive"
-            color="blue"
-          />
-        }
-      >
-        <LayersMenu
-          style={{
-            left: "16px",
-            position: "fixed",
-            bottom: "100px",
-            zIndex: 1000
-          }}
-          onToggleLayer={onToggleLayer}
-          selectedLayers={selectedLayers}
-        />
-      </TransitionablePortal>
+      <div style={{ position: "absolute", bottom: 0, left: 10, zIndex: 1000 }}>
+        <TransitionablePortal
+          closeOnTriggerClick
+          open={open}
+          onOpen={this.handleOpen}
+          onClose={this.handleClose}
+          openOnTriggerClick
+          transition={{ animation: "fade up" }}
+          trigger={
+            <Button
+              className="controlButton"
+              circular
+              icon="osi"
+              size="massive"
+              color="blue"
+            />
+          }
+        >
+          <Segment
+            style={{
+              position: "fixed",
+              left: 20,
+              bottom: 110,
+              zIndex: 1000,
+              overflow: "auto",
+              maxHeight: 300
+            }}
+          >
+            <LayersMenu
+              onToggleLayer={this.handleToggleLayer}
+              selectedLayers={selectedLayers}
+            />
+          </Segment>
+        </TransitionablePortal>
+      </div>
     );
   }
 }

@@ -29,50 +29,67 @@ const drawOptions = {
   circlemarker: false
 };
 
-export default ({
-  children,
-  center,
-  zoom,
-  featureGroupRef,
-  onFeatureGroupClick,
-  onClick,
-  onGeocoderResult,
-  onDrawCreated,
-  onDrawEdited,
-  onDrawDeleted
-}) => (
-  <Map
-    style={mapContainerStyle}
-    center={center}
-    zoom={zoom}
-    zoomControl={false}
-    maxZoom={20}
-    animate={true}
-    onClick={onClick}
-  >
-    <TileLayer
-      attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
-      url={basemapUrl}
-    />
-    <ZoomControl position="topright" />
-    <GeocoderControl
-      accessToken={MAPBOX_TOKEN}
-      onResult={onGeocoderResult}
-      collapsed={false}
-      position="topleft"
-      placeholder="Buscar ciudad..."
-      errorMessage="No se han encontrado resultados."
-    />
-    <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
-      <DrawControl
-        position="topleft"
-        draw={drawOptions}
-        onCreated={onDrawCreated}
-        onEdited={onDrawEdited}
-        onDeleted={onDrawDeleted}
-      />
-    </FeatureGroup>
+class TrialMap extends React.Component {
+  _onGeocoderResult = result => {
+    // Fly to bounds
+    const map = this.refs.map.leafletElement;
+    map.flyToBounds(result.bounds);
 
-    {children}
-  </Map>
-);
+    // Call event handler, if available
+    const { onGeocoderResult } = this.props;
+    if (onGeocoderResult) {
+      onGeocoderResult(result);
+    }
+  };
+
+  render() {
+    const {
+      children,
+      viewport,
+      featureGroupRef,
+      onViewportChanged,
+      onClick,
+      onFeatureGroupClick,
+      onDrawCreated,
+      onDrawEdited,
+      onDrawDeleted
+    } = this.props;
+
+    return (
+      <Map
+        ref="map"
+        style={mapContainerStyle}
+        viewport={viewport}
+        zoomControl={false}
+        animate={true}
+        onViewportChanged={onViewportChanged}
+        onClick={onClick}
+      >
+        <TileLayer
+          attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
+          url={basemapUrl}
+        />
+        <ZoomControl position="topright" />
+        <GeocoderControl
+          accessToken={MAPBOX_TOKEN}
+          onResult={this._onGeocoderResult}
+          position="topleft"
+        />
+        <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
+          <DrawControl
+            locale="es"
+            position="topleft"
+            draw={drawOptions}
+            onCreated={onDrawCreated}
+            onEdited={onDrawEdited}
+            onDeleted={onDrawDeleted}
+          />
+        </FeatureGroup>
+
+        {children}
+      </Map>
+    );
+  }
+}
+
+export default TrialMap;

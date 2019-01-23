@@ -18,8 +18,8 @@
 }
 
 .ui.popup.initial {
-  top: 10px;
-  left: 300px;
+  top: 50px;
+  left: 60px;
 }
 
 .ui.popup.search_done {
@@ -29,14 +29,21 @@
 
 .ui.popup.polygon_drawn {
   top: inherit;
-  bottom: 40px;
-  left: 80px;
+  bottom: 25px;
+  left: 90px;
 }
 
-.ui.popup.layer_selected { 
-  top: 40px;
-  right: 360px;
-  z-index: 1000 !important;
+.ui.popup.layer_selected {
+  top: 50px;
+  right: 400px;
+}
 
+.index .leaflet-container a {
+  color: #222;
+}
 
+.index .leaflet-draw-actions a {
+  background-color: #ccc;
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  line-height: 30px;
 }

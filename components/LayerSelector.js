@@ -83,8 +83,8 @@ export const allLayers = [
 ];
 
 class LayersMenu extends React.Component {
-  _onClickLayer = (_event, data) => {
-    this.props.onToggleLayer(data.value);
+  _onClickLayer = (_event, layerKey) => {
+    this.props.onToggleLayer(layerKey);
   };
 
   _layersByCategory(categoryId) {
@@ -95,24 +95,15 @@ class LayersMenu extends React.Component {
     const { selectedLayers } = this.props;
 
     return (
-      <List divided relaxed style={{ width: 300 }}>
+      <List selection relaxed style={{ width: 300 }}>
         {allLayers.map(opts => (
           <List.Item
             active={selectedLayers.includes(opts.key)}
-            onClick={this._onClickLayer}
             key={opts.key}
+            onClick={e => this._onClickLayer(e, opts.key)}
           >
-            {opts.image ? (
-              <Image src={opts.image} width={24} height={24} />
-            ) : (
-              <List.Icon
-                name={opts.icon}
-                size="large"
-                verticalAlign="middle"
-                inline="true"
-              />
-            )}
-            <List.Content>
+            <Image avatar src={opts.image} width={28} height={28} />
+            <List.Content style={{ width: "85%" }}>
               <List.Header as="a">{opts.text}</List.Header>
               <List.Description as="a">{opts.description}</List.Description>
             </List.Content>
@@ -129,13 +120,25 @@ class LayerSelector extends React.Component {
   handleOpen = () => this.setState({ open: true });
   handleClose = () => this.setState({ open: false });
 
+  handleToggleLayer = (event, layerKey) => {
+    // FIXME Should close automatically if there is 0 or 1 selected layers only
+    this.setState({ open: false });
+
+    const { onToggleLayer } = this.props;
+    if (onToggleLayer) {
+      onToggleLayer(event, layerKey);
+    }
+  };
+
   render() {
-    const { onToggleLayer, selectedLayers } = this.props;
+    const { selectedLayers } = this.props;
+    const { open } = this.state;
 
     return (
       <div style={{ position: "absolute", bottom: 0, left: 10, zIndex: 1000 }}>
         <TransitionablePortal
           closeOnTriggerClick
+          open={open}
           onOpen={this.handleOpen}
           onClose={this.handleClose}
           openOnTriggerClick
@@ -161,7 +164,7 @@ class LayerSelector extends React.Component {
             }}
           >
             <LayersMenu
-              onToggleLayer={onToggleLayer}
+              onToggleLayer={this.handleToggleLayer}
               selectedLayers={selectedLayers}
             />
           </Segment>

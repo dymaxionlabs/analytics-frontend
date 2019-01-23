@@ -105,12 +105,13 @@ class ModalContactForm extends Component {
     return (
       <Modal
         trigger={
-          <Button floated="left" hoverable>
+          <Button fluid primary>
             Confirmar
           </Button>
         }
-        closeIcon>
-        <Header content="Cotizar Imagenes" />
+        closeIcon
+      >
+        <Header content="Cotizar" />
         <Modal.Content>
           <ContactForm />
         </Modal.Content>

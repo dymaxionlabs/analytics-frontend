@@ -10,7 +10,7 @@ const AreaSection = ({ value }) => (
       verticalAlign="middle"
       style={{ width: 20, height: 20, margin: 10, marginLeft: 0 }}
     />
-    {Math.round(value)} km²
+    {Math.ceil(value)} km² / {Math.ceil(value * 100)} ha
     <Header.Subheader>tamaño de superficie</Header.Subheader>
   </Header>
 );

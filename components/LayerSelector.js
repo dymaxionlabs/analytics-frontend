@@ -3,6 +3,7 @@ import {
   Button,
   Dropdown,
   TransitionablePortal,
+  Segment,
   Menu
 } from "semantic-ui-react";
 
@@ -141,33 +142,33 @@ class LayerSelector extends React.Component {
     const { onToggleLayer, selectedLayers } = this.props;
 
     return (
-      <TransitionablePortal
-        closeOnTriggerClick
-        onOpen={this.handleOpen}
-        onClose={this.handleClose}
-        openOnTriggerClick
-        trigger={
-          <Button
-            className="controlButton"
-            style={{ zIndex: 1000 }}
-            circular
-            icon="osi"
-            size="massive"
-            color="blue"
-          />
-        }
-      >
-        <LayersMenu
-          style={{
-            left: "16px",
-            position: "fixed",
-            bottom: "100px",
-            zIndex: 1000
-          }}
-          onToggleLayer={onToggleLayer}
-          selectedLayers={selectedLayers}
-        />
-      </TransitionablePortal>
+      <div style={{ position: "absolute", bottom: 0, left: 10, zIndex: 1000 }}>
+        <TransitionablePortal
+          closeOnTriggerClick
+          onOpen={this.handleOpen}
+          onClose={this.handleClose}
+          openOnTriggerClick
+          transition={{ animation: "fade up" }}
+          trigger={
+            <Button
+              className="controlButton"
+              circular
+              icon="osi"
+              size="massive"
+              color="blue"
+            />
+          }
+        >
+          <Segment
+            style={{ position: "fixed", left: 20, bottom: 110, zIndex: 1000 }}
+          >
+            <LayersMenu
+              onToggleLayer={onToggleLayer}
+              selectedLayers={selectedLayers}
+            />
+          </Segment>
+        </TransitionablePortal>
+      </div>
     );
   }
 }

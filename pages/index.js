@@ -150,16 +150,16 @@ class Index extends React.Component {
           onDrawDeleted={this._onDrawDeleted}
         >
           <Guide step={step} />
-          <LayerSelector
-            onToggleLayer={this._onToggleLayer}
-            selectedLayers={selectedLayers}
-          />
           {isLayerSelected && (
             <ConfirmationPortal
               area={this.state.polygonsArea}
               selectedLayers={selectedLayers}
             />
           )}
+          <LayerSelector
+            onToggleLayer={this._onToggleLayer}
+            selectedLayers={selectedLayers}
+          />
         </Map>
       </div>
     );

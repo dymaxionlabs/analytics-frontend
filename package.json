@@ -22,7 +22,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "yarn build && next export && cp static/favicon.ico out/"
+    "export": "yarn build && next export"
   },
   "devDependencies": {
     "file-loader": "^2.0.0",

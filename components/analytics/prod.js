@@ -13,9 +13,9 @@ export function pageview() {
   ReactGA.pageview(window.location.pathname);
 }
 
-export function event(category = "", action = "") {
+export function event(category = "", action = "", value = "") {
   if (category && action) {
-    ReactGA.event({ category, action });
+    ReactGA.event({ category, action, value });
   }
 }
 

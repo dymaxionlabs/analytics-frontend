@@ -49,6 +49,7 @@ class TrialMap extends React.Component {
       featureGroupRef,
       onViewportChanged,
       onClick,
+      onGeocoderSearch,
       onFeatureGroupClick,
       onDrawCreated,
       onDrawEdited,
@@ -72,6 +73,7 @@ class TrialMap extends React.Component {
         <ZoomControl position="topright" />
         <GeocoderControl
           accessToken={MAPBOX_TOKEN}
+          onSearch={onGeocoderSearch}
           onResult={this._onGeocoderResult}
           position="topleft"
         />

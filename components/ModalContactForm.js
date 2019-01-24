@@ -92,14 +92,17 @@ class ContactForm extends Component {
 
 class ModalContactForm extends Component {
   render() {
+    const { onTriggerClick, onModalClose } = this.props;
+
     return (
       <Modal
         trigger={
-          <Button fluid primary>
+          <Button fluid primary onClick={onTriggerClick}>
             Confirmar
           </Button>
         }
         closeIcon
+        onClose={onModalClose}
       >
         <Header content="Cotizar" />
         <Modal.Content>

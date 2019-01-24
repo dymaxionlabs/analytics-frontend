@@ -47,21 +47,24 @@ class Index extends React.Component {
 
   componentDidUpdate() {}
 
-  _trackEvent(action) {
-    const { analytics } = this.props;
-    analytics.event("Quotation", action);
+  _trackEvent(action, value) {
+    this.props.analytics.event("Quotation", action, value);
   }
 
+  _onGeocoderSearch = query => {
+    this._trackEvent("search-geocoder", query);
+  };
+
   _onGeocoderResult = result => {
-    this._trackEvent("select-geocoder-result");
+    this._trackEvent("select-geocoder-result", result.title);
 
     if (!this._hasAnyPolygons() && !this._hasAnyLayerSelected()) {
       this.setState({ step: "search_done" });
     }
   };
 
-  _onDrawCreated() {
-    this._trackEvent("draw-geometry");
+  _onDrawCreated(event) {
+    this._trackEvent("draw-geometry", event.layerType);
 
     this._updatePolygonsArea();
     if (this._hasAnyLayerSelected()) {
@@ -111,9 +114,14 @@ class Index extends React.Component {
   }
 
   _onToggleLayer(layer) {
-    this._trackEvent("toggle-layer");
-
     const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
+
+    if (selectedLayers.includes(layer)) {
+      this._trackEvent("enable-layer", layer);
+    } else {
+      this._trackEvent("disable-layer", layer);
+    }
+
     let step;
     if (selectedLayers.length > 0) {
       if (this._hasAnyPolygons()) {
@@ -128,11 +136,20 @@ class Index extends React.Component {
         step = "search_done";
       }
     }
+
     this.setState({ selectedLayers, step });
   }
 
   _onMapViewportChanged = viewport => {
     this.setState({ viewport });
+  };
+
+  _onConfirmClick = () => {
+    this._trackEvent("confirm-quotation");
+  };
+
+  _onContactFormModalClose = () => {
+    this._trackEvent("cancel-form");
   };
 
   _addOrRemove(array, item) {
@@ -164,6 +181,7 @@ class Index extends React.Component {
           viewport={viewport}
           featureGroupRef={this.featureGroupRef}
           onViewportChanged={this._onMapViewportChanged}
+          onGeocoderSearch={this._onGeocoderSearch}
           onGeocoderResult={this._onGeocoderResult}
           onDrawCreated={this._onDrawCreated}
           onDrawEdited={this._onDrawEdited}
@@ -174,6 +192,8 @@ class Index extends React.Component {
             open={isLayerSelected}
             area={this.state.polygonsArea}
             selectedLayers={selectedLayers}
+            onConfirmClick={this._onConfirmClick}
+            onContactFormModalClose={this._onContactFormModalClose}
           />
           <LayerSelector
             onToggleLayer={this._onToggleLayer}

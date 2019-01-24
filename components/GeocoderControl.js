@@ -61,6 +61,8 @@ class GeocoderControl extends MapControl {
             results: results
           });
         });
+
+        this.triggerOnSearch(value);
       }
     }, 300);
   };
@@ -92,6 +94,13 @@ class GeocoderControl extends MapControl {
     const { onResult } = this.props;
     if (onResult) {
       onResult(result);
+    }
+  }
+
+  triggerOnSearch(query) {
+    const { onSearch } = this.props;
+    if (onSearch) {
+      onSearch(query);
     }
   }
 

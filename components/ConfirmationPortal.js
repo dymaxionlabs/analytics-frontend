@@ -44,7 +44,14 @@ class ConfirmationPortal extends React.Component {
   }
 
   render() {
-    const { open, area, onConfirmClick, onContactFormModalClose } = this.props;
+    const {
+      open,
+      area,
+      onConfirmClick,
+      onContactFormModalClose,
+      onContactFormSubmit
+    } = this.props;
+
     const layers = this._layersSentence();
 
     return (
@@ -69,6 +76,7 @@ class ConfirmationPortal extends React.Component {
             <ModalContactForm
               onTriggerClick={onConfirmClick}
               onModalClose={onContactFormModalClose}
+              onSubmit={onContactFormSubmit}
             />
           </Segment>
         </TransitionablePortal>

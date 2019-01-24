@@ -2,43 +2,44 @@ import React, { Component } from "react";
 import { Button, Form, Modal, Header } from "semantic-ui-react";
 
 class ContactForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {
-        name: "",
-        email: "",
-        city: "",
-        message: ""
-      },
-      invalidFields: {
-        name: false,
-        email: false,
-        city: false,
-        message: false
-      }
-    };
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
+  state = {
+    fields: {
+      name: "",
+      email: "",
+      city: "",
+      message: ""
+    },
+    invalidFields: {
+      name: false,
+      email: false,
+      city: false,
+      message: false
+    }
+  };
 
-  handleOnChange(event) {
+  handleOnChange = event => {
     this.setState({
       fields: {
         ...this.state.fields,
         [event.target.name]: event.target.value
       }
     });
-  }
+  };
 
-  handleOnClick() {
+  handleOnClick = () => {
     let fields = ["name", "email", "city", "message"];
     let invalidFields = { ...this.state.invalidFields };
     for (let field of fields) {
       invalidFields[field] = this.state.fields[field] === "";
     }
     this.setState({ invalidFields });
-  }
+
+    // FIXME Only track event if form is valid
+    const { onSubmit } = this.props;
+    if (onSubmit) {
+      onSubmit(this.state.fields);
+    }
+  };
 
   render() {
     return (
@@ -92,7 +93,7 @@ class ContactForm extends Component {
 
 class ModalContactForm extends Component {
   render() {
-    const { onTriggerClick, onModalClose } = this.props;
+    const { onTriggerClick, onModalClose, onSubmit } = this.props;
 
     return (
       <Modal
@@ -106,7 +107,7 @@ class ModalContactForm extends Component {
       >
         <Header content="Cotizar" />
         <Modal.Content>
-          <ContactForm />
+          <ContactForm onSubmit={onSubmit} />
         </Modal.Content>
       </Modal>
     );

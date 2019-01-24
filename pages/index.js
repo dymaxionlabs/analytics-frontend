@@ -152,6 +152,10 @@ class Index extends React.Component {
     this._trackEvent("cancel-form");
   };
 
+  _onContactFormSubmit = () => {
+    this._trackEvent("submit-form");
+  };
+
   _addOrRemove(array, item) {
     const include = array.includes(item);
     return include
@@ -194,6 +198,7 @@ class Index extends React.Component {
             selectedLayers={selectedLayers}
             onConfirmClick={this._onConfirmClick}
             onContactFormModalClose={this._onContactFormModalClose}
+            onContactFormSubmit={this._onContactFormSubmit}
           />
           <LayerSelector
             onToggleLayer={this._onToggleLayer}

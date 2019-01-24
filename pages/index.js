@@ -47,13 +47,22 @@ class Index extends React.Component {
 
   componentDidUpdate() {}
 
+  _trackEvent(action) {
+    const { analytics } = this.props;
+    analytics.event("Quotation", action);
+  }
+
   _onGeocoderResult = result => {
+    this._trackEvent("select-geocoder-result");
+
     if (!this._hasAnyPolygons() && !this._hasAnyLayerSelected()) {
       this.setState({ step: "search_done" });
     }
   };
 
   _onDrawCreated() {
+    this._trackEvent("draw-geometry");
+
     this._updatePolygonsArea();
     if (this._hasAnyLayerSelected()) {
       this.setState({ step: "layer_selected" });
@@ -63,10 +72,14 @@ class Index extends React.Component {
   }
 
   _onDrawEdited(event) {
+    this._trackEvent("edit-geometry");
+
     this._updatePolygonsArea();
   }
 
   _onDrawDeleted(event) {
+    this._trackEvent("delete-geometry");
+
     if (!this._updatePolygonsArea() && !this._hasAnyPolygons() == true) {
       this.setState({ step: "search_done" });
     }
@@ -98,6 +111,8 @@ class Index extends React.Component {
   }
 
   _onToggleLayer(layer) {
+    this._trackEvent("toggle-layer");
+
     const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
     let step;
     if (selectedLayers.length > 0) {

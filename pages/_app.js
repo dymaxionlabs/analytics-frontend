@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import withGA from "next-ga";
+import withGA from "../components/withGA";
 import App, { Container } from "next/app";
 
 class MyApp extends App {
@@ -15,11 +15,11 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, analytics } = this.props;
 
     return (
       <Container>
-        <Component {...pageProps} />
+        <Component {...pageProps} analytics={analytics} />
       </Container>
     );
   }

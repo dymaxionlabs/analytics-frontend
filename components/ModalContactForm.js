@@ -1,91 +1,143 @@
 import React, { Component } from "react";
-import { Button, Form, Modal, Header } from "semantic-ui-react";
+import { Button, Form, Modal, Message, Header } from "semantic-ui-react";
+
+const initialState = {
+  fields: {
+    name: "",
+    email: "",
+    city: "",
+    message: ""
+  },
+  invalidFields: {
+    name: true,
+    email: true,
+    city: true,
+    message: false
+  }
+};
 
 class ContactForm extends Component {
   state = {
-    fields: {
-      name: "",
-      email: "",
-      city: "",
-      message: ""
-    },
-    invalidFields: {
-      name: false,
-      email: false,
-      city: false,
-      message: false
-    }
+    ...initialState,
+    loading: false,
+    success: false,
+    submitedOnce: false,
+    error: false
   };
 
-  handleOnChange = event => {
+  handleInputChange = event => {
+    const target = event.target;
+    const name = target.name;
+    const isInvalid = target.checkValidity() === false;
+
     this.setState({
       fields: {
         ...this.state.fields,
-        [event.target.name]: event.target.value
+        [name]: target.value
+      },
+      invalidFields: {
+        ...this.state.invalidFields,
+        [name]: isInvalid
       }
     });
   };
 
-  handleOnClick = () => {
-    let fields = ["name", "email", "city", "message"];
-    let invalidFields = { ...this.state.invalidFields };
-    for (let field of fields) {
-      invalidFields[field] = this.state.fields[field] === "";
+  isInvalid() {
+    for (const key in this.state.invalidFields) {
+      if (this.state.invalidFields[key]) {
+        return true;
+      }
     }
-    this.setState({ invalidFields });
+    return false;
+  }
 
-    // FIXME Only track event if form is valid
+  handleSubmit = event => {
+    console.log("handle submit");
+    event.preventDefault();
+    this.setState({ submitedOnce: true });
+
+    if (this.isInvalid()) {
+      return;
+    }
+
     const { onSubmit } = this.props;
     if (onSubmit) {
       onSubmit(this.state.fields);
     }
+
+    this.setState({ loading: true });
+
+    setTimeout(() => {
+      this.setState({
+        ...initialState,
+        loading: false,
+        success: true,
+        validated: false,
+        submitedOnce: false,
+        error: false
+      });
+    }, 1000);
   };
 
   render() {
     return (
-      <Form>
+      <Form
+        success={this.state.success}
+        error={this.state.error}
+        loading={this.state.loading}
+      >
+        <Message
+          success
+          header="Form Completed"
+          content="You're all signed up for the newsletter"
+        />
+        <Message
+          error
+          header="Action Forbidden"
+          content="You can only sign up for an account once with a given e-mail address."
+        />
         <Form.Group widths="equal">
           <Form.Input
             fluid
-            required={true}
+            required
             label="Nombre"
-            placeholder="Nombre"
+            placeholder="Ingrese su nombre"
             name="name"
             value={this.state.fields.name}
-            onChange={this.handleOnChange}
-            error={this.state.invalidFields.name}
+            onChange={this.handleInputChange}
+            error={this.state.submitedOnce && this.state.invalidFields.name}
           />
           <Form.Input
             fluid
-            required={true}
+            required
             label="Email"
-            placeholder="Email"
+            placeholder="Ingrese su dirección de e-mail"
+            type="email"
             name="email"
             value={this.state.fields.email}
-            onChange={this.handleOnChange}
-            error={this.state.invalidFields.email}
+            onChange={this.handleInputChange}
+            error={this.state.submitedOnce && this.state.invalidFields.email}
           />
           <Form.Input
             fluid
-            required={true}
+            required
             label="Ciudad"
-            placeholder="Ciudad"
+            placeholder="Ingrese su ciudad"
             name="city"
             value={this.state.fields.city}
-            onChange={this.handleOnChange}
-            error={this.state.invalidFields.city}
+            onChange={this.handleInputChange}
+            error={this.state.submitedOnce && this.state.invalidFields.city}
           />
         </Form.Group>
         <Form.TextArea
-          required={true}
           label="Mensaje"
-          placeholder="Mensaje"
+          placeholder="Ingrese un comentario adicional"
           name="message"
           value={this.state.fields.message}
-          onChange={this.handleOnChange}
-          error={this.state.invalidFields.message}
+          onChange={this.handleInputChange}
+          error={this.state.submitedOnce && this.state.invalidFields.message}
         />
-        <Form.Button onClick={this.handleOnClick}>Enviar</Form.Button>
+        <Form.Button onClick={this.handleSubmit}>Enviar</Form.Button>
       </Form>
     );
   }

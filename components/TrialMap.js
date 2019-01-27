@@ -14,7 +14,7 @@ const mapContainerStyle = {
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw";
 
-const styleId = "mapbox.streets-satellite";
+const styleId = "mapbox.satellite";
 const basemapUrl = `https://api.tiles.mapbox.com/v4/${styleId}/{z}/{x}/{y}.png?access_token=${MAPBOX_TOKEN}`;
 
 const drawOptions = {

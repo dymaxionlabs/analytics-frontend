@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, Message, Header } from "semantic-ui-react";
+import axios from "axios";
+
+const QUOTATIONS_URL = `https://staging.api.dymaxionlabs.com/quotations/`;
 
 const initialState = {
   fields: {
@@ -52,8 +55,6 @@ class ContactForm extends Component {
   }
 
   handleSubmit = event => {
-    console.log("handle submit");
-    event.preventDefault();
     this.setState({ submitedOnce: true });
 
     if (this.isInvalid()) {
@@ -67,6 +68,11 @@ class ContactForm extends Component {
 
     this.setState({ loading: true });
 
+    // this.fakeSubmit();
+    this.submit();
+  };
+
+  fakeSubmit() {
     setTimeout(() => {
       this.setState({
         ...initialState,
@@ -77,7 +83,46 @@ class ContactForm extends Component {
         error: false
       });
     }, 1000);
-  };
+  }
+
+  submit() {
+    const areas_geom = this.props.polygonLayers.map(layer => ({
+      area_geom: layer.toGeoJSON()["geometry"]
+    }));
+
+    const params = {
+      name: this.state.fields.name,
+      email: this.state.fields.email,
+      message: this.state.fields.message,
+      areas: areas_geom,
+      layers: this.props.selectedLayers,
+      user: null // TODO
+    };
+
+    axios
+      .post(QUOTATIONS_URL, params)
+      .then(() => {
+        this.setState({
+          ...initialState,
+          success: true,
+          error: false
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          success: false,
+          error: true
+        });
+      })
+      .then(() => {
+        this.setState({
+          validated: false,
+          loading: false,
+          submitedOnce: false
+        });
+      });
+  }
 
   render() {
     return (
@@ -86,16 +131,6 @@ class ContactForm extends Component {
         error={this.state.error}
         loading={this.state.loading}
       >
-        <Message
-          success
-          header="Form Completed"
-          content="You're all signed up for the newsletter"
-        />
-        <Message
-          error
-          header="Action Forbidden"
-          content="You can only sign up for an account once with a given e-mail address."
-        />
         <Form.Group widths="equal">
           <Form.Input
             fluid
@@ -137,6 +172,19 @@ class ContactForm extends Component {
           onChange={this.handleInputChange}
           error={this.state.submitedOnce && this.state.invalidFields.message}
         />
+        <Message success>
+          <Message.Header>Cotización enviada</Message.Header>
+          Gracias por enviar su cotización. Le escribiremos en la brevedad con
+          más información.
+        </Message>
+        <Message error>
+          <Message.Header>Error al enviar cotización</Message.Header>
+          Ocurrió un error al enviar la cotización. Por favor, intente de nuevo
+          o contáctese con nosotros a{" "}
+          <a href="mailto:contacto@dymaxionlabs.com">
+            contacto@dymaxionlabs.com
+          </a>
+        </Message>
         <Form.Button onClick={this.handleSubmit}>Enviar</Form.Button>
       </Form>
     );
@@ -145,7 +193,7 @@ class ContactForm extends Component {
 
 class ModalContactForm extends Component {
   render() {
-    const { onTriggerClick, onModalClose, onSubmit } = this.props;
+    const { onTriggerClick, onModalClose, ...contactFormProps } = this.props;
 
     return (
       <Modal
@@ -159,7 +207,7 @@ class ModalContactForm extends Component {
       >
         <Header content="Cotizar" />
         <Modal.Content>
-          <ContactForm onSubmit={onSubmit} />
+          <ContactForm {...contactFormProps} />
         </Modal.Content>
       </Modal>
     );

@@ -89,9 +89,7 @@ class Index extends React.Component {
   }
 
   _hasAnyPolygons() {
-    const featureGroup = this._getFeatureGroup();
-    const numberOfPolygons = featureGroup.getLayers().length;
-    return numberOfPolygons > 0;
+    return this._polygonLayers().length > 0;
   }
 
   _updatePolygonsArea() {
@@ -106,11 +104,17 @@ class Index extends React.Component {
   }
 
   _getFeatureGroup() {
-    return this.featureGroupRef.current.leafletElement;
+    const featGroup = this.featureGroupRef.current;
+    return featGroup && featGroup.leafletElement;
   }
 
   _hasAnyLayerSelected() {
     return this.state.selectedLayers.length > 0;
+  }
+
+  _polygonLayers() {
+    const featureGroup = this._getFeatureGroup();
+    return featureGroup ? featureGroup.getLayers() : [];
   }
 
   _onToggleLayer(layer) {
@@ -196,6 +200,7 @@ class Index extends React.Component {
             open={isLayerSelected}
             area={this.state.polygonsArea}
             selectedLayers={selectedLayers}
+            polygonLayers={this._polygonLayers()}
             onConfirmClick={this._onConfirmClick}
             onContactFormModalClose={this._onContactFormModalClose}
             onContactFormSubmit={this._onContactFormSubmit}

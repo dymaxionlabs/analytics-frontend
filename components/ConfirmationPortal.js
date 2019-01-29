@@ -47,6 +47,8 @@ class ConfirmationPortal extends React.Component {
     const {
       open,
       area,
+      selectedLayers,
+      polygonLayers,
       onConfirmClick,
       onContactFormModalClose,
       onContactFormSubmit
@@ -74,6 +76,8 @@ class ConfirmationPortal extends React.Component {
             <AreaSection value={area} />
             {layers && <LayersSection layers={layers} />}
             <ModalContactForm
+              selectedLayers={selectedLayers}
+              polygonLayers={polygonLayers}
               onTriggerClick={onConfirmClick}
               onModalClose={onContactFormModalClose}
               onSubmit={onContactFormSubmit}

@@ -5,7 +5,7 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Dimmer, Loader } from "semantic-ui-react";
+import { Dimmer, Loader, Image } from "semantic-ui-react";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/TrialMap"), {
@@ -213,6 +213,17 @@ class Index extends React.Component {
             onToggleLayer={this._onToggleLayer}
             selectedLayers={selectedLayers}
           />
+          <a href="//www.dymaxionlabs.com" target="_blank">
+            <Image
+              src="/static/logo.png"
+              style={{
+                position: "absolute",
+                right: 10,
+                bottom: 25,
+                zIndex: 1000
+              }}
+            />
+          </a>
         </Map>
       </div>
     );

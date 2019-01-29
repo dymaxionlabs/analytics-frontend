@@ -63,22 +63,6 @@ export const allLayers = [
     description: "Índice que indica áreas con vegetación",
     value: "ndvi",
     categories: ["agri"]
-  },
-  {
-    key: "schools",
-    image: "/static/icons/schools.png",
-    text: "Escuelas",
-    description: "Escuelas y otros asentamientos educativos.",
-    value: "schools",
-    categories: ["demographic"]
-  },
-  {
-    key: "hospitals",
-    image: "/static/icons/hospitals.png",
-    text: "Hospitales",
-    description: "Hospitales y clínicas.",
-    value: "hospitals",
-    categories: ["demographic"]
   }
 ];
 

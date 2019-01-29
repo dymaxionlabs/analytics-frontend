@@ -31,7 +31,7 @@ class Index extends React.Component {
     viewport: DEFAULT_VIEWPORT,
     selectedLayers: [],
     polygonsArea: 0,
-    step: "initial"
+    step: "search_done"
   };
 
   featureGroupRef = React.createRef();

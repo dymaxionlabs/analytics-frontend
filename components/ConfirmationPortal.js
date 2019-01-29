@@ -24,7 +24,9 @@ const Item = ({ icon, title, description }) => (
 const AreaSection = ({ value }) => (
   <Item
     icon="area"
-    title={`${Math.ceil(value)} km² / ${Math.ceil(value * 100)} ha`}
+    title={`${Math.ceil(value).toLocaleString()} km² / ${Math.ceil(
+      value * 100
+    ).toLocaleString()} ha`}
     description="tamaño de superficie"
   />
 );

@@ -20,3 +20,4 @@ Attribution for some icons, from the Noun Project:
 - `Flood` by Adrien Coquet
 - `Plant` by Aleksandr Vector
 - `recent` by rupa c
+- `Road` by Creative Stall

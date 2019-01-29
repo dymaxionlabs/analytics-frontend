@@ -12,7 +12,7 @@ export const allLayers = [
     key: "recent-construction",
     image: "/static/icons/recent.png",
     text: "Construcción Reciente",
-    description: "Casas y edificios recientemente construidos.",
+    description: "Casas y edificios recientemente construidos",
     value: "recent-construction",
     categories: ["construction"]
   },
@@ -20,7 +20,7 @@ export const allLayers = [
     key: "roofs",
     image: "/static/icons/roofs.png",
     text: "Techos",
-    description: "Techos de casas y edificios.",
+    description: "Techos de casas y edificios",
     value: "roofs",
     categories: ["construction"]
   },
@@ -41,10 +41,18 @@ export const allLayers = [
     categories: ["demographic"]
   },
   {
+    key: "roads",
+    image: "/static/icons/roads.png",
+    text: "Rutas",
+    description: "Caminos y carreteras asfaltadas",
+    value: "roads",
+    categories: ["demographic"]
+  },
+  {
     key: "soil",
     image: "/static/icons/soil.png",
     text: "Área Sembrada",
-    description: "Suelo utilizado para siembra y cultivo.",
+    description: "Suelo utilizado para siembra y cultivo",
     value: "soil",
     categories: ["agri"]
   },

@@ -145,7 +145,11 @@ class Index extends React.Component {
   }
 
   _onMapViewportChanged = viewport => {
-    this.setState({ viewport });
+    let { step } = this.state;
+    if (step === "initial") {
+      step = "search_done";
+    }
+    this.setState({ viewport, step });
   };
 
   _onConfirmClick = () => {

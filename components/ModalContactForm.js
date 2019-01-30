@@ -97,6 +97,7 @@ class ContactForm extends Component {
       message: this.state.fields.message,
       areas: areas_geom,
       layers: this.props.selectedLayers,
+      extra_fields: { city: this.state.fields.city },
       user: null // TODO
     };
 

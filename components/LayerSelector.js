@@ -11,8 +11,8 @@ export const allLayers = [
   {
     key: "recent-construction",
     image: "/static/icons/recent.png",
-    text: "Construcción Reciente",
-    description: "Casas y edificios recientemente construidos",
+    text: "Nuevas Edificaciones",
+    description: "Nuevas construcciones para un período de tiempo",
     value: "recent-construction",
     categories: ["construction"]
   },
@@ -20,7 +20,7 @@ export const allLayers = [
     key: "roofs",
     image: "/static/icons/roofs.png",
     text: "Techos",
-    description: "Techos de casas y edificios",
+    description: "Contorno de techos de edificaciones",
     value: "roofs",
     categories: ["construction"]
   },
@@ -28,7 +28,7 @@ export const allLayers = [
     key: "pools",
     image: "/static/icons/pools.png",
     text: "Piletas",
-    description: "Piscinas residenciales y pequeñas piletas",
+    description: "Contorno de piscinas residenciales",
     value: "pools",
     categories: ["construction"]
   },
@@ -36,7 +36,7 @@ export const allLayers = [
     key: "informal-settlements",
     image: "/static/icons/slums.png",
     text: "Asentamientos Informales",
-    description: "Barrios precarios y asentamientos informales",
+    description: "Asentamientos y barrios populares",
     value: "informal-settlements",
     categories: ["demographic"]
   },
@@ -44,7 +44,7 @@ export const allLayers = [
     key: "roads",
     image: "/static/icons/roads.png",
     text: "Rutas",
-    description: "Caminos y carreteras asfaltadas",
+    description: "Rutas y caminos asfaltados",
     value: "roads",
     categories: ["demographic"]
   },
@@ -60,7 +60,7 @@ export const allLayers = [
     key: "floods",
     image: "/static/icons/flood.png",
     text: "Área Inundada y Anegada",
-    description: "Suelo que se encuentra inundado y/o presenta anegamiento",
+    description: "Áreas rurales que se encuentran inundadas y anegadas",
     value: "floods",
     categories: ["agri"]
   },
@@ -68,7 +68,7 @@ export const allLayers = [
     key: "ndvi",
     image: "/static/icons/vi.png",
     text: "Índice NDVI",
-    description: "Índice que indica áreas con vegetación",
+    description: "Índice de vigor de cultivo",
     value: "ndvi",
     categories: ["agri"]
   }

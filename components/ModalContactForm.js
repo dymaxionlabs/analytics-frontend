@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form, Modal, Message, Header } from "semantic-ui-react";
+import { Button, Form, Modal, Message, Header, Grid } from "semantic-ui-react";
+import { AreaSection, LayersSection } from "./ConfirmationPortal";
 import axios from "axios";
 
 const QUOTATIONS_URL = `https://staging.api.dymaxionlabs.com/quotations/`;
@@ -126,67 +127,81 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <Form
-        success={this.state.success}
-        error={this.state.error}
-        loading={this.state.loading}
-      >
-        <Form.Group widths="equal">
-          <Form.Input
-            fluid
-            required
-            label="Nombre"
-            placeholder="Ingrese su nombre"
-            name="name"
-            value={this.state.fields.name}
-            onChange={this.handleInputChange}
-            error={this.state.submitedOnce && this.state.invalidFields.name}
-          />
-          <Form.Input
-            fluid
-            required
-            label="Email"
-            placeholder="Ingrese su dirección de e-mail"
-            type="email"
-            name="email"
-            value={this.state.fields.email}
-            onChange={this.handleInputChange}
-            error={this.state.submitedOnce && this.state.invalidFields.email}
-          />
-          <Form.Input
-            fluid
-            required
-            label="Ciudad"
-            placeholder="Ingrese su ciudad"
-            name="city"
-            value={this.state.fields.city}
-            onChange={this.handleInputChange}
-            error={this.state.submitedOnce && this.state.invalidFields.city}
-          />
-        </Form.Group>
-        <Form.TextArea
-          label="Mensaje"
-          placeholder="Ingrese un comentario adicional"
-          name="message"
-          value={this.state.fields.message}
-          onChange={this.handleInputChange}
-          error={this.state.submitedOnce && this.state.invalidFields.message}
-        />
-        <Message success>
-          <Message.Header>Cotización enviada</Message.Header>
-          Gracias por enviar su cotización. Le escribiremos en la brevedad con
-          más información.
-        </Message>
-        <Message error>
-          <Message.Header>Error al enviar cotización</Message.Header>
-          Ocurrió un error al enviar la cotización. Por favor, intente de nuevo
-          o contáctese con nosotros a{" "}
-          <a href="mailto:contacto@dymaxionlabs.com">
-            contacto@dymaxionlabs.com
-          </a>
-        </Message>
-        <Form.Button onClick={this.handleSubmit}>Enviar</Form.Button>
-      </Form>
+      <Grid>
+        <Grid.Column width={12}>
+          <Form
+            size="large"
+            success={this.state.success}
+            error={this.state.error}
+            loading={this.state.loading}
+          >
+            <Form.Group widths="equal">
+              <Form.Input
+                fluid
+                required
+                label="Nombre"
+                placeholder="Ingrese su nombre"
+                name="name"
+                value={this.state.fields.name}
+                onChange={this.handleInputChange}
+                error={this.state.submitedOnce && this.state.invalidFields.name}
+              />
+              <Form.Input
+                fluid
+                required
+                label="Email"
+                placeholder="Ingrese su dirección de e-mail"
+                type="email"
+                name="email"
+                value={this.state.fields.email}
+                onChange={this.handleInputChange}
+                error={
+                  this.state.submitedOnce && this.state.invalidFields.email
+                }
+              />
+              <Form.Input
+                fluid
+                required
+                label="Ciudad"
+                placeholder="Ingrese su ciudad"
+                name="city"
+                value={this.state.fields.city}
+                onChange={this.handleInputChange}
+                error={this.state.submitedOnce && this.state.invalidFields.city}
+              />
+            </Form.Group>
+            <Form.TextArea
+              label="Mensaje"
+              placeholder="Ingrese un comentario adicional"
+              name="message"
+              value={this.state.fields.message}
+              onChange={this.handleInputChange}
+              error={
+                this.state.submitedOnce && this.state.invalidFields.message
+              }
+            />
+            <Message success>
+              <Message.Header>Cotización enviada</Message.Header>
+              Gracias por enviar su cotización. Le escribiremos en la brevedad
+              con más información.
+            </Message>
+            <Message error>
+              <Message.Header>Error al enviar cotización</Message.Header>
+              Ocurrió un error al enviar la cotización. Por favor, intente de
+              nuevo o contáctese con nosotros a{" "}
+              <a href="mailto:contacto@dymaxionlabs.com">
+                contacto@dymaxionlabs.com
+              </a>
+            </Message>
+            <Form.Button onClick={this.handleSubmit}>Enviar</Form.Button>
+          </Form>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <Header as="h4">Especificaciones</Header>
+          <AreaSection value={this.props.area} />
+          {this.props.layers && <LayersSection layers={this.props.layers} />}
+        </Grid.Column>
+      </Grid>
     );
   }
 }
@@ -205,7 +220,7 @@ class ModalContactForm extends Component {
         closeIcon
         onClose={onModalClose}
       >
-        <Header content="Cotizar" />
+        <Header content="Cotizar" as="h3" />
         <Modal.Content>
           <ContactForm {...contactFormProps} />
         </Modal.Content>

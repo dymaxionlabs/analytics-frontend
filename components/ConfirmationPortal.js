@@ -21,7 +21,7 @@ const Item = ({ icon, title, description }) => (
   </Header>
 );
 
-const AreaSection = ({ value }) => (
+export const AreaSection = ({ value }) => (
   <Item
     icon="area"
     title={`${Math.ceil(value).toLocaleString()} km² / ${Math.ceil(
@@ -31,7 +31,7 @@ const AreaSection = ({ value }) => (
   />
 );
 
-const LayersSection = ({ layers }) => (
+export const LayersSection = ({ layers }) => (
   <Item icon="layers" title={layers} description="capas seleccionadas" />
 );
 
@@ -80,6 +80,8 @@ class ConfirmationPortal extends React.Component {
             <ModalContactForm
               selectedLayers={selectedLayers}
               polygonLayers={polygonLayers}
+              area={area}
+              layers={layers}
               onTriggerClick={onConfirmClick}
               onModalClose={onContactFormModalClose}
               onSubmit={onContactFormSubmit}

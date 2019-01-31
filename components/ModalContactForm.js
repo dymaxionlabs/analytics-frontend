@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, Message, Header, Grid } from "semantic-ui-react";
 import { AreaSection, LayersSection } from "./ConfirmationPortal";
+import { buildApiUrl } from '../lib/api';
 import axios from "axios";
-
-const QUOTATIONS_URL = `https://staging.api.dymaxionlabs.com/quotations/`;
 
 const initialState = {
   fields: {
@@ -102,7 +101,7 @@ class ContactForm extends Component {
     };
 
     axios
-      .post(QUOTATIONS_URL, params)
+      .post(buildApiUrl('/quotations/'), params)
       .then(() => {
         this.setState({
           ...initialState,

@@ -5,7 +5,30 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Dimmer, Loader, Image } from "semantic-ui-react";
+import { Dimmer, Loader, Segment, Header, List } from "semantic-ui-react";
+
+const lotsData = require("../../static/agri/lots.json");
+const roiData = require("../../static/agri/roi.json");
+
+// FIXME colors should be in geojson
+const lotColors = {
+  S: "rgb(253, 153, 2)",
+  ST: "rgb(253, 153, 2)",
+  S2: "rgb(153, 170, 105)",
+  M: "rgb(239, 192, 0)",
+  MT: "rgb(239, 180, 0)",
+  G1: "rgb(30, 215, 206)"
+};
+
+// FIXME use labels from geojson
+const lotLabels = {
+  S: "Soja 1°",
+  S2: "Soja 2°",
+  ST: "Soja tardía",
+  M: "Maíz temprano",
+  MT: "Maíz tardío",
+  G1: "Girasol 1°"
+};
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../../components/view/Map"), {
@@ -17,9 +40,54 @@ const Map = dynamic(() => import("../../components/view/Map"), {
   )
 });
 
+const Color = ({ value }) => (
+  <div>
+    <style jsx>{`
+      div {
+        border: 1px solid #000;
+        width: 16px;
+        height: 16px;
+        background-color: ${value};
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: -3px;
+      }
+    `}</style>
+  </div>
+);
+
+const LotsLegend = () => (
+  <div>
+    <Segment
+      style={{
+        position: "fixed",
+        right: 80,
+        bottom: 40,
+        zIndex: 1000,
+        width: 160,
+        cursor: "default"
+      }}
+    >
+      <Header>Tipo de cultivo</Header>
+      <List>
+        {Object.keys(lotLabels).map(id => (
+          <List.Item style={{ marginBottom: "3px" }}>
+            <List.Content>
+              <List.Header>
+                <Color value={lotColors[id]} />
+                {lotLabels[id]}
+              </List.Header>
+            </List.Content>
+          </List.Item>
+        ))}
+      </List>
+    </Segment>
+  </div>
+);
+
 const DEFAULT_VIEWPORT = {
-  center: [-34.43888767776975, -58.93332694025683],
-  zoom: 16
+  center: [-36.179114636463652, -62.846142338298094],
+  zoom: 12
 };
 
 class AgriMap extends React.Component {
@@ -28,7 +96,7 @@ class AgriMap extends React.Component {
   };
 
   _trackEvent(action, value) {
-    this.props.analytics.event("/view/agri", action, value);
+    this.props.analytics.event("View-Agri", action, value);
   }
 
   _onMapViewportChanged = viewport => {
@@ -53,17 +121,7 @@ class AgriMap extends React.Component {
           />
         </Head>
         <Map viewport={viewport} onViewportChanged={this._onMapViewportChanged}>
-          <a href="//www.dymaxionlabs.com" target="_blank">
-            <Image
-              src="/static/logo.png"
-              style={{
-                position: "absolute",
-                right: 10,
-                bottom: 25,
-                zIndex: 1000
-              }}
-            />
-          </a>
+          <LotsLegend />
         </Map>
       </div>
     );

@@ -84,7 +84,8 @@ const LotsLegend = () => (
         bottom: 40,
         zIndex: 1000,
         width: 160,
-        cursor: "default"
+        cursor: "default",
+        color: "rgb(0,0,0,0.7)"
       }}
     >
       <Header>Tipo de cultivo</Header>

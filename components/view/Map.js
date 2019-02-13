@@ -61,6 +61,9 @@ const ROIPolygon = ({ data }) => (
   />
 );
 
+const attribution =
+  '&copy; Dymaxion Labs 2019, contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
+
 class ViewMap extends React.Component {
   render() {
     const { children, viewport, onViewportChanged, roiData } = this.props;
@@ -86,7 +89,7 @@ class ViewMap extends React.Component {
         /> */}
         <TileLayer
           url="https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png"
-          attribution="&copy; Copernicus (TODO)"
+          attribution={attribution}
         />
         {children}
         <ROIPolygon data={roiData} />

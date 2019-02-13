@@ -89,6 +89,24 @@ const LotsLegend = () => (
   </div>
 );
 
+class LotsLayer extends React.Component {
+  _style = feature => {
+    const color = lotColors[feature.properties.SIGLA] || "#ff0000";
+
+    return {
+      color: color,
+      fillColor: color,
+      opacity: 0,
+      fillOpacity: 0.95,
+      weight: 2
+    };
+  };
+
+  render() {
+    return <VectorLayer data={lotsData} style={this._style} />;
+  }
+}
+
 const DEFAULT_VIEWPORT = {
   center: [-36.179114636463652, -62.846142338298094],
   zoom: 12
@@ -105,18 +123,6 @@ class AgriMap extends React.Component {
 
   _onMapViewportChanged = viewport => {
     this.setState({ viewport });
-  };
-
-  _lotStyle = feature => {
-    const color = lotColors[feature.properties.SIGLA] || "#ff0000";
-
-    return {
-      color: color,
-      fillColor: color,
-      opacity: 0,
-      fillOpacity: 0.95,
-      weight: 2
-    };
   };
 
   render() {
@@ -141,8 +147,8 @@ class AgriMap extends React.Component {
           roiData={roiData}
           onViewportChanged={this._onMapViewportChanged}
         >
+          <LotsLayer />
           <LotsLegend />
-          <VectorLayer data={lotsData} style={this._lotStyle} />
         </Map>
       </div>
     );

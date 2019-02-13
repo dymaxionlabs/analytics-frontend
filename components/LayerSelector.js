@@ -74,7 +74,7 @@ export const allLayers = [
   },
   {
     key: "true-color",
-    image: "/static/icons/vi.png",
+    image: "/static/icons/sat.png",
     text: "Color verdadero",
     description: "Imagen satelital de color verdadero",
     value: "true-color",

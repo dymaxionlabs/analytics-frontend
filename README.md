@@ -21,3 +21,4 @@ Attribution for some icons, from the Noun Project:
 - `Plant` by Aleksandr Vector
 - `recent` by rupa c
 - `Road` by Creative Stall
+- `Satellite` by Ralf Schmitzer

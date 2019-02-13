@@ -5,7 +5,14 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Dimmer, Loader, Segment, Header, List } from "semantic-ui-react";
+import {
+  Dimmer,
+  Loader,
+  Segment,
+  Header,
+  List,
+  Button
+} from "semantic-ui-react";
 import LayerSelector from "../../components/LayerSelector";
 
 const lotsData = require("../../static/agri/lots.json");
@@ -97,6 +104,12 @@ const LotsLegend = () => (
   </div>
 );
 
+const QuoteButton = () => (
+  <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
+    <Button>Pedir cotización</Button>;
+  </div>
+);
+
 class LotsLayer extends React.Component {
   _style = feature => {
     const color = lotColors[feature.properties.SIGLA] || "#ff0000";
@@ -178,6 +191,8 @@ class AgriMap extends React.Component {
             availableLayers={availableLayers}
             selectedLayers={selectedLayers}
           />
+
+          <QuoteButton />
         </Map>
       </div>
     );

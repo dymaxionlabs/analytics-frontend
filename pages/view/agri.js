@@ -31,6 +31,13 @@ const lotLabels = {
   G1: "Girasol 1°"
 };
 
+const initialViewport = {
+  center: [-36.179114636463652, -62.846142338298094],
+  zoom: 12
+};
+
+const availableLayers = ["lots", "true-color", "ndvi"];
+
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../../components/view/Map"), {
   ssr: false,
@@ -108,16 +115,9 @@ class LotsLayer extends React.Component {
   }
 }
 
-const DEFAULT_VIEWPORT = {
-  center: [-36.179114636463652, -62.846142338298094],
-  zoom: 12
-};
-
-const availableLayers = ["true-color", "ndvi"];
-
 class AgriMap extends React.Component {
   state = {
-    viewport: DEFAULT_VIEWPORT,
+    viewport: initialViewport,
     selectedLayers: ["ndvi"]
   };
 

@@ -79,6 +79,14 @@ export const allLayers = [
     description: "Imagen satelital de color verdadero",
     value: "true-color",
     categories: []
+  },
+  {
+    key: "lots",
+    image: "/static/icons/soil.png",
+    text: "Lotes de cultivo",
+    description: "Lotes categorizados por tipo de cultivo",
+    value: "lots",
+    categories: ["agri"]
   }
 ];
 

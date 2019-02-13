@@ -65,20 +65,20 @@ export const allLayers = [
     categories: ["agri"]
   },
   {
-    key: "ndvi",
-    image: "/static/icons/vi.png",
-    text: "Índice NDVI",
-    description: "Índice de vigor de cultivo",
-    value: "ndvi",
-    categories: ["agri"]
-  },
-  {
     key: "true-color",
     image: "/static/icons/sat.png",
     text: "Color verdadero",
     description: "Imagen satelital de color verdadero",
     value: "true-color",
     categories: []
+  },
+  {
+    key: "ndvi",
+    image: "/static/icons/vi.png",
+    text: "Índice NDVI",
+    description: "Índice de vigor de cultivo",
+    value: "ndvi",
+    categories: ["agri"]
   },
   {
     key: "lots",

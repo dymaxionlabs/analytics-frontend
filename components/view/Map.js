@@ -61,6 +61,13 @@ const ROIPolygon = ({ data }) => (
   />
 );
 
+const Basemap = ({ url }) => (
+  <TileLayer
+    attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
+    url={url}
+  />
+);
+
 const attribution =
   '&copy; Dymaxion Labs 2019, contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
 
@@ -79,18 +86,7 @@ class ViewMap extends React.Component {
         minZoom={10}
       >
         {/* <VectorGrid {...lotsVectorGrid} /> */}
-        <TileLayer
-          attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
-          url={basemapUrl}
-        />
-        {/* <TileLayer
-          url="https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png"
-          attribution="&copy; Copernicus (TODO)"
-        /> */}
-        <TileLayer
-          url="https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png"
-          attribution={attribution}
-        />
+        <Basemap url={basemapUrl} />
         {children}
         <ROIPolygon data={roiData} />
 

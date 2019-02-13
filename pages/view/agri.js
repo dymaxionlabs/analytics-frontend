@@ -59,6 +59,9 @@ const Map = dynamic(() => import("../../components/view/Map"), {
 const VectorLayer = dynamic(() => import("../../components/VectorLayer"), {
   ssr: false
 });
+const RasterLayer = dynamic(() => import("../../components/RasterLayer"), {
+  ssr: false
+});
 
 const Color = ({ value }) => (
   <div>
@@ -85,11 +88,13 @@ const LotsLegend = () => (
         bottom: 40,
         zIndex: 1000,
         width: 160,
-        cursor: "default",
-        color: "rgb(0,0,0,0.7)"
+        cursor: "default"
       }}
     >
-      <Header>Tipo de cultivo</Header>
+      <Header style={{ marginBottom: "0.2em" }}>Tipo de cultivo</Header>
+      <Header as="h5" style={{ margin: 0 }}>
+        Febrero 2019
+      </Header>
       <List>
         {Object.keys(lotLabels).map(id => (
           <List.Item key={id} style={{ marginBottom: "3px" }}>
@@ -114,6 +119,34 @@ const QuoteButton = () => (
   </div>
 );
 
+const sentinelModifiedAttribution =
+  'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
+
+const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
+
+const rasterLayers = [
+  {
+    id: "true-color",
+    type: "raster",
+    url:
+      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
+    attribution: sentinelModifiedAttribution
+  },
+  {
+    id: "ndvi",
+    type: "raster",
+    url:
+      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
+    attribution: sentinelModifiedAttribution
+  }
+  // {
+  //   id: "lots",
+  //   type: "vector-geojson",
+  //   data: lotsData,
+  //   attribution: dymaxionAttribution
+  // }
+];
+
 class LotsLayer extends React.Component {
   _style = feature => {
     const color = lotColors[feature.properties.SIGLA] || "#ff0000";
@@ -128,14 +161,23 @@ class LotsLayer extends React.Component {
   };
 
   render() {
-    return <VectorLayer data={lotsData} style={this._style} />;
+    return (
+      <div>
+        <VectorLayer
+          data={lotsData}
+          style={this._style}
+          attribution={dymaxionAttribution}
+        />
+        <LotsLegend />
+      </div>
+    );
   }
 }
 
 class AgriMap extends React.Component {
   state = {
     viewport: initialViewport,
-    selectedLayers: ["ndvi"]
+    selectedLayers: ["ndvi", "lots"]
   };
 
   _trackEvent(action, value) {
@@ -168,6 +210,11 @@ class AgriMap extends React.Component {
   render() {
     const { viewport, selectedLayers } = this.state;
 
+    const showLotsLayer = selectedLayers.includes("lots");
+    const selectedRasterLayers = rasterLayers.filter(layer =>
+      selectedLayers.includes(layer.id)
+    );
+
     return (
       <div className="index">
         <Head>
@@ -187,8 +234,10 @@ class AgriMap extends React.Component {
           roiData={roiData}
           onViewportChanged={this._onMapViewportChanged}
         >
-          <LotsLayer />
-          <LotsLegend />
+          {showLotsLayer ? <LotsLayer /> : ""}
+          {Object.keys(selectedRasterLayers).map(key => (
+            <RasterLayer key={key} {...selectedRasterLayers[key]} />
+          ))}
 
           <LayerSelector
             onToggleLayer={this._onToggleLayer}

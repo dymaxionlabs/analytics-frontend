@@ -4,6 +4,7 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import {
   Dimmer,
@@ -107,7 +108,9 @@ const LotsLegend = () => (
 
 const QuoteButton = () => (
   <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
-    <Button primary>Pedir cotización</Button>;
+    <Link href="/">
+      <Button primary>Pedir cotización</Button>
+    </Link>
   </div>
 );
 

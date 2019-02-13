@@ -12,12 +12,12 @@ const roiData = require("../../static/agri/roi.json");
 
 // FIXME colors should be in geojson
 const lotColors = {
-  S: "rgb(253, 153, 2)",
-  ST: "rgb(253, 153, 2)",
-  S2: "rgb(153, 170, 105)",
-  M: "rgb(239, 192, 0)",
-  MT: "rgb(239, 180, 0)",
-  G1: "rgb(30, 215, 206)"
+  S: "#67d1ca",
+  ST: "#677dca",
+  S2: "#cada50",
+  M: "#fdae61",
+  MT: "#e77148",
+  G1: "#b95af0"
 };
 
 // FIXME use labels from geojson
@@ -38,6 +38,10 @@ const Map = dynamic(() => import("../../components/view/Map"), {
       <Loader size="big">Cargando...</Loader>
     </Dimmer>
   )
+});
+
+const VectorLayer = dynamic(() => import("../../components/VectorLayer"), {
+  ssr: false
 });
 
 const Color = ({ value }) => (
@@ -71,7 +75,7 @@ const LotsLegend = () => (
       <Header>Tipo de cultivo</Header>
       <List>
         {Object.keys(lotLabels).map(id => (
-          <List.Item style={{ marginBottom: "3px" }}>
+          <List.Item key={id} style={{ marginBottom: "3px" }}>
             <List.Content>
               <List.Header>
                 <Color value={lotColors[id]} />
@@ -103,6 +107,18 @@ class AgriMap extends React.Component {
     this.setState({ viewport });
   };
 
+  _lotStyle = feature => {
+    const color = lotColors[feature.properties.SIGLA] || "#ff0000";
+
+    return {
+      color: color,
+      fillColor: color,
+      opacity: 0,
+      fillOpacity: 0.95,
+      weight: 2
+    };
+  };
+
   render() {
     const { viewport } = this.state;
 
@@ -120,8 +136,13 @@ class AgriMap extends React.Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
         </Head>
-        <Map viewport={viewport} onViewportChanged={this._onMapViewportChanged}>
+        <Map
+          viewport={viewport}
+          roiData={roiData}
+          onViewportChanged={this._onMapViewportChanged}
+        >
           <LotsLegend />
+          <VectorLayer data={lotsData} style={this._lotStyle} />
         </Map>
       </div>
     );

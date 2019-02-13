@@ -97,8 +97,8 @@ class LotsLayer extends React.Component {
     return {
       color: color,
       fillColor: color,
-      opacity: 0,
-      fillOpacity: 0.95,
+      opacity: 1,
+      fillOpacity: 0.5,
       weight: 2
     };
   };

@@ -156,7 +156,7 @@ class LayerSelector extends React.Component {
     console.log(layers.map(layer => layer.key));
 
     return (
-      <div style={{ position: "absolute", bottom: 0, left: 10, zIndex: 1000 }}>
+      <div style={{ position: "absolute", bottom: -5, left: 10, zIndex: 1000 }}>
         <TransitionablePortal
           closeOnTriggerClick
           open={open}
@@ -178,7 +178,7 @@ class LayerSelector extends React.Component {
             style={{
               position: "fixed",
               left: 20,
-              bottom: 110,
+              bottom: 105,
               zIndex: 1000,
               overflow: "auto",
               maxHeight: 300

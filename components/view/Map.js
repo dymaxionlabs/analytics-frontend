@@ -94,7 +94,6 @@ class ViewMap extends React.Component {
         {children}
         <ROIPolygon data={roiData} />
 
-        <Logo />
         <ZoomControl position="topright" />
       </Map>
     );

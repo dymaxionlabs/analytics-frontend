@@ -80,7 +80,7 @@ const LotsLegend = () => (
     <Segment
       style={{
         position: "fixed",
-        right: 80,
+        right: 20,
         bottom: 40,
         zIndex: 1000,
         width: 160,
@@ -107,7 +107,7 @@ const LotsLegend = () => (
 
 const QuoteButton = () => (
   <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
-    <Button>Pedir cotización</Button>;
+    <Button primary>Pedir cotización</Button>;
   </div>
 );
 

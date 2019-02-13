@@ -55,7 +55,8 @@ const ROIPolygon = ({ data }) => (
   <GeoJSON
     data={data}
     style={{
-      fillOpacity: 0
+      fillColor: "#000",
+      fillOpacity: 0.1
     }}
   />
 );
@@ -70,7 +71,6 @@ class ViewMap extends React.Component {
         style={mapContainerStyle}
         viewport={viewport}
         zoomControl={false}
-        animate={true}
         onViewportChanged={onViewportChanged}
         maxZoom={15}
         minZoom={10}
@@ -80,14 +80,14 @@ class ViewMap extends React.Component {
           attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
           url={basemapUrl}
         />
-        {/* <TileLayer
+        <TileLayer
           url="https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png"
           attribution="&copy; Copernicus (TODO)"
-        /> */}
-        <TileLayer
+        />
+        {/* <TileLayer
           url="https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png"
           attribution="&copy; Copernicus (TODO)"
-        />
+        /> */}
         {children}
         <ROIPolygon data={roiData} />
 

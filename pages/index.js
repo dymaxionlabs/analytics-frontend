@@ -20,15 +20,27 @@ const Map = dynamic(() => import("../components/TrialMap"), {
 import ConfirmationPortal from "../components/ConfirmationPortal";
 import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/Guide";
+import Logo from "../components/Logo";
 
-const DEFAULT_VIEWPORT = {
+const initialViewport = {
   center: [-34.43888767776975, -58.93332694025683],
   zoom: 16
 };
 
+const availableLayers = [
+  "recent-construction",
+  "roofs",
+  "pools",
+  "informal-settlements",
+  "roads",
+  "soil",
+  "floods",
+  "ndvi"
+];
+
 class Index extends React.Component {
   state = {
-    viewport: DEFAULT_VIEWPORT,
+    viewport: initialViewport,
     selectedLayers: [],
     polygonsArea: 0,
     step: "search_done"
@@ -211,19 +223,10 @@ class Index extends React.Component {
           />
           <LayerSelector
             onToggleLayer={this._onToggleLayer}
+            availableLayers={availableLayers}
             selectedLayers={selectedLayers}
           />
-          <a href="//www.dymaxionlabs.com" target="_blank">
-            <Image
-              src="/static/logo.png"
-              style={{
-                position: "absolute",
-                right: 10,
-                bottom: 25,
-                zIndex: 1000
-              }}
-            />
-          </a>
+          <Logo />
         </Map>
       </div>
     );

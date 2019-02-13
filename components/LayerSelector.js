@@ -71,6 +71,14 @@ export const allLayers = [
     description: "Índice de vigor de cultivo",
     value: "ndvi",
     categories: ["agri"]
+  },
+  {
+    key: "true-color",
+    image: "/static/icons/vi.png",
+    text: "Color verdadero",
+    description: "Imagen satelital de color verdadero",
+    value: "true-color",
+    categories: []
   }
 ];
 
@@ -84,11 +92,11 @@ class LayersMenu extends React.Component {
   }
 
   render() {
-    const { selectedLayers } = this.props;
+    const { selectedLayers, availableLayers } = this.props;
 
     return (
       <List selection relaxed style={{ width: 300 }}>
-        {allLayers.map(opts => (
+        {availableLayers.map(opts => (
           <List.Item
             active={selectedLayers.includes(opts.key)}
             key={opts.key}
@@ -130,8 +138,14 @@ class LayerSelector extends React.Component {
   };
 
   render() {
-    const { selectedLayers } = this.props;
+    const { availableLayers, selectedLayers } = this.props;
     const { open } = this.state;
+
+    // If availableLayers exists, filter all layers with it
+    const layers = availableLayers
+      ? allLayers.filter(layer => availableLayers.includes(layer.key))
+      : allLayers;
+    console.log(layers.map(layer => layer.key));
 
     return (
       <div style={{ position: "absolute", bottom: 0, left: 10, zIndex: 1000 }}>
@@ -164,6 +178,7 @@ class LayerSelector extends React.Component {
           >
             <LayersMenu
               onToggleLayer={this.handleToggleLayer}
+              availableLayers={layers}
               selectedLayers={selectedLayers}
             />
           </Segment>

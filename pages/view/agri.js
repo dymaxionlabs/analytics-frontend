@@ -6,6 +6,7 @@ import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Segment, Header, List } from "semantic-ui-react";
+import LayerSelector from "../../components/LayerSelector";
 
 const lotsData = require("../../static/agri/lots.json");
 const roiData = require("../../static/agri/roi.json");
@@ -112,9 +113,12 @@ const DEFAULT_VIEWPORT = {
   zoom: 12
 };
 
+const availableLayers = ["true-color", "ndvi"];
+
 class AgriMap extends React.Component {
   state = {
-    viewport: DEFAULT_VIEWPORT
+    viewport: DEFAULT_VIEWPORT,
+    selectedLayers: ["ndvi"]
   };
 
   _trackEvent(action, value) {
@@ -125,8 +129,27 @@ class AgriMap extends React.Component {
     this.setState({ viewport });
   };
 
+  _onToggleLayer = layer => {
+    const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
+
+    if (selectedLayers.includes(layer)) {
+      this._trackEvent("enable-layer", layer);
+    } else {
+      this._trackEvent("disable-layer", layer);
+    }
+
+    this.setState({ selectedLayers });
+  };
+
+  _addOrRemove(array, item) {
+    const include = array.includes(item);
+    return include
+      ? array.filter(arrayItem => arrayItem !== item)
+      : [...array, item];
+  }
+
   render() {
-    const { viewport } = this.state;
+    const { viewport, selectedLayers } = this.state;
 
     return (
       <div className="index">
@@ -149,6 +172,12 @@ class AgriMap extends React.Component {
         >
           <LotsLayer />
           <LotsLegend />
+
+          <LayerSelector
+            onToggleLayer={this._onToggleLayer}
+            availableLayers={availableLayers}
+            selectedLayers={selectedLayers}
+          />
         </Map>
       </div>
     );

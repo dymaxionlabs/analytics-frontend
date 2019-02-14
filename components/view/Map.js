@@ -70,9 +70,6 @@ const Basemap = ({ url }) => (
   />
 );
 
-const attribution =
-  '&copy; Dymaxion Labs 2019, contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
-
 class ViewMap extends React.Component {
   render() {
     const { children, viewport, onViewportChanged, roiData } = this.props;

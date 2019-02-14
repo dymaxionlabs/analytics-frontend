@@ -46,6 +46,34 @@ const initialViewport = {
 
 const availableLayers = ["lots", "true-color", "ndvi"];
 
+const sentinelModifiedAttribution =
+  'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
+
+const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
+
+const rasterLayers = [
+  {
+    id: "true-color",
+    type: "raster",
+    url:
+      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
+    attribution: sentinelModifiedAttribution
+  },
+  {
+    id: "ndvi",
+    type: "raster",
+    url:
+      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
+    attribution: sentinelModifiedAttribution
+  }
+  // {
+  //   id: "lots",
+  //   type: "vector-geojson",
+  //   data: lotsData,
+  //   attribution: dymaxionAttribution
+  // }
+];
+
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../../components/view/Map"), {
   ssr: false,
@@ -111,45 +139,9 @@ const LotsLegend = () => (
   </div>
 );
 
-const QuoteButton = () => (
-  <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
-    <Link href="/">
-      <Button primary>Pedir cotización</Button>
-    </Link>
-  </div>
-);
-
-const sentinelModifiedAttribution =
-  'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
-
-const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
-
-const rasterLayers = [
-  {
-    id: "true-color",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  },
-  {
-    id: "ndvi",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  }
-  // {
-  //   id: "lots",
-  //   type: "vector-geojson",
-  //   data: lotsData,
-  //   attribution: dymaxionAttribution
-  // }
-];
-
 class LotsLayer extends React.Component {
   _style = feature => {
-    const color = lotColors[feature.properties.SIGLA] || "#ff0000";
+    const color = lotColors[feature.properties["SIGLA"]] || "#ff0000";
 
     return {
       color: color,
@@ -160,6 +152,15 @@ class LotsLayer extends React.Component {
     };
   };
 
+  _onEachFeature = (feature, layer) => {
+    layer.on("mouseover", () => {
+      layer.setStyle({ color: "#fff", weight: 3, fillOpacity: 1 });
+    });
+    layer.on("mouseout", () => {
+      layer.setStyle(this._style(feature));
+    });
+  };
+
   render() {
     return (
       <div>
@@ -167,12 +168,23 @@ class LotsLayer extends React.Component {
           data={lotsData}
           style={this._style}
           attribution={dymaxionAttribution}
+          onmouseover={this._onMouseOver}
+          onmouseout={this._onMouseOut}
+          onEachFeature={this._onEachFeature}
         />
         <LotsLegend />
       </div>
     );
   }
 }
+
+const QuoteButton = () => (
+  <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
+    <Link href="/">
+      <Button primary>Pedir cotización</Button>
+    </Link>
+  </div>
+);
 
 class AgriMap extends React.Component {
   state = {

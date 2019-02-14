@@ -153,11 +153,18 @@ class LotsLayer extends React.Component {
   };
 
   _onEachFeature = (feature, layer) => {
+    const popupContent = `<b>${lotLabels[feature.properties["SIGLA"]]}</b>`;
+    layer.bindPopup(popupContent, {
+      closeButton: false,
+      offset: L.point(0, -20)
+    });
     layer.on("mouseover", () => {
       layer.setStyle({ color: "#fff", weight: 3, fillOpacity: 1 });
+      layer.openPopup();
     });
     layer.on("mouseout", () => {
       layer.setStyle(this._style(feature));
+      layer.closePopup();
     });
   };
 

@@ -103,28 +103,65 @@ class LayersMenu extends React.Component {
     const { selectedLayers, availableLayers } = this.props;
 
     return (
-      <List selection relaxed style={{ width: 300 }}>
-        {availableLayers.map(opts => (
-          <List.Item
-            active={selectedLayers.includes(opts.key)}
-            key={opts.key}
-            onClick={e => this._onClickLayer(e, opts.key)}
-            style={{ padding: 7 }}
-          >
-            <Image
-              avatar
-              src={opts.image}
-              width={28}
-              height={28}
-              style={{ margin: "7px 9px 7px 0px" }}
-            />
-            <List.Content style={{ width: "85%" }}>
-              <List.Header as="a">{opts.text}</List.Header>
-              <List.Description as="a">{opts.description}</List.Description>
-            </List.Content>
-          </List.Item>
-        ))}
-      </List>
+      <div>
+        <List selection relaxed>
+          {availableLayers.map(opts => (
+            <List.Item
+              active={selectedLayers.includes(opts.key)}
+              key={opts.key}
+              onClick={e => this._onClickLayer(e, opts.key)}
+            >
+              <Image
+                avatar
+                src={opts.image}
+                width={28}
+                height={28}
+                style={{ margin: "7px 9px 7px 0px" }}
+              />
+              <List.Content style={{ width: "85%" }}>
+                <List.Header as="a">{opts.text}</List.Header>
+                <List.Description as="a">{opts.description}</List.Description>
+              </List.Content>
+            </List.Item>
+          ))}
+        </List>
+        <style jsx global>{`
+          .ui.selection.list {
+            width: 300px;
+          }
+
+          .ui.selection.list > .item {
+            padding: 16px 16px;
+            border-radius: 0;
+          }
+
+          .ui.selection.list.list > .item:hover,
+          .ui.selection.list > .item:hover {
+            background: rgba(0, 0, 0, 0.06);
+          }
+
+          .ui.selection.list > .item.active {
+            background: rgba(0, 0, 0, 0.12);
+          }
+
+          .ui.list .list > .item .description,
+          .ui.list > .item .description {
+            color: #000;
+          }
+
+          .ui.list .list > .item a.header,
+          .ui.list > .item a.header {
+            font-size: 16px;
+            color: #000 !important;
+            margin-bottom: 5px;
+          }
+
+          .ui.list .list > .item:hover a.header,
+          .ui.list > .item:hover a.header {
+            color: #000 !important;
+          }
+        `}</style>
+      </div>
     );
   }
 }
@@ -181,7 +218,8 @@ class LayerSelector extends React.Component {
               bottom: 105,
               zIndex: 1000,
               overflow: "auto",
-              maxHeight: 300
+              maxHeight: 300,
+              padding: 0
             }}
           >
             <LayersMenu

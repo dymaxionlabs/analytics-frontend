@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Modal, Header, Form, Message } from "semantic-ui-react";
+import { buildApiUrl } from '../lib/api';
+import axios from "axios";
 
 const initialState = {
   fields: {
@@ -71,8 +73,8 @@ class SimpleModalContactForm extends React.Component {
 
     this.setState({ loading: true });
 
-    this.fakeSubmit();
-    // this.submit();
+    //this.fakeSubmit();
+    this.submit();
   };
 
   fakeSubmit() {
@@ -92,7 +94,6 @@ class SimpleModalContactForm extends React.Component {
     const params = {
       email: this.state.fields.email,
       message: this.state.fields.message,
-      user: null // TODO
     };
 
     axios

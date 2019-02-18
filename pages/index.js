@@ -5,7 +5,7 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Dimmer, Loader, Image } from "semantic-ui-react";
+import { Dimmer, Loader, Button } from "semantic-ui-react";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/TrialMap"), {
@@ -20,7 +20,7 @@ const Map = dynamic(() => import("../components/TrialMap"), {
 import ConfirmationPortal from "../components/ConfirmationPortal";
 import LayerSelector from "../components/LayerSelector";
 import Guide from "../components/Guide";
-import Logo from "../components/Logo";
+import SimpleModalContactForm from "../components/SimpleModalContactForm";
 
 const initialViewport = {
   center: [-34.43888767776975, -58.93332694025683],
@@ -226,7 +226,25 @@ class Index extends React.Component {
             availableLayers={availableLayers}
             selectedLayers={selectedLayers}
           />
-          <Logo />
+          <SimpleModalContactForm
+            trigger={
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: -5,
+                  right: 90,
+                  zIndex: 1000
+                }}
+              >
+                <Button
+                  className="controlButton"
+                  circular
+                  icon="mail"
+                  size="massive"
+                />
+              </div>
+            }
+          />
         </Map>
       </div>
     );

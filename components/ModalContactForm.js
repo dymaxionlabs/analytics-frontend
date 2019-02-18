@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, Message, Header, Grid } from "semantic-ui-react";
 import { AreaSection, LayersSection } from "./ConfirmationPortal";
-import { buildApiUrl } from '../lib/api';
+import { buildApiUrl } from "../lib/api";
 import axios from "axios";
 
 const initialState = {
@@ -101,7 +101,7 @@ class ContactForm extends Component {
     };
 
     axios
-      .post(buildApiUrl('/quotations/'), params)
+      .post(buildApiUrl("/quotations/"), params)
       .then(() => {
         this.setState({
           ...initialState,
@@ -193,7 +193,9 @@ class ContactForm extends Component {
                 contacto@dymaxionlabs.com
               </a>
             </Message>
-            <Form.Button onClick={this.handleSubmit}>Enviar</Form.Button>
+            <Form.Button primary onClick={this.handleSubmit}>
+              Enviar
+            </Form.Button>
           </Form>
         </Grid.Column>
         <Grid.Column width={4}>

@@ -15,6 +15,7 @@ import {
   Button
 } from "semantic-ui-react";
 import LayerSelector from "../../components/LayerSelector";
+import SimpleModalContactForm from "../../components/SimpleModalContactForm";
 
 const lotsData = require("../../static/agri/lots.json");
 const roiData = require("../../static/agri/roi.json");
@@ -113,7 +114,7 @@ const LotsLegend = () => (
       style={{
         position: "fixed",
         right: 20,
-        bottom: 40,
+        bottom: 110,
         zIndex: 1000,
         width: 160,
         cursor: "default"
@@ -186,7 +187,7 @@ class LotsLayer extends React.Component {
 }
 
 const QuoteButton = () => (
-  <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1100 }}>
+  <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1000 }}>
     <Link href="/">
       <Button primary>Pedir cotización</Button>
     </Link>
@@ -264,6 +265,25 @@ class AgriMap extends React.Component {
             selectedLayers={selectedLayers}
           />
 
+          <SimpleModalContactForm
+            trigger={
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: -5,
+                  right: 90,
+                  zIndex: 1000
+                }}
+              >
+                <Button
+                  className="controlButton"
+                  circular
+                  icon="mail"
+                  size="massive"
+                />
+              </div>
+            }
+          />
           <QuoteButton />
         </Map>
       </div>

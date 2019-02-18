@@ -47,6 +47,16 @@ class SimpleModalContactForm extends React.Component {
     return false;
   }
 
+  handleClose = () => {
+    this.setState({
+      ...initialState,
+      loading: false,
+      success: false,
+      submitedOnce: false,
+      error: false
+    });
+  };
+
   handleSubmit = () => {
     this.setState({ submitedOnce: true });
 
@@ -122,7 +132,7 @@ class SimpleModalContactForm extends React.Component {
     } = this.state;
 
     return (
-      <Modal trigger={trigger} closeIcon>
+      <Modal trigger={trigger} onClose={this.handleClose} closeIcon>
         <Header icon="mail" content="Contáctenos" />
         <Modal.Content>
           <Form size="large" success={success} error={error} loading={loading}>

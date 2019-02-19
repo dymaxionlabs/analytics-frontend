@@ -7,6 +7,7 @@ import {
 } from "semantic-ui-react";
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
+import { withNamespaces } from "../i18n";
 
 const Item = ({ icon, title, description }) => (
   <Header as="h4">
@@ -37,11 +38,12 @@ export const LayersSection = ({ layers }) => (
 
 class ConfirmationPortal extends React.Component {
   _layersSentence() {
-    const selectedLayers = this.props.selectedLayers || [];
+    const { t, selectedLayers } = this.props;
+    const selLayers = selectedLayers || [];
 
     return allLayers
-      .filter(layer => selectedLayers.includes(layer.key))
-      .map(layer => layer.text)
+      .filter(layer => selLayers.includes(layer.key))
+      .map(layer => t(layer.key + "_title"))
       .join(", ");
   }
 
@@ -93,4 +95,6 @@ class ConfirmationPortal extends React.Component {
   }
 }
 
-export default ConfirmationPortal;
+export default withNamespaces("layer_selector", "confirmation_portal")(
+  ConfirmationPortal
+);

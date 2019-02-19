@@ -6,86 +6,67 @@ import {
   List,
   Image
 } from "semantic-ui-react";
+import { withNamespaces } from "../i18n";
 
 export const allLayers = [
   {
-    key: "recent-construction",
+    key: "recent_construction",
     image: "/static/icons/recent.png",
-    text: "Nuevas Edificaciones",
-    description: "Nuevas construcciones para un período de tiempo",
-    value: "recent-construction",
+    value: "recent_construction",
     categories: ["construction"]
   },
   {
     key: "roofs",
     image: "/static/icons/roofs.png",
-    text: "Techos",
-    description: "Contorno de techos de edificaciones",
     value: "roofs",
     categories: ["construction"]
   },
   {
     key: "pools",
     image: "/static/icons/pools.png",
-    text: "Piletas",
-    description: "Contorno de piscinas residenciales",
     value: "pools",
     categories: ["construction"]
   },
   {
-    key: "informal-settlements",
+    key: "informal_settlements",
     image: "/static/icons/slums.png",
-    text: "Asentamientos Informales",
-    description: "Asentamientos y barrios populares",
-    value: "informal-settlements",
+    value: "informal_settlements",
     categories: ["demographic"]
   },
   {
     key: "roads",
     image: "/static/icons/roads.png",
-    text: "Rutas",
-    description: "Rutas y caminos asfaltados",
     value: "roads",
     categories: ["demographic"]
   },
   {
     key: "soil",
     image: "/static/icons/soil.png",
-    text: "Área Sembrada",
-    description: "Suelo utilizado para siembra y cultivo",
     value: "soil",
     categories: ["agri"]
   },
   {
     key: "floods",
     image: "/static/icons/flood.png",
-    text: "Área Inundada y Anegada",
-    description: "Áreas rurales que se encuentran inundadas y anegadas",
     value: "floods",
     categories: ["agri"]
   },
   {
-    key: "true-color",
+    key: "true_color",
     image: "/static/icons/sat.png",
-    text: "Color verdadero",
-    description: "Imagen satelital de color verdadero",
-    value: "true-color",
+    value: "true_color",
     categories: []
   },
   {
     key: "ndvi",
     image: "/static/icons/vi.png",
-    text: "Índice NDVI",
-    description: "Índice de vigor de cultivo",
     value: "ndvi",
     categories: ["agri"]
   },
   {
-    key: "lots",
+    key: "crop_lots",
     image: "/static/icons/soil.png",
-    text: "Lotes de cultivo",
-    description: "Lotes categorizados por tipo de cultivo",
-    value: "lots",
+    value: "crop_lots",
     categories: ["agri"]
   }
 ];
@@ -100,7 +81,7 @@ class LayersMenu extends React.Component {
   }
 
   render() {
-    const { selectedLayers, availableLayers } = this.props;
+    const { t, selectedLayers, availableLayers } = this.props;
 
     return (
       <div>
@@ -119,8 +100,10 @@ class LayersMenu extends React.Component {
                 style={{ margin: "7px 9px 7px 0px" }}
               />
               <List.Content style={{ width: "85%" }}>
-                <List.Header as="a">{opts.text}</List.Header>
-                <List.Description as="a">{opts.description}</List.Description>
+                <List.Header as="a">{t(opts.key + "_title")}</List.Header>
+                <List.Description as="a">
+                  {t(opts.key + "_desc")}
+                </List.Description>
               </List.Content>
             </List.Item>
           ))}
@@ -183,7 +166,7 @@ class LayerSelector extends React.Component {
   };
 
   render() {
-    const { availableLayers, selectedLayers } = this.props;
+    const { t, availableLayers, selectedLayers } = this.props;
     const { open } = this.state;
 
     // If availableLayers exists, filter all layers with it
@@ -223,6 +206,7 @@ class LayerSelector extends React.Component {
             }}
           >
             <LayersMenu
+              t={t}
               onToggleLayer={this.handleToggleLayer}
               availableLayers={layers}
               selectedLayers={selectedLayers}
@@ -234,4 +218,4 @@ class LayerSelector extends React.Component {
   }
 }
 
-export default LayerSelector;
+export default withNamespaces("layer_selector")(LayerSelector);

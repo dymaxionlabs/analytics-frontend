@@ -37,5 +37,5 @@ for locale, locale_data in data.items():
 
         os.makedirs(os.path.dirname(outpath), exist_ok=True)
         with open(outpath, 'w') as outfile:
-            json.dump(data, outfile, sort_keys=True, indent=2)
+            json.dump(ns_data, outfile, sort_keys=True, indent=2)
         print(outpath, 'written')

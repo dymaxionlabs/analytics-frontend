@@ -6,6 +6,7 @@ import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Button } from "semantic-ui-react";
+import { i18n } from "../i18n";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/TrialMap"), {
@@ -48,6 +49,19 @@ class Index extends React.Component {
 
   featureGroupRef = React.createRef();
 
+  static async getInitialProps() {
+    return {
+      namespacesRequired: [
+        "index",
+        "layer_selector",
+        "geocoder_control",
+        "draw_control",
+        "confirmation_portal",
+        "modal_contact_form"
+      ]
+    };
+  }
+
   constructor(props) {
     super(props);
 
@@ -56,8 +70,6 @@ class Index extends React.Component {
     this._onDrawEdited = this._onDrawEdited.bind(this);
     this._onDrawDeleted = this._onDrawDeleted.bind(this);
   }
-
-  componentDidUpdate() {}
 
   _trackEvent(action, value) {
     this.props.analytics.event("Quotation", action, value);

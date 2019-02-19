@@ -45,7 +45,7 @@ const initialViewport = {
   zoom: 12
 };
 
-const availableLayers = ["lots", "true-color", "ndvi"];
+const availableLayers = ["crop_lots", "true_color", "ndvi"];
 
 const sentinelModifiedAttribution =
   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
@@ -54,7 +54,7 @@ const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 const rasterLayers = [
   {
-    id: "true-color",
+    id: "true_color",
     type: "raster",
     url:
       "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
@@ -197,8 +197,14 @@ const QuoteButton = () => (
 class AgriMap extends React.Component {
   state = {
     viewport: initialViewport,
-    selectedLayers: ["ndvi", "lots"]
+    selectedLayers: ["ndvi", "crop_lots"]
   };
+
+  static async getInitialProps() {
+    return {
+      namespacesRequired: ["view__agri", "layer_selector"]
+    };
+  }
 
   _trackEvent(action, value) {
     this.props.analytics.event("View-Agri", action, value);
@@ -230,7 +236,7 @@ class AgriMap extends React.Component {
   render() {
     const { viewport, selectedLayers } = this.state;
 
-    const showLotsLayer = selectedLayers.includes("lots");
+    const showLotsLayer = selectedLayers.includes("crop_lots");
     const selectedRasterLayers = rasterLayers.filter(layer =>
       selectedLayers.includes(layer.id)
     );

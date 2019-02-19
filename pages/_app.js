@@ -2,6 +2,7 @@ import React from "react";
 import withGA from "../components/withGA";
 import App, { Container } from "next/app";
 import { appWithTranslation, Router } from "../i18n";
+import i18next from "i18next";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -12,6 +13,17 @@ class MyApp extends App {
     }
 
     return { pageProps };
+  }
+
+  componentDidMount() {
+    const {
+      query: { lang }
+    } = this.props.router;
+
+    if (lang) {
+      console.log(`Setting language to '${lang}'`);
+      i18next.changeLanguage(lang);
+    }
   }
 
   render() {

@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import withGA from "../components/withGA";
 import App, { Container } from "next/app";
+import { appWithTranslation } from "../i18n";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -25,4 +26,4 @@ class MyApp extends App {
   }
 }
 
-export default withGA("UA-105156301-5", Router)(MyApp);
+export default withGA("UA-105156301-5", Router)(appWithTranslation(MyApp));

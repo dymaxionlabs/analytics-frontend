@@ -27,6 +27,7 @@
     "export": "yarn build && next export"
   },
   "devDependencies": {
+    "csv-parse": "^4.3.3",
     "file-loader": "^2.0.0",
     "url-loader": "^1.1.2"
   }

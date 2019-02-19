@@ -1,12 +1,7 @@
-import { Popup } from "semantic-ui-react";
-import React, { Component } from "react";
+import React from "react";
+import { withNamespaces } from "../i18n";
 
-const stepText = {
-  initial: "Escriba una ciudad o busque en el mapa un lugar.",
-  search_done: "Dibuje un polígono del área que desea analizar.",
-  polygon_drawn: "Seleccione una o más capas de análisis.",
-  layer_selected: "Si está de acuerdo con la selección, haga clic en Confirmar."
-};
+import { Popup } from "semantic-ui-react";
 
 const stepPosition = {
   initial: "left bottom",
@@ -15,14 +10,16 @@ const stepPosition = {
   layer_selected: "left center"
 };
 
-class Guide extends Component {
+class Guide extends React.Component {
   state = { isOpen: true };
 
   render() {
+    const { t } = this.props;
+
     return (
       <Popup
         style={{ transition: "all 0.25s ease", zIndex: 500 }}
-        content={stepText[this.props.step]}
+        content={t(this.props.step)}
         open={this.state.isOpen}
         size="large"
         className={this.props.step + " " + stepPosition[this.props.step]}
@@ -32,4 +29,4 @@ class Guide extends Component {
   }
 }
 
-export default Guide;
+export default withNamespaces("guide")(Guide);

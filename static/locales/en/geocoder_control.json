@@ -1,3 +1,5 @@
 {
-  "search_place": "Search place"
+  "no_results_desc": "Try typing the name of the city or town.",
+  "no_results_message": "No results.",
+  "search_placeholder": "Search place..."
 }

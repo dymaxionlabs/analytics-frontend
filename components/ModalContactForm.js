@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Button, Form, Modal, Message, Header, Grid } from "semantic-ui-react";
+
+import { Form, Modal, Message, Header, Grid } from "semantic-ui-react";
 import { AreaSection, LayersSection } from "./ConfirmationPortal";
 import { buildApiUrl } from "../lib/api";
+import { withNamespaces } from "../i18n";
 import axios from "axios";
 
 const initialState = {
@@ -110,7 +112,6 @@ class ContactForm extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           success: false,
           error: true
@@ -126,6 +127,8 @@ class ContactForm extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <Grid>
         <Grid.Column width={12}>
@@ -139,8 +142,8 @@ class ContactForm extends Component {
               <Form.Input
                 fluid
                 required
-                label="Nombre"
-                placeholder="Ingrese su nombre"
+                label={t("name_label")}
+                placeholder={t("name_placeholder")}
                 name="name"
                 value={this.state.fields.name}
                 onChange={this.handleInputChange}
@@ -149,8 +152,8 @@ class ContactForm extends Component {
               <Form.Input
                 fluid
                 required
-                label="Email"
-                placeholder="Ingrese su dirección de e-mail"
+                label={t("email_label")}
+                placeholder={t("email_placeholder")}
                 type="email"
                 name="email"
                 value={this.state.fields.email}
@@ -162,8 +165,8 @@ class ContactForm extends Component {
               <Form.Input
                 fluid
                 required
-                label="Ciudad"
-                placeholder="Ingrese su ciudad"
+                label={t("city_label")}
+                placeholder={t("city_placeholder")}
                 name="city"
                 value={this.state.fields.city}
                 onChange={this.handleInputChange}
@@ -171,8 +174,8 @@ class ContactForm extends Component {
               />
             </Form.Group>
             <Form.TextArea
-              label="Mensaje"
-              placeholder="Ingrese un comentario adicional"
+              label={t("message_label")}
+              placeholder={t("message_placeholder")}
               name="message"
               value={this.state.fields.message}
               onChange={this.handleInputChange}
@@ -181,25 +184,26 @@ class ContactForm extends Component {
               }
             />
             <Message success>
-              <Message.Header>Cotización enviada</Message.Header>
-              Gracias por enviar su cotización. Le escribiremos en la brevedad
-              con más información.
+              <Message.Header>{t("quote_success_title")}</Message.Header>
+              {t("quote_success_desc")}
             </Message>
             <Message error>
-              <Message.Header>Error al enviar cotización</Message.Header>
-              Ocurrió un error al enviar la cotización. Por favor, intente de
-              nuevo o contáctese con nosotros a{" "}
-              <a href="mailto:contacto@dymaxionlabs.com">
-                contacto@dymaxionlabs.com
-              </a>
+              <Message.Header>{t("quote_error_title")}</Message.Header>
+              {t("quote_error_desc", {
+                contactEmail: (
+                  <a href="mailto:contacto@dymaxionlabs.com">
+                    contacto@dymaxionlabs.com
+                  </a>
+                )
+              })}
             </Message>
             <Form.Button primary onClick={this.handleSubmit}>
-              Enviar
+              {t("send")}
             </Form.Button>
           </Form>
         </Grid.Column>
         <Grid.Column width={4}>
-          <Header as="h4">Especificaciones</Header>
+          <Header as="h4">{t("specifications")}</Header>
           <AreaSection value={this.props.area} />
           {this.props.layers && <LayersSection layers={this.props.layers} />}
         </Grid.Column>
@@ -210,25 +214,17 @@ class ContactForm extends Component {
 
 class ModalContactForm extends Component {
   render() {
-    const { onTriggerClick, onModalClose, ...contactFormProps } = this.props;
+    const { t, onModalClose, trigger, ...contactFormProps } = this.props;
 
     return (
-      <Modal
-        trigger={
-          <Button fluid primary onClick={onTriggerClick}>
-            Confirmar
-          </Button>
-        }
-        closeIcon
-        onClose={onModalClose}
-      >
-        <Header content="Cotizar" as="h3" />
+      <Modal trigger={trigger} onClose={onModalClose} closeIcon>
+        <Header content={t("quote")} as="h3" />
         <Modal.Content>
-          <ContactForm {...contactFormProps} />
+          <ContactForm t={t} {...contactFormProps} />
         </Modal.Content>
       </Modal>
     );
   }
 }
 
-export default ModalContactForm;
+export default withNamespaces("modal_contact_form")(ModalContactForm);

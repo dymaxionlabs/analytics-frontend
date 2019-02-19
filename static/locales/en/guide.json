@@ -1,0 +1,6 @@
+{
+  "initial": "Enter a city or search the map for a place.",
+  "layer_selected": "If you agree with the selected layers, click Confirm.",
+  "polygon_drawn": "Select one or more layers.",
+  "search_done": "Draw a polygon of the area you want to analyze."
+}

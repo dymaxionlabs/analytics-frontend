@@ -2,6 +2,7 @@
 import csv
 import json
 import os
+import shutil
 
 BASE_LOCALE_PATH = os.path.join('static', 'locales')
 
@@ -13,9 +14,12 @@ with open('i18n.csv') as csvfile:
 
     is_first_row = True
     for row in reader:
+        if not row['namespace']:
+            continue
+
         if is_first_row:
             locale_keys = list(sorted(set(row.keys()) - set(['namespace', 'key'])))
-            all_locales = [lc.lower() for lc in locale_keys]
+            all_locales = [lc.lower() for lc in locale_keys if lc]
             for locale in all_locales:
                 data[locale] = {}
             is_first_row = False
@@ -29,6 +33,7 @@ with open('i18n.csv') as csvfile:
                 data_local[ns] = {}
             data_local[ns][key] = row[locale]
 
+shutil.rmtree(BASE_LOCALE_PATH)
 for locale, locale_data in data.items():
     for ns, ns_data in locale_data.items():
         locale_path = os.path.join(BASE_LOCALE_PATH, locale)

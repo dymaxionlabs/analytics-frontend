@@ -1,5 +1,7 @@
 import React from "react";
+
 import {
+  Button,
   TransitionablePortal,
   Image,
   Segment,
@@ -22,18 +24,22 @@ const Item = ({ icon, title, description }) => (
   </Header>
 );
 
-export const AreaSection = ({ value }) => (
-  <Item
-    icon="area"
-    title={`${Math.ceil(value).toLocaleString()} km² / ${Math.ceil(
-      value * 100
-    ).toLocaleString()} ha`}
-    description="tamaño de superficie"
-  />
+export const AreaSection = withNamespaces("confirmation_portal")(
+  ({ t, value }) => (
+    <Item
+      icon="area"
+      title={`${Math.ceil(value).toLocaleString()} km² / ${Math.ceil(
+        value * 100
+      ).toLocaleString()} ha`}
+      description={t("surface_area")}
+    />
+  )
 );
 
-export const LayersSection = ({ layers }) => (
-  <Item icon="layers" title={layers} description="capas seleccionadas" />
+export const LayersSection = withNamespaces("confirmation_portal")(
+  ({ t, layers }) => (
+    <Item icon="layers" title={layers} description={t("selected_layers")} />
+  )
 );
 
 class ConfirmationPortal extends React.Component {
@@ -49,6 +55,7 @@ class ConfirmationPortal extends React.Component {
 
   render() {
     const {
+      t,
       open,
       area,
       selectedLayers,
@@ -77,14 +84,19 @@ class ConfirmationPortal extends React.Component {
               width: 300
             }}
           >
-            <AreaSection value={area} />
-            {layers && <LayersSection layers={layers} />}
+            <AreaSection t={t} value={area} />
+            {layers && <LayersSection t={t} layers={layers} />}
             <ModalContactForm
+              t={t}
+              trigger={
+                <Button fluid primary onClick={onConfirmClick}>
+                  {t("confirm")}
+                </Button>
+              }
               selectedLayers={selectedLayers}
               polygonLayers={polygonLayers}
               area={area}
               layers={layers}
-              onTriggerClick={onConfirmClick}
               onModalClose={onContactFormModalClose}
               onSubmit={onContactFormSubmit}
             />

@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Modal, Header, Form, Message } from "semantic-ui-react";
-import { buildApiUrl } from '../lib/api';
+import { withNamespaces } from "../i18n";
+import { Modal, Header, Form, Message } from "semantic-ui-react";
+import { buildApiUrl } from "../lib/api";
 import axios from "axios";
 
 const initialState = {
@@ -93,7 +94,7 @@ class SimpleModalContactForm extends React.Component {
   submit() {
     const params = {
       email: this.state.fields.email,
-      message: this.state.fields.message,
+      message: this.state.fields.message
     };
 
     axios
@@ -106,7 +107,6 @@ class SimpleModalContactForm extends React.Component {
         });
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           success: false,
           error: true
@@ -122,7 +122,7 @@ class SimpleModalContactForm extends React.Component {
   }
 
   render() {
-    const { trigger } = this.props;
+    const { t, trigger } = this.props;
     const {
       success,
       error,
@@ -134,14 +134,14 @@ class SimpleModalContactForm extends React.Component {
 
     return (
       <Modal trigger={trigger} onClose={this.handleClose} closeIcon>
-        <Header icon="mail" content="Contáctenos" />
+        <Header icon="mail" content={t("header")} />
         <Modal.Content>
           <Form size="large" success={success} error={error} loading={loading}>
             <Form.Input
               name="email"
-              label="Email"
+              label={t("email_label")}
               type="email"
-              placeholder="Ingrese su dirección de e-mail"
+              placeholder={t("email_placeholder")}
               required
               value={fields.email}
               onChange={this.handleInputChange}
@@ -149,28 +149,29 @@ class SimpleModalContactForm extends React.Component {
             />
             <Form.TextArea
               name="message"
-              label="Mensaje"
-              placeholder="Ingrese su mensaje"
+              label={t("message_label")}
+              placeholder={t("message_placeholder")}
               required
               value={fields.message}
               onChange={this.handleInputChange}
               error={submitedOnce && invalidFields.message}
             />
             <Message success>
-              <Message.Header>Mensaje enviado</Message.Header>
-              Gracias por enviar su mensaje. Le escribiremos en la brevedad con
-              más información.
+              <Message.Header>{t("contact_success_title")}</Message.Header>
+              {t("contact_success_desc")}
             </Message>
             <Message error>
-              <Message.Header>Error al enviar mensaje</Message.Header>
-              Ocurrió un error al enviar el mensaje. Por favor, intente de nuevo
-              o contáctese con nosotros a{" "}
-              <a href="mailto:contacto@dymaxionlabs.com">
-                contacto@dymaxionlabs.com
-              </a>
+              <Message.Header>{t("contact_error_title")}</Message.Header>
+              {t("contact_error_desc", {
+                contactEmail: (
+                  <a href="mailto:contacto@dymaxionlabs.com">
+                    contacto@dymaxionlabs.com
+                  </a>
+                )
+              })}
             </Message>
             <Form.Button primary onClick={this.handleSubmit}>
-              Enviar
+              {t("send")}
             </Form.Button>
           </Form>
         </Modal.Content>
@@ -179,4 +180,6 @@ class SimpleModalContactForm extends React.Component {
   }
 }
 
-export default SimpleModalContactForm;
+export default withNamespaces("simple_modal_contact_form")(
+  SimpleModalContactForm
+);

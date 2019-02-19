@@ -1,9 +1,17 @@
 {
-  "city": "Ciudad",
-  "email": "Email",
-  "message": "Mensaje",
-  "name": "Nombre",
+  "city_label": "Ciudad",
+  "city_placeholder": "Ingrese su ciudad",
+  "email_label": "Email",
+  "email_placeholder": "Ingrese su direcci\u00f3n de e-mail",
+  "message_label": "Mensaje",
+  "message_placeholder": "Ingrese un comentario adicional",
+  "name_label": "Nombre",
+  "name_placeholder": "Ingrese su nombre",
   "quote": "Cotizar",
+  "quote_error_desc": "Ocurri\u00f3 un error al enviar la cotizaci\u00f3n. Por favor, intente de nuevo o cont\u00e1ctese con nosotros a {{contactLink}}.",
+  "quote_error_title": "Error al enviar cotizaci\u00f3n",
+  "quote_success_desc": "Gracias por enviar su cotizaci\u00f3n. Le escribiremos en la brevedad con m\u00e1s informaci\u00f3n.",
+  "quote_success_title": "Cotizaci\u00f3n enviada exitosamente",
   "send": "Enviar",
   "specifications": "Especificaciones"
 }

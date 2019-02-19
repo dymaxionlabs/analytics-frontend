@@ -1,0 +1,12 @@
+{
+  "contact_error_desc": "Ocurri\u00f3 un error al enviar el mensaje. Por favor, intente de nuevo o cont\u00e1ctese con nosotros a {{contactLink}}.",
+  "contact_error_title": "Error al enviar mensaje",
+  "contact_success_desc": "Gracias por enviar su mensaje. Le escribiremos en la brevedad con m\u00e1s informaci\u00f3n.",
+  "contact_success_title": "Mensaje enviado exitosamente",
+  "email_label": "Email",
+  "email_placeholder": "Ingrese su direcci\u00f3n de e-mail",
+  "header": "Cont\u00e1ctenos",
+  "message_label": "Mensaje",
+  "message_placeholder": "Ingrese un comentario adicional",
+  "send": "Enviar"
+}

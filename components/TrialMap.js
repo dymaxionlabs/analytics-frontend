@@ -1,6 +1,7 @@
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import GeocoderControl from "./GeocoderControl";
 import DrawControl from "./DrawControl";
+import { i18n } from "../i18n";
 
 import "leaflet/dist/leaflet.css";
 
@@ -56,6 +57,8 @@ class TrialMap extends React.Component {
       onDrawDeleted
     } = this.props;
 
+    const locale = i18n.language || "es";
+
     return (
       <Map
         ref="map"
@@ -79,7 +82,7 @@ class TrialMap extends React.Component {
         />
         <FeatureGroup ref={featureGroupRef} onClick={onFeatureGroupClick}>
           <DrawControl
-            locale="es"
+            locale={locale}
             position="topleft"
             draw={drawOptions}
             onCreated={onDrawCreated}

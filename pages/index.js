@@ -3,10 +3,11 @@ import "../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
+import { withNamespaces } from "../i18n";
+
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Button } from "semantic-ui-react";
-import { i18n } from "../i18n";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/TrialMap"), {
@@ -196,13 +197,14 @@ class Index extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const { viewport, step, selectedLayers } = this.state;
     const isLayerSelected = step === "layer_selected";
 
     return (
       <div className="index">
         <Head>
-          <title>Analytics | Dymaxion Labs</title>
+          <title>{t("title")}</title>
           <link
             rel="shortcut icon"
             type="image/x-icon"
@@ -263,4 +265,4 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+export default withNamespaces()(Index);

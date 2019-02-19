@@ -1,9 +1,17 @@
 {
-  "city": "City",
-  "email": "Email",
-  "message": "Message",
-  "name": "Name",
+  "city_label": "City",
+  "city_placeholder": "Enter your city",
+  "email_label": "Email",
+  "email_placeholder": "Enter your email address",
+  "message_label": "Message",
+  "message_placeholder": "Enter an additional message",
+  "name_label": "Name",
+  "name_placeholder": "Enter your name",
   "quote": "Quote",
+  "quote_error_desc": "An error occurred when sending the quote. Please try again or contact us at {{contactLink}}.",
+  "quote_error_title": "Error when sending quote",
+  "quote_success_desc": "Thanks for sending your quote. We will write to you shortly with more information.",
+  "quote_success_title": "Quote sent successfully",
   "send": "Send",
-  "specifications": "Your layers"
+  "specifications": "Specifications"
 }

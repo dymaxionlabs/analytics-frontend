@@ -1,3 +1,5 @@
 {
-  "search_place": "Buscar localidad..."
+  "no_results_desc": "Pruebe escribir el nombre de la ciudad o localidad.",
+  "no_results_message": "No hay resultados.",
+  "search_placeholder": "Buscar localidad..."
 }

@@ -1,6 +1,12 @@
 namespace,key,es,en
-geocoder_control,search_place,Buscar localidad...,Search place
-draw_control,draw_polygon_desc,Dibuje un polígono del área que desea analizar.,Draw a polygon of the area you want to analyze.
+common,title,Analytics | Dymaxion Labs,Analytics | Dymaxion Labs
+guide,initial,Escriba una ciudad o busque en el mapa un lugar.,Enter a city or search the map for a place.
+guide,search_done,Dibuje un polígono del área que desea analizar.,Draw a polygon of the area you want to analyze.
+guide,polygon_drawn,Seleccione una o más capas de análisis.,Select one or more layers.
+guide,layer_selected,"Si está de acuerdo con la selección, haga clic en Confirmar.","If you agree with the selected layers, click Confirm."
+geocoder_control,search_placeholder,Buscar localidad...,Search place...
+geocoder_control,no_results_message,No hay resultados.,No results.
+geocoder_control,no_results_desc,Pruebe escribir el nombre de la ciudad o localidad.,Try typing the name of the city or town.
 layer_selector,recent_construction_title,Nuevas contrucciones,New buildings
 layer_selector,recent_construction_desc,Nuevas construcciones para un período de tiempo,New buildings built between two dates.
 layer_selector,roofs_title,Techos,Roofs
@@ -21,14 +27,40 @@ layer_selector,true_color_title,Color verdadero,True color
 layer_selector,true_color_desc,Imagen satelital de color verdadero,True color satellite image
 layer_selector,crop_lots_title,Lotes de cultivo,Crop lots
 layer_selector,crop_lots_desc,Lotes categorizados por tipo de cultivo,Categorized lots by crop type
-confirmation_portal,confirmation_text,"Si está de acuerdo con la selección, haga clic en Confirmar.","If you agree with selected layers, click Confirm."
 confirmation_portal,surface_area,tamaño de superficie,surface area
 confirmation_portal,selected_layers,capas seleccionadas,selected layers
 confirmation_portal,confirm,Confirmar,Confirm
-modal_contact_form,quote,Cotizar,Quote
-modal_contact_form,name,Nombre,Name
-modal_contact_form,email,Email,Email
-modal_contact_form,city,Ciudad,City
-modal_contact_form,specifications,Especificaciones,Your layers
-modal_contact_form,message,Mensaje,Message
+modal_contact_form,name_label,Nombre,Name
+modal_contact_form,name_placeholder,Ingrese su nombre,Enter your name
+modal_contact_form,email_label,Email,Email
+modal_contact_form,email_placeholder,Ingrese su dirección de e-mail,Enter your email address
+modal_contact_form,city_label,Ciudad,City
+modal_contact_form,city_placeholder,Ingrese su ciudad,Enter your city
+modal_contact_form,message_label,Mensaje,Message
+modal_contact_form,message_placeholder,Ingrese un comentario adicional,Enter an additional message
+modal_contact_form,specifications,Especificaciones,Specifications
 modal_contact_form,send,Enviar,Send
+modal_contact_form,quote,Cotizar,Quote
+modal_contact_form,quote_success_title,Cotización enviada exitosamente,Quote sent successfully
+modal_contact_form,quote_success_desc,Gracias por enviar su cotización. Le escribiremos en la brevedad con más información.,Thanks for sending your quote. We will write to you shortly with more information.
+modal_contact_form,quote_error_title,Error al enviar cotización,Error when sending quote
+modal_contact_form,quote_error_desc,"Ocurrió un error al enviar la cotización. Por favor, intente de nuevo o contáctese con nosotros a {{contactLink}}.",An error occurred when sending the quote. Please try again or contact us at {{contactLink}}.
+simple_modal_contact_form,header,Contáctenos,Contact us
+simple_modal_contact_form,email_label,Email,Email
+simple_modal_contact_form,email_placeholder,Ingrese su dirección de e-mail,Enter your email address
+simple_modal_contact_form,message_label,Mensaje,Message
+simple_modal_contact_form,message_placeholder,Ingrese un comentario adicional,Enter an additional message
+simple_modal_contact_form,contact_success_title,Mensaje enviado exitosamente,Message sent successfully
+simple_modal_contact_form,contact_success_desc,Gracias por enviar su mensaje. Le escribiremos en la brevedad con más información.,Thanks for sending your message. We will write to you shortly with more information.
+simple_modal_contact_form,contact_error_title,Error al enviar mensaje,Error when sending message
+simple_modal_contact_form,contact_error_desc,"Ocurrió un error al enviar el mensaje. Por favor, intente de nuevo o contáctese con nosotros a {{contactLink}}.",An error occurred when sending the message. Please try again or contact us at {{contactLink}}.
+simple_modal_contact_form,send,Enviar,Send
+case_study,request_quote,Pedir cotización,Request quote
+case_study__agri,crop_lots_legend_header,Tipos de cultivo,Crop types
+case_study__agri,crop_lots_legend_subheader,Febrero 2019,February 2019
+case_study__agri,crop_lots_type_S,Soja 1°,Soybean 1st
+case_study__agri,crop_lots_type_ST,Soja 2°,Soybean 2nd
+case_study__agri,crop_lots_type_S2,Soja tardía,Soybean (late)
+case_study__agri,crop_lots_type_M,Maíz temprano,Maize (early)
+case_study__agri,crop_lots_type_MT,Maíz tardío,Maize (late)
+case_study__agri,crop_lots_type_G1,Girasol 1°,Sunflower 1st

@@ -3,8 +3,8 @@ import "../../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
+import { withNamespaces, Link } from "../../i18n";
 import Head from "next/head";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import {
   Dimmer,
@@ -20,6 +20,8 @@ import SimpleModalContactForm from "../../components/SimpleModalContactForm";
 const lotsData = require("../../static/agri/lots.json");
 const roiData = require("../../static/agri/roi.json");
 
+const cropLotTypes = ["S", "S2", "ST", "M", "MT", "G1"];
+
 // FIXME colors should be in geojson
 const lotColors = {
   S: "#67d1ca",
@@ -28,16 +30,6 @@ const lotColors = {
   M: "#fdae61",
   MT: "#e77148",
   G1: "#b95af0"
-};
-
-// FIXME use labels from geojson
-const lotLabels = {
-  S: "Soja 1°",
-  S2: "Soja 2°",
-  ST: "Soja tardía",
-  M: "Maíz temprano",
-  MT: "Maíz tardío",
-  G1: "Girasol 1°"
 };
 
 const initialViewport = {
@@ -108,7 +100,7 @@ const Color = ({ value }) => (
   </div>
 );
 
-const LotsLegend = () => (
+const LotsLegend = withNamespaces("case_study__agri")(({ t }) => (
   <div>
     <Segment
       style={{
@@ -120,17 +112,19 @@ const LotsLegend = () => (
         cursor: "default"
       }}
     >
-      <Header style={{ marginBottom: "0.2em" }}>Tipo de cultivo</Header>
+      <Header style={{ marginBottom: "0.2em" }}>
+        {t("crop_lots_legend_header")}
+      </Header>
       <Header as="h5" style={{ margin: 0 }}>
-        Febrero 2019
+        {t("crop_lots_legend_subheader")}
       </Header>
       <List>
-        {Object.keys(lotLabels).map(id => (
+        {cropLotTypes.map(id => (
           <List.Item key={id} style={{ marginBottom: "3px" }}>
             <List.Content>
               <List.Header>
                 <Color value={lotColors[id]} />
-                {lotLabels[id]}
+                {t(`crop_lots_type_${id}`)}
               </List.Header>
             </List.Content>
           </List.Item>
@@ -138,7 +132,7 @@ const LotsLegend = () => (
       </List>
     </Segment>
   </div>
-);
+));
 
 class LotsLayer extends React.Component {
   _style = feature => {
@@ -154,7 +148,9 @@ class LotsLayer extends React.Component {
   };
 
   _onEachFeature = (feature, layer) => {
-    const popupContent = `<b>${lotLabels[feature.properties["SIGLA"]]}</b>`;
+    const { t } = this.props;
+    const id = feature.properties["SIGLA"];
+    const popupContent = `<b>${t(`crop_lots_type_${id}`)}</b>`;
     layer.bindPopup(popupContent, {
       closeButton: false,
       offset: L.point(0, -20)
@@ -170,6 +166,8 @@ class LotsLayer extends React.Component {
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <div>
         <VectorLayer
@@ -180,16 +178,16 @@ class LotsLayer extends React.Component {
           onmouseout={this._onMouseOut}
           onEachFeature={this._onEachFeature}
         />
-        <LotsLegend />
+        <LotsLegend t={t} />
       </div>
     );
   }
 }
 
-const QuoteButton = () => (
+const QuoteButton = ({ t }) => (
   <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1000 }}>
     <Link href="/">
-      <Button primary>Pedir cotización</Button>
+      <Button primary>{t("request_quote")}</Button>
     </Link>
   </div>
 );
@@ -202,7 +200,7 @@ class AgriMap extends React.Component {
 
   static async getInitialProps() {
     return {
-      namespacesRequired: ["view__agri", "layer_selector"]
+      namespacesRequired: ["case_study", "case_study__agri"]
     };
   }
 
@@ -234,6 +232,7 @@ class AgriMap extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const { viewport, selectedLayers } = this.state;
 
     const showLotsLayer = selectedLayers.includes("crop_lots");
@@ -260,7 +259,7 @@ class AgriMap extends React.Component {
           roiData={roiData}
           onViewportChanged={this._onMapViewportChanged}
         >
-          {showLotsLayer ? <LotsLayer /> : ""}
+          {showLotsLayer ? <LotsLayer t={t} /> : ""}
           {Object.keys(selectedRasterLayers).map(key => (
             <RasterLayer key={key} {...selectedRasterLayers[key]} />
           ))}
@@ -290,11 +289,11 @@ class AgriMap extends React.Component {
               </div>
             }
           />
-          <QuoteButton />
+          <QuoteButton t={t} />
         </Map>
       </div>
     );
   }
 }
 
-export default AgriMap;
+export default withNamespaces("case_study", "case_study__agri")(AgriMap);

@@ -1,0 +1,12 @@
+{
+  "contact_error_desc": "An error occurred when sending the message. Please try again or contact us at {{contactLink}}.",
+  "contact_error_title": "Error when sending message",
+  "contact_success_desc": "Thanks for sending your message. We will write to you shortly with more information.",
+  "contact_success_title": "Message sent successfully",
+  "email_label": "Email",
+  "email_placeholder": "Enter your email address",
+  "header": "Contact us",
+  "message_label": "Message",
+  "message_placeholder": "Enter an additional message",
+  "send": "Send"
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { withNamespaces } from "../i18n";
 import { MapControl, withLeaflet } from "react-leaflet";
 import { Input, Search } from "semantic-ui-react";
 import axios from "axios";
@@ -119,6 +120,7 @@ class GeocoderControl extends MapControl {
   }
 
   render() {
+    const { t } = this.props;
     const { isLoading, value, results } = this.state;
 
     return (
@@ -135,11 +137,11 @@ class GeocoderControl extends MapControl {
             <Input
               icon="search"
               iconPosition="left"
-              placeholder="Buscar localidad..."
+              placeholder={t("search_placeholder")}
             />
           }
-          noResultsMessage="No hay resultados."
-          noResultsDescription="Pruebe escribir el nombre de la ciudad o localidad."
+          noResultsMessage={t("no_results_message")}
+          noResultsDescription={t("no_results_desc")}
         />
         <style jsx global>{`
           .geocoder {
@@ -161,4 +163,4 @@ class GeocoderControl extends MapControl {
   }
 }
 
-export default withLeaflet(GeocoderControl);
+export default withNamespaces("geocoder_control")(withLeaflet(GeocoderControl));

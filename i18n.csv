@@ -1,0 +1,34 @@
+namespace,key,es,en
+geocoder_control,search_place,Buscar localidad...,Search place
+draw_control,draw_polygon_desc,Dibuje un polígono del área que desea analizar.,Draw a polygon of the area you want to analyze.
+layer_selector,recent_construction_title,Nuevas contrucciones,New buildings
+layer_selector,recent_construction_desc,Nuevas construcciones para un período de tiempo,New buildings built between two dates.
+layer_selector,roofs_title,Techos,Roofs
+layer_selector,roofs_desc,Cotorno de techos de edificaciones,Roofs outline.
+layer_selector,pools_title,Piscinas,Pools
+layer_selector,pools_desc,Contorno de piscinas residenciales,Residential pools outline.
+layer_selector,informal_settlements_title,Asentamientos informales,Informal settlements
+layer_selector,informal_settlements_desc,Asentamientos y barrios precarios,Slums and informal settlements location.
+layer_selector,roads_title,Rutas,Roads
+layer_selector,roads_desc,Rutas y caminos asfaltados,Area of pavemented roads
+layer_selector,soil_title,Area sembrada,Sown area
+layer_selector,soil_desc,Suelo utilizado para siembra y cultivo.,Soil land use for different crops.
+layer_selector,floods_title,Áreas inundadas,Flooded area
+layer_selector,floods_desc,Áreas rurales que se encuentran inundadas y anegadas.,Rural flooded area.
+layer_selector,ndvi_title,Indice NDVI,NDVI Index
+layer_selector,ndvi_desc,Indice de vigor de cultivo,Graphical indicator of yield index
+layer_selector,true_color_title,Color verdadero,True color
+layer_selector,true_color_desc,Imagen satelital de color verdadero,True color satellite image
+layer_selector,crop_lots_title,Lotes de cultivo,Crop lots
+layer_selector,crop_lots_desc,Lotes categorizados por tipo de cultivo,Categorized lots by crop type
+confirmation_portal,confirmation_text,"Si está de acuerdo con la selección, haga clic en Confirmar.","If you agree with selected layers, click Confirm."
+confirmation_portal,surface_area,tamaño de superficie,surface area
+confirmation_portal,selected_layers,capas seleccionadas,selected layers
+confirmation_portal,confirm,Confirmar,Confirm
+modal_contact_form,quote,Cotizar,Quote
+modal_contact_form,name,Nombre,Name
+modal_contact_form,email,Email,Email
+modal_contact_form,city,Ciudad,City
+modal_contact_form,specifications,Especificaciones,Your layers
+modal_contact_form,message,Mensaje,Message
+modal_contact_form,send,Enviar,Send

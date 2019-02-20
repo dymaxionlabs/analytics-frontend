@@ -198,10 +198,19 @@ class AgriMap extends React.Component {
     selectedLayers: ["ndvi", "crop_lots"]
   };
 
-  static async getInitialProps() {
+  static async getInitialProps({ query }) {
     return {
+      query: query,
       namespacesRequired: ["case_study", "case_study__agri"]
     };
+  }
+
+  componentDidMount() {
+    const { lang } = this.props.query;
+    if (lang) {
+      console.log(`Setting language to '${lang}'`);
+      i18n.changeLanguage(lang);
+    }
   }
 
   _trackEvent(action, value) {

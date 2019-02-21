@@ -12,11 +12,11 @@ import { Dimmer, Loader, Button } from "semantic-ui-react";
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/TrialMap"), {
   ssr: false,
-  loading: () => (
+  loading: withNamespaces()(({ t }) => (
     <Dimmer active>
-      <Loader size="big">Cargando...</Loader>
+      <Loader size="big">{t('loading')}</Loader>
     </Dimmer>
-  )
+  ))
 });
 
 import ConfirmationPortal from "../components/ConfirmationPortal";

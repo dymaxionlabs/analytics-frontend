@@ -70,11 +70,11 @@ const rasterLayers = [
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../../components/view/Map"), {
   ssr: false,
-  loading: () => (
+  loading: withNamespaces()(({ t }) => (
     <Dimmer active>
-      <Loader size="big">Cargando...</Loader>
+      <Loader size="big">{t('loading')}</Loader>
     </Dimmer>
-  )
+  ))
 });
 
 const VectorLayer = dynamic(() => import("../../components/VectorLayer"), {

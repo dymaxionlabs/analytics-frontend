@@ -184,6 +184,8 @@ class LotsLayer extends React.Component {
   }
 }
 
+LotsLayer = withNamespaces("case_study__agri")(LotsLayer);
+
 const QuoteButton = ({ t }) => (
   <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1000 }}>
     <Link href="/">

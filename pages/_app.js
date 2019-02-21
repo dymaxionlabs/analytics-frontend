@@ -15,6 +15,17 @@ class MyApp extends App {
     return { pageProps };
   }
 
+  componentDidMount() {
+    const {
+      query: { lang }
+    } = this.props.router;
+
+    if (lang) {
+      console.log(`Setting language to '${lang}'`);
+      i18next.changeLanguage(lang);
+    }
+  }
+
   render() {
     const { Component, pageProps, analytics } = this.props;
 

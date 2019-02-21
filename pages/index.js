@@ -3,7 +3,7 @@ import "../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
-import { i18n, withNamespaces } from "../i18n";
+import { withNamespaces } from "../i18n";
 
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -50,9 +50,8 @@ class Index extends React.Component {
 
   featureGroupRef = React.createRef();
 
-  static async getInitialProps({ query }) {
+  static async getInitialProps() {
     return {
-      query: query,
       namespacesRequired: [
         "index",
         "layer_selector",
@@ -62,14 +61,6 @@ class Index extends React.Component {
         "modal_contact_form"
       ]
     };
-  }
-
-  componentDidMount() {
-    const { lang } = this.props.query;
-    if (lang) {
-      console.log(`Setting language to '${lang}'`);
-      i18n.changeLanguage(lang);
-    }
   }
 
   constructor(props) {

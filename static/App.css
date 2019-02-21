@@ -47,3 +47,9 @@
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
   line-height: 30px;
 }
+
+.leaflet-control.leaflet-draw {
+  position: absolute !important;
+  top: 50px;
+  left: 0;
+}

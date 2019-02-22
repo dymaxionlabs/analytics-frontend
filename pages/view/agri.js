@@ -72,7 +72,7 @@ const Map = dynamic(() => import("../../components/view/Map"), {
   ssr: false,
   loading: withNamespaces()(({ t }) => (
     <Dimmer active>
-      <Loader size="big">{t('loading')}</Loader>
+      <Loader size="big">{t("loading")}</Loader>
     </Dimmer>
   ))
 });
@@ -178,7 +178,7 @@ class LotsLayer extends React.Component {
           onmouseout={this._onMouseOut}
           onEachFeature={this._onEachFeature}
         />
-        <LotsLegend t={t} />
+        <LotsLegend />
       </div>
     );
   }
@@ -186,13 +186,13 @@ class LotsLayer extends React.Component {
 
 LotsLayer = withNamespaces("case_study__agri")(LotsLayer);
 
-const QuoteButton = ({ t }) => (
+const QuoteButton = withNamespaces("case_study")(({ t }) => (
   <div style={{ position: "fixed", left: 20, top: 20, zIndex: 1000 }}>
     <Link href="/">
       <Button primary>{t("request_quote")}</Button>
     </Link>
   </div>
-);
+));
 
 class AgriMap extends React.Component {
   state = {
@@ -261,7 +261,7 @@ class AgriMap extends React.Component {
           roiData={roiData}
           onViewportChanged={this._onMapViewportChanged}
         >
-          {showLotsLayer ? <LotsLayer t={t} /> : ""}
+          {showLotsLayer ? <LotsLayer /> : ""}
           {Object.keys(selectedRasterLayers).map(key => (
             <RasterLayer key={key} {...selectedRasterLayers[key]} />
           ))}
@@ -291,11 +291,11 @@ class AgriMap extends React.Component {
               </div>
             }
           />
-          <QuoteButton t={t} />
+          <QuoteButton />
         </Map>
       </div>
     );
   }
 }
 
-export default withNamespaces("case_study", "case_study__agri")(AgriMap);
+export default withNamespaces(["case_study", "case_study__agri"])(AgriMap);

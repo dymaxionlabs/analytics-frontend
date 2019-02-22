@@ -36,23 +36,15 @@ export const AreaSection = withNamespaces("confirmation_portal")(
   )
 );
 
-export const LayersSection = withNamespaces("confirmation_portal")(
-  ({ t, layers }) => (
-    <Item icon="layers" title={layers} description={t("selected_layers")} />
+export const LayersSection = withNamespaces(["confirmation_portal", "layer_selector"])(
+  ({ t, layers }) => {
+    return (
+    <Item icon="layers" title={layers.map(layer => t(`layer_selector:${layer.key}_title`)).join(', ')} description={t('selected_layers')} />
   )
+}
 );
 
 class ConfirmationPortal extends React.Component {
-  _layersSentence() {
-    const { t, selectedLayers } = this.props;
-    const selLayers = selectedLayers || [];
-
-    return allLayers
-      .filter(layer => selLayers.includes(layer.key))
-      .map(layer => t(layer.key + "_title"))
-      .join(", ");
-  }
-
   render() {
     const {
       t,
@@ -65,7 +57,8 @@ class ConfirmationPortal extends React.Component {
       onContactFormSubmit
     } = this.props;
 
-    const layers = this._layersSentence();
+    const selLayers = selectedLayers || [];
+    const layers = allLayers.filter(layer => selLayers.includes(layer.key))
 
     return (
       <div>
@@ -84,13 +77,12 @@ class ConfirmationPortal extends React.Component {
               width: 300
             }}
           >
-            <AreaSection t={t} value={area} />
-            {layers && <LayersSection t={t} layers={layers} />}
+            <AreaSection value={area} />
+            {layers && <LayersSection layers={layers} />}
             <ModalContactForm
-              t={t}
               trigger={
                 <Button fluid primary onClick={onConfirmClick}>
-                  {t("confirm")}
+                  {t('confirm')}
                 </Button>
               }
               selectedLayers={selectedLayers}
@@ -107,6 +99,6 @@ class ConfirmationPortal extends React.Component {
   }
 }
 
-export default withNamespaces("layer_selector", "confirmation_portal")(
+export default withNamespaces("confirmation_portal")(
   ConfirmationPortal
 );

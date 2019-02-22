@@ -212,6 +212,8 @@ class ContactForm extends Component {
   }
 }
 
+ContactForm = withNamespaces("modal_contact_form")(ContactForm);
+
 class ModalContactForm extends Component {
   render() {
     const { t, onModalClose, trigger, ...contactFormProps } = this.props;
@@ -220,7 +222,7 @@ class ModalContactForm extends Component {
       <Modal trigger={trigger} onClose={onModalClose} closeIcon>
         <Header content={t("quote")} as="h3" />
         <Modal.Content>
-          <ContactForm t={t} {...contactFormProps} />
+          <ContactForm {...contactFormProps} />
         </Modal.Content>
       </Modal>
     );

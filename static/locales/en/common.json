@@ -1,4 +1,37 @@
 {
+  "email": "Email",
   "loading": "Loading...",
-  "title": "Analytics | Dymaxion Labs"
+  "login": {
+    "cant_remember": "Can't remember your password?",
+    "error_msg": "Incorrect username or password",
+    "remember": "Remember me",
+    "request_new_password": "Request a new one",
+    "submit": "Enter",
+    "success_msg": "Successful login! Redirecting...",
+    "title": "Login"
+  },
+  "login_btn": "Login",
+  "logout_btn": "Logout",
+  "password": "Password",
+  "reset_password": {
+    "cancel": "Cancel",
+    "email_label": "Enter the email address associated with your account",
+    "error_msg": "An error has occurred. Try requesting a new password change.",
+    "submit": "Send",
+    "success_msg": "Password changed successfully!",
+    "title": "Reset password"
+  },
+  "reset_password_confirm": {
+    "cancel": "Cancel",
+    "change": "Change",
+    "invalid_password": "The password must be 8 characters or more and contain at least one uppercase letter, one lower case letter and one number.",
+    "password1_label": "Enter new password",
+    "password1_placeholder": "Password",
+    "password2_label": "Confirm new password",
+    "password2_placeholder": "Confirm password",
+    "same_password": "Passwords must match.",
+    "title": "Confirm password change"
+  },
+  "title": "Analytics | Dymaxion Labs",
+  "username": "Username"
 }

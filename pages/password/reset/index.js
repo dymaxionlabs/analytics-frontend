@@ -14,9 +14,8 @@ import Grid from "@material-ui/core/Grid";
 import Head from "next/head";
 import withStyles from "@material-ui/core/styles/withStyles";
 import axios from "axios";
-import { i18n, withNamespaces, Link } from "../../i18n";
-import { buildApiUrl } from "../../utils/api";
-import { login } from "../../utils/auth";
+import { i18n, withNamespaces, Link } from "../../../i18n";
+import { buildApiUrl } from "../../../utils/api";
 
 const styles = theme => ({
   main: {

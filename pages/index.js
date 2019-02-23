@@ -40,11 +40,12 @@ const availableLayers = [
   "ndvi"
 ];
 
+// Not using <Link> because we need a full refresh to work with MUI-based pages
 const LoginButton = withNamespaces()(({ t }) => (
   <div style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}>
-    <Link href="/login">
+    <a href="/login">
       <Button>{t("login_btn")}</Button>
-    </Link>
+    </a>
   </div>
 ));
 

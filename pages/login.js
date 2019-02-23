@@ -1,38 +1,73 @@
 import React from "react";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { withNamespaces, Link } from "../i18n";
-import { login } from "../utils/auth";
-import { Checkbox, Form, Icon, Button, Header, Image } from "semantic-ui-react";
 import axios from "axios";
-import "semantic-ui-css/semantic.css";
-import logo from "../static/logo.png";
 import { buildApiUrl } from "../utils/api";
+import { login } from "../utils/auth";
 
-class Login extends React.Component {
+const styles = theme => ({
+  main: {
+    width: "auto",
+    display: "block", // Fix IE 11 issue.
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px`
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing.unit
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 3
+  }
+});
+
+class SignIn extends React.Component {
   state = {
-    user: "",
+    email: "",
     password: "",
     remember: false,
-    errorMsg: "",
-    successMsg: ""
+    isSubmitting: false
   };
 
-  static async getInitialProps(ctx) {
+  static async getInitialProps() {
     return {
       namespacesRequired: ["common"]
     };
   }
 
-  handleError = () => {
-    const { t } = this.props;
-
-    this.setState({
-      errorMsg: t("login.error_msg"),
-      successMsg: ""
-    });
-  };
-
-  onUserChange = e => {
-    this.setState({ user: e.target.value });
+  onEmailChange = e => {
+    this.setState({ email: e.target.value });
   };
 
   onPasswordChange = e => {
@@ -43,123 +78,108 @@ class Login extends React.Component {
     this.setState({ remember: !this.state.remember });
   };
 
-  onSubmit = () => {
+  onSubmit = event => {
+    event.preventDefault();
+
     const { t } = this.props;
-    const { user, password } = this.state;
+    const { email, password } = this.state;
 
     const dataSend = {
-      username: user,
+      email: email,
       password: password
     };
 
     // Reset messages
     this.setState({
       errorMsg: "",
-      successMsg: ""
+      successMsg: "",
+      isSubmitting: true
     });
 
     axios
       .post(buildApiUrl("/auth/login/"), dataSend)
       .then(response => {
-        const res = JSON.stringify(response.data);
-        const token = res["key"];
+        console.log(response.data);
+        const token = response.data.key;
         const expires = this.state.remember ? 30 : null;
-
-        this.setState({
-          successMsg: t("login.success_msg"),
-          errorMsg: ""
-        });
-
-        login({ token, expires });
+        if (token) {
+          login({ token, expires });
+        }
       })
-      .catch(this.handleError);
+      .catch(error => {
+        this.setState({
+          errorMsg: t("login.error_msg"),
+          isSubmitting: false,
+          successMsg: ""
+        });
+      });
   };
 
   render() {
-    const { t } = this.props;
+    const { t, classes } = this.props;
+    const { isSubmitting } = this.state;
 
     return (
-      <div className="container">
-        <Header
-          as="h1"
-          textAlign="center"
-          style={{ color: "#f05f40", paddingTop: 100 }}
-        >
-          <Image src={logo} />
-          <br />
-          {t("login.title")}
-        </Header>
-        <div
-          className="ui raised very padded text container segment"
-          style={{ marginTop: 20, width: 400 + "px" }}
-        >
-          <Form>
-            <Form.Field>
-              <Form.Input
-                fluid
-                iconPosition="left"
-                icon="user"
-                placeholder={t("username")}
-                onChange={this.onUserChange}
-                value={this.state.user}
+      <main className={classes.main}>
+        <Head>
+          <title>{t("title")}</title>
+        </Head>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {t("login.title")}
+          </Typography>
+          <Typography style={{ color: "red" }}>
+            {this.state.errorMsg}
+          </Typography>
+          <form className={classes.form} method="post" onSubmit={this.onSubmit}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">{t("email")}</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                type="email"
+                onChange={this.onEmailChange}
               />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input
-                fluid
-                iconPosition="left"
-                icon="key"
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">{t("password")}</InputLabel>
+              <Input
+                name="password"
                 type="password"
-                placeholder={t("password")}
+                id="password"
+                autoComplete="current-password"
                 onChange={this.onPasswordChange}
-                value={this.state.password}
               />
-            </Form.Field>
-            <br />
-            <Checkbox
-              checked={this.state.remember}
-              onClick={this.onRememberClick}
+            </FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
               label={t("login.remember")}
             />
-            <br />
-            <br />
-
             <Button
-              fluid
-              icon
-              onClick={this.onSubmit}
-              labelPosition="right"
-              color="orange"
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
             >
-              {t("login.submit")} <Icon name="right arrow" />
+              {t("login.submit")}
             </Button>
-
-            <div
-              style={{ textAlign: "left", color: "#990000", paddingTop: 20 }}
-            >
-              <span>{this.state.errorMsg}</span>
-            </div>
-            <div
-              style={{ textAlign: "left", color: "#009900", paddingTop: 20 }}
-            >
-              <span>{this.state.successMsg}</span>
-            </div>
-          </Form>
-        </div>
-        <div
-          className="ui raised center aligned text container segment"
-          style={{ marginTop: 20, width: 400 + "px" }}
-        >
-          {t("login.cant_remember")}{" "}
-          <Link href="/password/reset">
-            <a style={{ color: "#f05f40" }}>
-              {t("login.request_new_password")}
-            </a>
-          </Link>
-        </div>
-      </div>
+            {isSubmitting && <LinearProgress />}
+          </form>
+        </Paper>
+      </main>
     );
   }
 }
 
-export default withNamespaces()(Login);
+SignIn.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withNamespaces()(withStyles(styles)(SignIn));

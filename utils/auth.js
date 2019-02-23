@@ -4,7 +4,7 @@ import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 
 // FIXME Should redirect to /me (once implemented)
-export const login = async ({ token, expires, redirectTo = "/" }) => {
+export const login = async ({ token, expires, redirectTo = "/me" }) => {
   cookie.set("token", token, { expires: expires });
   Router.push(redirectTo);
 };

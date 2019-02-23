@@ -1,6 +1,35 @@
 namespace,key,es,en
 common,title,Analytics | Dymaxion Labs,Analytics | Dymaxion Labs
 common,loading,Cargando...,Loading...
+common,username,Usuario,Username
+common,password,Contraseña,Password
+common,email,Email,Email
+common,login_btn,Iniciar sesión,Login
+common,logout_btn,Cerrar sesión,Logout
+common,login.title,Inicio de sesión,Login
+common,login.remember,Recordar,Remember me
+common,login.cant_remember,¿No recuerda su contraseña?,Can't remember your password?
+common,login.request_new_password,Solicite una nueva,Request a new one
+common,login.submit,Ingresar,Enter
+common,login.error_msg,Usuario o contraseña incorrectos,Incorrect username or password
+common,login.success_msg,Inicio de sesión exitoso! Redirigiendo...,Successful login! Redirecting...
+common,reset_password.success_msg,Su requerimiento fue recibido. Revise su email para hacer el cambio de contraseña.,Your request was received. Check your email to make the password change.
+common,reset_password.error_msg,Email debe ser una dirección de email válida,Email must be a valid email address
+common,reset_password.title,Reestablecer la contraseña,Reset password
+common,reset_password.email_label,Ingrese la dirección de email asociada a su cuenta,Enter the email address associated with your account
+common,reset_password.cancel,Cancelar,Cancel
+common,reset_password.submit,Enviar,Send
+common,reset_password.success_msg,¡Cambio de contraseña exitoso!,Password changed successfully!
+common,reset_password.error_msg,Un error ha ocurrido. Intente soliciar un nuevo cambio de contraseña.,An error has occurred. Try requesting a new password change.
+common,reset_password_confirm.title,Confirmar cambio de contraseña,Confirm password change
+common,reset_password_confirm.invalid_password,"El password debe ser de 8 caracteres o más y contener al menos una letra mayúscula, una letra minúscula y un número.","The password must be 8 characters or more and contain at least one uppercase letter, one lower case letter and one number."
+common,reset_password_confirm.same_password,Las contraseñas deben coincidir.,Passwords must match.
+common,reset_password_confirm.password1_label,Ingrese nueva contraseña,Enter new password
+common,reset_password_confirm.password2_label,Confirme nueva contraseña,Confirm new password
+common,reset_password_confirm.password1_placeholder,Contraseña,Password
+common,reset_password_confirm.password2_placeholder,Confirmar contraseña,Confirm password
+common,reset_password_confirm.cancel,Cancelar,Cancel
+common,reset_password_confirm.change,Cambiar,Change
 guide,initial,Escriba una ciudad o busque en el mapa un lugar.,Enter a city or search the map for a place.
 guide,search_done,Dibuje un polígono del área que desea analizar.,Draw a polygon of the area you want to analyze.
 guide,polygon_drawn,Seleccione una o más capas de análisis.,Select one or more layers.

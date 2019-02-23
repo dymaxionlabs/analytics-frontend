@@ -31,7 +31,14 @@ with open('i18n.csv') as csvfile:
             data_local = data[locale]
             if ns not in data_local:
                 data_local[ns] = {}
-            data_local[ns][key] = row[locale]
+
+            k = data_local[ns]
+            key_parts = key.split('.')
+            for part in key_parts[:-1]:
+                if part not in k:
+                    k[part] = {}
+                k = k[part]
+            k[key_parts[-1]] = row[locale]
 
 shutil.rmtree(BASE_LOCALE_PATH)
 for locale, locale_data in data.items():

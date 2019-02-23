@@ -3,8 +3,8 @@ import "../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
-import { withNamespaces } from "../i18n";
-
+import { withNamespaces, Link } from "../i18n";
+import { withAuthSync } from "../utils/auth";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Button } from "semantic-ui-react";
@@ -14,7 +14,7 @@ const Map = dynamic(() => import("../components/TrialMap"), {
   ssr: false,
   loading: withNamespaces()(({ t }) => (
     <Dimmer active>
-      <Loader size="big">{t('loading')}</Loader>
+      <Loader size="big">{t("loading")}</Loader>
     </Dimmer>
   ))
 });
@@ -40,6 +40,14 @@ const availableLayers = [
   "ndvi"
 ];
 
+const LoginButton = withNamespaces()(({ t }) => (
+  <div style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}>
+    <Link href="/login">
+      <Button>{t("login_btn")}</Button>
+    </Link>
+  </div>
+));
+
 class Index extends React.Component {
   state = {
     viewport: initialViewport,
@@ -63,15 +71,6 @@ class Index extends React.Component {
     };
   }
 
-  constructor(props) {
-    super(props);
-
-    this._onToggleLayer = this._onToggleLayer.bind(this);
-    this._onDrawCreated = this._onDrawCreated.bind(this);
-    this._onDrawEdited = this._onDrawEdited.bind(this);
-    this._onDrawDeleted = this._onDrawDeleted.bind(this);
-  }
-
   _trackEvent(action, value) {
     this.props.analytics.event("Quotation", action, value);
   }
@@ -88,7 +87,7 @@ class Index extends React.Component {
     }
   };
 
-  _onDrawCreated(event) {
+  _onDrawCreated = event => {
     this._trackEvent("draw-geometry", event.layerType);
 
     this._updatePolygonsArea();
@@ -97,21 +96,21 @@ class Index extends React.Component {
     } else {
       this.setState({ step: "polygon_drawn" });
     }
-  }
+  };
 
-  _onDrawEdited(event) {
+  _onDrawEdited = event => {
     this._trackEvent("edit-geometry");
 
     this._updatePolygonsArea();
-  }
+  };
 
-  _onDrawDeleted(event) {
+  _onDrawDeleted = event => {
     this._trackEvent("delete-geometry");
 
     if (!this._updatePolygonsArea() && !this._hasAnyPolygons() == true) {
       this.setState({ step: "search_done" });
     }
-  }
+  };
 
   _hasAnyPolygons() {
     return this._polygonLayers().length > 0;
@@ -142,7 +141,7 @@ class Index extends React.Component {
     return featureGroup ? featureGroup.getLayers() : [];
   }
 
-  _onToggleLayer(layer) {
+  _onToggleLayer = layer => {
     const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
 
     if (selectedLayers.includes(layer)) {
@@ -167,7 +166,7 @@ class Index extends React.Component {
     }
 
     this.setState({ selectedLayers, step });
-  }
+  };
 
   _onMapViewportChanged = viewport => {
     let { step } = this.state;
@@ -260,9 +259,10 @@ class Index extends React.Component {
             }
           />
         </Map>
+        {!this.props.token && <LoginButton />}
       </div>
     );
   }
 }
 
-export default withNamespaces()(Index);
+export default withAuthSync(withNamespaces()(Index), { redirect: false });

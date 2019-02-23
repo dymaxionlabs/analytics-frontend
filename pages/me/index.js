@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -14,10 +15,13 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import {
-  mainListItems,
-  secondaryListItems
-} from "../../components/me/listItems";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+// import DashboardIcon from "@material-ui/icons/Dashboard";
+import LayersIcon from "@material-ui/icons/Layers";
+import MapIcon from "@material-ui/icons/Map";
 
 const drawerWidth = 240;
 
@@ -98,9 +102,22 @@ const styles = theme => ({
   }
 });
 
+const LayersContent = () => (
+  <Typography variant="h4" gutterBottom component="h2">
+    Layers
+  </Typography>
+);
+
+const MapsContent = () => (
+  <Typography variant="h4" gutterBottom component="h2">
+    Maps
+  </Typography>
+);
+
 class Dashboard extends React.Component {
   state = {
-    open: true
+    open: true,
+    currentContent: "layers"
   };
 
   handleDrawerOpen = () => {
@@ -111,8 +128,21 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
+  handleSectionChange = key => {
+    console.log(key);
+    this.setState({ currentContent: key });
+  };
+
   render() {
     const { classes } = this.props;
+    const { currentContent } = this.state;
+
+    let content;
+    if (currentContent === "layers") {
+      content = <LayersContent />;
+    } else if (currentContent === "maps") {
+      content = <MapsContent />;
+    }
 
     return (
       <div className={classes.root}>
@@ -148,11 +178,11 @@ class Dashboard extends React.Component {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
         </AppBar>
         <Drawer
@@ -171,15 +201,30 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          <List>
+            {/* <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem> */}
+            <ListItem button onClick={() => this.handleSectionChange("layers")}>
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Layers" />
+            </ListItem>
+            <ListItem button onClick={() => this.handleSectionChange("maps")}>
+              <ListItemIcon>
+                <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Maps" />
+            </ListItem>
+          </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-          </Typography>
+          {content}
         </main>
       </div>
     );

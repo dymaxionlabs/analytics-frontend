@@ -267,8 +267,8 @@ class Index extends React.Component {
               </div>
             }
           />
+          {this.props.token ? <DashboardButton /> : <LoginButton />}
         </Map>
-        {this.props.token ? <DashboardButton /> : <LoginButton />}
       </div>
     );
   }

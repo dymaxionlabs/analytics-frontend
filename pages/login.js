@@ -178,7 +178,7 @@ class SignIn extends React.Component {
           <Typography className={classes.passwordReset}>
             {t("login.cant_remember")}{" "}
             <Link href="/password/reset">
-              {t("login.request_new_password")}
+              <a>{t("login.request_new_password")}</a>
             </Link>
           </Typography>
         </Paper>

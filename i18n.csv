@@ -6,6 +6,7 @@ common,password,Contraseña,Password
 common,email,Email,Email
 common,login_btn,Iniciar sesión,Login
 common,logout_btn,Cerrar sesión,Logout
+common,dashboard_btn,Dashboard,Dashboard
 common,login.title,Inicio de sesión,Login
 common,login.remember,Recordar,Remember me
 common,login.cant_remember,¿No recuerda su contraseña?,Can't remember your password?

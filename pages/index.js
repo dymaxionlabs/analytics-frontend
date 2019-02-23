@@ -49,6 +49,14 @@ const LoginButton = withNamespaces()(({ t }) => (
   </div>
 ));
 
+const DashboardButton = withNamespaces()(({ t }) => (
+  <div style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}>
+    <a href="/me">
+      <Button>{t("dashboard_btn")}</Button>
+    </a>
+  </div>
+));
+
 class Index extends React.Component {
   state = {
     viewport: initialViewport,
@@ -260,7 +268,7 @@ class Index extends React.Component {
             }
           />
         </Map>
-        {!this.props.token && <LoginButton />}
+        {this.props.token ? <DashboardButton /> : <LoginButton />}
       </div>
     );
   }

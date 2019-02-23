@@ -1,0 +1,22 @@
+{
+  "layers": {
+    "created_at": "Fecha de creaci\u00f3n",
+    "date": "Fecha de adquisici\u00f3n",
+    "description": "Descripci\u00f3n",
+    "layer_type_R": "R\u00e1ster",
+    "layer_type_V": "Vector",
+    "name": "Nombre",
+    "title": "Tus capas",
+    "type": "Tipo"
+  },
+  "maps": {
+    "created_at": "Fecha de creaci\u00f3n",
+    "description": "Descripci\u00f3n",
+    "name": "Nombre",
+    "title": "Tus mapas"
+  },
+  "sidebar": {
+    "layers": "Capas",
+    "maps": "Mapas"
+  }
+}

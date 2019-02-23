@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { withNamespaces } from "../../i18n";
+import { withAuthSync } from "../../utils/auth";
 
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,13 +13,16 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
+// import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
+import LayersContent from "../../components/me/LayersContent";
+import MapsContent from "../../components/me/MapsContent";
 
 // import DashboardIcon from "@material-ui/icons/Dashboard";
 import LayersIcon from "@material-ui/icons/Layers";
@@ -102,23 +107,17 @@ const styles = theme => ({
   }
 });
 
-const LayersContent = () => (
-  <Typography variant="h4" gutterBottom component="h2">
-    Layers
-  </Typography>
-);
-
-const MapsContent = () => (
-  <Typography variant="h4" gutterBottom component="h2">
-    Maps
-  </Typography>
-);
-
 class Dashboard extends React.Component {
   state = {
     open: true,
     currentContent: "layers"
   };
+
+  static async getInitialProps() {
+    return {
+      namespacesRequired: ["common"]
+    };
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -129,7 +128,6 @@ class Dashboard extends React.Component {
   };
 
   handleSectionChange = key => {
-    console.log(key);
     this.setState({ currentContent: key });
   };
 
@@ -139,9 +137,9 @@ class Dashboard extends React.Component {
 
     let content;
     if (currentContent === "layers") {
-      content = <LayersContent />;
+      content = <LayersContent token={this.props.token} />;
     } else if (currentContent === "maps") {
-      content = <MapsContent />;
+      content = <MapsContent token={this.props.token} />;
     }
 
     return (
@@ -235,4 +233,8 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+Dashboard = withNamespaces("me")(Dashboard);
+Dashboard = withStyles(styles)(Dashboard);
+Dashboard = withAuthSync(Dashboard);
+
+export default Dashboard;

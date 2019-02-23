@@ -1,0 +1,22 @@
+{
+  "layers": {
+    "created_at": "Creation date",
+    "date": "Acquisition date",
+    "description": "Description",
+    "layer_type_R": "Raster",
+    "layer_type_V": "Vector",
+    "name": "Name",
+    "title": "Your layers",
+    "type": "Type"
+  },
+  "maps": {
+    "created_at": "Creation date",
+    "description": "Description",
+    "name": "Name",
+    "title": "Your maps"
+  },
+  "sidebar": {
+    "layers": "Layers",
+    "maps": "Maps"
+  }
+}

@@ -94,3 +94,17 @@ case_study__agri,crop_lots_type_S2,Soja tardía,Soybean (late)
 case_study__agri,crop_lots_type_M,Maíz temprano,Maize (early)
 case_study__agri,crop_lots_type_MT,Maíz tardío,Maize (late)
 case_study__agri,crop_lots_type_G1,Girasol 1°,Sunflower 1st
+me,sidebar.layers,Capas,Layers
+me,sidebar.maps,Mapas,Maps
+me,layers.title,Tus capas,Your layers
+me,layers.created_at,Fecha de creación,Creation date
+me,layers.name,Nombre,Name
+me,layers.description,Descripción,Description
+me,layers.type,Tipo,Type
+me,layers.date,Fecha de adquisición,Acquisition date
+me,layers.layer_type_R,Ráster,Raster
+me,layers.layer_type_V,Vector,Vector
+me,maps.title,Tus mapas,Your maps
+me,maps.name,Nombre,Name
+me,maps.description,Descripción,Description
+me,maps.created_at,Fecha de creación,Creation date

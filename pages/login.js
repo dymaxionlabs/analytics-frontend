@@ -102,7 +102,6 @@ class SignIn extends React.Component {
     axios
       .post(buildApiUrl("/auth/login/"), dataSend)
       .then(response => {
-        console.log(response.data);
         const token = response.data.key;
         const expires = this.state.remember ? 30 : null;
         if (token) {
@@ -169,6 +168,7 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
+              disabled={isSubmitting}
               className={classes.submit}
             >
               {t("login.submit")}

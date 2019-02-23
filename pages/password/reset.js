@@ -177,6 +177,7 @@ class PasswordReset extends React.Component {
                   variant="contained"
                   color="primary"
                   fullWidth
+                  disabled={isSubmitting}
                   className={classes.submit}
                 >
                   {t("login.submit")}

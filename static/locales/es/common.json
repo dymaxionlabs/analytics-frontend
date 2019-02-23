@@ -16,20 +16,22 @@
   "reset_password": {
     "cancel": "Cancelar",
     "email_label": "Ingrese la direcci\u00f3n de email asociada a su cuenta",
-    "error_msg": "Un error ha ocurrido. Intente soliciar un nuevo cambio de contrase\u00f1a.",
+    "error_msg": "Email debe ser una direcci\u00f3n de email v\u00e1lida",
     "submit": "Enviar",
-    "success_msg": "\u00a1Cambio de contrase\u00f1a exitoso!",
+    "success_msg": "Su requerimiento fue recibido. Revise su email para hacer el cambio de contrase\u00f1a.",
     "title": "Reestablecer la contrase\u00f1a"
   },
   "reset_password_confirm": {
     "cancel": "Cancelar",
     "change": "Cambiar",
+    "error_msg": "Un error ha ocurrido. Intente soliciar un nuevo cambio de contrase\u00f1a.",
     "invalid_password": "El password debe ser de 8 caracteres o m\u00e1s y contener al menos una letra may\u00fascula, una letra min\u00fascula y un n\u00famero.",
     "password1_label": "Ingrese nueva contrase\u00f1a",
     "password1_placeholder": "Contrase\u00f1a",
     "password2_label": "Confirme nueva contrase\u00f1a",
     "password2_placeholder": "Confirmar contrase\u00f1a",
     "same_password": "Las contrase\u00f1as deben coincidir.",
+    "success_msg": "\u00a1Cambio de contrase\u00f1a exitoso!",
     "title": "Confirmar cambio de contrase\u00f1a"
   },
   "title": "Analytics | Dymaxion Labs",

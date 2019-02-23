@@ -49,6 +49,9 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
+  },
+  passwordReset: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
@@ -172,6 +175,12 @@ class SignIn extends React.Component {
             </Button>
             {isSubmitting && <LinearProgress />}
           </form>
+          <Typography className={classes.passwordReset}>
+            {t("login.cant_remember")}{" "}
+            <Link href="/password/reset">
+              {t("login.request_new_password")}
+            </Link>
+          </Typography>
         </Paper>
       </main>
     );

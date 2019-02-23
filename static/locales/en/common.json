@@ -16,20 +16,22 @@
   "reset_password": {
     "cancel": "Cancel",
     "email_label": "Enter the email address associated with your account",
-    "error_msg": "An error has occurred. Try requesting a new password change.",
+    "error_msg": "Email must be a valid email address",
     "submit": "Send",
-    "success_msg": "Password changed successfully!",
+    "success_msg": "Your request was received. Check your email to make the password change.",
     "title": "Reset password"
   },
   "reset_password_confirm": {
     "cancel": "Cancel",
     "change": "Change",
+    "error_msg": "An error has occurred. Try requesting a new password change.",
     "invalid_password": "The password must be 8 characters or more and contain at least one uppercase letter, one lower case letter and one number.",
     "password1_label": "Enter new password",
     "password1_placeholder": "Password",
     "password2_label": "Confirm new password",
     "password2_placeholder": "Confirm password",
     "same_password": "Passwords must match.",
+    "success_msg": "Password changed successfully!",
     "title": "Confirm password change"
   },
   "title": "Analytics | Dymaxion Labs",

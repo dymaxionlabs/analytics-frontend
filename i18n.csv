@@ -19,8 +19,8 @@ common,reset_password.title,Reestablecer la contraseña,Reset password
 common,reset_password.email_label,Ingrese la dirección de email asociada a su cuenta,Enter the email address associated with your account
 common,reset_password.cancel,Cancelar,Cancel
 common,reset_password.submit,Enviar,Send
-common,reset_password.success_msg,¡Cambio de contraseña exitoso!,Password changed successfully!
-common,reset_password.error_msg,Un error ha ocurrido. Intente soliciar un nuevo cambio de contraseña.,An error has occurred. Try requesting a new password change.
+common,reset_password_confirm.success_msg,¡Cambio de contraseña exitoso!,Password changed successfully!
+common,reset_password_confirm.error_msg,Un error ha ocurrido. Intente soliciar un nuevo cambio de contraseña.,An error has occurred. Try requesting a new password change.
 common,reset_password_confirm.title,Confirmar cambio de contraseña,Confirm password change
 common,reset_password_confirm.invalid_password,"El password debe ser de 8 caracteres o más y contener al menos una letra mayúscula, una letra minúscula y un número.","The password must be 8 characters or more and contain at least one uppercase letter, one lower case letter and one number."
 common,reset_password_confirm.same_password,Las contraseñas deben coincidir.,Passwords must match.

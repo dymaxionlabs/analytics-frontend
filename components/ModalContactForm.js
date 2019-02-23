@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Form, Modal, Message, Header, Grid } from "semantic-ui-react";
 import { AreaSection, LayersSection } from "./ConfirmationPortal";
-import { buildApiUrl } from "../lib/api";
+import { buildApiUrl } from "../utils/api";
 import { withNamespaces } from "../i18n";
 import axios from "axios";
 

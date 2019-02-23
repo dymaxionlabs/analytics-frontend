@@ -1,6 +1,6 @@
 import React from "react";
-import { withNamespaces, Router, Link } from "../i18n";
-import { withAuthSync, login } from "../utils/auth";
+import { withNamespaces, Link } from "../i18n";
+import { login } from "../utils/auth";
 import { Checkbox, Form, Icon, Button, Header, Image } from "semantic-ui-react";
 import axios from "axios";
 import "semantic-ui-css/semantic.css";

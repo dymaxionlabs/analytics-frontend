@@ -1,4 +1,5 @@
 {
+  "download": "Descargar",
   "layers": {
     "created_at": "Fecha de creaci\u00f3n",
     "date": "Fecha de adquisici\u00f3n",
@@ -18,5 +19,6 @@
   "sidebar": {
     "layers": "Capas",
     "maps": "Mapas"
-  }
+  },
+  "view": "Ver"
 }

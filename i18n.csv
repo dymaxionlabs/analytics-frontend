@@ -97,6 +97,8 @@ case_study__agri,crop_lots_type_MT,Maíz tardío,Maize (late)
 case_study__agri,crop_lots_type_G1,Girasol 1°,Sunflower 1st
 me,sidebar.layers,Capas,Layers
 me,sidebar.maps,Mapas,Maps
+me,download,Descargar,Download
+me,view,Ver,View
 me,layers.title,Tus capas,Your layers
 me,layers.created_at,Fecha de creación,Creation date
 me,layers.name,Nombre,Name

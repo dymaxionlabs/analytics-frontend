@@ -1,4 +1,5 @@
 {
+  "download": "Download",
   "layers": {
     "created_at": "Creation date",
     "date": "Acquisition date",
@@ -18,5 +19,6 @@
   "sidebar": {
     "layers": "Layers",
     "maps": "Maps"
-  }
+  },
+  "view": "View"
 }

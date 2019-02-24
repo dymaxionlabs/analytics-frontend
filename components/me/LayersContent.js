@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import MapIcon from "@material-ui/icons/Map";
@@ -146,20 +147,24 @@ class LayersContent extends React.Component {
                   </TableCell>
                   <TableCell align="right">
                     <a href={`/layers/${layer.uuid}`}>
+                      <Tooltip title={t("view")}>
+                        <IconButton
+                          className={classes.button}
+                          aria-label={t("view")}
+                        >
+                          <MapIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </a>
+                    <Tooltip title={t("download")}>
                       <IconButton
                         className={classes.button}
-                        aria-label="View layer in a map"
+                        aria-label={t("download")}
+                        onClick={() => this.handleDownloadClick(layer)}
                       >
-                        <MapIcon />
+                        <CloudDownloadIcon />
                       </IconButton>
-                    </a>
-                    <IconButton
-                      className={classes.button}
-                      aria-label="Download layer"
-                      onClick={() => this.handleDownloadClick(layer)}
-                    >
-                      <CloudDownloadIcon />
-                    </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}

@@ -7,6 +7,7 @@ import getPageContext from "../utils/getPageContext";
 import withGA from "../components/withGA";
 import { appWithTranslation, Router } from "../i18n";
 import i18next from "i18next";
+import NProgress from "next-nprogress/component";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -60,6 +61,10 @@ class MyApp extends App {
           >
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+
+            {/* Progress indicator for page transitioning */}
+            <NProgress />
+
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
             <Component

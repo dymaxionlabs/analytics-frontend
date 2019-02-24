@@ -132,7 +132,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { t, classes } = this.props;
     const { currentContent } = this.state;
 
     let content;
@@ -210,13 +210,13 @@ class Dashboard extends React.Component {
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
-              <ListItemText primary="Layers" />
+              <ListItemText primary={t("sidebar.layers")} />
             </ListItem>
             <ListItem button onClick={() => this.handleSectionChange("maps")}>
               <ListItemIcon>
                 <MapIcon />
               </ListItemIcon>
-              <ListItemText primary="Maps" />
+              <ListItemText primary={t("sidebar.maps")} />
             </ListItem>
           </List>
         </Drawer>

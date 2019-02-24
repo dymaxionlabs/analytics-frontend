@@ -10,8 +10,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
+import Snackbar from "@material-ui/core/Snackbar";
+
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import MapIcon from "@material-ui/icons/Map";
+import CloseIcon from "@material-ui/icons/Close";
 
 import { i18n, withNamespaces } from "../../i18n";
 import axios from "axios";
@@ -36,9 +39,45 @@ function getLayerId(layer) {
   return parts[parts.length - 2];
 }
 
+class NotImplementedSnackbar extends React.Component {
+  render() {
+    const { classes, open, onClose } = this.props;
+
+    return (
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={onClose}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">Not implemented yet</span>}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            className={classes.close}
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
+    );
+  }
+}
+
+NotImplementedSnackbar = withStyles(styles)(NotImplementedSnackbar);
+
 class LayersContent extends React.Component {
   state = {
-    layers: []
+    layers: [],
+    notImplementedOpen: false
   };
 
   componentDidMount() {
@@ -52,13 +91,17 @@ class LayersContent extends React.Component {
       });
   }
 
-  onDownloadClick = id => {
-    alert("Not implemented yet");
+  handleDownloadClick = () => {
+    this.setState({ notImplementedOpen: true });
+  };
+
+  handleNotImplementedClose = () => {
+    this.setState({ notImplementedOpen: false });
   };
 
   render() {
     const { t, classes } = this.props;
-    const { layers } = this.state;
+    const { layers, notImplementedOpen } = this.state;
     const locale = i18n.language;
 
     return (
@@ -115,7 +158,9 @@ class LayersContent extends React.Component {
                     <IconButton
                       className={classes.button}
                       aria-label="Download layer"
-                      onClick={() => this.onDownloadClick(getLayerId(layer))}
+                      onClick={() =>
+                        this.handleDownloadClick(getLayerId(layer))
+                      }
                     >
                       <CloudDownloadIcon />
                     </IconButton>
@@ -125,6 +170,10 @@ class LayersContent extends React.Component {
             </TableBody>
           </Table>
         </Paper>
+        <NotImplementedSnackbar
+          open={notImplementedOpen}
+          onClose={this.handleNotImplementedClose}
+        />
       </div>
     );
   }

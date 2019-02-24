@@ -1,11 +1,4 @@
-import {
-  withLeaflet,
-  Map,
-  TileLayer,
-  ZoomControl,
-  GeoJSON
-} from "react-leaflet";
-import Logo from "../../components/Logo";
+import { Map, TileLayer, ZoomControl, GeoJSON } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 
@@ -67,6 +60,7 @@ const Basemap = ({ url }) => (
   <TileLayer
     attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
     url={url}
+    zIndex={-1}
   />
 );
 
@@ -81,7 +75,6 @@ class ViewMap extends React.Component {
         zoomControl={false}
         {...extraProps}
       >
-        {/* <VectorGrid {...lotsVectorGrid} /> */}
         <Basemap url={basemapUrl} />
         {children}
         {roiData && <ROIPolygon data={roiData} />}

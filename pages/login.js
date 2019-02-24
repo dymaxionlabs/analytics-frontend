@@ -14,10 +14,10 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Head from "next/head";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { withNamespaces, Link } from "../i18n";
+import { withNamespaces, Link, Router } from "../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../utils/api";
-import { login } from "../utils/auth";
+import { withAuthSync, login } from "../utils/auth";
 
 const styles = theme => ({
   main: {
@@ -63,10 +63,16 @@ class SignIn extends React.Component {
     isSubmitting: false
   };
 
-  static async getInitialProps() {
+  static async getInitialProps(ctx) {
     return {
       namespacesRequired: ["common"]
     };
+  }
+
+  componentDidMount() {
+    if (this.props.token) {
+      Router.replace("/me");
+    }
   }
 
   onEmailChange = e => {
@@ -191,4 +197,8 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withNamespaces()(withStyles(styles)(SignIn));
+SignIn = withStyles(styles)(SignIn);
+SignIn = withNamespaces()(SignIn);
+SignIn = withAuthSync(SignIn, { redirect: false });
+
+export default SignIn;

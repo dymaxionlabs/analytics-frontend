@@ -75,7 +75,7 @@ class LayerMap extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.query;
+    const { projectSlug, layerSlug } = this.props.query;
 
     axios
       .get(buildApiUrl(`/layers/${id}`), {

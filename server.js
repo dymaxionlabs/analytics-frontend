@@ -13,15 +13,19 @@ const handle = app.getRequestHandler();
 
   server.use(nextI18NextMiddleware(nextI18next));
 
-  server.get("/layers/:id", (req, res) => {
-    const actualPage = "/layer";
-    const queryParams = { id: req.params.id };
+  server.get("/layers/:uuid", (req, res) => {
+    const actualPage = "/layers";
+    const queryParams = {
+      uuid: req.params.uuid
+    };
     app.render(req, res, actualPage, queryParams);
   });
 
-  server.get("/maps/:id", (req, res) => {
-    const actualPage = "/map";
-    const queryParams = { id: req.params.id };
+  server.get("/maps/:uuid", (req, res) => {
+    const actualPage = "/maps";
+    const queryParams = {
+      uuid: req.params.uuid
+    };
     app.render(req, res, actualPage, queryParams);
   });
 

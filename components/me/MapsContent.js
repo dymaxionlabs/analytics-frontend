@@ -90,7 +90,7 @@ class MapsContent extends React.Component {
                   </TableCell>
                   <TableCell>{map.description}</TableCell>
                   <TableCell align="right">
-                    <a href={`/maps/${getMapId(map)}`}>
+                    <a href={`/maps/${map.project_slug}/${map.slug}`}>
                       <IconButton
                         className={classes.button}
                         aria-label="View map"

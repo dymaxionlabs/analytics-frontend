@@ -128,7 +128,7 @@ class LayersContent extends React.Component {
             </TableHead>
             <TableBody>
               {layers.map(layer => (
-                <TableRow key={layer.url}>
+                <TableRow key={layer.uuid}>
                   <TableCell>
                     <Moment locale={locale} fromNow>
                       {layer.created_at}
@@ -147,7 +147,7 @@ class LayersContent extends React.Component {
                     </Moment>
                   </TableCell>
                   <TableCell align="right">
-                    <a href={`/layers/${getLayerId(layer)}`}>
+                    <a href={`/layers/${layer.uuid}`}>
                       <IconButton
                         className={classes.button}
                         aria-label="View layer in a map"
@@ -158,9 +158,7 @@ class LayersContent extends React.Component {
                     <IconButton
                       className={classes.button}
                       aria-label="Download layer"
-                      onClick={() =>
-                        this.handleDownloadClick(getLayerId(layer))
-                      }
+                      onClick={() => this.handleDownloadClick(layer)}
                     >
                       <CloudDownloadIcon />
                     </IconButton>

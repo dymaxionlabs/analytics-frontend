@@ -87,8 +87,6 @@ class LayerMap extends React.Component {
       if (layer.layer_type === "R") {
         tileLayer = <TileLayer type="raster" url={layer.tiles_url} />;
       } else {
-        // const url =
-        //   "https://storage.googleapis.com/dym-tiles/flood/gfm_14d/2017177/{z}/{x}/{y}.pbf";
         const url = layer.tiles_url;
         tileLayer = (
           <VectorTileLayer
@@ -96,17 +94,9 @@ class LayerMap extends React.Component {
             type="protobuf"
             url={url}
             subdomains=""
-            vectorTileLayerStyles={{
-              style: {
-                weight: 1,
-                opacity: 1,
-                color: "#fff",
-                fillColor: "#00b2ff",
-                fillOpacity: 1,
-                fill: true,
-                stroke: true
-              }
-            }}
+            vectorTileLayerStyles={
+              layer.extra_fields && layer.extra_fields["styles"]
+            }
           />
         );
       }

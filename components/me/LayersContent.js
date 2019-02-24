@@ -16,7 +16,7 @@ import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import MapIcon from "@material-ui/icons/Map";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { i18n, withNamespaces } from "../../i18n";
+import { i18n, withNamespaces, Router } from "../../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../../utils/api";
 import Moment from "react-moment";
@@ -33,11 +33,6 @@ const styles = theme => ({
     marginBottom: theme.spacing.units * 10
   }
 });
-
-function getLayerId(layer) {
-  const parts = layer.url.split("/");
-  return parts[parts.length - 2];
-}
 
 class NotImplementedSnackbar extends React.Component {
   render() {
@@ -86,8 +81,11 @@ class LayersContent extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        console.log(response.data[0]);
         this.setState({ layers: response.data });
+      })
+      .catch(error => {
+        alert("An error ocurred");
+        Router.push("/login");
       });
   }
 

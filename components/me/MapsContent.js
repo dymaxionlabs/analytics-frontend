@@ -10,10 +10,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
-import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import MapIcon from "@material-ui/icons/Map";
 
-import { i18n, withNamespaces } from "../../i18n";
+import { i18n, withNamespaces, Router } from "../../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../../utils/api";
 import Moment from "react-moment";
@@ -49,6 +48,10 @@ class MapsContent extends React.Component {
       .then(response => {
         console.log(response.data);
         this.setState({ maps: response.data });
+      })
+      .catch(error => {
+        alert("An error ocurred");
+        Router.push("/login");
       });
   }
 

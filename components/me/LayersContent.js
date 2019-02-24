@@ -50,7 +50,7 @@ class NotImplementedSnackbar extends React.Component {
         ContentProps={{
           "aria-describedby": "message-id"
         }}
-        message={<span id="message-id">Not implemented yet</span>}
+        message={<span id="message-id">Disponible pronto</span>}
         action={[
           <IconButton
             key="close"

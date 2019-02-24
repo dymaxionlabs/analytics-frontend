@@ -16,33 +16,10 @@ const initialViewport = {
   zoom: 12
 };
 
-const sentinelModifiedAttribution =
-  'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
+// const sentinelModifiedAttribution =
+//   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
 
-const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
-
-const rasterLayers = [
-  {
-    id: "true_color",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  },
-  {
-    id: "ndvi",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  }
-  // {
-  //   id: "lots",
-  //   type: "vector-geojson",
-  //   data: lotsData,
-  //   attribution: dymaxionAttribution
-  // }
-];
+// const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/view/Map"), {

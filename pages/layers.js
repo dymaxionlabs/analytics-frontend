@@ -54,9 +54,6 @@ const Map = dynamic(() => import("../components/view/Map"), {
   ))
 });
 
-const VectorLayer = dynamic(() => import("../components/VectorLayer"), {
-  ssr: false
-});
 const RasterLayer = dynamic(() => import("../components/RasterLayer"), {
   ssr: false
 });
@@ -64,6 +61,7 @@ const RasterLayer = dynamic(() => import("../components/RasterLayer"), {
 class LayerMap extends React.Component {
   state = {
     layer: null,
+    bounds: null,
     viewport: initialViewport
   };
 
@@ -75,47 +73,39 @@ class LayerMap extends React.Component {
   }
 
   componentDidMount() {
-    const { projectSlug, layerSlug } = this.props.query;
+    const { uuid } = this.props.query;
 
     axios
-      .get(buildApiUrl(`/layers/${id}`), {
+      .get(buildApiUrl(`/layers/${uuid}/`), {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
         console.log(response.data);
-        this.setState({ layer: response.data });
+        const layer = response.data;
+        const minBounds = [layer.extent[1], layer.extent[0]];
+        const maxBounds = [layer.extent[3], layer.extent[2]];
+        const bounds = [minBounds, maxBounds];
+        console.log(bounds);
+        this.setState({ layer: layer, bounds: bounds });
       });
   }
 
   _trackEvent(action, value) {
-    this.props.analytics.event("View-Agri", action, value);
+    this.props.analytics.event("Layers", action, value);
   }
 
   _onMapViewportChanged = viewport => {
     this.setState({ viewport });
   };
 
-  _onToggleLayer = layer => {
-    const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
-
-    if (selectedLayers.includes(layer)) {
-      this._trackEvent("enable-layer", layer);
-    } else {
-      this._trackEvent("disable-layer", layer);
-    }
-
-    this.setState({ selectedLayers });
-  };
-
-  _addOrRemove(array, item) {
-    const include = array.includes(item);
-    return include
-      ? array.filter(arrayItem => arrayItem !== item)
-      : [...array, item];
-  }
-
   render() {
-    const { viewport, selectedLayers } = this.state;
+    const { viewport, bounds, layer } = this.state;
+
+    const rasterLayer = layer && (
+      <RasterLayer id="layer" type="raster" url={layer.tiles_url} />
+    );
+
+    const areaData = layer && layer.area_geom;
 
     return (
       <div className="index">
@@ -132,9 +122,13 @@ class LayerMap extends React.Component {
           />
         </Head>
         <Map
+          bounds={bounds}
           viewport={viewport}
           onViewportChanged={this._onMapViewportChanged}
-        />
+          roiData={areaData}
+        >
+          {rasterLayer}
+        </Map>
       </div>
     );
   }

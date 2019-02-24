@@ -258,8 +258,10 @@ class AgriMap extends React.Component {
         </Head>
         <Map
           viewport={viewport}
-          roiData={roiData}
           onViewportChanged={this._onMapViewportChanged}
+          roiData={roiData}
+          minZoom={10}
+          maxZoom={15}
         >
           {showLotsLayer ? <LotsLayer /> : ""}
           {Object.keys(selectedRasterLayers).map(key => (

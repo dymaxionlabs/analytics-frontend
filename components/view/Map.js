@@ -72,22 +72,19 @@ const Basemap = ({ url }) => (
 
 class ViewMap extends React.Component {
   render() {
-    const { children, viewport, onViewportChanged, roiData } = this.props;
+    const { children, roiData, ...extraProps } = this.props;
 
     return (
       <Map
         ref="map"
         style={mapContainerStyle}
-        viewport={viewport}
         zoomControl={false}
-        onViewportChanged={onViewportChanged}
-        maxZoom={15}
-        minZoom={10}
+        {...extraProps}
       >
         {/* <VectorGrid {...lotsVectorGrid} /> */}
         <Basemap url={basemapUrl} />
         {children}
-        <ROIPolygon data={roiData} />
+        {roiData && <ROIPolygon data={roiData} />}
 
         <ZoomControl position="topright" />
       </Map>

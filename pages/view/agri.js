@@ -77,10 +77,10 @@ const Map = dynamic(() => import("../../components/view/Map"), {
   ))
 });
 
-const VectorLayer = dynamic(() => import("../../components/VectorLayer"), {
+const GeoJSON = dynamic(() => import("../../components/GeoJSON"), {
   ssr: false
 });
-const RasterLayer = dynamic(() => import("../../components/RasterLayer"), {
+const TileLayer = dynamic(() => import("../../components/TileLayer"), {
   ssr: false
 });
 
@@ -170,7 +170,7 @@ class LotsLayer extends React.Component {
 
     return (
       <div>
-        <VectorLayer
+        <GeoJSONLayer
           data={lotsData}
           style={this._style}
           attribution={dymaxionAttribution}
@@ -265,7 +265,7 @@ class AgriMap extends React.Component {
         >
           {showLotsLayer ? <LotsLayer /> : ""}
           {Object.keys(selectedRasterLayers).map(key => (
-            <RasterLayer key={key} {...selectedRasterLayers[key]} />
+            <TileLayer key={key} {...selectedRasterLayers[key]} />
           ))}
 
           <LayerSelector

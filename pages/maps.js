@@ -54,10 +54,10 @@ const Map = dynamic(() => import("../components/view/Map"), {
   ))
 });
 
-const VectorLayer = dynamic(() => import("../components/VectorLayer"), {
+const GeoJSON = dynamic(() => import("../components/GeoJSON"), {
   ssr: false
 });
-const RasterLayer = dynamic(() => import("../components/RasterLayer"), {
+const TileLayer = dynamic(() => import("../components/TileLayer"), {
   ssr: false
 });
 

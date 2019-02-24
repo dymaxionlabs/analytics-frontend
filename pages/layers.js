@@ -54,7 +54,7 @@ const Map = dynamic(() => import("../components/view/Map"), {
   ))
 });
 
-const RasterLayer = dynamic(() => import("../components/RasterLayer"), {
+const TileLayer = dynamic(() => import("../components/TileLayer"), {
   ssr: false
 });
 
@@ -102,7 +102,7 @@ class LayerMap extends React.Component {
     const { viewport, bounds, layer } = this.state;
 
     const rasterLayer = layer && (
-      <RasterLayer id="layer" type="raster" url={layer.tiles_url} />
+      <TileLayer id="layer" type="raster" url={layer.tiles_url} />
     );
 
     const areaData = layer && layer.area_geom;

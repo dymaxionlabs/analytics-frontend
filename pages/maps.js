@@ -4,45 +4,23 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
 import { withNamespaces } from "../i18n";
-import { withAuthSync } from "../utils/auth";
+import { withAuthSync, logout } from "../utils/auth";
 import { buildApiUrl } from "../utils/api";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader } from "semantic-ui-react";
 import axios from "axios";
+import LayerLegend from "../components/LayerLegend";
 
 const initialViewport = {
   center: [-36.179114636463652, -62.846142338298094],
   zoom: 12
 };
 
-const sentinelModifiedAttribution =
-  'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
+// const sentinelModifiedAttribution =
+//   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
 
-const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
-
-const rasterLayers = [
-  {
-    id: "true_color",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/s2rgb/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  },
-  {
-    id: "ndvi",
-    type: "raster",
-    url:
-      "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
-    attribution: sentinelModifiedAttribution
-  }
-  // {
-  //   id: "lots",
-  //   type: "vector-geojson",
-  //   data: lotsData,
-  //   attribution: dymaxionAttribution
-  // }
-];
+// const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/view/Map"), {
@@ -54,16 +32,18 @@ const Map = dynamic(() => import("../components/view/Map"), {
   ))
 });
 
-const GeoJSON = dynamic(() => import("../components/GeoJSON"), {
-  ssr: false
-});
 const TileLayer = dynamic(() => import("../components/TileLayer"), {
   ssr: false
 });
 
-class LayerMap extends React.Component {
+const VectorTileLayer = dynamic(() => import("../components/VectorTileLayer"), {
+  ssr: false
+});
+
+class MapMap extends React.Component {
   state = {
-    layer: null,
+    map: null,
+    bounds: null,
     viewport: initialViewport
   };
 
@@ -75,47 +55,67 @@ class LayerMap extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.query;
+    const { uuid } = this.props.query;
 
     axios
-      .get(buildApiUrl(`/layers/${id}`), {
+      .get(buildApiUrl(`/maps/${uuid}/`), {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
         console.log(response.data);
-        this.setState({ layer: response.data });
+        const map = response.data;
+        const minBounds = [map.extent[1], map.extent[0]];
+        const maxBounds = [map.extent[3], map.extent[2]];
+        const bounds = [minBounds, maxBounds];
+        this.setState({ map: map, bounds: bounds });
+      })
+      .catch(err => {
+        const response = err.response;
+        if (!response || response.status >= 400) {
+          logout();
+        }
       });
   }
 
   _trackEvent(action, value) {
-    this.props.analytics.event("View-Agri", action, value);
+    this.props.analytics.event("Layers", action, value);
   }
 
   _onMapViewportChanged = viewport => {
     this.setState({ viewport });
   };
 
-  _onToggleLayer = layer => {
-    const selectedLayers = this._addOrRemove(this.state.selectedLayers, layer);
+  render() {
+    const { viewport, bounds, layer } = this.state;
 
-    if (selectedLayers.includes(layer)) {
-      this._trackEvent("enable-layer", layer);
-    } else {
-      this._trackEvent("disable-layer", layer);
+    // Build tile layer: use TileLayer or VectorTileLayer based on layer type
+    let tileLayer;
+    if (layer) {
+      if (layer.layer_type === "R") {
+        tileLayer = <TileLayer type="raster" url={layer.tiles_url} />;
+      } else {
+        const url = layer.tiles_url;
+        tileLayer = (
+          <VectorTileLayer
+            id="layer"
+            type="protobuf"
+            url={url}
+            subdomains=""
+            vectorTileLayerStyles={
+              layer.extra_fields && layer.extra_fields["styles"]
+            }
+          />
+        );
+      }
     }
 
-    this.setState({ selectedLayers });
-  };
+    // Get area polygon
+    const areaData = layer && layer.area_geom;
 
-  _addOrRemove(array, item) {
-    const include = array.includes(item);
-    return include
-      ? array.filter(arrayItem => arrayItem !== item)
-      : [...array, item];
-  }
-
-  render() {
-    const { viewport, selectedLayers } = this.state;
+    // Build Legend (if legend key is present on extra_fields)
+    const legendOpts =
+      layer && layer.extra_fields && layer.extra_fields["legend"];
+    const legend = legendOpts && <LayerLegend {...legendOpts} />;
 
     return (
       <div className="index">
@@ -132,15 +132,20 @@ class LayerMap extends React.Component {
           />
         </Head>
         <Map
+          bounds={bounds}
           viewport={viewport}
           onViewportChanged={this._onMapViewportChanged}
-        />
+          roiData={areaData}
+        >
+          {tileLayer}
+          {legend}
+        </Map>
       </div>
     );
   }
 }
 
-LayerMap = withNamespaces()(LayerMap);
-LayerMap = withAuthSync(LayerMap);
+MapMap = withNamespaces()(MapMap);
+MapMap = withAuthSync(MapMap);
 
-export default LayerMap;
+export default MapMap;

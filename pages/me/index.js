@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Head from "next/head";
 import { withNamespaces } from "../../i18n";
 import { withAuthSync } from "../../utils/auth";
 
@@ -115,7 +116,7 @@ class Dashboard extends React.Component {
 
   static async getInitialProps() {
     return {
-      namespacesRequired: ["common"]
+      namespacesRequired: ["me", "common"]
     };
   }
 
@@ -144,6 +145,9 @@ class Dashboard extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Head>
+          <title>{t("common:title")}</title>
+        </Head>
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -233,7 +237,7 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-Dashboard = withNamespaces("me")(Dashboard);
+Dashboard = withNamespaces(["me", "common"])(Dashboard);
 Dashboard = withStyles(styles)(Dashboard);
 Dashboard = withAuthSync(Dashboard);
 

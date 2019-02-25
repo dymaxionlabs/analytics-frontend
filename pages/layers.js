@@ -10,6 +10,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader } from "semantic-ui-react";
 import axios from "axios";
+import LayerLegend from "../components/LayerLegend";
 
 const initialViewport = {
   center: [-36.179114636463652, -62.846142338298094],
@@ -82,6 +83,7 @@ class LayerMap extends React.Component {
   render() {
     const { viewport, bounds, layer } = this.state;
 
+    // Build tile layer: use TileLayer or VectorTileLayer based on layer type
     let tileLayer;
     if (layer) {
       if (layer.layer_type === "R") {
@@ -102,7 +104,13 @@ class LayerMap extends React.Component {
       }
     }
 
+    // Get area polygon
     const areaData = layer && layer.area_geom;
+
+    // Build Legend (if legend key is present on extra_fields)
+    const legendOpts =
+      layer && layer.extra_fields && layer.extra_fields["legend"];
+    const legend = legendOpts && <LayerLegend {...legendOpts} />;
 
     return (
       <div className="index">
@@ -125,6 +133,7 @@ class LayerMap extends React.Component {
           roiData={areaData}
         >
           {tileLayer}
+          {legend}
         </Map>
       </div>
     );

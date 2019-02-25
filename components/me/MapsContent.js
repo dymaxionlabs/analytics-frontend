@@ -12,7 +12,8 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import MapIcon from "@material-ui/icons/Map";
 
-import { i18n, withNamespaces, Router } from "../../i18n";
+import { i18n, withNamespaces } from "../../i18n";
+import { logout } from "../../utils/auth";
 import axios from "axios";
 import { buildApiUrl } from "../../utils/api";
 import Moment from "react-moment";
@@ -49,9 +50,11 @@ class MapsContent extends React.Component {
         console.log(response.data);
         this.setState({ maps: response.data });
       })
-      .catch(error => {
-        alert("An error ocurred");
-        Router.push("/login");
+      .catch(err => {
+        const response = err.response;
+        if (!response || response.status >= 400) {
+          logout();
+        }
       });
   }
 

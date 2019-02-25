@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
 import { withNamespaces } from "../i18n";
-import { withAuthSync } from "../utils/auth";
+import { withAuthSync, logout } from "../utils/auth";
 import { buildApiUrl } from "../utils/api";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -69,6 +69,12 @@ class LayerMap extends React.Component {
         const bounds = [minBounds, maxBounds];
         console.log(bounds);
         this.setState({ layer: layer, bounds: bounds });
+      })
+      .catch(err => {
+        const response = err.response;
+        if (!response || response.status >= 400) {
+          logout();
+        }
       });
   }
 

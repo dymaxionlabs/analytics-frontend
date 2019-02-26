@@ -156,6 +156,7 @@ class PasswordReset extends React.Component {
                 autoFocus
                 type="email"
                 onChange={this.onEmailChange}
+                value={this.state.email}
               />
             </FormControl>
             <Grid container spacing={24}>

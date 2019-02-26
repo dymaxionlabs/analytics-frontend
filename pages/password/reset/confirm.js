@@ -209,8 +209,8 @@ class PasswordResetConfirm extends React.Component {
                 name="password1"
                 type="password"
                 id="password1"
-                autoComplete="current-password"
                 onChange={this.onPassword1Change}
+                value={this.state.pass1}
               />
               {this.state.err_pass1_msg && (
                 <FormHelperText>{this.state.err_pass1_msg}</FormHelperText>
@@ -224,8 +224,8 @@ class PasswordResetConfirm extends React.Component {
                 name="password2"
                 type="password"
                 id="password2"
-                autoComplete="current-password"
                 onChange={this.onPassword2Change}
+                value={this.state.pass2}
               />
               {this.state.err_pass2_msg && (
                 <FormHelperText>{this.state.err_pass2_msg}</FormHelperText>

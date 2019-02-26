@@ -44,7 +44,6 @@ class LayersFab extends React.Component {
 
   _findLayer(uuid) {
     const layer = this.props.layers.find(layer => layer.uuid === uuid);
-    console.log(`_findLayer("${uuid}") => ${layer}`);
     return layer;
   }
 

@@ -10,7 +10,8 @@ import axios from "axios";
 
 import LoadingProgress from "../components/LoadingProgress";
 import LayersFab from "../components/LayersFab";
-import LayerLegend from "../components/LayerLegend";
+// import LayerLegend from "../components/LayerLegend";
+import LayersLegendExpansionPanel from "../components/LayersLegendExpansionPanel";
 
 const styles = theme => ({});
 
@@ -31,8 +32,6 @@ const TileLayer = dynamic(() => import("../components/TileLayer"), {
 const VectorTileLayer = dynamic(() => import("../components/VectorTileLayer"), {
   ssr: false
 });
-
-const LayerToggle = ({}) => null;
 
 const initialViewport = {
   center: [-36.179114636463652, -62.846142338298094],
@@ -62,7 +61,6 @@ class MapMap extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        console.log(response.data);
         const map = response.data;
         const minBounds = [map.extent[1], map.extent[0]];
         const maxBounds = [map.extent[3], map.extent[2]];
@@ -121,7 +119,6 @@ class MapMap extends React.Component {
     if (map) {
       for (const uuid of activeLayers) {
         const layer = layers.find(layer => layer.uuid === uuid);
-        console.log(layer);
         if (layer.layer_type === "R") {
           tileLayers.push(
             <TileLayer key={layer.uuid} type="raster" url={layer.tiles_url} />
@@ -142,10 +139,9 @@ class MapMap extends React.Component {
       }
     }
 
-    // // Build Legend (if legend key is present on extra_fields)
-    // const legendOpts =
-    //   layer && layer.extra_fields && layer.extra_fields["legend"];
-    // const legend = legendOpts && <LayerLegend {...legendOpts} />;
+    const layersWithLegend = layers.filter(
+      layer => layer.extra_fields && layer.extra_fields.legend
+    );
 
     return (
       <div className="index">
@@ -171,8 +167,8 @@ class MapMap extends React.Component {
             activeLayers={activeLayers}
             onToggle={this.handleToggleLayer}
           />
+          <LayersLegendExpansionPanel layers={layersWithLegend} />
           {tileLayers}
-          {/* {legend} */}
         </Map>
       </div>
     );

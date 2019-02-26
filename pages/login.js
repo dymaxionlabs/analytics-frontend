@@ -115,6 +115,8 @@ class SignIn extends React.Component {
         }
       })
       .catch(error => {
+        console.log(error);
+        console.log(error.message);
         this.setState({
           errorMsg: t("login.error_msg"),
           isSubmitting: false,
@@ -152,16 +154,18 @@ class SignIn extends React.Component {
                 autoComplete="email"
                 autoFocus
                 type="email"
+                onInput={this.onEmailChange}
                 onChange={this.onEmailChange}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">{t("password")}</InputLabel>
               <Input
+                id="password"
                 name="password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                autoComplete="password"
+                onInput={this.onPasswordChange}
                 onChange={this.onPasswordChange}
               />
             </FormControl>

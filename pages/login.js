@@ -14,10 +14,11 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Head from "next/head";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { withNamespaces, Link, Router } from "../i18n";
+import { withNamespaces, Link } from "../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../utils/api";
 import { withAuthSync, login } from "../utils/auth";
+import { routerReplace } from "../utils/router";
 
 const styles = theme => ({
   main: {
@@ -71,7 +72,7 @@ class SignIn extends React.Component {
 
   componentDidMount() {
     if (this.props.token) {
-      Router.replace("/me");
+      routerReplace("/me");
     }
   }
 

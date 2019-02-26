@@ -1,19 +1,18 @@
 import { Component } from "react";
-import Router from "next/router";
+import { routerPush } from "./router";
 import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 
-// FIXME Should redirect to /me (once implemented)
 export const login = async ({ token, expires, redirectTo = "/me" }) => {
   cookie.set("token", token, { expires: expires });
-  Router.push(redirectTo);
+  routerPush(redirectTo);
 };
 
 export const logout = () => {
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
-  Router.push("/login");
+  routerPush("/login");
 };
 
 // Gets the display name of a JSX component for dev tools
@@ -58,7 +57,7 @@ export const withAuthSync = (WrappedComponent, options) =>
     }
 
     onLogout() {
-      Router.push("/login");
+      routerPush("/login");
     }
 
     render() {
@@ -81,7 +80,7 @@ export const auth = (ctx, redirect) => {
     }
 
     if (!token) {
-      Router.push("/login");
+      routerPush("/login");
     }
   }
 

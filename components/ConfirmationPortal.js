@@ -36,13 +36,20 @@ export const AreaSection = withNamespaces("confirmation_portal")(
   )
 );
 
-export const LayersSection = withNamespaces(["confirmation_portal", "layer_selector"])(
-  ({ t, layers }) => {
-    return (
-    <Item icon="layers" title={layers.map(layer => t(`layer_selector:${layer.key}_title`)).join(', ')} description={t('selected_layers')} />
-  )
-}
-);
+export const LayersSection = withNamespaces([
+  "confirmation_portal",
+  "layer_selector"
+])(({ t, layers }) => {
+  return (
+    <Item
+      icon="layers"
+      title={layers
+        .map(layer => t(`layer_selector:${layer.key}_title`))
+        .join(", ")}
+      description={t("selected_layers")}
+    />
+  );
+});
 
 class ConfirmationPortal extends React.Component {
   render() {
@@ -58,7 +65,7 @@ class ConfirmationPortal extends React.Component {
     } = this.props;
 
     const selLayers = selectedLayers || [];
-    const layers = allLayers.filter(layer => selLayers.includes(layer.key))
+    const layers = allLayers.filter(layer => selLayers.includes(layer.key));
 
     return (
       <div>
@@ -82,7 +89,7 @@ class ConfirmationPortal extends React.Component {
             <ModalContactForm
               trigger={
                 <Button fluid primary onClick={onConfirmClick}>
-                  {t('confirm')}
+                  {t("confirm")}
                 </Button>
               }
               selectedLayers={selectedLayers}
@@ -99,6 +106,4 @@ class ConfirmationPortal extends React.Component {
   }
 }
 
-export default withNamespaces("confirmation_portal")(
-  ConfirmationPortal
-);
+export default withNamespaces("confirmation_portal")(ConfirmationPortal);

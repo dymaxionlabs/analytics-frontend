@@ -157,6 +157,7 @@ class SignIn extends React.Component {
                 type="email"
                 onInput={this.onEmailChange}
                 onChange={this.onEmailChange}
+                value={this.state.email}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -168,6 +169,7 @@ class SignIn extends React.Component {
                 autoComplete="password"
                 onInput={this.onPasswordChange}
                 onChange={this.onPasswordChange}
+                value={this.state.password}
               />
             </FormControl>
             <FormControlLabel

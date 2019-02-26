@@ -1,35 +1,27 @@
-import "../static/index.css"; // FIXME Convert to JSX styles
-import "../static/App.css"; // FIXME Convert to JSX styles
-import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
-
 import React from "react";
+import Head from "next/head";
+import dynamic from "next/dynamic";
+
+import withStyles from "@material-ui/core/styles/withStyles";
 import { withNamespaces } from "../i18n";
 import { withAuthSync, logout } from "../utils/auth";
 import { buildApiUrl } from "../utils/api";
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import { Dimmer, Loader } from "semantic-ui-react";
 import axios from "axios";
+
+import LoadingProgress from "../components/LoadingProgress";
+import LayersFab from "../components/LayersFab";
 import LayerLegend from "../components/LayerLegend";
 
-const initialViewport = {
-  center: [-36.179114636463652, -62.846142338298094],
-  zoom: 12
-};
+const styles = theme => ({});
 
 // const sentinelModifiedAttribution =
 //   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
-
 // const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 // Dynamically load TrialMap component as it only works on browser
 const Map = dynamic(() => import("../components/view/Map"), {
   ssr: false,
-  loading: withNamespaces()(({ t }) => (
-    <Dimmer active>
-      <Loader size="big">{t("loading")}</Loader>
-    </Dimmer>
-  ))
+  loading: LoadingProgress
 });
 
 const TileLayer = dynamic(() => import("../components/TileLayer"), {
@@ -40,11 +32,19 @@ const VectorTileLayer = dynamic(() => import("../components/VectorTileLayer"), {
   ssr: false
 });
 
+const LayerToggle = ({}) => null;
+
+const initialViewport = {
+  center: [-36.179114636463652, -62.846142338298094],
+  zoom: 12
+};
+
 class MapMap extends React.Component {
   state = {
     map: null,
     bounds: null,
-    viewport: initialViewport
+    viewport: initialViewport,
+    activeLayers: []
   };
 
   static async getInitialProps({ query }) {
@@ -71,7 +71,7 @@ class MapMap extends React.Component {
       })
       .catch(err => {
         const response = err.response;
-        if (!response || response.status >= 400) {
+        if (response && response.status >= 400) {
           logout();
         }
       });
@@ -81,41 +81,71 @@ class MapMap extends React.Component {
     this.props.analytics.event("Layers", action, value);
   }
 
-  _onMapViewportChanged = viewport => {
+  handleMapViewportChanged = viewport => {
     this.setState({ viewport });
   };
 
-  render() {
-    const { viewport, bounds, layer } = this.state;
+  handleToggleLayer = layer => {
+    if (!layer) return; // just in case
 
-    // Build tile layer: use TileLayer or VectorTileLayer based on layer type
-    let tileLayer;
-    if (layer) {
-      if (layer.layer_type === "R") {
-        tileLayer = <TileLayer type="raster" url={layer.tiles_url} />;
-      } else {
-        const url = layer.tiles_url;
-        tileLayer = (
-          <VectorTileLayer
-            id="layer"
-            type="protobuf"
-            url={url}
-            subdomains=""
-            vectorTileLayerStyles={
-              layer.extra_fields && layer.extra_fields["styles"]
-            }
-          />
-        );
+    const uuid = layer.uuid;
+    const activeLayers = this._addOrRemove(this.state.activeLayers, uuid);
+
+    if (activeLayers.includes(uuid)) {
+      this._trackEvent("enable-layer", uuid);
+    } else {
+      this._trackEvent("disable-layer", uuid);
+    }
+
+    this.setState({ activeLayers: activeLayers });
+  };
+
+  _addOrRemove(array, item) {
+    const include = array.includes(item);
+    return include
+      ? array.filter(arrayItem => arrayItem !== item)
+      : [...array, item];
+  }
+
+  render() {
+    const { viewport, bounds, map, activeLayers } = this.state;
+
+    const layers = map
+      ? map.layers
+          .sort((a, b) => a.order - b.order)
+          .map(mapLayer => mapLayer.layer)
+      : [];
+
+    // Build tile layers from active layers: use TileLayer or VectorTileLayer based on layer type
+    let tileLayers = [];
+    if (map) {
+      for (const uuid of activeLayers) {
+        const layer = layers.find(layer => layer.uuid === uuid);
+        console.log(layer);
+        if (layer.layer_type === "R") {
+          tileLayers.push(
+            <TileLayer key={layer.uuid} type="raster" url={layer.tiles_url} />
+          );
+        } else {
+          tileLayers.push(
+            <VectorTileLayer
+              key={layer.uuid}
+              type="protobuf"
+              url={layer.tiles_url}
+              subdomains=""
+              vectorTileLayerStyles={
+                layer.extra_fields && layer.extra_fields["styles"]
+              }
+            />
+          );
+        }
       }
     }
 
-    // Get area polygon
-    const areaData = layer && layer.area_geom;
-
-    // Build Legend (if legend key is present on extra_fields)
-    const legendOpts =
-      layer && layer.extra_fields && layer.extra_fields["legend"];
-    const legend = legendOpts && <LayerLegend {...legendOpts} />;
+    // // Build Legend (if legend key is present on extra_fields)
+    // const legendOpts =
+    //   layer && layer.extra_fields && layer.extra_fields["legend"];
+    // const legend = legendOpts && <LayerLegend {...legendOpts} />;
 
     return (
       <div className="index">
@@ -134,11 +164,15 @@ class MapMap extends React.Component {
         <Map
           bounds={bounds}
           viewport={viewport}
-          onViewportChanged={this._onMapViewportChanged}
-          roiData={areaData}
+          onViewportChanged={this.handleMapViewportChanged}
         >
-          {tileLayer}
-          {legend}
+          <LayersFab
+            layers={layers}
+            activeLayers={activeLayers}
+            onToggle={this.handleToggleLayer}
+          />
+          {tileLayers}
+          {/* {legend} */}
         </Map>
       </div>
     );

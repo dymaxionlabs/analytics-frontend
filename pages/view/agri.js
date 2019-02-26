@@ -234,7 +234,6 @@ class AgriMap extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
     const { viewport, selectedLayers } = this.state;
 
     const showLotsLayer = selectedLayers.includes("crop_lots");

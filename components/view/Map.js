@@ -8,35 +8,6 @@ const mapContainerStyle = {
   flex: 1
 };
 
-//import VectorGridDefault from "react-leaflet-vectorgrid";
-//const VectorGrid = withLeaflet(VectorGridDefault);
-
-// const lotsVectorGrid = {
-//   type: "protobuf",
-//   url: "https://tiler.dymaxionlabs.com/data/smap_2018/{z}/{x}/{y}.pbf",
-//   subdomains: "",
-//   vectorTileLayerStyles: {
-//     style: {
-//       weight: 0.5,
-//       opacity: 1,
-//       color: "#fff",
-//       fillColor: "#00b2ff",
-//       fillOpacity: 0.6,
-//       fill: true,
-//       stroke: true
-//     },
-//     hoverStyle: {
-//       fillColor: "#390870",
-//       fillOpacity: 1
-//     },
-//     activeStyle: {
-//       fillColor: "#390870",
-//       fillOpacity: 1
-//     },
-//     zIndex: 401
-//   }
-// };
-
 // FIXME Move this to config/
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw";

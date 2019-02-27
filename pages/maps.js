@@ -138,7 +138,10 @@ class Maps extends React.Component {
     }
 
     const layersWithLegend = layers.filter(
-      layer => layer.extra_fields && layer.extra_fields.legend
+      layer =>
+        activeLayers.includes(layer.uuid) &&
+        layer.extra_fields &&
+        layer.extra_fields.legend
     );
 
     return (

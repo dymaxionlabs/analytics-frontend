@@ -6,6 +6,9 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import { withNamespaces } from "../i18n";
 
 const styles = theme => ({
@@ -23,14 +26,33 @@ const styles = theme => ({
   }
 });
 
+const ColorBlock = ({ value }) => (
+  <div>
+    <style jsx>{`
+      div {
+        border: 1px solid #000;
+        width: 16px;
+        height: 16px;
+        background-color: ${value};
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: -3px;
+      }
+    `}</style>
+  </div>
+);
+
 const Legend = ({ layer }) => {
   const legend = layer.extra_fields && layer.extra_fields.legend;
   return legend ? (
-    <ul>
+    <List dense={true}>
       {legend.items.map(item => (
-        <li key={item.value}>{item.value}</li>
+        <ListItem>
+          <ColorBlock value={item.color} />
+          <ListItemText primary={item.value} />
+        </ListItem>
       ))}
-    </ul>
+    </List>
   ) : null;
 };
 

@@ -116,8 +116,7 @@ class Login extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error);
-        console.log(error.message);
+        console.error(error);
         this.setState({
           errorMsg: t("login.error_msg"),
           isSubmitting: false,

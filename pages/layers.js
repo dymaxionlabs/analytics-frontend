@@ -61,12 +61,10 @@ class Layers extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        console.log(response.data);
         const layer = response.data;
         const minBounds = [layer.extent[1], layer.extent[0]];
         const maxBounds = [layer.extent[3], layer.extent[2]];
         const bounds = [minBounds, maxBounds];
-        console.log(bounds);
         this.setState({ layer: layer, bounds: bounds });
       })
       .catch(err => {

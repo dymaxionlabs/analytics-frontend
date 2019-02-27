@@ -113,10 +113,6 @@ class Maps extends React.Component {
     });
   };
 
-  componentDidUpdate() {
-    console.log(this.state.layersOpacity);
-  }
-
   render() {
     const { viewport, bounds, map, activeLayers, layersOpacity } = this.state;
 

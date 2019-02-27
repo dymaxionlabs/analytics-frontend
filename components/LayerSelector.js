@@ -174,7 +174,6 @@ class LayerSelector extends React.Component {
     const layers = availableLayers
       ? allLayers.filter(layer => availableLayers.includes(layer.key))
       : allLayers;
-    //console.log(layers.map(layer => layer.key));
 
     return (
       <div style={{ position: "absolute", bottom: -5, left: 10, zIndex: 1000 }}>

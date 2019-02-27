@@ -37,7 +37,11 @@ class Maps extends React.Component {
   state = {
     map: null,
     bounds: null,
-    activeLayers: []
+    activeLayers: [],
+    viewport: {
+      center: [-36.179114636463652, -62.846142338298094],
+      zoom: 12
+    }
   };
 
   static async getInitialProps({ query }) {

@@ -160,6 +160,8 @@ class Maps extends React.Component {
         layer.extra_fields.legend
     );
 
+    const mapboxStyle = map && map.extra_fields && map.extra_fields.mapboxStyle;
+
     return (
       <div className="index">
         <Head>
@@ -178,6 +180,7 @@ class Maps extends React.Component {
           bounds={bounds}
           viewport={viewport}
           onViewportChanged={this.handleMapViewportChanged}
+          mapboxStyle={mapboxStyle}
         >
           <LayersFab
             layers={layers}

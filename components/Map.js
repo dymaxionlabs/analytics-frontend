@@ -17,9 +17,6 @@ const mapContainerStyle = {
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiZ2Vzc2ljYTExMTIiLCJhIjoiY2pvZnYwYmV0MDhrYjNxanRpc2E3enhydiJ9.fawTIAVKzqpOE41wkVw1Zw";
 
-const styleId = "mapbox.streets-satellite";
-const basemapUrl = `https://api.tiles.mapbox.com/v4/${styleId}/{z}/{x}/{y}.png?access_token=${MAPBOX_TOKEN}`;
-
 const ROIPolygon = ({ data }) => (
   <GeoJSON
     data={data}
@@ -32,17 +29,23 @@ const ROIPolygon = ({ data }) => (
   />
 );
 
-const Basemap = ({ url }) => (
-  <TileLayer
-    attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
-    url={url}
-    zIndex={-1}
-  />
+const MapboxBasemap = ({ style }) => {
+  const styleId = style || "mapbox.satellite";
+  return (
+    <Basemap
+      url={`https://api.tiles.mapbox.com/v4/${styleId}/{z}/{x}/{y}.png?access_token=${MAPBOX_TOKEN}`}
+      attribution='&amp;copy <a href="http://mapbox.com/copyright">Mapbox</a> contributors'
+    />
+  );
+};
+
+const Basemap = ({ url, attribution }) => (
+  <TileLayer url={url} attribution={attribution} zIndex={-1} />
 );
 
 class Map extends React.Component {
   render() {
-    const { children, roiData, ...extraProps } = this.props;
+    const { children, roiData, mapboxStyle, ...extraProps } = this.props;
 
     return (
       <LeafletMap
@@ -51,7 +54,7 @@ class Map extends React.Component {
         zoomControl={false}
         {...extraProps}
       >
-        <Basemap url={basemapUrl} />
+        <MapboxBasemap style={mapboxStyle} />
         {children}
         {roiData && <ROIPolygon data={roiData} />}
 

@@ -268,4 +268,7 @@ PasswordResetConfirm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withNamespaces()(withStyles(styles)(PasswordResetConfirm));
+PasswordResetConfirm = withStyles(styles)(PasswordResetConfirm);
+PasswordResetConfirm = withNamespaces()(PasswordResetConfirm);
+
+export default PasswordResetConfirm;

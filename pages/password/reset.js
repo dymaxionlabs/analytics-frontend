@@ -14,8 +14,8 @@ import Grid from "@material-ui/core/Grid";
 import Head from "next/head";
 import withStyles from "@material-ui/core/styles/withStyles";
 import axios from "axios";
-import { i18n, withNamespaces, Link } from "../../../i18n";
-import { buildApiUrl } from "../../../utils/api";
+import { i18n, withNamespaces, Link } from "../../i18n";
+import { buildApiUrl } from "../../utils/api";
 
 const styles = theme => ({
   main: {
@@ -196,4 +196,7 @@ PasswordReset.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withNamespaces()(withStyles(styles)(PasswordReset));
+PasswordReset = withStyles(styles)(PasswordReset);
+PasswordReset = withNamespaces()(PasswordReset);
+
+export default PasswordReset;

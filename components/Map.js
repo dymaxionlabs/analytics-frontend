@@ -1,4 +1,9 @@
-import { Map, TileLayer, ZoomControl, GeoJSON } from "react-leaflet";
+import {
+  Map as LeafletMap,
+  TileLayer,
+  ZoomControl,
+  GeoJSON
+} from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 
@@ -35,12 +40,12 @@ const Basemap = ({ url }) => (
   />
 );
 
-class ViewMap extends React.Component {
+class Map extends React.Component {
   render() {
     const { children, roiData, ...extraProps } = this.props;
 
     return (
-      <Map
+      <LeafletMap
         ref="map"
         style={mapContainerStyle}
         zoomControl={false}
@@ -51,9 +56,9 @@ class ViewMap extends React.Component {
         {roiData && <ROIPolygon data={roiData} />}
 
         <ZoomControl position="topright" />
-      </Map>
+      </LeafletMap>
     );
   }
 }
 
-export default ViewMap;
+export default Map;

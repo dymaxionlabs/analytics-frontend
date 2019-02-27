@@ -4,7 +4,7 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import JssProvider from "react-jss/lib/JssProvider";
 import getPageContext from "../utils/getPageContext";
-import withGA from "../components/withGA";
+import withGA from "../utils/ga";
 import { appWithTranslation, Router } from "../i18n";
 import i18next from "i18next";
 import NProgress from "next-nprogress/component";

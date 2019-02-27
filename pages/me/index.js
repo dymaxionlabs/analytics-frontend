@@ -237,8 +237,8 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-Dashboard = withNamespaces(["me", "common"])(Dashboard);
 Dashboard = withStyles(styles)(Dashboard);
+Dashboard = withNamespaces(["me", "common"])(Dashboard);
 Dashboard = withAuthSync(Dashboard);
 
 export default Dashboard;

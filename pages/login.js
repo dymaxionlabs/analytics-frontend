@@ -56,7 +56,7 @@ const styles = theme => ({
   }
 });
 
-class SignIn extends React.Component {
+class Login extends React.Component {
   state = {
     email: "",
     password: "",
@@ -200,12 +200,12 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-SignIn = withStyles(styles)(SignIn);
-SignIn = withNamespaces()(SignIn);
-SignIn = withAuthSync(SignIn, { redirect: false });
+Login = withStyles(styles)(Login);
+Login = withNamespaces()(Login);
+Login = withAuthSync(Login, { redirect: false });
 
-export default SignIn;
+export default Login;

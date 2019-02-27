@@ -59,16 +59,10 @@ const rasterLayers = [
       "https://storage.googleapis.com/dym-tiles/custom/dym-agro-trenque-lauquen/ndvi/{z}/{x}/{y}.png",
     attribution: sentinelModifiedAttribution
   }
-  // {
-  //   id: "lots",
-  //   type: "vector-geojson",
-  //   data: lotsData,
-  //   attribution: dymaxionAttribution
-  // }
 ];
 
 // Dynamically load TrialMap component as it only works on browser
-const Map = dynamic(() => import("../../components/view/Map"), {
+const Map = dynamic(() => import("../../components/Map"), {
   ssr: false,
   loading: withNamespaces()(({ t }) => (
     <Dimmer active>
@@ -194,7 +188,7 @@ const QuoteButton = withNamespaces("case_study")(({ t }) => (
   </div>
 ));
 
-class AgriMap extends React.Component {
+class ViewAgri extends React.Component {
   state = {
     viewport: initialViewport,
     selectedLayers: ["ndvi", "crop_lots"]
@@ -299,4 +293,4 @@ class AgriMap extends React.Component {
   }
 }
 
-export default withNamespaces(["case_study", "case_study__agri"])(AgriMap);
+export default withNamespaces(["case_study", "case_study__agri"])(ViewAgri);

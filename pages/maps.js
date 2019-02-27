@@ -20,7 +20,7 @@ const styles = theme => ({});
 // const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 // Dynamically load TrialMap component as it only works on browser
-const Map = dynamic(() => import("../components/view/Map"), {
+const Map = dynamic(() => import("../components/Map"), {
   ssr: false,
   loading: LoadingProgress
 });
@@ -33,16 +33,10 @@ const VectorTileLayer = dynamic(() => import("../components/VectorTileLayer"), {
   ssr: false
 });
 
-const initialViewport = {
-  center: [-36.179114636463652, -62.846142338298094],
-  zoom: 12
-};
-
-class MapMap extends React.Component {
+class Maps extends React.Component {
   state = {
     map: null,
     bounds: null,
-    viewport: initialViewport,
     activeLayers: []
   };
 
@@ -175,7 +169,8 @@ class MapMap extends React.Component {
   }
 }
 
-MapMap = withNamespaces()(MapMap);
-MapMap = withAuthSync(MapMap);
+Maps = withStyles(styles)(Maps);
+Maps = withNamespaces()(Maps);
+Maps = withAuthSync(Maps);
 
-export default MapMap;
+export default Maps;

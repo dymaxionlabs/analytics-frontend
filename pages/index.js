@@ -3,7 +3,7 @@ import "../static/App.css"; // FIXME Convert to JSX styles
 import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 
 import React from "react";
-import { withNamespaces, Link } from "../i18n";
+import { withNamespaces } from "../i18n";
 import { withAuthSync } from "../utils/auth";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -274,4 +274,7 @@ class Index extends React.Component {
   }
 }
 
-export default withAuthSync(withNamespaces()(Index), { redirect: false });
+Index = withNamespaces()(Index);
+Index = withAuthSync(Index, { redirect: false });
+
+export default Index;

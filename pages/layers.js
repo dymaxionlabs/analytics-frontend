@@ -19,11 +19,10 @@ const initialViewport = {
 
 // const sentinelModifiedAttribution =
 //   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
-
 // const dymaxionAttribution = "&copy; Dymaxion Labs 2019";
 
 // Dynamically load TrialMap component as it only works on browser
-const Map = dynamic(() => import("../components/view/Map"), {
+const Map = dynamic(() => import("../components/Map"), {
   ssr: false,
   loading: withNamespaces()(({ t }) => (
     <Dimmer active>
@@ -40,7 +39,7 @@ const VectorTileLayer = dynamic(() => import("../components/VectorTileLayer"), {
   ssr: false
 });
 
-class LayerMap extends React.Component {
+class Layers extends React.Component {
   state = {
     layer: null,
     bounds: null,
@@ -146,7 +145,7 @@ class LayerMap extends React.Component {
   }
 }
 
-LayerMap = withNamespaces()(LayerMap);
-LayerMap = withAuthSync(LayerMap);
+Layers = withNamespaces()(Layers);
+Layers = withAuthSync(Layers);
 
-export default LayerMap;
+export default Layers;

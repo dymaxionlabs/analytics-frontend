@@ -46,8 +46,8 @@ const Legend = ({ layer }) => {
   const legend = layer.extra_fields && layer.extra_fields.legend;
   return legend ? (
     <List dense={true}>
-      {legend.items.map(item => (
-        <ListItem>
+      {legend.items.map((item, i) => (
+        <ListItem key={i}>
           <ColorBlock value={item.color} />
           <ListItemText primary={item.value} />
         </ListItem>

@@ -9,6 +9,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import LayersIcon from "@material-ui/icons/Layers";
 import { withNamespaces } from "../i18n";
 
+import OpacitySlider from "./OpacitySlider";
+
 const styles = theme => ({
   fab: {
     position: "fixed",
@@ -48,7 +50,9 @@ class LayersFab extends React.Component {
   }
 
   render() {
-    const { t, classes, layers, activeLayers } = this.props;
+    const { t, classes, layers, activeLayers, onOpacityChange } = this.props;
+    const layersOpacity = this.props.layersOpacity || {};
+
     const { anchorEl } = this.state;
 
     return (
@@ -84,6 +88,10 @@ class LayersFab extends React.Component {
                 }
                 label={layer.name}
               />
+              <OpacitySlider
+                value={layersOpacity[layer.uuid] || 100}
+                onChange={(e, value) => onOpacityChange(layer.uuid, value)}
+              />
             </MenuItem>
           ))}
         </Menu>
@@ -96,8 +104,10 @@ LayersFab.propTypes = {
   classes: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   layers: PropTypes.array.isRequired,
+  layersOpacity: PropTypes.object,
   activeLayers: PropTypes.array.isRequired,
-  onToggle: PropTypes.func
+  onToggle: PropTypes.func,
+  onOpacityChange: PropTypes.func
 };
 
 export default withNamespaces()(withStyles(styles)(LayersFab));

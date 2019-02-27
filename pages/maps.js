@@ -41,7 +41,8 @@ class Maps extends React.Component {
     viewport: {
       center: [-36.179114636463652, -62.846142338298094],
       zoom: 12
-    }
+    },
+    layersOpacity: {}
   };
 
   static async getInitialProps({ query }) {
@@ -103,8 +104,21 @@ class Maps extends React.Component {
       : [...array, item];
   }
 
+  handleOpacityChange = (uuid, value) => {
+    this.setState({
+      layersOpacity: {
+        ...this.state.layersOpacity,
+        [uuid]: value
+      }
+    });
+  };
+
+  componentDidUpdate() {
+    console.log(this.state.layersOpacity);
+  }
+
   render() {
-    const { viewport, bounds, map, activeLayers } = this.state;
+    const { viewport, bounds, map, activeLayers, layersOpacity } = this.state;
 
     const layers = map
       ? map.layers
@@ -119,7 +133,12 @@ class Maps extends React.Component {
         const layer = layers.find(layer => layer.uuid === uuid);
         if (layer.layer_type === "R") {
           tileLayers.push(
-            <TileLayer key={layer.uuid} type="raster" url={layer.tiles_url} />
+            <TileLayer
+              key={layer.uuid}
+              type="raster"
+              url={layer.tiles_url}
+              opacity={(layersOpacity[layer.uuid] || 100) / 100}
+            />
           );
         } else {
           tileLayers.push(
@@ -128,6 +147,7 @@ class Maps extends React.Component {
               type="protobuf"
               url={layer.tiles_url}
               subdomains=""
+              opacity={(layersOpacity[layer.uuid] || 100) / 100}
               vectorTileLayerStyles={
                 layer.extra_fields && layer.extra_fields["styles"]
               }
@@ -166,7 +186,9 @@ class Maps extends React.Component {
           <LayersFab
             layers={layers}
             activeLayers={activeLayers}
+            layersOpacity={layersOpacity}
             onToggle={this.handleToggleLayer}
+            onOpacityChange={this.handleOpacityChange}
           />
           <LayersLegendExpansionPanel layers={layersWithLegend} />
           {tileLayers}

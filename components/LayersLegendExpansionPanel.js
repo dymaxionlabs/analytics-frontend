@@ -23,6 +23,12 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
+  },
+  item: {
+    padding: "0 0 5px 0"
+  },
+  itemText: {
+    padding: "0 5px 0 0"
   }
 });
 
@@ -42,19 +48,19 @@ const ColorBlock = ({ value }) => (
   </div>
 );
 
-const Legend = ({ layer }) => {
+const Legend = withStyles(styles)(({ layer, classes }) => {
   const legend = layer.extra_fields && layer.extra_fields.legend;
   return legend ? (
     <List dense={true}>
       {legend.items.map((item, i) => (
-        <ListItem key={i}>
+        <ListItem key={i} className={classes.item}>
           <ColorBlock value={item.color} />
-          <ListItemText primary={item.value} />
+          <ListItemText className={classes.itemText} primary={item.value} />
         </ListItem>
       ))}
     </List>
   ) : null;
-};
+});
 
 class LayersLegendExpansionPanel extends React.Component {
   render() {

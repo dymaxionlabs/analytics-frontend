@@ -89,19 +89,24 @@ class Layers extends React.Component {
     // Build tile layer: use TileLayer or VectorTileLayer based on layer type
     let tileLayer;
     if (layer) {
+      const url = layer.tiles_url;
+      const maxZoom = layer.extra_fields && layer.extra_fields.maxZoom;
+
       if (layer.layer_type === "R") {
-        tileLayer = <TileLayer type="raster" url={layer.tiles_url} />;
+        tileLayer = (
+          <TileLayer type="raster" url={layer.tiles_url} maxZoom={maxZoom} />
+        );
       } else {
-        const url = layer.tiles_url;
+        const styles = layer.extra_fields && layer.extra_fields["styles"];
+
         tileLayer = (
           <VectorTileLayer
             id="layer"
             type="protobuf"
             url={url}
             subdomains=""
-            vectorTileLayerStyles={
-              layer.extra_fields && layer.extra_fields["styles"]
-            }
+            maxNativeZoom={maxZoom}
+            vectorTileLayerStyles={styles}
           />
         );
       }

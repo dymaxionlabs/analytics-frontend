@@ -127,26 +127,33 @@ class Maps extends React.Component {
     if (map) {
       for (const uuid of activeLayers) {
         const layer = layers.find(layer => layer.uuid === uuid);
+
+        const opacity = (layersOpacity[layer.uuid] || 100) / 100;
+        const maxZoom = layer.extra_fields && layer.extra_fields.maxZoom;
+        const url = layer.tiles_url;
+
         if (layer.layer_type === "R") {
           tileLayers.push(
             <TileLayer
               key={layer.uuid}
               type="raster"
-              url={layer.tiles_url}
-              opacity={(layersOpacity[layer.uuid] || 100) / 100}
+              url={url}
+              maxZoom={maxZoom}
+              opacity={opacity}
             />
           );
         } else {
+          const styles = layer.extra_fields && layer.extra_fields["styles"];
+
           tileLayers.push(
             <VectorTileLayer
               key={layer.uuid}
               type="protobuf"
-              url={layer.tiles_url}
+              url={url}
               subdomains=""
-              opacity={(layersOpacity[layer.uuid] || 100) / 100}
-              vectorTileLayerStyles={
-                layer.extra_fields && layer.extra_fields["styles"]
-              }
+              maxNativeZoom={maxZoom}
+              opacity={opacity}
+              vectorTileLayerStyles={styles}
             />
           );
         }

@@ -122,12 +122,18 @@ class Maps extends React.Component {
           .map(mapLayer => mapLayer.layer)
       : [];
 
+    // Sorted active layers
+    const sortedActiveLayers = layers.filter(layer =>
+      activeLayers.includes(layer.uuid)
+    );
+
     // Build tile layers from active layers: use TileLayer or VectorTileLayer based on layer type
     let tileLayers = [];
     if (map) {
-      for (const uuid of activeLayers) {
-        const layer = layers.find(layer => layer.uuid === uuid);
+      for (let i = 0; i < sortedActiveLayers.length; i++) {
+        const layer = sortedActiveLayers[i];
 
+        const zIndex = sortedActiveLayers.length - i;
         const opacity = (layersOpacity[layer.uuid] || 100) / 100;
         const maxZoom =
           (layer.extra_fields && layer.extra_fields.maxZoom) || 18;
@@ -141,6 +147,7 @@ class Maps extends React.Component {
               url={url}
               // maxZoom={maxZoom}
               opacity={opacity}
+              zIndex={zIndex}
             />
           );
         } else {
@@ -155,6 +162,7 @@ class Maps extends React.Component {
               maxNativeZoom={maxZoom}
               opacity={opacity}
               vectorTileLayerStyles={styles}
+              zIndex={zIndex}
             />
           );
         }

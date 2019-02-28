@@ -68,9 +68,9 @@ class LayersLegendExpansionPanel extends React.Component {
               <Typography className={classes.heading}>{layer.name}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              {layer.description && (
+              {/* {layer.description && (
                 <Typography>{layer.description}</Typography>
-              )}
+              )} */}
               <Legend layer={layer} />
             </ExpansionPanelDetails>
           </ExpansionPanel>

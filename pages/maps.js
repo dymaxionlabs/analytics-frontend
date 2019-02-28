@@ -129,7 +129,8 @@ class Maps extends React.Component {
         const layer = layers.find(layer => layer.uuid === uuid);
 
         const opacity = (layersOpacity[layer.uuid] || 100) / 100;
-        const maxZoom = layer.extra_fields && layer.extra_fields.maxZoom;
+        const maxZoom =
+          (layer.extra_fields && layer.extra_fields.maxZoom) || 18;
         const url = layer.tiles_url;
 
         if (layer.layer_type === "R") {
@@ -138,7 +139,7 @@ class Maps extends React.Component {
               key={layer.uuid}
               type="raster"
               url={url}
-              maxZoom={maxZoom}
+              // maxZoom={maxZoom}
               opacity={opacity}
             />
           );

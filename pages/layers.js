@@ -90,7 +90,7 @@ class Layers extends React.Component {
     let tileLayer;
     if (layer) {
       const url = layer.tiles_url;
-      const maxZoom = layer.extra_fields && layer.extra_fields.maxZoom;
+      const maxZoom = (layer.extra_fields && layer.extra_fields.maxZoom) || 18;
 
       if (layer.layer_type === "R") {
         tileLayer = (

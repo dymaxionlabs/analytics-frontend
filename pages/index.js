@@ -42,19 +42,21 @@ const availableLayers = [
 
 // Not using <Link> because we need a full refresh to work with MUI-based pages
 const LoginButton = withNamespaces()(({ t }) => (
-  <div style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}>
-    <a href="/login">
-      <Button>{t("login_btn")}</Button>
-    </a>
-  </div>
+  <a href="/login" style={{ margin: "0 5px" }}>
+    <Button>{t("login_btn")}</Button>
+  </a>
 ));
 
 const DashboardButton = withNamespaces()(({ t }) => (
-  <div style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}>
-    <a href="/me">
-      <Button>{t("dashboard_btn")}</Button>
-    </a>
-  </div>
+  <a href="/me">
+    <Button>{t("dashboard_btn")}</Button>
+  </a>
+));
+
+const SignUpButton = withNamespaces()(({ t }) => (
+  <a href={t("signup_href")} style={{ margin: "0 5px" }}>
+    <Button primary>{t("signup_btn")}</Button>
+  </a>
 ));
 
 class Index extends React.Component {
@@ -267,7 +269,20 @@ class Index extends React.Component {
               </div>
             }
           />
-          {this.props.token ? <DashboardButton /> : <LoginButton />}
+          {this.props.token ? (
+            <div
+              style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}
+            >
+              <DashboardButton />
+            </div>
+          ) : (
+            <div
+              style={{ position: "fixed", right: 50, top: 10, zIndex: 1000 }}
+            >
+              <SignUpButton />
+              <LoginButton />
+            </div>
+          )}
         </Map>
       </div>
     );

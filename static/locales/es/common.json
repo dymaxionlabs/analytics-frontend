@@ -35,6 +35,8 @@
     "success_msg": "\u00a1Cambio de contrase\u00f1a exitoso!",
     "title": "Confirmar cambio de contrase\u00f1a"
   },
+  "signup_btn": "Registrarse",
+  "signup_href": "https://landings.dymaxionlabs.com/analytics-form-es",
   "title": "Analytics | Dymaxion Labs",
   "username": "Usuario"
 }

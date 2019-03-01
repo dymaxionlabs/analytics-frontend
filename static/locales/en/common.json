@@ -35,6 +35,8 @@
     "success_msg": "Password changed successfully!",
     "title": "Confirm password change"
   },
+  "signup_btn": "Sign up",
+  "signup_href": "https://landings.dymaxionlabs.com/analytics-form-en",
   "title": "Analytics | Dymaxion Labs",
   "username": "Username"
 }

@@ -24,11 +24,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import LayersContent from "../../components/me/LayersContent";
 import MapsContent from "../../components/me/MapsContent";
+import ImagesContent from "../../components/me/ImagesContent";
+import ImageUploadDialog from "../../components/ImageUploadDialog";
 
 // import DashboardIcon from "@material-ui/icons/Dashboard";
+import CollectionsIcon from "@material-ui/icons/Collections";
 import LayersIcon from "@material-ui/icons/Layers";
 import MapIcon from "@material-ui/icons/Map";
-import ImageUploadDialog from "../../components/ImageUploadDialog";
 
 const drawerWidth = 240;
 
@@ -134,14 +136,16 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { t, classes } = this.props;
+    const { t, classes, token } = this.props;
     const { currentContent } = this.state;
 
     let content;
     if (currentContent === "layers") {
-      content = <LayersContent token={this.props.token} />;
+      content = <LayersContent token={token} />;
     } else if (currentContent === "maps") {
-      content = <MapsContent token={this.props.token} />;
+      content = <MapsContent token={token} />;
+    } else if (currentContent === "images") {
+      content = <ImagesContent token={token} />;
     }
 
     return (
@@ -186,7 +190,7 @@ class Dashboard extends React.Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <ImageUploadDialog />
+            <ImageUploadDialog token={token} />
           </Toolbar>
         </AppBar>
         <Drawer
@@ -223,6 +227,12 @@ class Dashboard extends React.Component {
                 <MapIcon />
               </ListItemIcon>
               <ListItemText primary={t("sidebar.maps")} />
+            </ListItem>
+            <ListItem button onClick={() => this.handleSectionChange("images")}>
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("sidebar.images")} />
             </ListItem>
           </List>
         </Drawer>

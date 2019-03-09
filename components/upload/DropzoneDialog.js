@@ -101,7 +101,7 @@ class DropzoneDialog extends React.Component {
           open={this.state.open}
           onClose={this.handleClose.bind(this)}
         >
-          <DialogTitle>Upload File</DialogTitle>
+          <DialogTitle>Upload images</DialogTitle>
           <DialogContent>
             <DropzoneArea
               acceptedFiles={this.props.acceptedFiles}

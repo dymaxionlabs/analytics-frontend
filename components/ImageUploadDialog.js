@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withNamespaces } from "../i18n";
 import { withStyles } from "@material-ui/core/styles";
+import { buildApiUrl } from "../utils/api";
 import DropzoneDialog from "./upload/DropzoneDialog";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { Typography } from "@material-ui/core";
+import axios from "axios";
 
 const styles = theme => ({
   button: {
@@ -33,6 +35,17 @@ class ImageUploadDialog extends Component {
   };
 
   handleSave = files => {
+    files.forEach(file => {
+      axios
+        .put(
+          buildApiUrl(`/images/upload/${file.name}`),
+          { data: file },
+          { headers: { Authorization: this.props.token } }
+        )
+        .then(data => {
+          console.log(data);
+        });
+    });
     // Saving files to state for further use and closing Modal.
     this.setState({
       files: files,
@@ -60,7 +73,7 @@ class ImageUploadDialog extends Component {
           open={open}
           onSave={this.handleSave}
           acceptedFiles={["image/jpeg"]}
-          filesLimit={2000}
+          filesLimit={250}
           dropzoneText={
             <Typography>Drag and drop an image file here or click</Typography>
           }
@@ -78,6 +91,6 @@ ImageUploadDialog.propTypes = {
 };
 
 ImageUploadDialog = withStyles(styles)(ImageUploadDialog);
-ImageUploadDialog = withNamespaces("image_upload_dialog")(ImageUploadDialog);
+ImageUploadDialog = withNamespaces()(ImageUploadDialog);
 
 export default ImageUploadDialog;

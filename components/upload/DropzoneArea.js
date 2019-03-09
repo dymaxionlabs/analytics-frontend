@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
 import Paper from "@material-ui/core/Paper";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Dropzone from "react-dropzone";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Grid from "@material-ui/core/Grid";
@@ -22,10 +22,13 @@ const styles = theme => ({
       backgroundPosition: "-70px 0"
     }
   },
+  paper: {
+    marginBottom: theme.spacing.unit * 2
+  },
   dropZone: {
     position: "relative",
     width: "100%",
-    minHeight: "250px",
+    minHeight: "110px",
     backgroundColor: "#F0F0F0",
     cursor: "pointer",
     boxSizing: "border-box"
@@ -197,7 +200,7 @@ class DropzoneArea extends Component {
 
     return (
       <Fragment>
-        <Paper elevation={1}>
+        <Paper elevation={1} className={classes.paper}>
           <Dropzone
             accept={this.props.acceptedFiles.join(",")}
             onDrop={this.onDrop.bind(this)}
@@ -213,8 +216,8 @@ class DropzoneArea extends Component {
               </Typography>
               <CloudUploadIcon className={classes.uploadIconSize} />
               {loading && (
-                <div>
-                  <CircularProgress className={classes.progress} />
+                <div style={{ flexGrid: 1 }}>
+                  <LinearProgress />
                 </div>
               )}
             </div>
@@ -229,9 +232,6 @@ class DropzoneArea extends Component {
         </Paper>
         {showPreviews && (
           <Fragment>
-            <Grid container>
-              <Typography>Preview</Typography>
-            </Grid>
             <PreviewList
               fileObjects={this.state.fileObjects}
               handleRemove={this.handleRemove.bind(this)}

@@ -95,7 +95,12 @@ class DropzoneDialog extends React.Component {
   render() {
     return (
       <Fragment>
-        <Dialog open={this.state.open} onClose={this.handleClose.bind(this)}>
+        <Dialog
+          fullWidth={true}
+          maxWidth="sm"
+          open={this.state.open}
+          onClose={this.handleClose.bind(this)}
+        >
           <DialogTitle>Upload File</DialogTitle>
           <DialogContent>
             <DropzoneArea

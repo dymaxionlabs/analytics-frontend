@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
+import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Dropzone from "react-dropzone";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +13,7 @@ import SnackbarContentWrapper from "./SnackbarContentWrapper";
 import PreviewList from "./PreviewList";
 import classNames from "classnames";
 
-const styles = {
+const styles = theme => ({
   "@keyframes progress": {
     "0%": {
       backgroundPosition: "0 0"
@@ -25,10 +27,11 @@ const styles = {
     width: "100%",
     minHeight: "250px",
     backgroundColor: "#F0F0F0",
-    border: "dashed",
-    borderColor: "#C8C8C8",
     cursor: "pointer",
     boxSizing: "border-box"
+  },
+  dropzoneText: {
+    padding: theme.spacing.unit * 2
   },
   stripes: {
     border: "solid",
@@ -52,10 +55,10 @@ const styles = {
     height: 51,
     color: "#909090"
   },
-  dropzoneParagraph: {
-    fontSize: 24
+  progress: {
+    margin: theme.spacing.unit * 2
   }
-};
+});
 
 class DropzoneArea extends Component {
   constructor(props) {
@@ -64,7 +67,8 @@ class DropzoneArea extends Component {
       fileObjects: [],
       openSnackBar: false,
       snackbarMessage: "",
-      snackbarVariant: "success"
+      snackbarVariant: "success",
+      loading: false
     };
   }
 
@@ -78,6 +82,7 @@ class DropzoneArea extends Component {
 
   onDrop(files) {
     const _this = this;
+
     if (this.state.fileObjects.length + files.length > this.props.filesLimit) {
       this.setState({
         openSnackBar: true,
@@ -87,8 +92,10 @@ class DropzoneArea extends Component {
         snackbarVariant: "error"
       });
     } else {
-      var count = 0;
-      var message = "";
+      let count = 0;
+
+      _this.setState({ loading: true });
+
       files.forEach(file => {
         const reader = new FileReader();
         reader.onload = event => {
@@ -108,14 +115,14 @@ class DropzoneArea extends Component {
               if (this.props.onDrop) {
                 this.props.onDrop(file);
               }
-              message += `File ${file.name} successfully uploaded. `;
               count++; // we cannot rely on the index because this is asynchronous
               if (count === files.length) {
                 // display message when the last one fires
                 this.setState({
                   openSnackBar: true,
-                  snackbarMessage: message,
-                  snackbarVariant: "success"
+                  snackbarMessage: `${count} files selected for upload.`,
+                  snackbarVariant: "success",
+                  loading: false
                 });
               }
             }
@@ -182,6 +189,7 @@ class DropzoneArea extends Component {
 
   render() {
     const { classes } = this.props;
+    const { loading } = this.state;
     const showPreviews =
       this.props.showPreviews && this.state.fileObjects.length > 0;
     const showPreviewsInDropzone =
@@ -189,34 +197,36 @@ class DropzoneArea extends Component {
 
     return (
       <Fragment>
-        <Dropzone
-          accept={this.props.acceptedFiles.join(",")}
-          onDrop={this.onDrop.bind(this)}
-          onDropRejected={this.handleDropRejected.bind(this)}
-          className={classNames(classes.dropZone, this.props.dropZoneClass)}
-          acceptClassName={classes.stripes}
-          rejectClassName={classes.rejectStripes}
-          maxSize={this.props.maxFileSize}
-        >
-          <div className={classes.dropzoneTextStyle}>
-            <p
-              className={classNames(
-                classes.dropzoneParagraph,
-                this.props.dropzoneParagraphClass
+        <Paper elevation={1}>
+          <Dropzone
+            accept={this.props.acceptedFiles.join(",")}
+            onDrop={this.onDrop.bind(this)}
+            onDropRejected={this.handleDropRejected.bind(this)}
+            className={classNames(classes.dropZone, this.props.dropZoneClass)}
+            acceptClassName={classes.stripes}
+            rejectClassName={classes.rejectStripes}
+            maxSize={this.props.maxFileSize}
+          >
+            <div className={classes.dropzoneTextStyle}>
+              <Typography as="h3" className={classes.dropzoneText}>
+                {this.props.dropzoneText}
+              </Typography>
+              <CloudUploadIcon className={classes.uploadIconSize} />
+              {loading && (
+                <div>
+                  <CircularProgress className={classes.progress} />
+                </div>
               )}
-            >
-              {this.props.dropzoneText}
-            </p>
-            <CloudUploadIcon className={classes.uploadIconSize} />
-          </div>
-          {showPreviewsInDropzone && (
-            <PreviewList
-              fileObjects={this.state.fileObjects}
-              handleRemove={this.handleRemove.bind(this)}
-              showFileNames={this.props.showFileNamesInPreview}
-            />
-          )}
-        </Dropzone>
+            </div>
+            {showPreviewsInDropzone && (
+              <PreviewList
+                fileObjects={this.state.fileObjects}
+                handleRemove={this.handleRemove.bind(this)}
+                showFileNames={this.props.showFileNamesInPreview}
+              />
+            )}
+          </Dropzone>
+        </Paper>
         {showPreviews && (
           <Fragment>
             <Grid container>
@@ -255,9 +265,7 @@ DropzoneArea.defaultProps = {
   acceptedFiles: ["image/*", "video/*", "application/*"],
   filesLimit: 3,
   maxFileSize: 3000000,
-  dropzoneText: (
-    <Typography>Drag and drop an image file here or click</Typography>
-  ),
+  dropzoneText: "Drag and drop your images here, or click",
   showPreviews: false, // By default previews show up under in the dialog and inside in the standalone
   showPreviewsInDropzone: true,
   showFileNamesInPreview: false,
@@ -273,7 +281,7 @@ DropzoneArea.propTypes = {
   acceptedFiles: PropTypes.array,
   filesLimit: PropTypes.number,
   maxFileSize: PropTypes.number,
-  dropzoneText: PropTypes.object,
+  dropzoneText: PropTypes.string,
   showPreviews: PropTypes.bool,
   showPreviewsInDropzone: PropTypes.bool,
   showFileNamesInPreview: PropTypes.bool,

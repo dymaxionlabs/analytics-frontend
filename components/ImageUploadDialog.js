@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withNamespaces } from "../i18n";
 import { withStyles } from "@material-ui/core/styles";
 import DropzoneDialog from "./upload/DropzoneDialog";
 import Button from "@material-ui/core/Button";
@@ -64,8 +65,7 @@ class ImageUploadDialog extends Component {
             <Typography>Drag and drop an image file here or click</Typography>
           }
           showPreviews={true}
-          showAlerts={false}
-          // maxFileSize={5000000}
+          maxFileSize={50000000}
           onClose={this.handleClose}
         />
       </div>
@@ -77,4 +77,7 @@ ImageUploadDialog.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ImageUploadDialog);
+ImageUploadDialog = withStyles(styles)(ImageUploadDialog);
+ImageUploadDialog = withNamespaces("image_upload_dialog")(ImageUploadDialog);
+
+export default ImageUploadDialog;

@@ -28,6 +28,7 @@ import MapsContent from "../../components/me/MapsContent";
 // import DashboardIcon from "@material-ui/icons/Dashboard";
 import LayersIcon from "@material-ui/icons/Layers";
 import MapIcon from "@material-ui/icons/Map";
+import ImageUploadDialog from "../../components/ImageUploadDialog";
 
 const drawerWidth = 240;
 
@@ -185,6 +186,7 @@ class Dashboard extends React.Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
+            <ImageUploadDialog />
           </Toolbar>
         </AppBar>
         <Drawer

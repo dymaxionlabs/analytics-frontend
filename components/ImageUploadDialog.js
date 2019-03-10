@@ -74,9 +74,6 @@ class ImageUploadDialog extends Component {
           onSave={this.handleSave}
           acceptedFiles={["image/jpeg"]}
           filesLimit={250}
-          dropzoneText={
-            <Typography>Drag and drop an image file here or click</Typography>
-          }
           showPreviews={true}
           maxFileSize={50000000}
           onClose={this.handleClose}

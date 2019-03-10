@@ -58,7 +58,7 @@ const styles = theme => ({
 
 class Login extends React.Component {
   state = {
-    email: "",
+    username: "",
     password: "",
     remember: false,
     isSubmitting: false
@@ -76,8 +76,8 @@ class Login extends React.Component {
     }
   }
 
-  onEmailChange = e => {
-    this.setState({ email: e.target.value });
+  onUsernameChange = e => {
+    this.setState({ username: e.target.value });
   };
 
   onPasswordChange = e => {
@@ -92,10 +92,10 @@ class Login extends React.Component {
     event.preventDefault();
 
     const { t } = this.props;
-    const { email, password } = this.state;
+    const { username, password } = this.state;
 
     const dataSend = {
-      email: email,
+      username: username,
       password: password
     };
 
@@ -147,16 +147,15 @@ class Login extends React.Component {
           </Typography>
           <form className={classes.form} method="post" onSubmit={this.onSubmit}>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">{t("email")}</InputLabel>
+              <InputLabel htmlFor="username">{t("username")}</InputLabel>
               <Input
-                id="email"
-                name="email"
-                autoComplete="email"
+                id="username"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                type="email"
-                onInput={this.onEmailChange}
-                onChange={this.onEmailChange}
-                value={this.state.email}
+                onInput={this.onUsernameChange}
+                onChange={this.onUsernameChange}
+                value={this.state.username}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>

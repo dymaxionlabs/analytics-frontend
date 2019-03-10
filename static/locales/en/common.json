@@ -1,4 +1,8 @@
 {
+  "confirm_email": {
+    "error_msg": "An error has occurred. Please try again later.",
+    "success_msg": "Your email address has been verified successfully."
+  },
   "dashboard_btn": "Dashboard",
   "email": "Email",
   "loading": "Loading...",

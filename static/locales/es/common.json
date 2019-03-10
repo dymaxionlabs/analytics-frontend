@@ -1,4 +1,8 @@
 {
+  "confirm_email": {
+    "error_msg": "Un error ha ocurrido. Por favor reintente m\u00e1s tarde.",
+    "success_msg": "Su direcci\u00f3n de correo fue verificada con \u00e9xito."
+  },
   "dashboard_btn": "Dashboard",
   "email": "Email",
   "loading": "Cargando...",

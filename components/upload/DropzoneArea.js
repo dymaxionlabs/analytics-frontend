@@ -11,6 +11,7 @@ import { convertBytesToMbsOrKbs } from "./helpers";
 import SnackbarContentWrapper from "./SnackbarContentWrapper";
 import PreviewList from "./PreviewList";
 import classNames from "classnames";
+import { withNamespaces } from "../../i18n";
 
 const styles = theme => ({
   "@keyframes progress": {
@@ -84,13 +85,14 @@ class DropzoneArea extends Component {
 
   onDrop(files) {
     const _this = this;
+    const { t } = this.props;
 
     if (this.state.fileObjects.length + files.length > this.props.filesLimit) {
       this.setState({
         openSnackBar: true,
-        snackbarMessage: `Maximum allowed number of files exceeded. Only ${
-          this.props.filesLimit
-        } allowed`,
+        snackbarMessage: t("max_allowed_exceeded", {
+          count: this.props.filesLimit
+        }),
         snackbarVariant: "error"
       });
     } else {
@@ -122,7 +124,7 @@ class DropzoneArea extends Component {
                 // display message when the last one fires
                 this.setState({
                   openSnackBar: true,
-                  snackbarMessage: `${count} files selected for upload.`,
+                  snackbarMessage: t("selected_files", { count: count }),
                   snackbarVariant: "success",
                   loading: false
                 });
@@ -137,6 +139,7 @@ class DropzoneArea extends Component {
 
   handleRemove = fileIndex => event => {
     event.stopPropagation();
+    const { t } = this.props;
     const { fileObjects } = this.state;
     const file = fileObjects.filter((fileObject, i) => {
       return i === fileIndex;
@@ -153,24 +156,24 @@ class DropzoneArea extends Component {
       }
       this.setState({
         openSnackBar: true,
-        snackbarMessage: "File " + file.name + " removed",
+        snackbarMessage: t("removed_file", { name: file.name }),
         snackbarVariant: "info"
       });
     });
   };
 
   handleDropRejected(rejectedFiles, evt) {
-    var message = "";
+    const { t } = this.props;
+    let message = "";
     rejectedFiles.forEach(rejectedFile => {
-      message = `File ${rejectedFile.name} was rejected. `;
+      message = `${t("rejected_file", { name: rejectedFile.name })} `;
       if (!this.props.acceptedFiles.includes(rejectedFile.type)) {
-        message += "File type not supported. ";
+        message += `${t("unsupported_file")} `;
       }
       if (rejectedFile.size > this.props.fileSizeLimit) {
-        message +=
-          "File is too big. Size limit is " +
-          convertBytesToMbsOrKbs(this.props.fileSizeLimit) +
-          ". ";
+        message += t("file_too_big", {
+          sizeLimit: convertBytesToMbsOrKbs(this.props.fileSizeLimit)
+        });
       }
     });
     if (this.props.onDropRejected) {
@@ -292,4 +295,7 @@ DropzoneArea.propTypes = {
   onDelete: PropTypes.func
 };
 
-export default withStyles(styles)(DropzoneArea);
+DropzoneArea = withStyles(styles)(DropzoneArea);
+DropzoneArea = withNamespaces("dropzone")(DropzoneArea);
+
+export default DropzoneArea;

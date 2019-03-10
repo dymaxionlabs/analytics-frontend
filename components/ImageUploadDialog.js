@@ -35,7 +35,7 @@ class UploadProgressDialog extends Component {
   };
 
   render() {
-    const { open, progress } = this.props;
+    const { t, open, progress } = this.props;
 
     return (
       <Dialog
@@ -43,13 +43,15 @@ class UploadProgressDialog extends Component {
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Uploading...</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          {t("upload_progress.title")}
+        </DialogTitle>
         <DialogContent>
           <LinearProgress variant="determinate" value={progress} />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose} color="primary">
-            Cancel
+            {t("cancel_btn")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -58,6 +60,9 @@ class UploadProgressDialog extends Component {
 }
 
 UploadProgressDialog = withStyles(styles)(UploadProgressDialog);
+UploadProgressDialog = withNamespaces("image_upload_dialog")(
+  UploadProgressDialog
+);
 
 class ImageUploadDialog extends Component {
   state = {
@@ -109,16 +114,20 @@ class ImageUploadDialog extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { t, classes } = this.props;
     const { open, uploading, uploadProgress } = this.state;
 
     return (
       <div>
         <Button onClick={this.handleOpen} className={classes.button}>
           <CloudUploadIcon className={classes.leftIcon} />
-          Upload images
+          {t("upload_btn")}
         </Button>
         <DropzoneDialog
+          title={t("dialog.title")}
+          submitButtonText={t("dialog.submit")}
+          cancelButtonText={t("dialog.cancel")}
+          dropzoneText={t("dialog.dropzone")}
           open={open}
           onSave={this.handleSave}
           acceptedFiles={["image/jpeg"]}
@@ -142,6 +151,6 @@ ImageUploadDialog.propTypes = {
 };
 
 ImageUploadDialog = withStyles(styles)(ImageUploadDialog);
-ImageUploadDialog = withNamespaces()(ImageUploadDialog);
+ImageUploadDialog = withNamespaces("image_upload_dialog")(ImageUploadDialog);
 
 export default ImageUploadDialog;

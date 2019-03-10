@@ -101,9 +101,10 @@ class DropzoneDialog extends React.Component {
           open={this.state.open}
           onClose={this.handleClose.bind(this)}
         >
-          <DialogTitle>Upload images</DialogTitle>
+          <DialogTitle>{this.props.title}</DialogTitle>
           <DialogContent>
             <DropzoneArea
+              dropzoneText={this.props.dropzoneText}
               acceptedFiles={this.props.acceptedFiles}
               filesLimit={this.props.filesLimit}
               maxFileSize={this.props.maxFileSize}
@@ -119,14 +120,14 @@ class DropzoneDialog extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={this.handleClose.bind(this)}>
-              Cancel
+              {this.props.cancelButtonText}
             </Button>
             <Button
               color="primary"
               disabled={this.state.disabled}
               onClick={this.handleSaveClick.bind(this)}
             >
-              Submit
+              {this.props.submitButtonText}
             </Button>
           </DialogActions>
         </Dialog>
@@ -137,6 +138,9 @@ class DropzoneDialog extends React.Component {
 
 DropzoneDialog.defaultProps = {
   open: false,
+  title: "Upload files",
+  submitButtonText: "Submit",
+  cancelButtonText: "Cancel",
   acceptedFiles: ["image/*", "video/*", "application/*"],
   filesLimit: 3,
   maxFileSize: 3000000,
@@ -154,6 +158,10 @@ DropzoneDialog.defaultProps = {
 
 DropzoneDialog.propTypes = {
   open: PropTypes.bool.isRequired,
+  title: PropTypes.string,
+  submitButtonText: PropTypes.string,
+  cancelButtonText: PropTypes.string,
+  dropzoneText: PropTypes.string,
   onSave: PropTypes.func,
   onDelete: PropTypes.func,
   onClose: PropTypes.func,

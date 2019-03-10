@@ -111,6 +111,7 @@ case_study__agri,crop_lots_type_MT,Maíz tardío,Maize (late)
 case_study__agri,crop_lots_type_G1,Girasol 1°,Sunflower 1st
 me,sidebar.layers,Capas,Layers
 me,sidebar.maps,Mapas,Maps
+me,sidebar.images,Imágenes,Images
 me,download,Descargar,Download
 me,view,Ver,View
 me,layers.title,Tus capas,Your layers
@@ -125,3 +126,19 @@ me,maps.title,Tus mapas,Your maps
 me,maps.name,Nombre,Name
 me,maps.description,Descripción,Description
 me,maps.created_at,Fecha de creación,Creation date
+me,images.title,Tus imágenes,Your images
+me,images.name,Nombre de imagen,Image name
+me,images.created_at,Fecha de creación,Creation date
+image_upload_dialog,upload_progress.title,Subiendo...,Uploading...
+image_upload_dialog,upload_btn,Subir imágenes,Upload images
+image_upload_dialog,cancel_btn,Cancelar,Cancel
+image_upload_dialog,dialog.title,Subir imágenes,Upload images
+image_upload_dialog,dialog.submit,Enviar,Submit
+image_upload_dialog,dialog.cancel,Cancelar,Cancel
+image_upload_dialog,dialog.dropzone,"Arrastrá y soltá tus imágenes acá, o hacé clic.","Drag and drop your images here, or click"
+dropzone,selected_files,{{count}} archivos seleccionados para subir.,{{count}} files selected for upload.
+dropzone,max_allowed_exceeded,Número máximo permitido de archivos superados. Sólo se permite {{count}}.,Maximum allowed number of files exceeded. Only {{count}} allowed.
+dropzone,removed_file,Archivo {{name}} removido.,File {{name}} removed.
+dropzone,rejected_file,Archivo {{name}} fue rechazado.,File {{name}} was rejected.
+dropzone,unsupported_file,Tipo de archivo no soportado.,File type not supported.
+dropzone,file_too_big,Archivo es demasiado grande. El límite de tamaño es {{sizeLimit}}.,File is too big. Size limit is {{sizeLimit}}.

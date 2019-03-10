@@ -1,0 +1,13 @@
+{
+  "cancel_btn": "Cancel",
+  "dialog": {
+    "cancel": "Cancel",
+    "dropzone": "Drag and drop your images here, or click",
+    "submit": "Submit",
+    "title": "Upload images"
+  },
+  "upload_btn": "Upload images",
+  "upload_progress": {
+    "title": "Uploading..."
+  }
+}

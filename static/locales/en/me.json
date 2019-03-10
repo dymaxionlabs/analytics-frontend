@@ -1,5 +1,10 @@
 {
   "download": "Download",
+  "images": {
+    "created_at": "Creation date",
+    "name": "Image name",
+    "title": "Your images"
+  },
   "layers": {
     "created_at": "Creation date",
     "date": "Acquisition date",
@@ -17,6 +22,7 @@
     "title": "Your maps"
   },
   "sidebar": {
+    "images": "Images",
     "layers": "Layers",
     "maps": "Maps"
   },

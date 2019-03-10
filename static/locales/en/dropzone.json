@@ -1,0 +1,8 @@
+{
+  "file_too_big": "File is too big. Size limit is {{sizeLimit}}.",
+  "max_allowed_exceeded": "Maximum allowed number of files exceeded. Only {{count}} allowed.",
+  "rejected_file": "File {{name}} was rejected.",
+  "removed_file": "File {{name}} removed.",
+  "selected_files": "{{count}} files selected for upload.",
+  "unsupported_file": "File type not supported."
+}

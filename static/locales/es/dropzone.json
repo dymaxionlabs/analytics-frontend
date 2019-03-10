@@ -1,0 +1,8 @@
+{
+  "file_too_big": "Archivo es demasiado grande. El l\u00edmite de tama\u00f1o es {{sizeLimit}}.",
+  "max_allowed_exceeded": "N\u00famero m\u00e1ximo permitido de archivos superados. S\u00f3lo se permite {{count}}.",
+  "rejected_file": "Archivo {{name}} fue rechazado.",
+  "removed_file": "Archivo {{name}} removido.",
+  "selected_files": "{{count}} archivos seleccionados para subir.",
+  "unsupported_file": "Tipo de archivo no soportado."
+}

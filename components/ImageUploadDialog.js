@@ -37,7 +37,7 @@ class ImageUploadDialog extends Component {
   handleSave = files => {
     files.forEach(file => {
       axios
-        .put(
+        .post(
           buildApiUrl(`/images/upload/${file.name}`),
           { data: file },
           { headers: { Authorization: this.props.token } }

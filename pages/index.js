@@ -54,7 +54,7 @@ const DashboardButton = withNamespaces()(({ t }) => (
 ));
 
 const SignUpButton = withNamespaces()(({ t }) => (
-  <a href={t("signup_href")} style={{ margin: "0 5px" }}>
+  <a href="/signup" style={{ margin: "0 5px" }}>
     <Button primary>{t("signup_btn")}</Button>
   </a>
 ));

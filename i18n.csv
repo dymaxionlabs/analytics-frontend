@@ -16,6 +16,16 @@ common,login.request_new_password,Solicite una nueva,Request a new one
 common,login.submit,Ingresar,Enter
 common,login.error_msg,Usuario o contraseña incorrectos,Incorrect username or password
 common,login.success_msg,Inicio de sesión exitoso! Redirigiendo...,Successful login! Redirecting...
+common,signup.header,Registración,Sign up
+common,signup.subheader,"Para registrarse por favor ingrese un nombre de usuario, una dirección de correo válida y contraseña.","To register, please enter a username, a valid email address and password."
+common,signup.username_placeholder,Nombre de usuario,Username
+common,signup.email_placeholder,Email,Email
+common,signup.password1_placeholder,Contraseña,Password
+common,signup.password2_placeholder,Confirmar contraseña,Confirm password
+common,signup.cancel,Cancelar,Cancel
+common,signup.submit,Registrarse,Sign up
+common,signup.error_msg,Un error ha ocurrido. Por favor reintentelo.,An error has occurred. Please retry.
+common,signup.success_msg,¡Gracias por registrarse! En breve será redirigido...,Thank you for signing up! Soon you will be redirected...
 common,reset_password.success_msg,Su requerimiento fue recibido. Revise su email para hacer el cambio de contraseña.,Your request was received. Check your email to make the password change.
 common,reset_password.error_msg,Email debe ser una dirección de email válida,Email must be a valid email address
 common,reset_password.title,Reestablecer la contraseña,Reset password

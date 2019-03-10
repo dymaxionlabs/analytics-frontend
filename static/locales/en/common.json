@@ -35,6 +35,18 @@
     "success_msg": "Password changed successfully!",
     "title": "Confirm password change"
   },
+  "signup": {
+    "cancel": "Cancel",
+    "email_placeholder": "Email",
+    "error_msg": "An error has occurred. Please retry.",
+    "header": "Sign up",
+    "password1_placeholder": "Password",
+    "password2_placeholder": "Confirm password",
+    "subheader": "To register, please enter a username, a valid email address and password.",
+    "submit": "Sign up",
+    "success_msg": "Thank you for signing up! Soon you will be redirected...",
+    "username_placeholder": "Username"
+  },
   "signup_btn": "Sign up",
   "signup_href": "https://landings.dymaxionlabs.com/analytics-form-en",
   "title": "Analytics | Dymaxion Labs",

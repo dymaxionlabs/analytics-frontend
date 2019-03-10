@@ -51,8 +51,10 @@ class MapsContent extends React.Component {
       })
       .catch(err => {
         const response = err.response;
-        if (!response || response.status >= 400) {
+        if (response && response.status === 401) {
           logout();
+        } else {
+          console.error(response);
         }
       });
   }

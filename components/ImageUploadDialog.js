@@ -76,31 +76,31 @@ class ImageUploadDialog extends Component {
     this.setState({ open: false, uploading: false });
   };
 
-  handleSave = files => {
+  handleSave = async files => {
     if (files.length == 0) return;
 
     this.setState({ uploading: true, uploadProgress: 0 });
 
     let count = 0;
-    files.forEach(file => {
-      axios
-        .post(buildApiUrl(`/images/upload/${file.name}`), file, {
+    for (const file of files) {
+      try {
+        console.log(`Downloading ${file}...`);
+        await axios.post(buildApiUrl(`/images/upload/${file.name}`), file, {
           headers: { Authorization: this.props.token }
-        })
-        .then(() => {})
-        .catch(err => {
-          console.error(err);
-        })
-        .then(() => {
-          count += 1;
-          this.setState({ uploadProgress: (count / files.length) * 100 });
-          if (count === files.length) {
-            this.setState({ open: false, uploading: false });
-          }
         });
+      } catch (err) {
+        console.error(err);
+      }
+      console.log(`Finished downloading ${file}`);
+
+      count += 1;
+      this.setState({ uploadProgress: (count / files.length) * 100 });
+      if (count === files.length) {
+        this.setState({ open: false, uploading: false });
+      }
 
       if (!this.state.uploading) return;
-    });
+    }
   };
 
   handleOpen = () => {

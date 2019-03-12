@@ -14,7 +14,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
-import MapIcon from "@material-ui/icons/Map";
+import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from "@material-ui/icons/Close";
 
 import { i18n, withNamespaces } from "../../i18n";
@@ -93,10 +93,6 @@ class ImagesContent extends React.Component {
       });
   }
 
-  handleDownloadClick = () => {
-    this.setState({ notImplementedOpen: true });
-  };
-
   handleNotImplementedClose = () => {
     this.setState({ notImplementedOpen: false });
   };
@@ -122,6 +118,7 @@ class ImagesContent extends React.Component {
               <TableRow>
                 <TableCell>{t("images.created_at")}</TableCell>
                 <TableCell>{t("images.name")}</TableCell>
+                <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -134,6 +131,27 @@ class ImagesContent extends React.Component {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {image.name}
+                  </TableCell>
+                  <TableCell align="right">
+                    <Tooltip title={t("download")}>
+                      <a href={image.file} download>
+                        <IconButton
+                          className={classes.button}
+                          aria-label={t("download")}
+                        >
+                          <CloudDownloadIcon />
+                        </IconButton>
+                      </a>
+                    </Tooltip>
+                    {/* <Tooltip title={t("delete")}>
+                      <IconButton
+                        className={classes.button}
+                        aria-label={t("delete")}
+                        onClick={() => this.handleDeleteClick(layer)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip> */}
                   </TableCell>
                 </TableRow>
               ))}

@@ -64,7 +64,9 @@ class Maps extends React.Component {
         const minBounds = [map.extent[1], map.extent[0]];
         const maxBounds = [map.extent[3], map.extent[2]];
         const bounds = [minBounds, maxBounds];
+
         this.setState({ map: map, bounds: bounds });
+        this._toggleActiveLayers(map.layers);
       })
       .catch(err => {
         const response = err.response;
@@ -72,6 +74,13 @@ class Maps extends React.Component {
           logout();
         }
       });
+  }
+
+  _toggleActiveLayers(layers) {
+    const activeLayers = layers
+      .filter(mapLayer => mapLayer.is_active)
+      .map(mapLayer => mapLayer.layer.uuid);
+    this.setState({ activeLayers });
   }
 
   _trackEvent(action, value) {
@@ -145,7 +154,7 @@ class Maps extends React.Component {
               key={layer.uuid}
               type="raster"
               url={url}
-              // maxZoom={maxZoom}
+              maxNativeZoom={maxZoom}
               opacity={opacity}
               zIndex={zIndex}
             />

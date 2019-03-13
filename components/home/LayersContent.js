@@ -14,7 +14,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
-import DeleteIcon from "@material-ui/icons/Delete";
+import MapIcon from "@material-ui/icons/Map";
 import CloseIcon from "@material-ui/icons/Close";
 
 import { i18n, withNamespaces } from "../../i18n";
@@ -71,27 +71,33 @@ class NotImplementedSnackbar extends React.Component {
 
 NotImplementedSnackbar = withStyles(styles)(NotImplementedSnackbar);
 
-class ImagesContent extends React.Component {
+class LayersContent extends React.Component {
   state = {
-    images: [],
+    layers: [],
     notImplementedOpen: false
   };
 
   componentDidMount() {
     axios
-      .get(buildApiUrl("/images/"), {
+      .get(buildApiUrl("/layers/"), {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        this.setState({ images: response.data });
+        this.setState({ layers: response.data });
       })
       .catch(err => {
         const response = err.response;
-        if (!response || response.status >= 400) {
+        if (response && response.status === 401) {
           logout();
+        } else {
+          console.error(response);
         }
       });
   }
+
+  handleDownloadClick = () => {
+    this.setState({ notImplementedOpen: true });
+  };
 
   handleNotImplementedClose = () => {
     this.setState({ notImplementedOpen: false });
@@ -99,7 +105,7 @@ class ImagesContent extends React.Component {
 
   render() {
     const { t, classes } = this.props;
-    const { images: images, notImplementedOpen } = this.state;
+    const { layers, notImplementedOpen } = this.state;
     const locale = i18n.language;
 
     return (
@@ -110,48 +116,60 @@ class ImagesContent extends React.Component {
           gutterBottom
           component="h2"
         >
-          {t("images.title")}
+          {t("layers.title")}
         </Typography>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>{t("images.created_at")}</TableCell>
-                <TableCell>{t("images.name")}</TableCell>
+                <TableCell>{t("layers.created_at")}</TableCell>
+                <TableCell>{t("layers.name")}</TableCell>
+                <TableCell>{t("layers.description")}</TableCell>
+                <TableCell>{t("layers.type")}</TableCell>
+                <TableCell>{t("layers.date")}</TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {images.map(image => (
-                <TableRow key={image.name}>
+              {layers.map((layer, i) => (
+                <TableRow key={i}>
                   <TableCell>
                     <Moment locale={locale} fromNow>
-                      {image.created_at}
+                      {layer.created_at}
                     </Moment>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {image.name}
+                    {layer.name}
+                  </TableCell>
+                  <TableCell>{layer.description}</TableCell>
+                  <TableCell>
+                    {t(`layers.layer_type_${layer.layer_type}`)}
+                  </TableCell>
+                  <TableCell>
+                    <Moment locale={locale} format="DD/MM/YYYY">
+                      {layer.date}
+                    </Moment>
                   </TableCell>
                   <TableCell align="right">
-                    <Tooltip title={t("download")}>
-                      <a href={image.file} download>
+                    <a href={`/layers/${layer.uuid}`}>
+                      <Tooltip title={t("view")}>
                         <IconButton
                           className={classes.button}
-                          aria-label={t("download")}
+                          aria-label={t("view")}
                         >
-                          <CloudDownloadIcon />
+                          <MapIcon />
                         </IconButton>
-                      </a>
-                    </Tooltip>
-                    {/* <Tooltip title={t("delete")}>
+                      </Tooltip>
+                    </a>
+                    <Tooltip title={t("download")}>
                       <IconButton
                         className={classes.button}
-                        aria-label={t("delete")}
-                        onClick={() => this.handleDeleteClick(layer)}
+                        aria-label={t("download")}
+                        onClick={() => this.handleDownloadClick(layer)}
                       >
-                        <DeleteIcon />
+                        <CloudDownloadIcon />
                       </IconButton>
-                    </Tooltip> */}
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}
@@ -167,11 +185,11 @@ class ImagesContent extends React.Component {
   }
 }
 
-ImagesContent.propTypes = {
+LayersContent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-ImagesContent = withStyles(styles)(ImagesContent);
-ImagesContent = withNamespaces("me")(ImagesContent);
+LayersContent = withStyles(styles)(LayersContent);
+LayersContent = withNamespaces("me")(LayersContent);
 
-export default ImagesContent;
+export default LayersContent;

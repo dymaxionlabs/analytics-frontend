@@ -29,6 +29,11 @@ const handle = app.getRequestHandler();
     app.render(req, res, actualPage, queryParams);
   });
 
+  server.get("/home/:section", (req, res) => {
+    const section = req.params.section;
+    return app.render(req, res, "/home", { section: section });
+  });
+
   server.get("*", (req, res) => handle(req, res));
 
   await server.listen(3000);

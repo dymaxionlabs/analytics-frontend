@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Head from "next/head";
-import { withNamespaces } from "../../i18n";
+import { withNamespaces, Link } from "../../i18n";
 import { withAuthSync } from "../../utils/auth";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -22,12 +22,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import LayersContent from "../../components/me/LayersContent";
-import MapsContent from "../../components/me/MapsContent";
-import ImagesContent from "../../components/me/ImagesContent";
+import MapsContent from "../../components/home/MapsContent";
+import LayersContent from "../../components/home/LayersContent";
+import ImagesContent from "../../components/home/ImagesContent";
 import ImageUploadDialog from "../../components/ImageUploadDialog";
 
-// import DashboardIcon from "@material-ui/icons/Dashboard";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import CollectionsIcon from "@material-ui/icons/Collections";
 import LayersIcon from "@material-ui/icons/Layers";
 import MapIcon from "@material-ui/icons/Map";
@@ -111,16 +111,55 @@ const styles = theme => ({
   }
 });
 
-class Dashboard extends React.Component {
+const sortedSections = ["dashboard", "maps", "layers", "images"];
+
+const sections = {
+  dashboard: {
+    path: "/",
+    icon: <DashboardIcon />,
+    content: null
+  },
+  maps: {
+    key: "maps",
+    path: "/maps",
+    icon: <MapIcon />,
+    content: <MapsContent />
+  },
+  layers: {
+    key: "layers",
+    path: "/layers",
+    icon: <LayersIcon />,
+    content: <LayersContent />
+  },
+  images: {
+    key: "images",
+    path: "/images",
+    icon: <CollectionsIcon />,
+    content: <ImagesContent />
+  }
+};
+
+class Home extends React.Component {
   state = {
     open: true,
-    currentContent: "layers"
+    section: "dashboard"
   };
 
-  static async getInitialProps() {
+  static async getInitialProps({ query }) {
     return {
-      namespacesRequired: ["me", "common"]
+      namespacesRequired: ["me", "common"],
+      query: query
     };
+  }
+
+  constructor(props) {
+    super(props);
+
+    // Set current section based on path
+    const { section } = props.query;
+    if (section && sortedSections.includes(section)) {
+      this.state.section = section;
+    }
   }
 
   handleDrawerOpen = () => {
@@ -131,22 +170,20 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
-  handleSectionChange = key => {
-    this.setState({ currentContent: key });
+  handleSectionChange = section => {
+    this.setState({ section });
   };
 
   render() {
     const { t, classes, token } = this.props;
-    const { currentContent } = this.state;
+    const { section, open } = this.state;
 
-    let content;
-    if (currentContent === "layers") {
-      content = <LayersContent token={token} />;
-    } else if (currentContent === "maps") {
-      content = <MapsContent token={token} />;
-    } else if (currentContent === "images") {
-      content = <ImagesContent token={token} />;
-    }
+    const originalContent = sections[section].content;
+    const content =
+      originalContent &&
+      React.cloneElement(originalContent, {
+        token: token
+      });
 
     return (
       <div className={classes.root}>
@@ -156,22 +193,16 @@ class Dashboard extends React.Component {
         <CssBaseline />
         <AppBar
           position="absolute"
-          className={classNames(
-            classes.appBar,
-            this.state.open && classes.appBarShift
-          )}
+          className={classNames(classes.appBar, open && classes.appBarShift)}
         >
-          <Toolbar
-            disableGutters={!this.state.open}
-            className={classes.toolbar}
-          >
+          <Toolbar disableGutters={!open} className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
               className={classNames(
                 classes.menuButton,
-                this.state.open && classes.menuButtonHidden
+                open && classes.menuButtonHidden
               )}
             >
               <MenuIcon />
@@ -198,10 +229,10 @@ class Dashboard extends React.Component {
           classes={{
             paper: classNames(
               classes.drawerPaper,
-              !this.state.open && classes.drawerPaperClose
+              !open && classes.drawerPaperClose
             )
           }}
-          open={this.state.open}
+          open={open}
         >
           <div className={classes.toolbarIcon}>
             <IconButton onClick={this.handleDrawerClose}>
@@ -210,30 +241,22 @@ class Dashboard extends React.Component {
           </div>
           <Divider />
           <List>
-            {/* <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem> */}
-            <ListItem button onClick={() => this.handleSectionChange("layers")}>
-              <ListItemIcon>
-                <LayersIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("sidebar.layers")} />
-            </ListItem>
-            <ListItem button onClick={() => this.handleSectionChange("maps")}>
-              <ListItemIcon>
-                <MapIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("sidebar.maps")} />
-            </ListItem>
-            <ListItem button onClick={() => this.handleSectionChange("images")}>
-              <ListItemIcon>
-                <CollectionsIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("sidebar.images")} />
-            </ListItem>
+            {sortedSections.map(key => (
+              <Link
+                key={key}
+                href={`/home?section=${key}`}
+                as={`/home${sections[key].path}`}
+              >
+                <ListItem
+                  button
+                  onClick={() => this.handleSectionChange(key)}
+                  selected={section === key}
+                >
+                  <ListItemIcon>{sections[key].icon}</ListItemIcon>
+                  <ListItemText primary={t(`sidebar.${key}`)} />
+                </ListItem>
+              </Link>
+            ))}
           </List>
         </Drawer>
         <main className={classes.content}>
@@ -245,12 +268,12 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
+Home.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-Dashboard = withStyles(styles)(Dashboard);
-Dashboard = withNamespaces(["me", "common"])(Dashboard);
-Dashboard = withAuthSync(Dashboard);
+Home = withStyles(styles)(Home);
+Home = withNamespaces(["me", "common"])(Home);
+Home = withAuthSync(Home);
 
-export default Dashboard;
+export default Home;

@@ -85,8 +85,8 @@ class MapsContent extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {maps.map(map => (
-                <TableRow key={map.url}>
+              {maps.map((map, i) => (
+                <TableRow key={i}>
                   <TableCell>
                     <Moment locale={locale} fromNow>
                       {map.created_at}

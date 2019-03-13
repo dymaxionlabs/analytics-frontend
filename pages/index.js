@@ -48,7 +48,7 @@ const LoginButton = withNamespaces()(({ t }) => (
 ));
 
 const DashboardButton = withNamespaces()(({ t }) => (
-  <a href="/me">
+  <a href="/home">
     <Button>{t("dashboard_btn")}</Button>
   </a>
 ));

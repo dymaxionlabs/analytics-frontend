@@ -109,6 +109,7 @@ case_study__agri,crop_lots_type_S2,Soja tardía,Soybean (late)
 case_study__agri,crop_lots_type_M,Maíz temprano,Maize (early)
 case_study__agri,crop_lots_type_MT,Maíz tardío,Maize (late)
 case_study__agri,crop_lots_type_G1,Girasol 1°,Sunflower 1st
+me,sidebar.dashboard,Dashboard,Dashboard
 me,sidebar.layers,Capas,Layers
 me,sidebar.maps,Mapas,Maps
 me,sidebar.images,Imágenes,Images

@@ -72,7 +72,7 @@ class Login extends React.Component {
 
   componentDidMount() {
     if (this.props.token) {
-      routerReplace("/me");
+      routerReplace("/home");
     }
   }
 

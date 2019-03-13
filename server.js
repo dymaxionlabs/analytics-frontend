@@ -29,6 +29,10 @@ const handle = app.getRequestHandler();
     app.render(req, res, actualPage, queryParams);
   });
 
+  server.get("/me", (req, res) => {
+    return res.redirect("/home");
+  });
+
   server.get("/home/:section", (req, res) => {
     const section = req.params.section;
     return app.render(req, res, "/home", { section: section });

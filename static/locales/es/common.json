@@ -5,6 +5,18 @@
   },
   "dashboard_btn": "Dashboard",
   "email": "Email",
+  "invite": {
+    "already_confirmed": "La invitaci\u00f3n ya ha sido confirmada.",
+    "error_msg": "Un error ha ocurrido. Por favor reintentelo.",
+    "header": "Invitaci\u00f3n a proyecto",
+    "invalid_key": "El enlace de invitaci\u00f3n es inv\u00e1lido. Por favor p\u00f3ngase en contacto con nosotros.",
+    "password1_placeholder": "Contrase\u00f1a",
+    "password2_placeholder": "Confirmar contrase\u00f1a",
+    "subheader": "Ha sido invitado al proyecto {{project}} a trav\u00e9s de {{email}}",
+    "submit": "Registrar",
+    "success_msg": "\u00a1Gracias por registrarse! En breve ser\u00e1 redirigido...",
+    "username_placeholder": "Nombre de usuario"
+  },
   "loading": "Cargando...",
   "login": {
     "cant_remember": "\u00bfNo recuerda su contrase\u00f1a?",
@@ -47,7 +59,7 @@
     "password1_placeholder": "Contrase\u00f1a",
     "password2_placeholder": "Confirmar contrase\u00f1a",
     "subheader": "Para registrarse por favor ingrese un nombre de usuario, una direcci\u00f3n de correo v\u00e1lida y contrase\u00f1a.",
-    "submit": "Registrarse",
+    "submit": "Registrar",
     "success_msg": "\u00a1Gracias por registrarse! En breve ser\u00e1 redirigido...",
     "username_placeholder": "Nombre de usuario"
   },

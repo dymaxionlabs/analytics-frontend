@@ -23,7 +23,7 @@ common,signup.email_placeholder,Email,Email
 common,signup.password1_placeholder,Contraseña,Password
 common,signup.password2_placeholder,Confirmar contraseña,Confirm password
 common,signup.cancel,Cancelar,Cancel
-common,signup.submit,Registrarse,Sign up
+common,signup.submit,Registrar,Sign up
 common,signup.error_msg,Un error ha ocurrido. Por favor reintentelo.,An error has occurred. Please retry.
 common,signup.success_msg,¡Gracias por registrarse! En breve será redirigido...,Thank you for signing up! Soon you will be redirected...
 common,confirm_email.success_msg,Su dirección de correo fue verificada con éxito.,Your email address has been verified successfully.
@@ -45,6 +45,16 @@ common,reset_password_confirm.password1_placeholder,Contraseña,Password
 common,reset_password_confirm.password2_placeholder,Confirmar contraseña,Confirm password
 common,reset_password_confirm.cancel,Cancelar,Cancel
 common,reset_password_confirm.change,Cambiar,Change
+common,invite.already_confirmed,La invitación ya ha sido confirmada.,The invitation has already been confirmed.
+common,invite.invalid_key,El enlace de invitación es inválido. Por favor póngase en contacto con nosotros.,The invitation link is invalid. Please contact us.
+common,invite.success_msg,¡Gracias por registrarse! En breve será redirigido...,Thank you for signing up! Soon you will be redirected...
+common,invite.error_msg,Un error ha ocurrido. Por favor reintentelo.,An error has occurred. Please retry.
+common,invite.header,Invitación a proyecto,Invitation to project
+common,invite.subheader,Ha sido invitado al proyecto {{project}} a través de {{email}},You have been invited to the project {{project}} through {{email}}
+common,invite.username_placeholder,Nombre de usuario,Username
+common,invite.password1_placeholder,Contraseña,Password
+common,invite.password2_placeholder,Confirmar contraseña,Confirm password
+common,invite.submit,Registrar,Sign up
 guide,initial,Escriba una ciudad o busque en el mapa un lugar.,Enter a city or search the map for a place.
 guide,search_done,Dibuje un polígono del área que desea analizar.,Draw a polygon of the area you want to analyze.
 guide,polygon_drawn,Seleccione una o más capas de análisis.,Select one or more layers.

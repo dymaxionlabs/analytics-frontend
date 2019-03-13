@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Head from "next/head";
 import { withNamespaces, Link } from "../../i18n";
 import { withAuthSync } from "../../utils/auth";
+import { routerReplace } from "../../utils/router";
 
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -111,14 +112,14 @@ const styles = theme => ({
   }
 });
 
-const sortedSections = ["dashboard", "maps", "layers", "images"];
+const sortedSections = ["maps", "layers", "images"];
 
 const sections = {
-  dashboard: {
-    path: "/",
-    icon: <DashboardIcon />,
-    content: null
-  },
+  // dashboard: {
+  //   path: "/",
+  //   icon: <DashboardIcon />,
+  //   content: null
+  // },
   maps: {
     key: "maps",
     path: "/maps",
@@ -142,7 +143,7 @@ const sections = {
 class Home extends React.Component {
   state = {
     open: true,
-    section: "dashboard"
+    section: "maps"
   };
 
   static async getInitialProps({ query }) {
@@ -155,10 +156,19 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
+    let { section } = props.query;
+
     // Set current section based on path
-    const { section } = props.query;
     if (section && sortedSections.includes(section)) {
       this.state.section = section;
+    }
+  }
+
+  componentDidMount() {
+    let { section } = this.props.query;
+    // By default, go to maps
+    if (!section) {
+      routerReplace("/home/maps");
     }
   }
 

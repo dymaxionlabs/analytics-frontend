@@ -182,7 +182,8 @@ class DropzoneArea extends Component {
     this.setState({
       openSnackBar: true,
       snackbarMessage: message,
-      snackbarVariant: "error"
+      snackbarVariant: "error",
+      loading: false
     });
   }
 

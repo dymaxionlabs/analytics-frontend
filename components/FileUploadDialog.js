@@ -64,7 +64,7 @@ UploadProgressDialog = withNamespaces("image_upload_dialog")(
   UploadProgressDialog
 );
 
-class ImageUploadDialog extends Component {
+class FileUploadDialog extends Component {
   state = {
     open: false,
     uploading: false,
@@ -85,7 +85,7 @@ class ImageUploadDialog extends Component {
     for (const file of files) {
       try {
         console.log(`Downloading ${file}...`);
-        await axios.post(buildApiUrl(`/images/upload/${file.name}`), file, {
+        await axios.post(buildApiUrl(`/files/upload/${file.name}`), file, {
           headers: { Authorization: this.props.token }
         });
       } catch (err) {
@@ -130,10 +130,9 @@ class ImageUploadDialog extends Component {
           dropzoneText={t("dialog.dropzone")}
           open={open}
           onSave={this.handleSave}
-          acceptedFiles={["image/jpeg"]}
-          filesLimit={250}
+          filesLimit={1000}
           showPreviews={true}
-          maxFileSize={50000000}
+          maxFileSize={2000000000} /* 2gb */
           onClose={this.handleClose}
         />
         <UploadProgressDialog
@@ -146,11 +145,11 @@ class ImageUploadDialog extends Component {
   }
 }
 
-ImageUploadDialog.propTypes = {
+FileUploadDialog.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-ImageUploadDialog = withStyles(styles)(ImageUploadDialog);
-ImageUploadDialog = withNamespaces("image_upload_dialog")(ImageUploadDialog);
+FileUploadDialog = withStyles(styles)(FileUploadDialog);
+FileUploadDialog = withNamespaces("image_upload_dialog")(FileUploadDialog);
 
-export default ImageUploadDialog;
+export default FileUploadDialog;

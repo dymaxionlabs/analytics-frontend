@@ -26,7 +26,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import MapsContent from "../../components/home/MapsContent";
 import LayersContent from "../../components/home/LayersContent";
 import ImagesContent from "../../components/home/ImagesContent";
-import ImageUploadDialog from "../../components/ImageUploadDialog";
+import FileUploadDialog from "../../components/FileUploadDialog";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import CollectionsIcon from "@material-ui/icons/Collections";
@@ -231,7 +231,7 @@ class Home extends React.Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <ImageUploadDialog token={token} />
+            <FileUploadDialog token={token} />
           </Toolbar>
         </AppBar>
         <Drawer

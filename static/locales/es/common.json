@@ -7,12 +7,13 @@
   "email": "Email",
   "invite": {
     "already_confirmed": "La invitaci\u00f3n ya ha sido confirmada.",
+    "email_placeholder": "Email",
     "error_msg": "Un error ha ocurrido. Por favor reintentelo.",
     "header": "Invitaci\u00f3n a proyecto",
     "invalid_key": "El enlace de invitaci\u00f3n es inv\u00e1lido. Por favor p\u00f3ngase en contacto con nosotros.",
     "password1_placeholder": "Contrase\u00f1a",
     "password2_placeholder": "Confirmar contrase\u00f1a",
-    "subheader": "Ha sido invitado al proyecto {{project}} a trav\u00e9s de {{email}}",
+    "subheader": "Ha sido invitado al proyecto \"{{project}}\". Para poder acceder, debe registrarse con un nombre de usuario y contrase\u00f1a.",
     "submit": "Registrar",
     "success_msg": "\u00a1Gracias por registrarse! En breve ser\u00e1 redirigido...",
     "username_placeholder": "Nombre de usuario"

@@ -7,12 +7,13 @@
   "email": "Email",
   "invite": {
     "already_confirmed": "The invitation has already been confirmed.",
+    "email_placeholder": "Email",
     "error_msg": "An error has occurred. Please retry.",
     "header": "Invitation to project",
     "invalid_key": "The invitation link is invalid. Please contact us.",
     "password1_placeholder": "Password",
     "password2_placeholder": "Confirm password",
-    "subheader": "You have been invited to the project {{project}} through {{email}}",
+    "subheader": "You have been invited to the project \"{{project}}\". To access, you must register with a username and password.",
     "submit": "Sign up",
     "success_msg": "Thank you for signing up! Soon you will be redirected...",
     "username_placeholder": "Username"

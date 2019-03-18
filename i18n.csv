@@ -50,8 +50,9 @@ common,invite.invalid_key,El enlace de invitación es inválido. Por favor póng
 common,invite.success_msg,¡Gracias por registrarse! En breve será redirigido...,Thank you for signing up! Soon you will be redirected...
 common,invite.error_msg,Un error ha ocurrido. Por favor reintentelo.,An error has occurred. Please retry.
 common,invite.header,Invitación a proyecto,Invitation to project
-common,invite.subheader,Ha sido invitado al proyecto {{project}} a través de {{email}},You have been invited to the project {{project}} through {{email}}
+common,invite.subheader,"Ha sido invitado al proyecto ""{{project}}"". Para poder acceder, debe registrarse con un nombre de usuario y contraseña.","You have been invited to the project ""{{project}}"". To access, you must register with a username and password."
 common,invite.username_placeholder,Nombre de usuario,Username
+common,invite.email_placeholder,Email,Email
 common,invite.password1_placeholder,Contraseña,Password
 common,invite.password2_placeholder,Confirmar contraseña,Confirm password
 common,invite.submit,Registrar,Sign up

@@ -69,11 +69,14 @@ const styles = theme => ({
 class Invite extends React.Component {
   state = {
     username: "",
+    email: "",
     password1: "",
     password2: "",
     err_username_msg: "",
+    err_email_msg: "",
     err_password1_msg: "",
     err_password2_msg: "",
+    inviteHasEmail: false,
     fatalError: "",
     loading: true
   };
@@ -107,14 +110,25 @@ class Invite extends React.Component {
 
     this.setState({ loading: true });
 
+    // Retrieve token for validation
     axios
       .get(buildApiUrl(`/projects/invitations/${key}/`))
       .then(response => {
         const { data } = response;
-        if (data.confirmed) {
+        if (data.email && data.confirmed) {
           this.setState({ fatalError: t("invite.already_confirmed") });
         } else {
-          this.setState({ project: data.project, email: data.email });
+          this.setState({
+            project: data.project,
+            email: data.email,
+            inviteHasEmail: !!data.email
+          });
+        }
+
+        // If already logged in, show Confirm button only
+        const { token } = this.props;
+        if (token) {
+          // TODO
         }
       })
       .catch(err => {
@@ -130,6 +144,10 @@ class Invite extends React.Component {
     this.setState({ username: e.target.value });
   };
 
+  onEmailChange = e => {
+    this.setState({ email: e.target.value });
+  };
+
   onPassword1Change = e => {
     this.setState({ password1: e.target.value });
   };
@@ -137,6 +155,40 @@ class Invite extends React.Component {
   onPassword2Change = e => {
     this.setState({ password2: e.target.value });
   };
+
+  _confirmInvitationToken(userToken) {
+    const { t } = this.props;
+    const { key, redirect } = this.props.query;
+    console.log(`confirm with ${userToken}`);
+
+    axios
+      .post(
+        buildApiUrl(`/projects/invitations/${key}/confirm/`),
+        {},
+        {
+          headers: {
+            "Accept-Language": i18n.language,
+            Authorization: userToken
+          }
+        }
+      )
+      .then(() => {})
+      .catch(err => {
+        if (err.response) {
+          console.error(err);
+        }
+      })
+      .then(() => {
+        // Regardless of confirmation, login user
+        this.setState({
+          successMsg: t("invite.success_msg")
+        });
+
+        if (userToken) {
+          login({ token: userToken, redirectTo: redirect });
+        }
+      });
+  }
 
   onSubmit = event => {
     event.preventDefault();
@@ -156,6 +208,7 @@ class Invite extends React.Component {
       errorMsg: "",
       successMsg: "",
       err_username_msg: "",
+      err_email_msg: "",
       err_password1_msg: "",
       err_password2_msg: "",
       loading: true
@@ -166,30 +219,8 @@ class Invite extends React.Component {
         headers: { "Accept-Language": i18n.language }
       })
       .then(response => {
-        // Confirm invitation to project
-        const inviteKey = this.props.query.key;
-        axios
-          .post(buildApiUrl(`/projects/invitations/${inviteKey}/confirm/`))
-          .then(response => {})
-          .catch(err => {
-            if (err.response) {
-              console.error(err);
-            }
-          })
-          .then(() => {
-            // Regardless of confirmation, login user
-
-            this.setState({
-              successMsg: t("invite.success_msg")
-            });
-
-            const token = response.data.key;
-            const redirectTo = this.props.query.redirect;
-
-            if (token) {
-              login({ token, redirectTo });
-            }
-          });
+        const token = response.data.key;
+        this._confirmInvitationToken(token);
       })
       .catch(error => {
         console.error(error);
@@ -224,7 +255,7 @@ class Invite extends React.Component {
 
   render() {
     const { t, classes } = this.props;
-    const { loading, email, project } = this.state;
+    const { loading, email, project, fatalError } = this.state;
 
     return (
       <main className={classes.main}>
@@ -240,13 +271,15 @@ class Invite extends React.Component {
             {t("invite.header")}
           </Typography>
           <Typography className={classes.subheader}>
-            {t("invite.subheader", { project, email })}
+            {!loading &&
+              !fatalError &&
+              t("invite.subheader", { project, email })}
           </Typography>
           <Typography className={classes.successMessage}>
             {this.state.successMsg}
           </Typography>
           <Typography className={classes.errorMessage}>
-            {this.state.errorMsg || this.state.fatalError}
+            {this.state.errorMsg || fatalError}
           </Typography>
           <form className={classes.form} method="post" onSubmit={this.onSubmit}>
             <FormControl margin="normal" required fullWidth>
@@ -267,6 +300,26 @@ class Invite extends React.Component {
                 </FormHelperText>
               )}
             </FormControl>
+            {!this.state.inviteHasEmail && (
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">
+                  {t("invite.email_placeholder")}
+                </InputLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  onChange={this.onEmailChange}
+                  value={this.state.email}
+                />
+                {this.state.err_email_msg && (
+                  <FormHelperText error>
+                    {this.state.err_email_msg}
+                  </FormHelperText>
+                )}
+              </FormControl>
+            )}
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password1">
                 {t("invite.password1_placeholder")}
@@ -308,7 +361,7 @@ class Invite extends React.Component {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  disabled={this.state.fatalError !== "" || loading}
+                  disabled={fatalError !== "" || loading}
                   className={classes.submit}
                 >
                   {t("invite.submit")}

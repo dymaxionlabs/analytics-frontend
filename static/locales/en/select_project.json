@@ -1,0 +1,13 @@
+{
+  "header": "Select or create project",
+  "new": {
+    "header": "New project",
+    "name_placeholder": "Name",
+    "submit_btn": "Create"
+  },
+  "open": {
+    "header": "Open project"
+  },
+  "subheader": "You can create a new project or open an existing one.",
+  "title": "Select or create project"
+}

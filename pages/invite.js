@@ -375,7 +375,8 @@ class Invite extends React.Component {
 }
 
 Invite.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 };
 
 Invite = withStyles(styles)(Invite);

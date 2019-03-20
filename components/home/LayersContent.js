@@ -83,7 +83,7 @@ class LayersContent extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        this.setState({ layers: response.data });
+        this.setState({ layers: response.data.results });
       })
       .catch(err => {
         const response = err.response;

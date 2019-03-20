@@ -47,7 +47,7 @@ class MapsContent extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        this.setState({ maps: response.data });
+        this.setState({ maps: response.data.results });
       })
       .catch(err => {
         const response = err.response;

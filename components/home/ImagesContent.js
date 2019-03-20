@@ -83,7 +83,7 @@ class ImagesContent extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        this.setState({ images: response.data });
+        this.setState({ images: response.data.results });
       })
       .catch(err => {
         const response = err.response;

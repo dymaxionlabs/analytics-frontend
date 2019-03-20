@@ -7,7 +7,6 @@ import { withAuthSync } from "../../utils/auth";
 import { routerReplace } from "../../utils/router";
 
 import { withStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -200,7 +199,6 @@ class Home extends React.Component {
         <Head>
           <title>{t("common:title")}</title>
         </Head>
-        <CssBaseline />
         <AppBar
           position="absolute"
           className={classNames(classes.appBar, open && classes.appBarShift)}

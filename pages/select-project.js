@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import withStyles from "@material-ui/core/styles/withStyles";
+import cookie from "js-cookie";
 
 import { i18n, withNamespaces } from "../i18n";
 import { buildApiUrl } from "../utils/api";
@@ -23,6 +24,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import BasicAppbar from "../components/BasicAppbar";
+import { routerPush } from "../utils/router";
 
 const styles = theme => ({
   main: {
@@ -64,7 +66,38 @@ class NewProjectForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("submit");
+
+    const { token } = this.props;
+    const { name } = this.state;
+
+    axios
+      .post(
+        buildApiUrl(`/projects/`),
+        { name: name },
+        {
+          headers: {
+            "Accept-Language": i18n.language,
+            Authorization: token
+          }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        const { uuid } = response.data;
+        cookie.set("project", uuid);
+        routerPush("/home/");
+      })
+      .catch(err => {
+        const response = err.response;
+        if (response && response.status === 401) {
+          logout();
+        } else {
+          console.error(response);
+        }
+      })
+      .then(() => {
+        this.setState({ loading: false });
+      });
   };
 
   render() {
@@ -222,7 +255,7 @@ class SelectProject extends React.Component {
             >
               <Grid item xs>
                 <Typography>{t("new.header")}</Typography>
-                <NewProjectForm />
+                <NewProjectForm token={token} />
               </Grid>
               <Grid item xs>
                 <Typography>{t("open.header")}</Typography>

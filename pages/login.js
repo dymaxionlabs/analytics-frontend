@@ -63,7 +63,7 @@ class Login extends React.Component {
     isSubmitting: false
   };
 
-  static async getInitialProps(ctx) {
+  static async getInitialProps() {
     return {
       namespacesRequired: ["common"]
     };

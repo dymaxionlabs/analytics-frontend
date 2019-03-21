@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import { withNamespaces } from "../i18n";
 import { withAuthSync } from "../utils/auth";
+import { routerReplace } from "../utils/router";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Button } from "semantic-ui-react";
@@ -80,6 +81,12 @@ class Index extends React.Component {
         "modal_contact_form"
       ]
     };
+  }
+
+  componentDidMount() {
+    if (this.props.token) {
+      routerReplace("/home");
+    }
   }
 
   _trackEvent(action, value) {

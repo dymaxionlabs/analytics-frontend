@@ -22,6 +22,7 @@ import { logout } from "../../utils/auth";
 import axios from "axios";
 import { buildApiUrl } from "../../utils/api";
 import Moment from "react-moment";
+import cookie from "js-cookie";
 
 const styles = theme => ({
   root: {
@@ -78,8 +79,11 @@ class LayersContent extends React.Component {
   };
 
   componentDidMount() {
+    const projectId = cookie.get("project");
+
     axios
       .get(buildApiUrl("/layers/"), {
+        params: { project_uuid: projectId },
         headers: { Authorization: this.props.token }
       })
       .then(response => {

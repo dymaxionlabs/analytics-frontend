@@ -1,5 +1,5 @@
 {
-  "header": "Seleccionar o crear proyecto",
+  "header": "Seleccionar proyecto",
   "new": {
     "header": "Nuevo proyecto",
     "name_placeholder": "Nombre",
@@ -9,5 +9,5 @@
     "header": "Abrir proyecto"
   },
   "subheader": "Puede crear un nuevo proyecto o abrir uno existente.",
-  "title": "Seleccionar o crear proyecto"
+  "title": "Proyectos"
 }

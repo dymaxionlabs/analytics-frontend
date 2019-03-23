@@ -82,7 +82,6 @@ class NewProjectForm extends React.Component {
         }
       )
       .then(response => {
-        console.log(response.data);
         const { uuid } = response.data;
         cookie.set("project", uuid);
         routerPush("/home/");
@@ -167,7 +166,6 @@ class OpenProjectList extends React.Component {
         }
       })
       .then(response => {
-        console.log(response.data);
         const { count, results } = response.data;
         this.setState({ count, results });
       })
@@ -184,6 +182,11 @@ class OpenProjectList extends React.Component {
       });
   }
 
+  handleSelectProject = uuid => {
+    cookie.set("project", uuid);
+    routerPush("/home/");
+  };
+
   render() {
     const { t, classes } = this.props;
     const { loading, count, results } = this.state;
@@ -196,7 +199,11 @@ class OpenProjectList extends React.Component {
         <List className={classes.list}>
           {results &&
             results.map(project => (
-              <ListItem button key={project.uuid}>
+              <ListItem
+                button
+                key={project.uuid}
+                onClick={() => this.handleSelectProject(project.uuid)}
+              >
                 <Avatar>
                   <FolderIcon />
                 </Avatar>

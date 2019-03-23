@@ -154,8 +154,8 @@ dropzone,removed_file,Archivo {{name}} removido.,File {{name}} removed.
 dropzone,rejected_file,Archivo {{name}} fue rechazado.,File {{name}} was rejected.
 dropzone,unsupported_file,Tipo de archivo no soportado.,File type not supported.
 dropzone,file_too_big,Archivo es demasiado grande. El límite de tamaño es {{sizeLimit}}.,File is too big. Size limit is {{sizeLimit}}.
-select_project,title,Seleccionar o crear proyecto,Select or create project
-select_project,header,Seleccionar o crear proyecto,Select or create project
+select_project,title,Proyectos,Projects
+select_project,header,Seleccionar proyecto,Select project
 select_project,subheader,Puede crear un nuevo proyecto o abrir uno existente.,You can create a new project or open an existing one.
 select_project,new.header,Nuevo proyecto,New project
 select_project,new.submit_btn,Crear,Create

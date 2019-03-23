@@ -1,29 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Head from "next/head";
-import withStyles from "@material-ui/core/styles/withStyles";
-import cookie from "js-cookie";
-
-import { i18n, withNamespaces } from "../i18n";
-import { buildApiUrl } from "../utils/api";
-import { withAuthSync, logout } from "../utils/auth";
-import axios from "axios";
-import Moment from "react-moment";
-
-import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
+import Input from "@material-ui/core/Input";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Paper from "@material-ui/core/Paper";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
-import LinearProgress from "@material-ui/core/LinearProgress";
-
+import axios from "axios";
+import cookie from "js-cookie";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import React from "react";
+import Moment from "react-moment";
 import BasicAppbar from "../components/BasicAppbar";
+import { i18n, withNamespaces } from "../i18n";
+import { buildApiUrl } from "../utils/api";
+import { logout, withAuthSync } from "../utils/auth";
 import { routerPush } from "../utils/router";
 
 const styles = theme => ({
@@ -244,11 +241,11 @@ class SelectProject extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>{t("title")}</title>
+        </Head>
         <BasicAppbar />
         <main className={classes.main}>
-          <Head>
-            <title>{t("title")}</title>
-          </Head>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
               {t("header")}

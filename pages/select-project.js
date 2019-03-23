@@ -43,6 +43,12 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`
   },
+  subheader: {
+    marginBottom: theme.spacing.unit * 3
+  },
+  subsubheader: {
+    fontWeight: 500
+  },
   grid: {
     flexGrow: 1
   },
@@ -248,10 +254,12 @@ class SelectProject extends React.Component {
         <BasicAppbar />
         <main className={classes.main}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h5">
+            <Typography className={classes.header} component="h1" variant="h5">
               {t("header")}
             </Typography>
-            <Typography>{t("subheader")}</Typography>
+            <Typography className={classes.subheader}>
+              {t("subheader")}
+            </Typography>
             <Grid
               container
               direction="column"
@@ -259,11 +267,15 @@ class SelectProject extends React.Component {
               className={classes.grid}
             >
               <Grid item xs>
-                <Typography>{t("new.header")}</Typography>
+                <Typography className={classes.subsubheader}>
+                  {t("new.header")}
+                </Typography>
                 <NewProjectForm token={token} />
               </Grid>
               <Grid item xs>
-                <Typography>{t("open.header")}</Typography>
+                <Typography className={classes.subsubheader}>
+                  {t("open.header")}
+                </Typography>
                 <OpenProjectList token={token} />
               </Grid>
             </Grid>

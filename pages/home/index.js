@@ -1,38 +1,37 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import Head from "next/head";
-import { withNamespaces, Link } from "../../i18n";
-import { withAuthSync } from "../../utils/auth";
-import { routerReplace } from "../../utils/router";
-
-import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-// import Badge from "@material-ui/core/Badge";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import List from "@material-ui/core/List";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
-import MapsContent from "../../components/home/MapsContent";
-import LayersContent from "../../components/home/LayersContent";
-import ImagesContent from "../../components/home/ImagesContent";
-import FileUploadDialog from "../../components/FileUploadDialog";
-
-import DashboardIcon from "@material-ui/icons/Dashboard";
+import { withStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+// import DashboardIcon from "@material-ui/icons/Dashboard";
 import CollectionsIcon from "@material-ui/icons/Collections";
 import LayersIcon from "@material-ui/icons/Layers";
 import MapIcon from "@material-ui/icons/Map";
+// import Badge from "@material-ui/core/Badge";
+import MenuIcon from "@material-ui/icons/Menu";
+import classNames from "classnames";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import React from "react";
+import FileUploadDialog from "../../components/FileUploadDialog";
+import ImagesContent from "../../components/home/ImagesContent";
+import LayersContent from "../../components/home/LayersContent";
+import MapsContent from "../../components/home/MapsContent";
+import SelectProjectButton from "../../components/SelectProjectButton";
+import { Link, withNamespaces } from "../../i18n";
+import { withAuthSync } from "../../utils/auth";
+import { routerReplace } from "../../utils/router";
+import cookie from "js-cookie";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const styles = theme => ({
   root: {
@@ -164,8 +163,14 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    let { section } = this.props.query;
+    // If there is not selected project, go there
+    const projectId = cookie.get("project");
+    if (!projectId) {
+      routerReplace("/select-project");
+    }
+
     // By default, go to maps
+    let { section } = this.props.query;
     if (!section) {
       routerReplace("/home/maps");
     }
@@ -224,6 +229,7 @@ class Home extends React.Component {
             >
               Analytics Dashboard
             </Typography>
+            <SelectProjectButton token={token} />
             {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />

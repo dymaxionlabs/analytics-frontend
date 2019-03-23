@@ -161,3 +161,4 @@ select_project,new.header,Nuevo proyecto,New project
 select_project,new.submit_btn,Crear,Create
 select_project,new.name_placeholder,Nombre,Name
 select_project,open.header,Abrir proyecto,Open project
+select_project,open.no_projects,No hay proyectos aún.,There are no projects yet.

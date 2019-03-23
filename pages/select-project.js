@@ -191,31 +191,32 @@ class OpenProjectList extends React.Component {
 
     if (loading) {
       return <LinearProgress />;
-    } else {
+    } else if (results.length > 0) {
       return (
         <List className={classes.list}>
-          {results &&
-            results.map(project => (
-              <ListItem
-                button
-                key={project.uuid}
-                onClick={() => this.handleSelectProject(project.uuid)}
-              >
-                <Avatar>
-                  <FolderIcon />
-                </Avatar>
-                <ListItemText
-                  primary={project.name}
-                  secondary={
-                    <Moment locale={locale} fromNow>
-                      {project.updated_at}
-                    </Moment>
-                  }
-                />
-              </ListItem>
-            ))}
+          {results.map(project => (
+            <ListItem
+              button
+              key={project.uuid}
+              onClick={() => this.handleSelectProject(project.uuid)}
+            >
+              <Avatar>
+                <FolderIcon />
+              </Avatar>
+              <ListItemText
+                primary={project.name}
+                secondary={
+                  <Moment locale={locale} fromNow>
+                    {project.updated_at}
+                  </Moment>
+                }
+              />
+            </ListItem>
+          ))}
         </List>
       );
+    } else {
+      return <Typography>{t("open.no_projects")}</Typography>;
     }
   }
 }

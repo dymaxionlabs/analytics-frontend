@@ -1,21 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withNamespaces } from "../i18n";
-import { withStyles } from "@material-ui/core/styles";
-import { buildApiUrl } from "../utils/api";
-import DropzoneDialog from "./upload/DropzoneDialog";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { withStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import axios from "axios";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { withNamespaces } from "../i18n";
+import { buildApiUrl } from "../utils/api";
+import DropzoneDialog from "./upload/DropzoneDialog";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    color: "white"
   },
   leftIcon: {
     marginRight: theme.spacing.unit

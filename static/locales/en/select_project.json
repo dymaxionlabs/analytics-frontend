@@ -6,7 +6,8 @@
     "submit_btn": "Create"
   },
   "open": {
-    "header": "Open project"
+    "header": "Open project",
+    "no_projects": "There are no projects yet."
   },
   "subheader": "You can create a new project or open an existing one.",
   "title": "Projects"

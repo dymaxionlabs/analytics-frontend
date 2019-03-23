@@ -142,7 +142,7 @@ const sections = {
 class Home extends React.Component {
   state = {
     open: true,
-    section: "maps"
+    section: null
   };
 
   static async getInitialProps({ query }) {
@@ -187,7 +187,7 @@ class Home extends React.Component {
     const { t, classes, token } = this.props;
     const { section, open } = this.state;
 
-    const originalContent = sections[section].content;
+    const originalContent = section && sections[section].content;
     const content =
       originalContent &&
       React.cloneElement(originalContent, {

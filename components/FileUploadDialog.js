@@ -7,6 +7,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import axios from "axios";
+import cookie from "js-cookie";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { withNamespaces } from "../i18n";
@@ -78,6 +79,8 @@ class FileUploadDialog extends Component {
   };
 
   handleSave = async files => {
+    const projectId = cookie.get("project");
+
     if (files.length == 0) return;
 
     this.setState({ uploading: true, uploadProgress: 0 });
@@ -85,14 +88,16 @@ class FileUploadDialog extends Component {
     let count = 0;
     for (const file of files) {
       try {
-        console.log(`Downloading ${file}...`);
-        await axios.post(buildApiUrl(`/files/upload/${file.name}`), file, {
-          headers: { Authorization: this.props.token }
-        });
+        await axios.post(
+          buildApiUrl(`/files/upload/${file.name}?project_uuid=${projectId}`),
+          file,
+          {
+            headers: { Authorization: this.props.token }
+          }
+        );
       } catch (err) {
         console.error(err);
       }
-      console.log(`Finished downloading ${file}`);
 
       count += 1;
       this.setState({ uploadProgress: (count / files.length) * 100 });

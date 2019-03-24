@@ -110,7 +110,7 @@ const styles = theme => ({
   }
 });
 
-const sortedSections = ["maps", "layers", "images"];
+const sortedSections = ["images", "layers", "maps"];
 
 const sections = {
   // dashboard: {
@@ -230,12 +230,12 @@ class Home extends React.Component {
               Analytics Dashboard
             </Typography>
             <SelectProjectButton token={token} />
+            {/* <FileUploadDialog token={token} /> */}
             {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <FileUploadDialog token={token} />
           </Toolbar>
         </AppBar>
         <Drawer

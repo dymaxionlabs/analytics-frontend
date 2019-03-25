@@ -55,6 +55,13 @@ const styles = theme => ({
   list: {
     overflow: "auto",
     maxHeight: 320
+  },
+  inlineFormContainer: {
+    display: "flex"
+  },
+  inlineFormControl: {
+    flexGrow: 1,
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -113,24 +120,23 @@ class NewProjectForm extends React.Component {
         autoComplete="off"
         onSubmit={this.handleSubmit}
       >
-        <Grid container spacing={24} alignItems="flex-end">
-          <Grid item>
-            <FormControl margin="dense" required fullWidth>
-              <Input
-                name="name"
-                placeholder={t("new.name_placeholder")}
-                className={classes.textField}
-                value={name}
-                onChange={this.handleChange}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <Button type="submit" variant="contained" color="primary">
-              {t("new.submit_btn")}
-            </Button>
-          </Grid>
-        </Grid>
+        <div className={classes.inlineFormContainer}>
+          <FormControl
+            required
+            margin="dense"
+            className={classes.inlineFormControl}
+          >
+            <Input
+              name="name"
+              placeholder={t("new.name_placeholder")}
+              value={name}
+              onChange={this.handleChange}
+            />
+          </FormControl>
+          <Button type="submit" variant="contained" color="primary">
+            {t("new.submit_btn")}
+          </Button>
+        </div>
       </form>
     );
   }

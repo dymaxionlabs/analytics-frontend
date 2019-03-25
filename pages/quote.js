@@ -70,7 +70,7 @@ class Quote extends React.Component {
 
   featureGroupRef = React.createRef();
 
-  static async getInitialProps() {
+  static async getInitialProps({ query }) {
     return {
       namespacesRequired: [
         "index",
@@ -79,13 +79,20 @@ class Quote extends React.Component {
         "draw_control",
         "confirmation_portal",
         "modal_contact_form"
-      ]
+      ],
+      query: query
     };
   }
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    if (this.props.token) {
-      routerReplace("/home");
+    const { lat, lng, zoom } = props.query;
+
+    if (lat && lng) {
+      this.state.viewport.center = [lat, lng];
+    }
+    if (zoom) {
+      this.state.viewport.zoom = zoom;
     }
   }
 

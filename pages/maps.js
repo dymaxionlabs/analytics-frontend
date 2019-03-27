@@ -187,6 +187,17 @@ class Maps extends React.Component {
 
     const mapboxStyle = map && map.extra_fields && map.extra_fields.mapboxStyle;
 
+    let areaData;
+    if (
+      map &&
+      map.extra_fields &&
+      map.extra_fields["showAreaExtent"] &&
+      layers.length > 0
+    ) {
+      const layer = layers[0];
+      areaData = layer.area_geom;
+    }
+
     return (
       <div className="index">
         <Head>
@@ -206,6 +217,7 @@ class Maps extends React.Component {
           viewport={viewport}
           onViewportChanged={this.handleMapViewportChanged}
           mapboxStyle={mapboxStyle}
+          roiData={areaData}
         >
           <LayersFab
             layers={layers}

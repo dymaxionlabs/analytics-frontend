@@ -22,7 +22,7 @@ const ROIPolygon = ({ data }) => (
     data={data}
     style={{
       fillColor: "#000",
-      fillOpacity: 0.2,
+      fillOpacity: 0.05,
       color: "#fff",
       weight: 1
     }}

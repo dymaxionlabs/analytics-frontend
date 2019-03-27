@@ -24,7 +24,7 @@ const ROIPolygon = ({ data }) => (
       fillColor: "#000",
       fillOpacity: 0.05,
       color: "#fff",
-      weight: 1
+      weight: 2
     }}
   />
 );

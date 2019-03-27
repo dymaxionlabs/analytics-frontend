@@ -164,7 +164,7 @@ class LotsLayer extends React.Component {
 
     return (
       <div>
-        <GeoJSONLayer
+        <GeoJSON
           data={lotsData}
           style={this._style}
           attribution={dymaxionAttribution}

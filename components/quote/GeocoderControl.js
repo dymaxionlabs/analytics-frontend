@@ -1,5 +1,5 @@
 import React from "react";
-import { withNamespaces } from "../i18n";
+import { withNamespaces } from "../../i18n";
 import { MapControl, withLeaflet } from "react-leaflet";
 import { Input, Search } from "semantic-ui-react";
 import axios from "axios";

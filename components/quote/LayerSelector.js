@@ -7,7 +7,7 @@ import {
   List,
   Image
 } from "semantic-ui-react";
-import { withNamespaces } from "../i18n";
+import { withNamespaces } from "../../i18n";
 
 export const allLayers = [
   {

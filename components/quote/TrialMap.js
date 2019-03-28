@@ -1,7 +1,7 @@
 import { Map, TileLayer, ZoomControl, FeatureGroup } from "react-leaflet";
 import GeocoderControl from "./GeocoderControl";
 import DrawControl from "./DrawControl";
-import { i18n } from "../i18n";
+import { i18n } from "../../i18n";
 
 import "leaflet/dist/leaflet.css";
 

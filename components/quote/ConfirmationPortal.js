@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import ModalContactForm from "./ModalContactForm";
 import { allLayers } from "./LayerSelector";
-import { withNamespaces } from "../i18n";
+import { withNamespaces } from "../../i18n";
 
 const Item = ({ icon, title, description }) => (
   <Header as="h4">

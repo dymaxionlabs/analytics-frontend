@@ -1,7 +1,7 @@
 import React from "react";
-import { withNamespaces } from "../i18n";
+import { withNamespaces } from "../../i18n";
 import { Modal, Header, Form, Message } from "semantic-ui-react";
-import { buildApiUrl } from "../utils/api";
+import { buildApiUrl } from "../../utils/api";
 import axios from "axios";
 
 const initialState = {

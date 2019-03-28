@@ -5,13 +5,12 @@ import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
 import React from "react";
 import { withNamespaces } from "../i18n";
 import { withAuthSync } from "../utils/auth";
-import { routerReplace } from "../utils/router";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Dimmer, Loader, Button } from "semantic-ui-react";
 
 // Dynamically load TrialMap component as it only works on browser
-const Map = dynamic(() => import("../components/TrialMap"), {
+const Map = dynamic(() => import("../components/quote/TrialMap"), {
   ssr: false,
   loading: withNamespaces()(({ t }) => (
     <Dimmer active>
@@ -20,10 +19,10 @@ const Map = dynamic(() => import("../components/TrialMap"), {
   ))
 });
 
-import ConfirmationPortal from "../components/ConfirmationPortal";
-import LayerSelector from "../components/LayerSelector";
-import Guide from "../components/Guide";
-import SimpleModalContactForm from "../components/SimpleModalContactForm";
+import ConfirmationPortal from "../components/quote/ConfirmationPortal";
+import LayerSelector from "../components/quote/LayerSelector";
+import Guide from "../components/quote/Guide";
+import SimpleModalContactForm from "../components/quote/SimpleModalContactForm";
 
 const initialViewport = {
   center: [-34.43888767776975, -58.93332694025683],

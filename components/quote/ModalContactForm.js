@@ -103,7 +103,7 @@ class ContactForm extends Component {
     };
 
     axios
-      .post(buildApiUrl("/quotations/"), params)
+      .post(buildApiUrl("/requests/"), params)
       .then(() => {
         this.setState({
           ...initialState,

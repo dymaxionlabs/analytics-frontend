@@ -81,9 +81,10 @@ class Register extends React.Component {
     isSubmitting: false
   };
 
-  static async getInitialProps() {
+  static async getInitialProps({ query }) {
     return {
-      namespacesRequired: ["common"]
+      namespacesRequired: ["common"],
+      query
     };
   }
 
@@ -137,7 +138,8 @@ class Register extends React.Component {
           successMsg: t("signup.success_msg")
         });
         if (token) {
-          login({ token });
+          const { redirect } = this.props.query;
+          login({ token, redirectTo: redirect });
         }
       })
       .catch(error => {
@@ -173,6 +175,7 @@ class Register extends React.Component {
 
   render() {
     const { t, classes } = this.props;
+    const { redirect } = this.props.query;
     const { isSubmitting } = this.state;
 
     return (
@@ -269,7 +272,9 @@ class Register extends React.Component {
             </FormControl>
             <Grid container spacing={24}>
               <Grid item xs>
-                <Link href="/login">
+                <Link
+                  href={{ pathname: "login", query: { redirect: redirect } }}
+                >
                   <Button
                     className={classes.submit}
                     variant="contained"
@@ -296,7 +301,7 @@ class Register extends React.Component {
           </form>
           <Typography className={classes.loginPar}>
             {t("signup.already_has_account")}{" "}
-            <Link href="/login">
+            <Link href={{ pathname: "login", query: { redirect: redirect } }}>
               <a>{t("signup.login")}</a>
             </Link>
           </Typography>

@@ -65,9 +65,10 @@ class Login extends React.Component {
     isSubmitting: false
   };
 
-  static async getInitialProps() {
+  static async getInitialProps({ query }) {
     return {
-      namespacesRequired: ["common"]
+      namespacesRequired: ["common"],
+      query
     };
   }
 
@@ -107,7 +108,8 @@ class Login extends React.Component {
         const token = response.data.key;
         const expires = this.state.remember ? 30 : null;
         if (token) {
-          login({ token, expires });
+          const { redirect } = this.props.query;
+          login({ token, expires, redirectTo: redirect });
         }
       })
       .catch(error => {
@@ -122,6 +124,7 @@ class Login extends React.Component {
 
   render() {
     const { t, classes } = this.props;
+    const { redirect } = this.props.query;
     const { isSubmitting } = this.state;
 
     return (
@@ -188,7 +191,7 @@ class Login extends React.Component {
           </Typography>
           <Typography className={classes.signup}>
             {t("login.has_no_account")}{" "}
-            <Link href="/signup">
+            <Link href={{ pathname: "signup", query: { redirect: redirect } }}>
               <a>{t("login.signup")}</a>
             </Link>
           </Typography>

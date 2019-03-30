@@ -16,6 +16,8 @@ common,login.request_new_password,Solicite una nueva,Request a new one
 common,login.submit,Ingresar,Enter
 common,login.error_msg,Usuario o contraseña incorrectos,Incorrect username or password
 common,login.success_msg,Inicio de sesión exitoso! Redirigiendo...,Successful login! Redirecting...
+common,login.has_no_account,¿No está registrado aún?,Not registered yet?
+common,login.signup,Regístrese,Sign up
 common,signup.header,Registración,Sign up
 common,signup.subheader,"Para registrarse por favor ingrese un nombre de usuario, una dirección de correo válida y contraseña.","To register, please enter a username, a valid email address and password."
 common,signup.username_placeholder,Nombre de usuario,Username

@@ -22,8 +22,10 @@
   "login": {
     "cant_remember": "Can't remember your password?",
     "error_msg": "Incorrect username or password",
+    "has_no_account": "Not registered yet?",
     "remember": "Remember me",
     "request_new_password": "Request a new one",
+    "signup": "Sign up",
     "submit": "Enter",
     "success_msg": "Successful login! Redirecting...",
     "title": "Login"

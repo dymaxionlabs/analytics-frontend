@@ -22,8 +22,10 @@
   "login": {
     "cant_remember": "\u00bfNo recuerda su contrase\u00f1a?",
     "error_msg": "Usuario o contrase\u00f1a incorrectos",
+    "has_no_account": "\u00bfNo est\u00e1 registrado a\u00fan?",
     "remember": "Recordar",
     "request_new_password": "Solicite una nueva",
+    "signup": "Reg\u00edstrese",
     "submit": "Ingresar",
     "success_msg": "Inicio de sesi\u00f3n exitoso! Redirigiendo...",
     "title": "Inicio de sesi\u00f3n"

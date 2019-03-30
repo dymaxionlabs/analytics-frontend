@@ -53,10 +53,12 @@
     "title": "Confirmar cambio de contrase\u00f1a"
   },
   "signup": {
+    "already_has_account": "\u00bfYa tiene una cuenta?",
     "cancel": "Cancelar",
     "email_placeholder": "Email",
     "error_msg": "Un error ha ocurrido. Por favor reintentelo.",
     "header": "Registraci\u00f3n",
+    "login": "Iniciar sesi\u00f3n",
     "password1_placeholder": "Contrase\u00f1a",
     "password2_placeholder": "Confirmar contrase\u00f1a",
     "subheader": "Para registrarse por favor ingrese un nombre de usuario, una direcci\u00f3n de correo v\u00e1lida y contrase\u00f1a.",

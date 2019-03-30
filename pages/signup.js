@@ -62,6 +62,9 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
+  },
+  loginPar: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
@@ -291,6 +294,12 @@ class Register extends React.Component {
             </Grid>
             {isSubmitting && <LinearProgress />}
           </form>
+          <Typography className={classes.loginPar}>
+            {t("signup.already_has_account")}{" "}
+            <Link href="/login">
+              <a>{t("signup.login")}</a>
+            </Link>
+          </Typography>
         </Paper>
       </main>
     );

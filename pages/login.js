@@ -16,7 +16,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { withNamespaces, Link } from "../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../utils/api";
-import { withAuthSync, login } from "../utils/auth";
+import { login } from "../utils/auth";
 import { routerReplace } from "../utils/router";
 
 const styles = theme => ({
@@ -67,12 +67,6 @@ class Login extends React.Component {
     return {
       namespacesRequired: ["common"]
     };
-  }
-
-  componentDidMount() {
-    if (this.props.token) {
-      routerReplace("/home");
-    }
   }
 
   onUsernameChange = e => {
@@ -202,6 +196,5 @@ Login.propTypes = {
 
 Login = withStyles(styles)(Login);
 Login = withNamespaces()(Login);
-Login = withAuthSync(Login, { redirect: false });
 
 export default Login;

@@ -53,10 +53,12 @@
     "title": "Confirm password change"
   },
   "signup": {
+    "already_has_account": "Already have an account?",
     "cancel": "Cancel",
     "email_placeholder": "Email",
     "error_msg": "An error has occurred. Please retry.",
     "header": "Sign up",
+    "login": "Login",
     "password1_placeholder": "Password",
     "password2_placeholder": "Confirm password",
     "subheader": "To register, please enter a username, a valid email address and password.",

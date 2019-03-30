@@ -26,6 +26,8 @@ common,signup.cancel,Cancelar,Cancel
 common,signup.submit,Registrar,Sign up
 common,signup.error_msg,Un error ha ocurrido. Por favor reintentelo.,An error has occurred. Please retry.
 common,signup.success_msg,¡Gracias por registrarse! En breve será redirigido...,Thank you for signing up! Soon you will be redirected...
+common,signup.already_has_account,¿Ya tiene una cuenta?,Already have an account?
+common,signup.login,Iniciar sesión,Login
 common,confirm_email.success_msg,Su dirección de correo fue verificada con éxito.,Your email address has been verified successfully.
 common,confirm_email.error_msg,Un error ha ocurrido. Por favor reintente más tarde.,An error has occurred. Please try again later.
 common,reset_password.success_msg,Su requerimiento fue recibido. Revise su email para hacer el cambio de contraseña.,Your request was received. Check your email to make the password change.

@@ -33,6 +33,9 @@
   "login_btn": "Login",
   "logout_btn": "Logout",
   "password": "Password",
+  "quote_btn": {
+    "value": "Quote new layer"
+  },
   "reset_password": {
     "cancel": "Cancel",
     "email_label": "Enter the email address associated with your account",

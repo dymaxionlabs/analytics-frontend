@@ -63,6 +63,7 @@ class LayersFab extends React.Component {
           aria-owns={anchorEl ? "layers-menu" : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
+          color="secondary"
         >
           <LayersIcon />
         </Fab>

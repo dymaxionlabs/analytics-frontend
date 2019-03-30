@@ -33,6 +33,9 @@
   "login_btn": "Iniciar sesi\u00f3n",
   "logout_btn": "Cerrar sesi\u00f3n",
   "password": "Contrase\u00f1a",
+  "quote_btn": {
+    "value": "Cotizar nueva capa"
+  },
   "reset_password": {
     "cancel": "Cancelar",
     "email_label": "Ingrese la direcci\u00f3n de email asociada a su cuenta",

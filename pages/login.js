@@ -17,7 +17,6 @@ import { withNamespaces, Link } from "../i18n";
 import axios from "axios";
 import { buildApiUrl } from "../utils/api";
 import { login } from "../utils/auth";
-import { routerReplace } from "../utils/router";
 
 const styles = theme => ({
   main: {
@@ -200,7 +199,8 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 };
 
 Login = withStyles(styles)(Login);

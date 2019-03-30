@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Form, Modal, Message, Header, Grid } from "semantic-ui-react";
 import { AreaSection, LayersSection } from "./ConfirmationPortal";
 import { buildApiUrl } from "../../utils/api";
-import { withNamespaces } from "../../i18n";
+import { i18n, withNamespaces } from "../../i18n";
 import axios from "axios";
 
 const initialState = {
@@ -88,6 +88,8 @@ class ContactForm extends Component {
   }
 
   submit() {
+    const { token } = this.props;
+
     const areas_geom = this.props.polygonLayers.map(layer => ({
       area_geom: layer.toGeoJSON()["geometry"]
     }));
@@ -98,12 +100,16 @@ class ContactForm extends Component {
       message: this.state.fields.message,
       areas: areas_geom,
       layers: this.props.selectedLayers,
-      extra_fields: { city: this.state.fields.city },
-      user: null // TODO
+      extra_fields: { city: this.state.fields.city }
     };
 
     axios
-      .post(buildApiUrl("/requests/"), params)
+      .post(buildApiUrl("/requests/"), params, {
+        headers: {
+          "Accept-Language": i18n.language,
+          Authorization: token
+        }
+      })
       .then(() => {
         this.setState({
           ...initialState,

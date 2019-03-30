@@ -220,7 +220,7 @@ class Quote extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { token, t } = this.props;
     const { viewport, step, selectedLayers } = this.state;
     const isLayerSelected = step === "layer_selected";
 
@@ -250,6 +250,7 @@ class Quote extends React.Component {
         >
           <Guide step={step} />
           <ConfirmationPortal
+            token={token}
             open={isLayerSelected}
             area={this.state.polygonsArea}
             selectedLayers={selectedLayers}

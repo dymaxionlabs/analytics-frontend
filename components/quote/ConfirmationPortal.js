@@ -55,6 +55,7 @@ class ConfirmationPortal extends React.Component {
   render() {
     const {
       t,
+      token,
       open,
       area,
       selectedLayers,
@@ -87,6 +88,7 @@ class ConfirmationPortal extends React.Component {
             <AreaSection value={area} />
             {layers && <LayersSection layers={layers} />}
             <ModalContactForm
+              token={token}
               trigger={
                 <Button fluid primary onClick={onConfirmClick}>
                   {t("confirm")}

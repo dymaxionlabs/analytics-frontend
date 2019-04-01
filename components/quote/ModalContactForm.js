@@ -21,6 +21,95 @@ const initialState = {
   }
 };
 
+let AuthContactForm = ({ t }) => <p>None</p>;
+AuthContactForm = withNamespaces("modal_contact_form")(AuthContactForm);
+
+let AnonContactForm = ({
+  t,
+  success,
+  error,
+  loading,
+  submitedOnce,
+  fields,
+  invalidFields,
+  area,
+  layers,
+  onInputChange,
+  onSubmit
+}) => (
+  <Grid>
+    <Grid.Column width={12}>
+      <Form size="large" success={success} error={error} loading={loading}>
+        <Form.Group widths="equal">
+          <Form.Input
+            fluid
+            required
+            label={t("name_label")}
+            placeholder={t("name_placeholder")}
+            name="name"
+            value={fields.name}
+            onChange={onInputChange}
+            error={submitedOnce && invalidFields.name}
+          />
+          <Form.Input
+            fluid
+            required
+            label={t("email_label")}
+            placeholder={t("email_placeholder")}
+            type="email"
+            name="email"
+            value={fields.email}
+            onChange={onInputChange}
+            error={submitedOnce && invalidFields.email}
+          />
+          <Form.Input
+            fluid
+            required
+            label={t("city_label")}
+            placeholder={t("city_placeholder")}
+            name="city"
+            value={fields.city}
+            onChange={onInputChange}
+            error={submitedOnce && invalidFields.city}
+          />
+        </Form.Group>
+        <Form.TextArea
+          label={t("message_label")}
+          placeholder={t("message_placeholder")}
+          name="message"
+          value={fields.message}
+          onChange={onInputChange}
+          error={submitedOnce && invalidFields.message}
+        />
+        <Message success>
+          <Message.Header>{t("quote_success_title")}</Message.Header>
+          {t("quote_success_desc")}
+        </Message>
+        <Message error>
+          <Message.Header>{t("quote_error_title")}</Message.Header>
+          {t("quote_error_desc", {
+            contactEmail: (
+              <a href="mailto:contacto@dymaxionlabs.com">
+                contacto@dymaxionlabs.com
+              </a>
+            )
+          })}
+        </Message>
+        <Form.Button primary onClick={onSubmit}>
+          {t("send")}
+        </Form.Button>
+      </Form>
+    </Grid.Column>
+    <Grid.Column width={4}>
+      <Header as="h4">{t("specifications")}</Header>
+      <AreaSection value={area} />
+      {layers && <LayersSection layers={layers} />}
+    </Grid.Column>
+  </Grid>
+);
+
+AnonContactForm = withNamespaces("modal_contact_form")(AnonContactForm);
+
 class ContactForm extends Component {
   state = {
     ...initialState,
@@ -103,13 +192,13 @@ class ContactForm extends Component {
       extra_fields: { city: this.state.fields.city }
     };
 
+    let headers = { "Accept-Language": i18n.language };
+
+    // Only send Auth header if authenticated
+    if (token) headers["Authorization"] = token;
+
     axios
-      .post(buildApiUrl("/requests/"), params, {
-        headers: {
-          "Accept-Language": i18n.language,
-          Authorization: token
-        }
-      })
+      .post(buildApiUrl("/requests/"), params, headers)
       .then(() => {
         this.setState({
           ...initialState,
@@ -133,88 +222,16 @@ class ContactForm extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { token, area, layers } = this.props;
+    const form = token ? AuthContactForm : AnonContactForm;
 
-    return (
-      <Grid>
-        <Grid.Column width={12}>
-          <Form
-            size="large"
-            success={this.state.success}
-            error={this.state.error}
-            loading={this.state.loading}
-          >
-            <Form.Group widths="equal">
-              <Form.Input
-                fluid
-                required
-                label={t("name_label")}
-                placeholder={t("name_placeholder")}
-                name="name"
-                value={this.state.fields.name}
-                onChange={this.handleInputChange}
-                error={this.state.submitedOnce && this.state.invalidFields.name}
-              />
-              <Form.Input
-                fluid
-                required
-                label={t("email_label")}
-                placeholder={t("email_placeholder")}
-                type="email"
-                name="email"
-                value={this.state.fields.email}
-                onChange={this.handleInputChange}
-                error={
-                  this.state.submitedOnce && this.state.invalidFields.email
-                }
-              />
-              <Form.Input
-                fluid
-                required
-                label={t("city_label")}
-                placeholder={t("city_placeholder")}
-                name="city"
-                value={this.state.fields.city}
-                onChange={this.handleInputChange}
-                error={this.state.submitedOnce && this.state.invalidFields.city}
-              />
-            </Form.Group>
-            <Form.TextArea
-              label={t("message_label")}
-              placeholder={t("message_placeholder")}
-              name="message"
-              value={this.state.fields.message}
-              onChange={this.handleInputChange}
-              error={
-                this.state.submitedOnce && this.state.invalidFields.message
-              }
-            />
-            <Message success>
-              <Message.Header>{t("quote_success_title")}</Message.Header>
-              {t("quote_success_desc")}
-            </Message>
-            <Message error>
-              <Message.Header>{t("quote_error_title")}</Message.Header>
-              {t("quote_error_desc", {
-                contactEmail: (
-                  <a href="mailto:contacto@dymaxionlabs.com">
-                    contacto@dymaxionlabs.com
-                  </a>
-                )
-              })}
-            </Message>
-            <Form.Button primary onClick={this.handleSubmit}>
-              {t("send")}
-            </Form.Button>
-          </Form>
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Header as="h4">{t("specifications")}</Header>
-          <AreaSection value={this.props.area} />
-          {this.props.layers && <LayersSection layers={this.props.layers} />}
-        </Grid.Column>
-      </Grid>
-    );
+    return React.createElement(form, {
+      area: area,
+      layers: layers,
+      onInputChange: this.handleInputChange,
+      onSubmit: this.handleSubmit,
+      ...this.state
+    });
   }
 }
 

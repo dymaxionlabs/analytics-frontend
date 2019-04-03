@@ -29,16 +29,7 @@ const initialViewport = {
   zoom: 16
 };
 
-const availableLayers = [
-  "recent-construction",
-  "roofs",
-  "pools",
-  "informal-settlements",
-  "roads",
-  "soil",
-  "floods",
-  "ndvi"
-];
+const availableLayers = ["roofs", "pools", "roads", "soil", "floods", "ndvi"];
 
 // Not using <Link> because we need a full refresh to work with MUI-based pages
 const LoginButton = withNamespaces()(({ t }) => (

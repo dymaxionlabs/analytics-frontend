@@ -14,8 +14,8 @@ import {
   List,
   Button
 } from "semantic-ui-react";
-import LayerSelector from "../../components/LayerSelector";
-import SimpleModalContactForm from "../../components/SimpleModalContactForm";
+import LayerSelector from "../../components/quote/LayerSelector";
+import SimpleModalContactForm from "../../components/quote/SimpleModalContactForm";
 
 const lotsData = require("../../static/agri/lots.json");
 const roiData = require("../../static/agri/roi.json");

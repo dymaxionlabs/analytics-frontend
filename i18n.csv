@@ -88,8 +88,15 @@ layer_selector,true_color_title,Color verdadero,True color
 layer_selector,true_color_desc,Imagen satelital de color verdadero,True color satellite image
 layer_selector,crop_lots_title,Lotes de cultivo,Crop lots
 layer_selector,crop_lots_desc,Lotes categorizados por tipo de cultivo,Categorized lots by crop type
+layer_selector,pools_desc_long,El servicio de contorno de piscinas de alta precisión consiste en un archivo vectorial con la ubicación de cada una para el área solicitada.,The high precision pool outline service consists of a vector file containing the location of each pool within the requested area.
+layer_selector,roofs_desc_long,El servicio de contorno de techos de alta precisión consiste en un archivo vectorial con la ubicación de cada uno para el área solicitada.,The high precision roof outline service consists of a vector file containing the location of each roof within the requested area.
+layer_selector,roads_desc_long,El servicio de mapeo de rutas pavimentadas de alta precisión consiste en un archivo vectorial con la ubicación del contorno de cada una para el área solicitada.,The pavement roads outline service consists of a vector file containing the outline of each pavement road within the requested area.
+layer_selector,soil_desc_long,El servicio de mapeo de área sembrada consiste en un archivo vectorial con la ubicación de los polígonos con áreas sembradas  y las imagenes utilizadas para el área solicitada.,The sown area map service consists of a vector file containing the polygon of each sowned area and the images used for calculations within the requested territory.
+layer_selector,floods_desc_long,El servicio de mapeo de áreas inundadas consiste en un archivo vectorial con la ubicación de los polígonos con áreas inundadas y las imagenes utilizadas para el área solicitada.,The flooded areas map service consists of a vector file containing the polygon of each flooded area and the images used for calculations within the requested territory.
+layer_selector,ndvi_desc_long,El servicio de mapeo de índice verde consiste en un archivo ráster con el índice NDVI y las imagenes utilizadas para el área solicitada,The green index map service consists of a raster file containing the NDVI index and the images used for calculations within the requested area.
 confirmation_portal,surface_area,tamaño de superficie,surface area
 confirmation_portal,selected_layers,capas seleccionadas,selected layers
+confirmation_portal,price,costo del servicio,service cost
 confirmation_portal,confirm,Confirmar,Confirm
 modal_contact_form,name_label,Nombre,Name
 modal_contact_form,name_placeholder,Ingrese su nombre,Enter your name
@@ -106,6 +113,11 @@ modal_contact_form,quote_success_title,Cotización enviada exitosamente,Quote se
 modal_contact_form,quote_success_desc,Gracias por enviar su cotización. Le escribiremos en la brevedad con más información.,Thanks for sending your quote. We will write to you shortly with more information.
 modal_contact_form,quote_error_title,Error al enviar cotización,Error when sending quote
 modal_contact_form,quote_error_desc,"Ocurrió un error al enviar la cotización. Por favor, intente de nuevo o contáctese con nosotros a {{contactLink}}.",An error occurred when sending the quote. Please try again or contact us at {{contactLink}}.
+modal_contact_form,layer_info.agri,Este servicio se calcula sobre imágenes satelitales recientes del sensor Sentinel-2.,We use up-to-date satellite imagery from ESA sensor Sentinel-2.
+modal_contact_form,layer_info.urban,Este servicio se calcula sobre imágenes satelitales recientes de alta resolución. El precio no incluye la entrega de la imágenes utilizadas,We use recent high resolution satellite imagery to run our algorithms. The price doesn't include the delivery of the images involved.
+modal_contact_form,only_request_checkbox,Quiero hacer un pedido diferente y consultar primero.,I want to make a different order and consult first.
+modal_contact_form,request_btn,Consultar,Consult
+modal_contact_form,pay_btn,Pagar,Pay
 simple_modal_contact_form,header,Contáctenos,Contact us
 simple_modal_contact_form,email_label,Email,Email
 simple_modal_contact_form,email_placeholder,Ingrese su dirección de e-mail,Enter your email address

@@ -55,7 +55,7 @@ class Quote extends React.Component {
     viewport: initialViewport,
     selectedLayers: [],
     polygonsArea: 0,
-    step: "search_done"
+    step: "initial"
   };
 
   featureGroupRef = React.createRef();
@@ -73,6 +73,7 @@ class Quote extends React.Component {
       query: query
     };
   }
+
   constructor(props) {
     super(props);
 

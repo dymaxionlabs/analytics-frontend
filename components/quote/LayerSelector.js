@@ -14,31 +14,31 @@ export const allLayers = [
     key: "recent_construction",
     image: "/static/icons/recent.png",
     value: "recent_construction",
-    categories: ["construction"]
+    categories: ["urban"]
   },
   {
     key: "roofs",
     image: "/static/icons/roofs.png",
     value: "roofs",
-    categories: ["construction"]
+    categories: ["urban"]
   },
   {
     key: "pools",
     image: "/static/icons/pools.png",
     value: "pools",
-    categories: ["construction"]
+    categories: ["urban"]
   },
   {
     key: "informal_settlements",
     image: "/static/icons/slums.png",
     value: "informal_settlements",
-    categories: ["demographic"]
+    categories: ["urban"]
   },
   {
     key: "roads",
     image: "/static/icons/roads.png",
     value: "roads",
-    categories: ["demographic"]
+    categories: ["urban"]
   },
   {
     key: "soil",

@@ -51,7 +51,20 @@ export const LayersSection = withNamespaces([
   );
 });
 
+export let PriceSection = ({ t, price }) => (
+  <Item icon="price" title={`U$S ${price}`} description={t("price")} />
+);
+
+PriceSection = withNamespaces(["confirmation_portal", "layer_selector"])(
+  PriceSection
+);
+
 class ConfirmationPortal extends React.Component {
+  calculatePrice() {
+    const { area } = this.props;
+    return Math.round(area * 5);
+  }
+
   render() {
     const {
       t,
@@ -65,6 +78,7 @@ class ConfirmationPortal extends React.Component {
       onContactFormSubmit
     } = this.props;
 
+    const price = this.calculatePrice();
     const selLayers = selectedLayers || [];
     const layers = allLayers.filter(layer => selLayers.includes(layer.key));
 
@@ -98,6 +112,7 @@ class ConfirmationPortal extends React.Component {
               polygonLayers={polygonLayers}
               area={area}
               layers={layers}
+              price={price}
               onModalClose={onContactFormModalClose}
               onSubmit={onContactFormSubmit}
             />

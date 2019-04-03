@@ -3,15 +3,22 @@
   "city_placeholder": "Ingrese su ciudad",
   "email_label": "Email",
   "email_placeholder": "Ingrese su direcci\u00f3n de e-mail",
+  "layer_info": {
+    "agri": "Este servicio se calcula sobre im\u00e1genes satelitales recientes del sensor Sentinel-2.",
+    "urban": "Este servicio se calcula sobre im\u00e1genes satelitales recientes de alta resoluci\u00f3n. El precio no incluye la entrega de la im\u00e1genes utilizadas"
+  },
   "message_label": "Mensaje",
   "message_placeholder": "Ingrese un comentario adicional",
   "name_label": "Nombre",
   "name_placeholder": "Ingrese su nombre",
+  "only_request_checkbox": "Quiero hacer un pedido diferente y consultar primero.",
+  "pay_btn": "Pagar",
   "quote": "Cotizar",
   "quote_error_desc": "Ocurri\u00f3 un error al enviar la cotizaci\u00f3n. Por favor, intente de nuevo o cont\u00e1ctese con nosotros a {{contactLink}}.",
   "quote_error_title": "Error al enviar cotizaci\u00f3n",
   "quote_success_desc": "Gracias por enviar su cotizaci\u00f3n. Le escribiremos en la brevedad con m\u00e1s informaci\u00f3n.",
   "quote_success_title": "Cotizaci\u00f3n enviada exitosamente",
+  "request_btn": "Consultar",
   "send": "Enviar",
   "specifications": "Especificaciones"
 }

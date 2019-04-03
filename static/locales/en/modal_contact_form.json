@@ -3,15 +3,22 @@
   "city_placeholder": "Enter your city",
   "email_label": "Email",
   "email_placeholder": "Enter your email address",
+  "layer_info": {
+    "agri": "We use up-to-date satellite imagery from ESA sensor Sentinel-2.",
+    "urban": "We use recent high resolution satellite imagery to run our algorithms. The price doesn't include the delivery of the images involved."
+  },
   "message_label": "Message",
   "message_placeholder": "Enter an additional message",
   "name_label": "Name",
   "name_placeholder": "Enter your name",
+  "only_request_checkbox": "I want to make a different order and consult first.",
+  "pay_btn": "Pay",
   "quote": "Quote",
   "quote_error_desc": "An error occurred when sending the quote. Please try again or contact us at {{contactLink}}.",
   "quote_error_title": "Error when sending quote",
   "quote_success_desc": "Thanks for sending your quote. We will write to you shortly with more information.",
   "quote_success_title": "Quote sent successfully",
+  "request_btn": "Consult",
   "send": "Send",
   "specifications": "Specifications"
 }

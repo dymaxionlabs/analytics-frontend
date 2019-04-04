@@ -62,7 +62,7 @@ PriceSection = withNamespaces(["confirmation_portal", "layer_selector"])(
 class ConfirmationPortal extends React.Component {
   calculatePrice() {
     const { area } = this.props;
-    return Math.round(area * 5);
+    return Math.round(area * 10);
   }
 
   render() {

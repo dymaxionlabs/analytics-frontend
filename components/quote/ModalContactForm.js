@@ -19,9 +19,9 @@ class ModalContactForm extends React.Component {
             <AnonymousRequestForm {...formProps} />
           )}
         </Modal.Content>
-        {/* <Modal.Actions>
+        <Modal.Actions>
           <p>{t("footer")}</p>
-        </Modal.Actions> */}
+        </Modal.Actions>
       </Modal>
     );
   }

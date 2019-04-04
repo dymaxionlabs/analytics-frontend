@@ -38,13 +38,13 @@ export const AreaSection = withNamespaces("confirmation_portal")(
 
 export const LayersSection = withNamespaces([
   "confirmation_portal",
-  "layer_selector"
+  "common"
 ])(({ t, layers }) => {
   return (
     <Item
       icon="layers"
       title={layers
-        .map(layer => t(`layer_selector:${layer.key}_title`))
+        .map(layer => t(`common:${layer.key}_title`))
         .join(", ")}
       description={t("selected_layers")}
     />
@@ -55,7 +55,7 @@ export let PriceSection = ({ t, price }) => (
   <Item icon="price" title={`U$S ${price}`} description={t("price")} />
 );
 
-PriceSection = withNamespaces(["confirmation_portal", "layer_selector"])(
+PriceSection = withNamespaces(["confirmation_portal", "common"])(
   PriceSection
 );
 

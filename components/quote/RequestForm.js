@@ -122,10 +122,10 @@ class RequestForm extends React.Component {
                   />
                   <List.Content style={{ width: "90%" }}>
                     <List.Header>
-                      {t(`layer_selector:${layer.key}_title`)}
+                      {t(`common:${layer.key}_title`)}
                     </List.Header>
                     <List.Description>
-                      {t(`layer_selector:${layer.key}_desc_long`)}
+                      {t(`common:${layer.key}_desc_long`)}
                       {layer.categories.map(category => (
                         <Message
                           key={category}
@@ -183,7 +183,7 @@ class RequestForm extends React.Component {
   }
 }
 
-RequestForm = withNamespaces(["modal_contact_form", "layer_selector"])(
+RequestForm = withNamespaces(["modal_contact_form", "common"])(
   RequestForm
 );
 

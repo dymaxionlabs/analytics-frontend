@@ -64,7 +64,7 @@ class Quote extends React.Component {
     return {
       namespacesRequired: [
         "index",
-        "layer_selector",
+        "common",
         "geocoder_control",
         "draw_control",
         "confirmation_portal",

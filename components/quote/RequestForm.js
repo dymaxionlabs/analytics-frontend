@@ -18,6 +18,7 @@ class RequestForm extends React.Component {
     loading: false,
     success: false,
     error: false,
+    redirecting: false,
     onlyRequest: false
   };
 
@@ -62,10 +63,23 @@ class RequestForm extends React.Component {
       })
       .then(response => {
         console.log(response);
-        this.setState({
-          success: true,
-          error: false
-        });
+        const { extra_fields } = response.data;
+        if (extra_fields) {
+          const initPoint = extra_fields.payment_init_point;
+          console.log(`Redirecting to payment init point: ${initPoint}`);
+          this.setState({
+            success: true,
+            error: false,
+            redirecting: true
+          });
+          window.location.href = initPoint;
+        } else {
+          this.setState({
+            success: true,
+            error: false,
+            redirecting: false
+          });
+        }
       })
       .catch(error => {
         this.setState({
@@ -84,7 +98,7 @@ class RequestForm extends React.Component {
 
   render() {
     const { t, area, layers, price } = this.props;
-    const { onlyRequest, success, error, loading } = this.state;
+    const { onlyRequest, success, error, loading, redirecting } = this.state;
 
     return (
       <Grid>
@@ -136,7 +150,9 @@ class RequestForm extends React.Component {
             </Form.Field>
             <Message success>
               <Message.Header>{t("quote_success_title")}</Message.Header>
-              {t("quote_success_desc")}
+              {redirecting
+                ? t("quote_success_redirecting_desc")
+                : t("quote_success_desc")}
             </Message>
             <Message error>
               <Message.Header>{t("quote_error_title")}</Message.Header>

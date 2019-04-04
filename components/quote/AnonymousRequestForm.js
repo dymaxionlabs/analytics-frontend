@@ -100,6 +100,7 @@ class AnonymousRequestForm extends React.Component {
         });
       })
       .catch(error => {
+        console.error(error);
         this.setState({
           success: false,
           error: true

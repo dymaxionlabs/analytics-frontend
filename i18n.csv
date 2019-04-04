@@ -109,10 +109,11 @@ modal_contact_form,message_placeholder,Ingrese un comentario adicional,Enter an 
 modal_contact_form,specifications,Especificaciones,Specifications
 modal_contact_form,send,Enviar,Send
 modal_contact_form,quote,Cotizar,Quote
-modal_contact_form,quote_success_title,Cotización enviada exitosamente,Quote sent successfully
-modal_contact_form,quote_success_desc,Gracias por enviar su cotización. Le escribiremos en la brevedad con más información.,Thanks for sending your quote. We will write to you shortly with more information.
-modal_contact_form,quote_error_title,Error al enviar cotización,Error when sending quote
-modal_contact_form,quote_error_desc,"Ocurrió un error al enviar la cotización. Por favor, intente de nuevo o contáctese con nosotros a {{contactLink}}.",An error occurred when sending the quote. Please try again or contact us at {{contactLink}}.
+modal_contact_form,quote_success_title,Pedido enviado exitosamente,Request sent successfully
+modal_contact_form,quote_success_desc,Gracias por enviar tu pedido. Le escribiremos en la brevedad con más información.,Thanks for sending your request. We will write to you shortly with more information.
+modal_contact_form,quote_success_redirecting_desc,Estamos redirigiéndote a la página de pagos.,We are redirecting you to the payments page.
+modal_contact_form,quote_error_title,Error al enviar pedido,Error when sending request
+modal_contact_form,quote_error_desc,"Ocurrió un error al enviar el pedido. Por favor, intente de nuevo o contáctese con nosotros a {{contactLink}}.",An error occurred when sending the request. Please try again or contact us at {{contactLink}}.
 modal_contact_form,layer_info.agri,Este servicio se calcula sobre imágenes satelitales recientes del sensor Sentinel-2.,We use up-to-date satellite imagery from ESA sensor Sentinel-2.
 modal_contact_form,layer_info.urban,Este servicio se calcula sobre imágenes satelitales recientes de alta resolución. El precio no incluye la entrega de la imágenes utilizadas,We use recent high resolution satellite imagery to run our algorithms. The price doesn't include the delivery of the images involved.
 modal_contact_form,only_request_checkbox,Quiero hacer un pedido diferente y consultar primero.,I want to make a different order and consult first.

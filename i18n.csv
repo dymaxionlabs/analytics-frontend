@@ -119,6 +119,7 @@ modal_contact_form,layer_info.urban,Este servicio se calcula sobre imágenes sat
 modal_contact_form,only_request_checkbox,Quiero hacer un pedido diferente y consultar primero.,I want to make a different order and consult first.
 modal_contact_form,request_btn,Consultar,Consult
 modal_contact_form,pay_btn,Pagar,Pay
+modal_contact_form,footer,Linea de ayuda: +54 11 1234-5678,Helpline: +54 11 1234-5678
 simple_modal_contact_form,header,Contáctenos,Contact us
 simple_modal_contact_form,email_label,Email,Email
 simple_modal_contact_form,email_placeholder,Ingrese su dirección de e-mail,Enter your email address

@@ -3,6 +3,7 @@
   "city_placeholder": "Enter your city",
   "email_label": "Email",
   "email_placeholder": "Enter your email address",
+  "footer": "Helpline: +54 11 1234-5678",
   "layer_info": {
     "agri": "We use up-to-date satellite imagery from ESA sensor Sentinel-2.",
     "urban": "We use recent high resolution satellite imagery to run our algorithms. The price doesn't include the delivery of the images involved."

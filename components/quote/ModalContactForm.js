@@ -19,9 +19,9 @@ class ModalContactForm extends React.Component {
             <AnonymousRequestForm {...formProps} />
           )}
         </Modal.Content>
-        <Modal.Actions>
-          <p>Call +54 911 1234-5678</p>
-        </Modal.Actions>
+        {/* <Modal.Actions>
+          <p>{t("footer")}</p>
+        </Modal.Actions> */}
       </Modal>
     );
   }

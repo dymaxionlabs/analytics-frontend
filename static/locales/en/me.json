@@ -21,11 +21,19 @@
     "name": "Name",
     "title": "Your maps"
   },
+  "requests": {
+    "area_km2": "Area (km\u00b2)",
+    "created_at": "Date",
+    "layers": "Layers",
+    "state": "Current state",
+    "title": "Your requests"
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "images": "Images",
     "layers": "Layers",
-    "maps": "Maps"
+    "maps": "Maps",
+    "requests": "Requests"
   },
   "view": "View"
 }

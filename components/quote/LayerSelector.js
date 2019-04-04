@@ -218,4 +218,4 @@ class LayerSelector extends React.Component {
   }
 }
 
-export default withNamespaces("layer_selector")(LayerSelector);
+export default withNamespaces()(LayerSelector);

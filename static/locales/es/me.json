@@ -21,11 +21,19 @@
     "name": "Nombre",
     "title": "Tus mapas"
   },
+  "requests": {
+    "area_km2": "\u00c1rea (km\u00b2)",
+    "created_at": "Fecha",
+    "layers": "Capas",
+    "state": "Estado actual",
+    "title": "Tus pedidos"
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "images": "Im\u00e1genes",
     "layers": "Capas",
-    "maps": "Mapas"
+    "maps": "Mapas",
+    "requests": "Pedidos"
   },
   "view": "Ver"
 }

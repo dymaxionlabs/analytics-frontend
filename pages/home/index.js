@@ -15,6 +15,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CollectionsIcon from "@material-ui/icons/Collections";
 import LayersIcon from "@material-ui/icons/Layers";
 import MapIcon from "@material-ui/icons/Map";
+import MessageIcon from "@material-ui/icons/Message";
 // import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import classNames from "classnames";
@@ -25,6 +26,7 @@ import FileUploadDialog from "../../components/FileUploadDialog";
 import ImagesContent from "../../components/home/ImagesContent";
 import LayersContent from "../../components/home/LayersContent";
 import MapsContent from "../../components/home/MapsContent";
+import RequestsContent from "../../components/home/RequestsContent";
 import SelectProjectButton from "../../components/SelectProjectButton";
 import { Link, withNamespaces } from "../../i18n";
 import { withAuthSync } from "../../utils/auth";
@@ -110,7 +112,7 @@ const styles = theme => ({
   }
 });
 
-const sortedSections = ["images", "layers", "maps"];
+const sortedSections = ["requests", "images", "layers", "maps"];
 
 const sections = {
   // dashboard: {
@@ -118,6 +120,12 @@ const sections = {
   //   icon: <DashboardIcon />,
   //   content: null
   // },
+  requests: {
+    key: "requests",
+    path: "/requests",
+    icon: <MessageIcon />,
+    content: <RequestsContent />
+  },
   maps: {
     key: "maps",
     path: "/maps",

@@ -3,8 +3,15 @@
     "error_msg": "An error has occurred. Please try again later.",
     "success_msg": "Your email address has been verified successfully."
   },
+  "crop_lots_desc": "Categorized lots by crop type",
+  "crop_lots_title": "Crop lots",
   "dashboard_btn": "Dashboard",
   "email": "Email",
+  "floods_desc": "Rural flooded area.",
+  "floods_desc_long": "The flooded areas map service consists of a vector file containing the polygon of each flooded area and the images used for calculations within the requested territory.",
+  "floods_title": "Flooded area",
+  "informal_settlements_desc": "Slums and informal settlements location.",
+  "informal_settlements_title": "Informal settlements",
   "invite": {
     "already_confirmed": "The invitation has already been confirmed.",
     "email_placeholder": "Email",
@@ -32,9 +39,27 @@
   },
   "login_btn": "Login",
   "logout_btn": "Logout",
+  "ndvi_desc": "Graphical indicator of yield index",
+  "ndvi_desc_long": "The green index map service consists of a raster file containing the NDVI index and the images used for calculations within the requested area.",
+  "ndvi_title": "NDVI Index",
   "password": "Password",
+  "pools_desc": "Residential pools outline.",
+  "pools_desc_long": "The high precision pool outline service consists of a vector file containing the location of each pool within the requested area.",
+  "pools_title": "Pools",
   "quote_btn": {
     "value": "Quote new layer"
+  },
+  "recent_construction_desc": "New buildings built between two dates.",
+  "recent_construction_title": "New buildings",
+  "request": {
+    "state": {
+      "awaiting_payment": "Awaiting payment",
+      "canceled": "Canceled",
+      "evaluating": "Evaluating",
+      "finished": "Finished",
+      "pending": "Pending",
+      "processing": "Processing"
+    }
   },
   "reset_password": {
     "cancel": "Cancel",
@@ -57,6 +82,12 @@
     "success_msg": "Password changed successfully!",
     "title": "Confirm password change"
   },
+  "roads_desc": "Area of pavemented roads",
+  "roads_desc_long": "The pavement roads outline service consists of a vector file containing the outline of each pavement road within the requested area.",
+  "roads_title": "Roads",
+  "roofs_desc": "Roofs outline.",
+  "roofs_desc_long": "The high precision roof outline service consists of a vector file containing the location of each roof within the requested area.",
+  "roofs_title": "Roofs",
   "signup": {
     "already_has_account": "Already have an account?",
     "cancel": "Cancel",
@@ -73,6 +104,11 @@
   },
   "signup_btn": "Sign up",
   "signup_href": "https://landings.dymaxionlabs.com/analytics-form-en",
+  "soil_desc": "Soil land use for different crops.",
+  "soil_desc_long": "The sown area map service consists of a vector file containing the polygon of each sowned area and the images used for calculations within the requested territory.",
+  "soil_title": "Sown area",
   "title": "Analytics | Dymaxion Labs",
+  "true_color_desc": "True color satellite image",
+  "true_color_title": "True color",
   "username": "Username"
 }

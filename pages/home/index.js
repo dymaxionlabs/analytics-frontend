@@ -28,6 +28,7 @@ import LayersContent from "../../components/home/LayersContent";
 import MapsContent from "../../components/home/MapsContent";
 import RequestsContent from "../../components/home/RequestsContent";
 import SelectProjectButton from "../../components/SelectProjectButton";
+import CliengoLoader from "../../components/CliengoLoader";
 import { Link, withNamespaces } from "../../i18n";
 import { withAuthSync } from "../../utils/auth";
 import { routerReplace } from "../../utils/router";
@@ -211,6 +212,7 @@ class Home extends React.Component {
       <div className={classes.root}>
         <Head>
           <title>{t("common:title")}</title>
+          <CliengoLoader />
         </Head>
         <AppBar
           position="absolute"

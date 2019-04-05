@@ -1,16 +1,17 @@
-import PropTypes from "prop-types";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import PropTypes from "prop-types";
 import React from "react";
+import CliengoLoader from "../components/CliengoLoader";
 import LayersFab from "../components/LayersFab";
 // import LayerLegend from "../components/LayerLegend";
 import LayersLegendExpansionPanel from "../components/LayersLegendExpansionPanel";
 import LoadingProgress from "../components/LoadingProgress";
+import QuoteButton from "../components/QuoteButton";
 import { withNamespaces } from "../i18n";
 import { buildApiUrl } from "../utils/api";
 import { withAuthSync } from "../utils/auth";
-import QuoteButton from "../components/QuoteButton";
 
 // const sentinelModifiedAttribution =
 //   'Contains modified <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus">Copernicus</a> Sentinel data 2019, processed by ESA.';
@@ -217,6 +218,7 @@ class Maps extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <CliengoLoader />
         </Head>
         <Map
           bounds={bounds}

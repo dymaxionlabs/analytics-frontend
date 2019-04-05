@@ -1,16 +1,16 @@
-import "../static/index.css"; // FIXME Convert to JSX styles
-import "../static/App.css"; // FIXME Convert to JSX styles
-import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
-
-import React from "react";
-import { withNamespaces } from "../i18n";
-import { withAuthSync, logout } from "../utils/auth";
-import { buildApiUrl } from "../utils/api";
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import { Dimmer, Loader } from "semantic-ui-react";
 import axios from "axios";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import React from "react";
+import "semantic-ui-css/semantic.css"; // FIXME Move this Layout
+import { Dimmer, Loader } from "semantic-ui-react";
+import CliengoLoader from "../components/CliengoLoader";
 import LayerLegend from "../components/LayerLegend";
+import { withNamespaces } from "../i18n";
+import "../static/App.css"; // FIXME Convert to JSX styles
+import "../static/index.css"; // FIXME Convert to JSX styles
+import { buildApiUrl } from "../utils/api";
+import { logout, withAuthSync } from "../utils/auth";
 
 const initialViewport = {
   center: [-36.179114636463652, -62.846142338298094],
@@ -133,6 +133,7 @@ class Layers extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <CliengoLoader />
         </Head>
         <Map
           bounds={bounds}

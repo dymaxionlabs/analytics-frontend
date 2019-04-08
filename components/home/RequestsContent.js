@@ -41,13 +41,12 @@ class RequestsContent extends React.Component {
   };
 
   componentDidMount() {
-    const projectId = cookie.get("project");
-
     axios
       .get(buildApiUrl("/requests/"), {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
+        console.log(response.data.results);
         this.setState({ requests: response.data.results });
       })
       .catch(err => {
@@ -71,8 +70,12 @@ class RequestsContent extends React.Component {
 
   formatState(lastStateUpdate) {
     const { t } = this.props;
-    const state = lastStateUpdate.state.toLowerCase();
-    return t(`common:request.state.${state}`);
+    if (lastStateUpdate) {
+      const state = lastStateUpdate.state.toLowerCase();
+      return t(`common:request.state.${state}`);
+    } else {
+      return t(`common:request.state.pending`);
+    }
   }
 
   mustRequestBePayed(request) {

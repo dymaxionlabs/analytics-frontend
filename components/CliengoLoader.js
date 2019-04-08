@@ -1,9 +1,12 @@
 import React from "react";
 
-export default () => (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `(function() {
+const isProduction = process.env.NODE_ENV === "production";
+
+export default () =>
+  isProduction && (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `(function() {
         var ldk = document.createElement('script');
         ldk.type = 'text/javascript';
         ldk.async = true;
@@ -11,6 +14,6 @@ export default () => (
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ldk, s);
       })();`
-    }}
-  />
-);
+      }}
+    />
+  );

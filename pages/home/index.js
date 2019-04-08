@@ -23,6 +23,7 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
 import FileUploadDialog from "../../components/FileUploadDialog";
+import Button from "@material-ui/core/Button";
 import ImagesContent from "../../components/home/ImagesContent";
 import LayersContent from "../../components/home/LayersContent";
 import MapsContent from "../../components/home/MapsContent";
@@ -110,6 +111,12 @@ const styles = theme => ({
   },
   h5: {
     marginBottom: theme.spacing.unit * 2
+  },
+  button: {
+    color: "white"
+  },
+  anchorButton: {
+    textDecoration: "none"
   }
 });
 
@@ -146,6 +153,18 @@ const sections = {
     content: <ImagesContent />
   }
 };
+
+let QuoteButton = ({ t, classes }) => (
+  <a href="/quote" className={classes.anchorButton}>
+    <Button className={classes.button}>{t("quote_btn.value")}</Button>
+  </a>
+);
+QuoteButton.propTypes = {
+  classes: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
+};
+QuoteButton = withStyles(styles)(QuoteButton);
+QuoteButton = withNamespaces()(QuoteButton);
 
 class Home extends React.Component {
   state = {
@@ -240,6 +259,7 @@ class Home extends React.Component {
               Analytics Dashboard
             </Typography>
             <SelectProjectButton token={token} />
+            <QuoteButton />
             {/* <FileUploadDialog token={token} /> */}
             {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">

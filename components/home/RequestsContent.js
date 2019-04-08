@@ -46,7 +46,6 @@ class RequestsContent extends React.Component {
         headers: { Authorization: this.props.token }
       })
       .then(response => {
-        console.log(response.data.results);
         this.setState({ requests: response.data.results });
       })
       .catch(err => {

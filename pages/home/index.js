@@ -125,7 +125,7 @@ const styles = theme => ({
   }
 });
 
-const sortedSections = ["requests", "images", "layers", "maps"];
+const sortedSections = ["images", "layers", "maps"];
 
 const sections = {
   // dashboard: {
@@ -311,6 +311,22 @@ class Home extends React.Component {
                 </ListItem>
               </Link>
             ))}
+          </List>
+          <Divider />
+          <List>
+            <Link
+              href={`/home?section=requests`}
+              as={`/home${sections["requests"].path}`}
+            >
+              <ListItem
+                button
+                onClick={() => this.handleSectionChange("requests")}
+                selected={section === "requests"}
+              >
+                <ListItemIcon>{sections["requests"].icon}</ListItemIcon>
+                <ListItemText primary={t(`sidebar.requests`)} />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main className={classes.content}>

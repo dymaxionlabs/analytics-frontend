@@ -256,6 +256,11 @@ class Home extends React.Component {
               noWrap
               className={classes.title}
             >
+              <img
+                className={classes.titleLogo}
+                src="/static/logo.png"
+                height="24"
+              />
               Analytics Dashboard
             </Typography>
             <SelectProjectButton token={token} />

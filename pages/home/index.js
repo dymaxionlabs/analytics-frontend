@@ -74,7 +74,12 @@ const styles = theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    display: "flex",
+    flexGrow: 1,
+    alignItems: "center"
+  },
+  titleLogo: {
+    marginRight: 5
   },
   drawerPaper: {
     position: "relative",

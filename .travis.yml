@@ -1,7 +1,26 @@
+dist: xenial
+
+addons:
+  chrome: stable
+
+services:
+  - xvfb
+
 language: node_js
+
 node_js:
   - "10.16.0"
+
+before_install:
+  - # start your web application and listen on `localhost`
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+
+before_script:
+  - yarn dev
+  - sleep 20  # give server time to build page
+
 script:
-  - yarn test:coverage
+  - xvfb-run yarn test
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)

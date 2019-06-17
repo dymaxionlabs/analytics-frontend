@@ -40,8 +40,13 @@
     "export": "yarn build && next export"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
     "csv-parse": "^4.3.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
     "file-loader": "^2.0.0",
+    "jest": "^24.8.0",
     "url-loader": "^1.1.2"
   }
 }

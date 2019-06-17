@@ -1,7 +1,16 @@
-# Analytics (aka Terra frontend)
+# analytics-frontend
+
+[![Build Status](https://travis-ci.org/dymaxionlabs/analytics-frontend.svg?branch=master)](https://travis-ci.org/dymaxionlabs/analytics-frontend)
+[![codecov](https://codecov.io/gh/dymaxionlabs/analytics-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/dymaxionlabs/analytics-frontend)
+
+Dymaxion Analytics frontend repository.
 
 This is our main platform of image provisioning and analytics for users.
 It uses the Terra API for fetching user data and raster/vector layers.
+
+For more information on the frontend (API), see the repository at
+[https://github.com/dymaxionlabs/analytics-frontend](https://github.com/dymaxionlabs/analytics-frontend).
+
 
 ## Development
 
@@ -9,7 +18,26 @@ It uses the Terra API for fetching user data and raster/vector layers.
 * Run `yarn build` (only needed the first time)
 * Run `yarn dev` to start the development server
 
+
+## Issue tracker
+
+Please report any bugs and enhancement ideas using the GitHub issue tracker:
+
+  https://github.com/dymaxionlabs/analytics-frontend/issues
+
+
+## Help wanted
+
+Any help in testing, development, documentation and other tasks is highly
+appreciated and useful to the project.
+
+For more details, see the file [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
 ## License
+
+Source code is released under a BSD-2 license.  Please refer to
+[LICENSE.md](LICENSE.md) for more information.
 
 Attribution for some icons, from the Noun Project:
 

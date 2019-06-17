@@ -16,7 +16,7 @@ before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 before_script:
-  - yarn dev
+  - yarn dev &
   - sleep 20  # give server time to build page
 
 script:

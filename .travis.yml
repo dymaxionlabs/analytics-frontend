@@ -20,7 +20,7 @@ before_script:
   - sleep 20  # give server time to build page
 
 script:
-  - xvfb-run yarn test
+  - xvfb-run -a yarn test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

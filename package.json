@@ -40,7 +40,10 @@
     "export": "yarn build && next export",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "nightwatch",
+    "test:e2e:chrome": "yarn test:e2e --env chrome",
+    "test:e2e:debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js --env chrome"
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",

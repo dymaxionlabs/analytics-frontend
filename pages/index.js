@@ -47,10 +47,14 @@ class Index extends React.Component {
 
     // for some reason, Router does not work
     if (token) {
-      window.location.href = "/home";
+      this._redirectTo("/home");
     } else {
-      window.location.href = "/quote";
+      this._redirectTo("/quote");
     }
+  }
+
+  _redirectTo(path) {
+    window.location.href = path;
   }
 
   render() {

@@ -109,11 +109,10 @@ class Login extends React.Component {
         const expires = this.state.remember ? 30 : null;
         if (token) {
           const { redirect } = this.props.query;
-          login({ token, expires, redirectTo: redirect });
+          this._login({ token, expires, redirectTo: redirect });
         }
       })
       .catch(error => {
-        console.error(error);
         this.setState({
           errorMsg: t("login.error_msg"),
           isSubmitting: false,
@@ -121,6 +120,10 @@ class Login extends React.Component {
         });
       });
   };
+
+  _login(opts) {
+    login(opts);
+  }
 
   render() {
     const { t, classes } = this.props;

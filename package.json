@@ -50,6 +50,7 @@
     "enzyme-to-json": "^3.3.5",
     "file-loader": "^2.0.0",
     "jest": "^24.8.0",
+    "jest-mock-axios": "^3.0.0",
     "url-loader": "^1.1.2"
   }
 }

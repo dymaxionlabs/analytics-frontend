@@ -4572,6 +4572,18 @@ jest-message-util@^24.8.0:
     slash "^2.0.0"
     stack-utils "^1.0.1"
 
+jest-mock-axios@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jest-mock-axios/-/jest-mock-axios-3.0.0.tgz#d32ea69b5577245bda8ea2212ccce5ba6cca2f2e"
+  integrity sha512-l8ba32ZljX3/HYqhYOmRr0MDZcQcDEV3vflY6E8G/1bE8LNH2ypB1YWFdmTJENvUzrQiiFp3cQaWS8YjHYLgzQ==
+  dependencies:
+    jest-mock-promise "^1.0.23"
+
+jest-mock-promise@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/jest-mock-promise/-/jest-mock-promise-1.0.23.tgz#c921fd6b512ac546097edbcf477f3d4169657e40"
+  integrity sha1-ySH9a1EqxUYJftvPR389QWllfkA=
+
 jest-mock@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-24.8.0.tgz#2f9d14d37699e863f1febf4e4d5a33b7fdbbde56"

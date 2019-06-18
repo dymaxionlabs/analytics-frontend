@@ -168,7 +168,15 @@ class Login extends React.Component {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  id="remember"
+                  value="remember"
+                  checked={this.state.remember}
+                  onChange={this.onRememberClick}
+                  color="primary"
+                />
+              }
               label={t("login.remember")}
             />
             <Button

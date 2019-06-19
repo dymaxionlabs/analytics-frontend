@@ -184,9 +184,13 @@ class Invite extends React.Component {
         });
 
         if (userToken) {
-          login({ token: userToken, redirectTo: redirect });
+          this._login({ token: userToken, redirectTo: redirect });
         }
       });
+  }
+
+  _login(opts) {
+    login(opts);
   }
 
   onSubmit = event => {
@@ -287,7 +291,7 @@ class Invite extends React.Component {
               <Input
                 id="username"
                 name="username"
-                autoComplete="user"
+                autoComplete="on"
                 autoFocus
                 onChange={this.onUsernameChange}
                 value={this.state.username}
@@ -306,7 +310,7 @@ class Invite extends React.Component {
                 <Input
                   id="email"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="on"
                   type="email"
                   onChange={this.onEmailChange}
                   value={this.state.email}

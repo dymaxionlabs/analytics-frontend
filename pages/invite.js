@@ -115,12 +115,16 @@ class Invite extends React.Component {
       .then(response => {
         const { data } = response;
         if (data.email && data.confirmed) {
-          this.setState({ fatalError: t("invite.already_confirmed") });
+          this.setState({
+            fatalError: t("invite.already_confirmed"),
+            loading: false
+          });
         } else {
           this.setState({
             project: data.project,
             email: data.email,
-            inviteHasEmail: !!data.email
+            inviteHasEmail: !!data.email,
+            loading: false
           });
         }
 
@@ -131,11 +135,10 @@ class Invite extends React.Component {
         }
       })
       .catch(err => {
-        console.error(err);
-        this.setState({ fatalError: t("invite.invalid_key") });
-      })
-      .then(() => {
-        this.setState({ loading: false });
+        this.setState({
+          fatalError: t("invite.invalid_key"),
+          loading: false
+        });
       });
   }
 
@@ -155,13 +158,12 @@ class Invite extends React.Component {
     this.setState({ password2: e.target.value });
   };
 
-  _confirmInvitationToken(userToken) {
+  _confirmInvitationToken = async userToken => {
     const { t } = this.props;
     const { key, redirect } = this.props.query;
-    console.log(`confirm with ${userToken}`);
 
-    axios
-      .post(
+    try {
+      await axios.post(
         buildApiUrl(`/projects/invitations/${key}/confirm/`),
         {},
         {
@@ -170,24 +172,22 @@ class Invite extends React.Component {
             Authorization: userToken
           }
         }
-      )
-      .then(() => {})
-      .catch(err => {
-        if (err.response) {
-          console.error(err);
-        }
-      })
-      .then(() => {
-        // Regardless of confirmation, login user
-        this.setState({
-          successMsg: t("invite.success_msg")
-        });
+      );
+    } catch (err) {
+      if (err.response) {
+        console.error(err);
+      }
+    }
 
-        if (userToken) {
-          this._login({ token: userToken, redirectTo: redirect });
-        }
-      });
-  }
+    // Regardless of confirmation, login user
+    this.setState({
+      successMsg: t("invite.success_msg")
+    });
+
+    if (userToken) {
+      this._login({ token: userToken, redirectTo: redirect });
+    }
+  };
 
   _login(opts) {
     login(opts);
@@ -226,8 +226,6 @@ class Invite extends React.Component {
         this._confirmInvitationToken(token);
       })
       .catch(error => {
-        console.error(error);
-
         // Generic error message
         let errorMsg = t("invite.error_msg");
 

@@ -22,7 +22,6 @@ import classNames from "classnames";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
-import FileUploadDialog from "../../components/FileUploadDialog";
 import Button from "@material-ui/core/Button";
 import ImagesContent from "../../components/home/ImagesContent";
 import LayersContent from "../../components/home/LayersContent";
@@ -270,7 +269,6 @@ class Home extends React.Component {
             </Typography>
             <SelectProjectButton token={token} />
             <QuoteButton />
-            {/* <FileUploadDialog token={token} /> */}
             {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />

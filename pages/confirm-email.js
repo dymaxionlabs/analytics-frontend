@@ -72,7 +72,6 @@ class ConfirmEmail extends React.Component {
         });
       })
       .catch(error => {
-        console.error(error);
         this.setState({
           errorMsg: t("confirm_email.error_msg"),
           successMsg: ""

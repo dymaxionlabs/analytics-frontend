@@ -93,21 +93,29 @@ class NewProjectForm extends React.Component {
       )
       .then(response => {
         const { uuid } = response.data;
-        cookie.set("project", uuid);
-        routerPush("/home/");
+        this._setProjectCookie(uuid);
+        this._redirectToHome();
       })
       .catch(err => {
         const response = err.response;
         if (response && response.status === 401) {
           logout();
         } else {
-          console.error(response);
+          // console.error(response);
         }
       })
       .then(() => {
         this.setState({ loading: false });
       });
   };
+
+  _setProjectCookie(uuid) {
+    cookie.set("project", uuid);
+  }
+
+  _redirectToHome() {
+    routerPush("/home/");
+  }
 
   render() {
     const { t, classes } = this.props;
@@ -127,6 +135,7 @@ class NewProjectForm extends React.Component {
             className={classes.inlineFormControl}
           >
             <Input
+              id="name"
               name="name"
               placeholder={t("new.name_placeholder")}
               value={name}
@@ -183,7 +192,7 @@ class OpenProjectList extends React.Component {
         if (response && response.status === 401) {
           logout();
         } else {
-          console.error(response);
+          // console.error(response);
         }
       })
       .then(() => {
@@ -192,8 +201,8 @@ class OpenProjectList extends React.Component {
   }
 
   handleSelectProject = uuid => {
-    cookie.set("project", uuid);
-    routerPush("/home/");
+    this._setProjectCookie(uuid);
+    this._redirectToHome();
   };
 
   render() {
@@ -301,4 +310,5 @@ SelectProject = withStyles(styles)(SelectProject);
 SelectProject = withNamespaces("select_project")(SelectProject);
 SelectProject = withAuthSync(SelectProject);
 
+export { SelectProject, NewProjectForm, OpenProjectList };
 export default SelectProject;

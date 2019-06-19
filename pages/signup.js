@@ -139,12 +139,10 @@ class Register extends React.Component {
         });
         if (token) {
           const { redirect } = this.props.query;
-          login({ token, redirectTo: redirect });
+          this._login({ token, redirectTo: redirect });
         }
       })
       .catch(error => {
-        console.error(error);
-
         // Generic error message
         let errorMsg = t("signup.error_msg");
 
@@ -172,6 +170,10 @@ class Register extends React.Component {
         });
       });
   };
+
+  _login(opts) {
+    login(opts);
+  }
 
   render() {
     const { t, classes } = this.props;

@@ -88,7 +88,8 @@ class LayersLegendExpansionPanel extends React.Component {
 
 LayersLegendExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  layers: PropTypes.array.isRequired
 };
 
 export default withNamespaces()(withStyles(styles)(LayersLegendExpansionPanel));

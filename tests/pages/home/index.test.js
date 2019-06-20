@@ -1,7 +1,6 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
 import cookie from "js-cookie";
-import mockAxios from "jest-mock-axios";
 import Home from "../../../pages/home/index";
 
 describe("Home", () => {

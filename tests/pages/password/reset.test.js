@@ -1,10 +1,13 @@
-import { shallow, mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
 import PasswordReset from "../../../pages/password/reset";
-// import i18n from "../i18n";
-import jest from "jest";
 
 describe("PasswordReset", () => {
-  it("", () => {});
+  const getWrapper = props => {
+    return mount(shallow(<PasswordReset {...props} />).get(0));
+  };
+
+  it("(smoke test)", () => {
+    const wrapper = getWrapper({});
+  });
 });

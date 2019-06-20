@@ -1,9 +1,9 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import React from "react";
 import OpacitySlider from "../../components/OpacitySlider";
 
 describe("OpacitySlider", () => {
   it("(smoke test)", () => {
-    const wrapper = shallow(<OpacitySlider value={42} />);
+    const wrapper = mount(shallow(<OpacitySlider value={42} />).get(0));
   });
 });

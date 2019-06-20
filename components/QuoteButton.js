@@ -19,9 +19,13 @@ const styles = theme => ({
 class QuoteButton extends React.Component {
   onClick = e => {
     const { isAuthenticated } = this.props;
-    const href = isAuthenticated ? "/quote" : "/login?redirect=%2Fquote";
-    routerPush(href);
+    const path = isAuthenticated ? "/quote" : "/login?redirect=%2Fquote";
+    this._redirectTo(path);
   };
+
+  _redirectTo(path) {
+    routerPush(path);
+  }
 
   render() {
     const { classes, t } = this.props;

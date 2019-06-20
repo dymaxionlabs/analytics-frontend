@@ -28,16 +28,16 @@ class SelectProjectButton extends React.Component {
         headers: { Authorization: token }
       })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ name: response.data.name });
       })
       .catch(err => {
         const response = err.response;
-        if (response) {
-          console.error(response);
-        } else {
-          console.error(err);
-        }
+        // if (response) {
+        //   console.error(response);
+        // } else {
+        //   console.error(err);
+        // }
       });
   }
 

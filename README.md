@@ -8,8 +8,8 @@ Dymaxion Analytics frontend repository.
 This is our main platform of image provisioning and analytics for users.
 It uses the Terra API for fetching user data and raster/vector layers.
 
-For more information on the frontend (API), see the repository at
-[https://github.com/dymaxionlabs/analytics-frontend](https://github.com/dymaxionlabs/analytics-frontend).
+For more information on the backend (API), see the repository at
+[https://github.com/dymaxionlabs/analytics-backend](https://github.com/dymaxionlabs/analytics-backend).
 
 
 ## Development

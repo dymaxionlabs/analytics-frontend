@@ -106,7 +106,7 @@ describe("OpenProjectList", () => {
     );
   };
 
-  it("makes a GET request to /projects/ to get list of projects on mount", () => {
+  it("makes a GET request to /projects/ to get list of projects, when mounted", () => {
     const userToken = "userToken";
     const wrapper = getWrapper({ token: userToken });
 

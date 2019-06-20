@@ -51,6 +51,10 @@ class Maps extends React.Component {
   }
 
   componentDidMount() {
+    this._loadMap();
+  }
+
+  _loadMap() {
     const { token } = this.props;
     const { uuid } = this.props.query;
 
@@ -59,7 +63,7 @@ class Maps extends React.Component {
     axios
       .get(buildApiUrl(`/maps/${uuid}/`), { headers: headers })
       .then(response => {
-        const map = response.data;
+        const { map } = response.data;
         const minBounds = [map.extent[1], map.extent[0]];
         const maxBounds = [map.extent[3], map.extent[2]];
         const bounds = [minBounds, maxBounds];
@@ -71,15 +75,19 @@ class Maps extends React.Component {
         const response = err.response;
         if (response) {
           if (response.status === 404) {
-            alert("Map was not found.");
+            this._alert("Map was not found.");
           } else {
-            alert(
+            this._alert(
               "An error ocurred when trying to load map. Please try accessing again later."
             );
           }
           window.location.href = "/";
         }
       });
+  }
+
+  _alert(msg) {
+    alert(msg);
   }
 
   _toggleActiveLayers(layers) {

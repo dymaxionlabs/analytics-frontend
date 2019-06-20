@@ -67,8 +67,8 @@ const styles = theme => ({
 
 class PasswordResetConfirm extends React.Component {
   state = {
-    pass1: "",
-    pass2: "",
+    password1: "",
+    password2: "",
     err_pass1_msg: "",
     err_pass2_msg: "",
     isSubmitting: false,
@@ -83,11 +83,11 @@ class PasswordResetConfirm extends React.Component {
   }
 
   onPassword1Change = e => {
-    this.setState({ pass1: e.target.value });
+    this.setState({ password1: e.target.value });
   };
 
   onPassword2Change = e => {
-    this.setState({ pass2: e.target.value });
+    this.setState({ password2: e.target.value });
   };
 
   onSubmit = event => {
@@ -95,11 +95,11 @@ class PasswordResetConfirm extends React.Component {
 
     const { t } = this.props;
     const { uid, token } = this.props.query;
-    const { pass1, pass2 } = this.state;
+    const { password1, password2 } = this.state;
 
     const dataSend = {
-      new_password1: pass1,
-      new_password2: pass2,
+      new_password1: password1,
+      new_password2: password2,
       uid,
       token
     };
@@ -120,7 +120,7 @@ class PasswordResetConfirm extends React.Component {
           successMsg: t("reset_password_confirm.success_msg"),
           errorMsg: ""
         });
-        Router.push("/login");
+        this._redirectTo("/login");
       })
       .catch(error => {
         this.setState({
@@ -132,12 +132,16 @@ class PasswordResetConfirm extends React.Component {
       });
   };
 
+  _redirectTo(path) {
+    Router.push(path);
+  }
+
   componentDidUpdate() {
     const { t } = this.props;
-    const isPasswordValid = passwordRegExp.test(this.state.pass1);
+    const isPasswordValid = passwordRegExp.test(this.state.password1);
 
     if (
-      this.state.pass1.length > 0 &&
+      this.state.password1.length > 0 &&
       !isPasswordValid &&
       this.state.err_pass1_msg === ""
     ) {
@@ -146,7 +150,7 @@ class PasswordResetConfirm extends React.Component {
         err_pass1_msg: t("reset_password_confirm.invalid_password")
       });
     } else if (
-      this.state.pass1.length > 0 &&
+      this.state.password1.length > 0 &&
       isPasswordValid &&
       this.state.err_pass1_msg !== ""
     ) {
@@ -156,8 +160,8 @@ class PasswordResetConfirm extends React.Component {
     if (
       isPasswordValid &&
       this.state.err_pass2_msg === "" &&
-      this.state.pass2 !== this.state.pass1 &&
-      this.state.pass2.length > 0
+      this.state.password2 !== this.state.password1 &&
+      this.state.password2.length > 0
     ) {
       this.setState({
         validForm: false,
@@ -165,7 +169,7 @@ class PasswordResetConfirm extends React.Component {
       });
     } else if (
       isPasswordValid &&
-      this.state.pass2 === this.state.pass1 &&
+      this.state.password2 === this.state.password1 &&
       this.state.err_pass2_msg !== ""
     ) {
       this.setState({ err_pass2_msg: "", validForm: true });
@@ -208,7 +212,7 @@ class PasswordResetConfirm extends React.Component {
                 type="password"
                 id="password1"
                 onChange={this.onPassword1Change}
-                value={this.state.pass1}
+                value={this.state.password1}
               />
               {this.state.err_pass1_msg && (
                 <FormHelperText>{this.state.err_pass1_msg}</FormHelperText>
@@ -223,7 +227,7 @@ class PasswordResetConfirm extends React.Component {
                 type="password"
                 id="password2"
                 onChange={this.onPassword2Change}
-                value={this.state.pass2}
+                value={this.state.password2}
               />
               {this.state.err_pass2_msg && (
                 <FormHelperText>{this.state.err_pass2_msg}</FormHelperText>

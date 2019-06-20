@@ -30,11 +30,6 @@ const styles = theme => ({
   }
 });
 
-function getMapId(layer) {
-  const parts = layer.url.split("/");
-  return parts[parts.length - 2];
-}
-
 class RequestsContent extends React.Component {
   state = {
     requests: []
@@ -53,7 +48,7 @@ class RequestsContent extends React.Component {
         if (response && response.status === 401) {
           logout();
         } else {
-          console.error(response);
+          // console.error(response);
         }
       });
   }

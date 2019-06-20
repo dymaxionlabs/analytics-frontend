@@ -94,7 +94,7 @@ class LayersContent extends React.Component {
         if (response && response.status === 401) {
           logout();
         } else {
-          console.error(response);
+          // console.error(response);
         }
       });
   }

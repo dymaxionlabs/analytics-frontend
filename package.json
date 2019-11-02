@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
-    "csv-parse": "^4.3.3",
+    "csv-parse": "^4.4.6",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",

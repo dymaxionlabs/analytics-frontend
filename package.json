@@ -17,7 +17,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
-    "next": "^7.0.2",
+    "next": "^9.3.2",
     "next-cookies": "^1.1.0",
     "next-i18next": "^0.32.0",
     "next-nprogress": "^1.4.0",

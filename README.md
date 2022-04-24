@@ -1,5 +1,7 @@
 # analytics-frontend
 
+**Note: This repository has been superseded by [Dymaxion Labs Platform](https://github.com/dymaxionlabs/platform).**
+
 [![Build Status](https://travis-ci.org/dymaxionlabs/analytics-frontend.svg?branch=master)](https://travis-ci.org/dymaxionlabs/analytics-frontend)
 [![codecov](https://codecov.io/gh/dymaxionlabs/analytics-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/dymaxionlabs/analytics-frontend)
 
